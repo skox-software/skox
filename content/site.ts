@@ -13,7 +13,7 @@ export const site = {
   description:
     "SKOX builds the software a business can't buy off the shelf — AI phone agents, live dashboards, internal tools and full products. Fixed scope, fixed price, fixed date.",
   email: "snkrpickups@gmail.com",
-  url: "https://skox.dev",
+  url: "https://skox.vercel.app",
 } as const;
 
 export const nav = [
