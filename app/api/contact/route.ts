@@ -1,0 +1,79 @@
+import { NextResponse } from "next/server";
+import { formatLead, validate, type Lead } from "@/lib/leads";
+
+export const runtime = "nodejs";
+
+/* Small in-memory limiter. Resets on redeploy, which is fine for this volume. */
+const hits = new Map<string, number[]>();
+const WINDOW = 60_000;
+const MAX = 5;
+
+function limited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > MAX;
+}
+
+export async function POST(req: Request) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (limited(ip)) {
+    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
+  let body: Partial<Lead>;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: "bad_json" }, { status: 400 });
+  }
+
+  // Honeypot: bots fill it, people never see it. Accept silently, deliver nothing.
+  if (body.website) return NextResponse.json({ ok: true });
+
+  const errors = validate(body);
+  if (Object.keys(errors).length) {
+    return NextResponse.json({ ok: false, errors }, { status: 422 });
+  }
+
+  const lead: Lead = {
+    name: String(body.name).trim(),
+    email: String(body.email).trim(),
+    company: String(body.company ?? "").trim(),
+    broken: String(body.broken).trim(),
+    timeline: String(body.timeline ?? "").trim(),
+    leak: body.leak ? String(body.leak).slice(0, 300) : undefined,
+  };
+
+  const to = process.env.CONTACT_EMAIL ?? "snkrpickups@gmail.com";
+  const key = process.env.RESEND_API_KEY;
+  const text = formatLead(lead);
+
+  if (!key) {
+    // No mail provider configured — never drop the lead, write it where it survives.
+    console.log(`[SKOX LEAD] ${new Date().toISOString()}\n${text}\n`);
+    return NextResponse.json({ ok: true, delivered: "log" });
+  }
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: process.env.LEAD_FROM_EMAIL ?? "SKOX <onboarding@resend.dev>",
+      to: [to],
+      reply_to: lead.email,
+      subject: `Scope request — ${lead.company || lead.name}`,
+      text,
+    }),
+  });
+
+  if (!res.ok) {
+    // Log it too, so a provider outage can't silently eat a real lead.
+    console.error(`[SKOX LEAD — DELIVERY FAILED ${res.status}]\n${text}\n`);
+    return NextResponse.json({ ok: false, error: "delivery_failed" }, { status: 502 });
+  }
+
+  return NextResponse.json({ ok: true, delivered: "email" });
+}
