@@ -23,7 +23,8 @@ export function FrontDeskSection() {
             booking on your calendar — at eleven at night, on a Sunday, while you are with a customer.
           </p>
           <p className="mt-6 text-[15px] leading-[1.6] max-w-[520px] text-white/45">
-            Try to stump it. It is a real conversation, not a video.
+            Ask it what a customer would ask. Scripted to one business for this demo — the version we
+            build you is trained on your whole book, your prices and your calendar.
           </p>
         </div>
 

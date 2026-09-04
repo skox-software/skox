@@ -2,8 +2,19 @@ import { CtaBlock, Section, SectionHead } from "@/components/Section";
 import { capabilities, faq, offer, problems, refusals, riskReversal, whyUs } from "@/content/site";
 
 const withRefund = (s: string) => s.replace("{REFUND}", String(riskReversal.refundPercent));
-const withScarcity = (s: string) =>
-  s.replace("{N}", String(refusals.concurrentBuilds)).replace("{DATE}", refusals.nextStart);
+/**
+ * Renders the scarcity claim only while it is still true. Once `nextStart` is in
+ * the past the dated version is dropped automatically — a stale scarcity date is
+ * worse than no scarcity date.
+ */
+function scarcityLine() {
+  const n = String(refusals.concurrentBuilds);
+  const start = new Date(refusals.nextStart + "T00:00:00");
+  const stillAhead = Number.isFinite(start.getTime()) && start.getTime() > Date.now();
+  if (!stillAhead) return refusals.scarcityNoDate.replace("{N}", n);
+  const label = start.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
+  return refusals.scarcity.replace("{N}", n).replace("{DATE}", label);
+}
 
 /* ------------------------------------------------------------ problem stack */
 export function ProblemStack() {
@@ -236,7 +247,7 @@ export function WhatWeDont() {
 
         <p className="reveal mt-12 text-[17px] sm:text-[19px] leading-[1.5] max-w-[680px] text-white">{refusals.close}</p>
         <p className="reveal mt-5 text-[14px] font-mono leading-[1.6] max-w-[560px] text-[var(--color-amber)]/85">
-          {withScarcity(refusals.scarcity)}
+          {scarcityLine()}
         </p>
       </div>
     </Section>

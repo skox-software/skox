@@ -294,12 +294,18 @@ export const refusals = {
   ],
   close:
     "We take the work that fits in a fixed scope with a date on it. Everything else breaks the guarantee, and the guarantee is the business.",
-  /** NEEDS_CONFIRMATION — Josh to keep `nextStart` current. Never let this go stale; a
-      scarcity claim that is provably wrong costs more credibility than it buys. */
+  /**
+   * NEEDS_CONFIRMATION — both values are placeholders until Josh sets the real ones.
+   * `nextStart` is an ISO date so it can be checked; once it passes, the scarcity line
+   * silently drops the date rather than publishing a claim that is provably stale.
+   * A scarcity claim that has expired costs more credibility than it ever bought.
+   */
   concurrentBuilds: 2,
-  nextStart: "29 September",
+  nextStart: "2026-09-29",
   scarcity:
     "We run {N} builds at a time. That is the whole calendar. Next start date we can commit to is {DATE}.",
+  scarcityNoDate:
+    "We run {N} builds at a time. That is the whole calendar — the date we give you assumes a slot is open.",
 } as const;
 
 export const faq = [
@@ -332,7 +338,7 @@ export const faq = [
 export const form = {
   kicker: "Start here",
   headline: "Tell us what's broken.",
-  sub: "Two fields and one sentence. We read every one of these ourselves.",
+  sub: "Three fields. It comes straight to the two of us — no filter, no sequence.",
   submit: "Get my free scope",
   reassure: "No deposit. No obligation. You keep the scope document either way.",
   submitting: "Sending…",

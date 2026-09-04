@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
 import { entryOffer, form as copy, riskReversal, site } from "@/content/site";
@@ -24,7 +25,11 @@ export function ScopeForm() {
     e.preventDefault();
     const found = validate(lead);
     setErrors(found);
-    if (Object.keys(found).length) return;
+    if (Object.keys(found).length) {
+      // Which field blocks people is the most actionable form metric there is.
+      track("scope_form_invalid", { fields: Object.keys(found).join(",") });
+      return;
+    }
 
     let leak: string | undefined;
     try {
@@ -41,9 +46,12 @@ export function ScopeForm() {
         body: JSON.stringify({ ...lead, leak }),
       });
       if (!res.ok) throw new Error(String(res.status));
+      // The conversion. Everything upstream is judged against this.
+      track("scope_request", { withLeak: Boolean(leak) });
       setState("done");
     } catch {
       // Never swallow a real lead behind a green checkmark.
+      track("scope_request_failed");
       setState("failed");
     }
   }

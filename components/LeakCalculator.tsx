@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { track } from "@vercel/analytics";
 import { Section, SectionHead } from "@/components/Section";
 import { calculator } from "@/content/site";
 import { clampField, computeLeak, money } from "@/lib/leak";
@@ -63,6 +64,15 @@ export function LeakCalculator() {
 
   const monthly = useCountUp(result.monthly);
   const annual = useCountUp(result.annual);
+
+  /* Fire once when someone actually moves a control — not on the default state. */
+  const engaged = useRef(false);
+  useEffect(() => {
+    if (engaged.current) return;
+    if (missed === calculator.defaults.missed && value === calculator.defaults.value && close === calculator.defaults.close) return;
+    engaged.current = true;
+    track("calculator_used");
+  }, [missed, value, close]);
 
   /* Hand the number to the form, so a lead arrives pre-qualified. */
   useEffect(() => {
