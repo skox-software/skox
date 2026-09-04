@@ -47,7 +47,7 @@ const jsonLd = {
       mainEntity: faq.map((f) => ({
         "@type": "Question",
         name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a.replace("{REFUND}", "25") },
+        acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
   ],

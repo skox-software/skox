@@ -2,10 +2,9 @@ import { Animate } from "@/components/Animate";
 import { Atmosphere } from "@/components/Atmosphere";
 import { HeroCard } from "@/components/HeroCard";
 import { Nav } from "@/components/Nav";
-import { hero, riskReversal } from "@/content/site";
+import { hero } from "@/content/site";
 
 export function Hero() {
-  const guarantee = hero.guarantee.replace("{REFUND}", String(riskReversal.refundPercent));
 
   return (
     <section id="top" className="relative w-full min-h-screen lg:h-screen overflow-hidden bg-[var(--color-pitch)]">
@@ -31,9 +30,11 @@ export function Hero() {
               </Animate>
 
               <Animate delay={420} direction="up">
-                <p className="mb-5 sm:mb-6 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[15px] sm:text-[17px] font-[450] text-white">
-                  <span className="h-1.5 w-1.5 shrink-0 bg-[var(--color-amber)]" aria-hidden />
-                  {guarantee}
+                {/* flex with a bare text node makes the text an anonymous item that
+                    can't share the row — wrap it in its own span so it sits beside the mark. */}
+                <p className="mb-5 sm:mb-6 flex items-start gap-2.5 text-[15px] sm:text-[17px] font-[450] leading-[1.45] text-white max-w-[460px]">
+                  <span className="mt-[9px] h-1.5 w-1.5 shrink-0 bg-[var(--color-amber)]" aria-hidden />
+                  <span>{hero.guarantee}</span>
                 </p>
               </Animate>
 

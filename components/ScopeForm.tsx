@@ -4,7 +4,7 @@ import { useState } from "react";
 import { track } from "@vercel/analytics";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
-import { entryOffer, form as copy, riskReversal, site } from "@/content/site";
+import { entryOffer, form as copy, site } from "@/content/site";
 import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 
 type State = "idle" | "sending" | "done" | "failed";
@@ -67,8 +67,18 @@ export function ScopeForm() {
             {copy.successTitle}
           </h2>
           <p className="mt-4 text-[17px] leading-[1.55]" style={{ color: "var(--text-dim)" }}>
-            {copy.successBody}
+            {site.bookingUrl ? copy.successBooking : copy.successBody}
           </p>
+          {site.bookingUrl && (
+            <a
+              href={site.bookingUrl}
+              target="_blank"
+              rel="noopener"
+              className="chamfer mt-7 h-[51px] px-[27px] inline-flex items-center bg-[var(--color-ink)] dark:bg-[var(--color-paper)] text-[var(--color-paper)] dark:text-[var(--color-ink)] text-[15.5px] font-[450] transition-opacity hover:opacity-88"
+            >
+              Pick my 30 minutes
+            </a>
+          )}
         </div>
       </Section>
     );
@@ -93,7 +103,7 @@ export function ScopeForm() {
                   <span aria-hidden className="mt-[9px] h-[5px] w-[5px] shrink-0 bg-[var(--color-amber)]" />
                   <span>
                     <span className="block text-[16px] font-[450]" style={{ color: "var(--text)" }}>
-                      {s2.item.replace("{REFUND}", String(riskReversal.refundPercent))}
+                      {s2.item}
                     </span>
                     <span className="block text-[14px] leading-[1.5] mt-0.5" style={{ color: "var(--text-dim)" }}>
                       {s2.detail}
@@ -105,6 +115,17 @@ export function ScopeForm() {
             <p className="mt-6 text-[15px] leading-[1.55]" style={{ color: "var(--text)" }}>
               {entryOffer.keep} <span style={{ color: "var(--text-dim)" }}>{entryOffer.cost}</span>
             </p>
+            {site.sampleScopeUrl && (
+              <a
+                href={site.sampleScopeUrl}
+                target="_blank"
+                rel="noopener"
+                className="mt-4 inline-flex items-center gap-2 text-[15px] font-[450] underline underline-offset-4 text-[var(--color-amber-dim)]"
+              >
+                See a real one first
+                <span aria-hidden>↗</span>
+              </a>
+            )}
           </div>
         </div>
 

@@ -162,6 +162,7 @@ export function LeakCalculator() {
               </div>
             </div>
             <p className="mt-8 text-[15px] leading-[1.55] text-white/75">{calculator.payoff}</p>
+            <p className="mt-3 text-[14px] leading-[1.55] text-white/50">{calculator.priceBand}</p>
             <a
               href="#scope"
               className="chamfer mt-7 h-[51px] px-[27px] inline-flex items-center bg-[#E9E9E9] text-[#0A0707] text-[15.5px] font-[450] transition-opacity hover:opacity-90"

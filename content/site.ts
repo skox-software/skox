@@ -14,6 +14,10 @@ export const site = {
     "SKOX builds the software a business can't buy off the shelf — AI phone agents, live dashboards, internal tools and full products. Fixed scope, fixed price, fixed date.",
   email: "snkrpickups@gmail.com",
   url: "https://skox.vercel.app",
+  /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
+  bookingUrl: null as string | null,
+  /** Drop a redacted scope at public/sample-scope.pdf and set this to "/sample-scope.pdf". */
+  sampleScopeUrl: null as string | null,
 } as const;
 
 export const nav = [
@@ -25,12 +29,12 @@ export const nav = [
 
 export const hero = {
   eyebrow: "Two builders · fixed scope · fixed date",
-  headline: "The software you can't buy off the shelf. Live in days, not quarters.",
-  sub: "Websites, custom web apps, live dashboards and internal tools — scoped in writing, priced fixed, delivered on the date we set.",
-  primaryCta: "Get my free scope",
+  headline: "A site in 7 days. A live dashboard in 14. One workflow automated in 10.",
+  sub: "Two builders. We take one problem — the spreadsheet, the missed calls, the report nobody can pull — and hand it back working, on the date we set.",
+  primaryCta: "Get my price and date",
   secondaryCta: "See what we build",
   /** Sits directly under the headline — the top half of the fold gets ~65% of all attention. */
-  guarantee: "Fixed price. Fixed date. If we miss it, you get {REFUND}% back.",
+  guarantee: "Fixed price and a delivery date, both agreed in writing before you pay anything.",
   proofline: "Free written scope — what gets built, what it costs, the day it goes live. Yours to keep either way.",
 } as const;
 
@@ -46,7 +50,7 @@ export const entryOffer = {
     { item: "A written scope document", detail: "Exactly what gets built, in plain language, with nothing hand-waved." },
     { item: "A fixed price", detail: "Not a range, not an estimate, not billed by the hour." },
     { item: "A fixed delivery date", detail: "Set before you pay anything, and not re-estimated once work starts." },
-    { item: "{REFUND}% back if we miss it", detail: "The risk of the date sits with us, which is where it belongs." },
+    { item: "You see it working at the halfway mark", detail: "Not a status email — the actual thing, running, while there is still time to change it." },
     { item: "You own the code outright", detail: "Your repos, your accounts, from day one. No licence, no hostage hosting." },
   ],
   keep: "You keep the scope document whether you hire us or not. No deposit, no obligation, no follow-up sequence.",
@@ -100,8 +104,10 @@ export const calculator = {
   footnote:
     "Deliberately conservative: it only counts enquiries you never reached, at your own close rate. No industry multipliers, no assumed lift.",
   payoff:
-    "That is the number doing nothing costs. A build is a fraction of it, once, and it is live in days.",
-  cta: "Get my free scope",
+    "That is every month. A build is one number, once, and it is live before another one of those months finishes.",
+  priceBand:
+    "Most builds land between $6,500 and $75,000. If your budget is not in that range we will say so on the call rather than waste your thirty minutes.",
+  cta: "Get my price and date",
 } as const;
 
 export const capabilities = [
@@ -236,11 +242,7 @@ export const riskReversal = {
   kicker: "Risk",
   headline: "The date is the product.",
   sub: "Anyone can quote a range. The commitment is what you're actually buying, so we put weight behind it.",
-  /**
-   * NEEDS_CONFIRMATION — Josh to set the real number before launch.
-   * A guarantee that is vague converts nothing; one that is wrong costs real money.
-   */
-  refundPercent: 25,
+
   points: [
     {
       title: "You keep the scope either way",
@@ -251,8 +253,8 @@ export const riskReversal = {
       body: "It goes in the document before you pay anything. It is not re-estimated once work starts.",
     },
     {
-      title: "We miss it, you get money back",
-      body: "If we miss the date in the scope, {REFUND}% of the fee comes back. The risk of the date sits with us, which is where it belongs.",
+      title: "You see it working halfway, not at the end",
+      body: "At the midpoint you get the actual thing running, not a status update — while there is still time to change direction. Most projects fail because nobody looked until it was too late to act.",
     },
     {
       title: "Never hourly",
@@ -315,7 +317,7 @@ export const faq = [
   },
   {
     q: "What actually happens if the date slips?",
-    a: "The date goes in the written scope before you pay anything. If we miss it, {REFUND}% of the fee comes back to you. We would rather carry that risk than pad the estimate, because a padded estimate is just an agency timeline with better manners.",
+    a: "It goes in the written scope before you pay anything, and it is not re-estimated once work starts. You also see the thing running at the halfway mark, so a slip is visible to you with time to act rather than announced at the end. We would rather commit to a real date than pad the estimate — a padded estimate is just an agency timeline with better manners.",
   },
   {
     q: "Why isn't pricing on the site?",
@@ -344,5 +346,6 @@ export const form = {
   submitting: "Sending…",
   successTitle: "Got it.",
   successBody: "We read every one of these ourselves. Expect a reply within one business day.",
+  successBooking: "Now pick your thirty minutes. If nothing on there works, just reply to the email we've sent you.",
   errorTitle: "That didn't send.",
 } as const;

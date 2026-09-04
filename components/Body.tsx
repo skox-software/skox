@@ -1,7 +1,6 @@
 import { CtaBlock, Section, SectionHead } from "@/components/Section";
 import { capabilities, faq, offer, problems, refusals, riskReversal, whyUs } from "@/content/site";
 
-const withRefund = (s: string) => s.replace("{REFUND}", String(riskReversal.refundPercent));
 /**
  * Renders the scarcity claim only while it is still true. Once `nextStart` is in
  * the past the dated version is dropped automatically — a stale scarcity date is
@@ -181,7 +180,7 @@ export function RiskReversal() {
               {p.title}
             </h3>
             <p className="mt-3 text-[15px] leading-[1.6]" style={{ color: "var(--text-dim)" }}>
-              {withRefund(p.body)}
+              {p.body}
             </p>
           </div>
         ))}
@@ -275,7 +274,7 @@ export function Faq() {
               </span>
             </summary>
             <p className="pb-7 pr-10 text-[15.5px] leading-[1.65] max-w-[720px]" style={{ color: "var(--text-dim)" }}>
-              {withRefund(f.a)}
+              {f.a}
             </p>
           </details>
         ))}
