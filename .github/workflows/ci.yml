@@ -1,0 +1,28 @@
+name: CI
+
+# Deployment is handled by Vercel's Git integration, not by this workflow —
+# Vercel builds every push to main as production and every pull request as a
+# preview, and comments the preview URL itself. This job only has to catch a
+# broken build before review.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx eslint .
+      - run: npm run build
