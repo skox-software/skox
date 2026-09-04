@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { formatAttribution, readAttribution } from "@/lib/attribution";
-import { COMPANY_KEY } from "@/lib/personalize";
 import { heroForm, form as copy, site } from "@/content/site";
 import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 
@@ -16,15 +15,6 @@ const EMPTY: Lead = { name: "", email: "", company: "", broken: "", timeline: ""
  * Contact form that lives inside the hero. Styled for the dark ground and wired
  * to the same /api/contact endpoint (and validation) as the full ScopeForm.
  */
-/** Falls back to whatever the visitor typed into the hero demo. */
-function demoCompany(): string {
-  try {
-    return sessionStorage.getItem(COMPANY_KEY) ?? "";
-  } catch {
-    return "";
-  }
-}
-
 export function HeroContactForm() {
   const [lead, setLead] = useState<Lead>(EMPTY);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -32,11 +22,7 @@ export function HeroContactForm() {
   const router = useRouter();
 
   /** One object, used for both the POST and the mailto fallback. */
-  const enriched: Lead = {
-    ...lead,
-    company: lead.company || demoCompany(),
-    attribution: formatAttribution(readAttribution()),
-  };
+  const enriched: Lead = { ...lead, attribution: formatAttribution(readAttribution()) };
 
   const set =
     (k: keyof Lead) =>

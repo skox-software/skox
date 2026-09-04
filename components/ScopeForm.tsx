@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { formatAttribution, readAttribution } from "@/lib/attribution";
-import { COMPANY_KEY } from "@/lib/personalize";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
 import { entryOffer, form as copy, site } from "@/content/site";
@@ -23,16 +22,7 @@ function readLeak(): string | undefined {
 }
 
 function enrich(lead: Lead): Lead {
-  return { ...lead, company: lead.company || demoCompany(), attribution: formatAttribution(readAttribution()) };
-}
-
-/** Falls back to whatever the visitor typed into the hero demo. */
-function demoCompany(): string {
-  try {
-    return sessionStorage.getItem(COMPANY_KEY) ?? "";
-  } catch {
-    return "";
-  }
+  return { ...lead, attribution: formatAttribution(readAttribution()) };
 }
 
 export function ScopeForm() {

@@ -1,6 +1,6 @@
 import { Animate } from "@/components/Animate";
 import { Atmosphere } from "@/components/Atmosphere";
-import { PersonalizedDemo } from "@/components/PersonalizedDemo";
+import { HeroContactForm } from "@/components/HeroContactForm";
 import { Nav } from "@/components/Nav";
 import { heroForm } from "@/content/site";
 
@@ -47,9 +47,9 @@ export function Hero() {
               </Animate>
             </div>
 
-            {/* Right — the visitor sees their own business running before they read a word */}
+            {/* Right — the capture, above the fold. This is the page's one job. */}
             <Animate delay={700} direction="scale" className="w-full lg:w-auto lg:shrink-0">
-              <PersonalizedDemo />
+              <HeroContactForm />
             </Animate>
           </div>
         </div>
