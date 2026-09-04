@@ -29,7 +29,8 @@ export function computeLeak(input: LeakInput): LeakResult {
   return {
     monthly: Math.round(monthly),
     annual: Math.round(monthly * 12),
-    lostCustomers: Math.round(lostCustomers * 10) / 10,
+    // Whole people. "37.9 customers" reads as sloppy to an operator.
+    lostCustomers: Math.round(lostCustomers),
   };
 }
 

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import { HeroFormBand } from "@/components/HeroFormBand";
 import { LeakCalculator } from "@/components/LeakCalculator";
 import { ScopeForm } from "@/components/ScopeForm";
 import { Footer } from "@/components/Footer";
@@ -12,6 +13,7 @@ export default function Page() {
     <>
       <main>
         <Hero />
+        <HeroFormBand />
         <ProblemStack />
         <LeakCalculator />
         <WhatWeBuild />

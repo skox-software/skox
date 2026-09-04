@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { track } from "@vercel/analytics";
+import { COMPANY_KEY } from "@/lib/personalize";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
 import { entryOffer, form as copy, site } from "@/content/site";
@@ -10,6 +11,15 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 type State = "idle" | "sending" | "done" | "failed";
 
 const EMPTY: Lead = { name: "", email: "", company: "", broken: "", timeline: "", website: "" };
+
+/** Falls back to whatever the visitor typed into the hero demo. */
+function demoCompany(): string {
+  try {
+    return sessionStorage.getItem(COMPANY_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
 
 export function ScopeForm() {
   const [lead, setLead] = useState<Lead>(EMPTY);
@@ -43,7 +53,7 @@ export function ScopeForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...lead, leak }),
+        body: JSON.stringify({ ...lead, company: lead.company || demoCompany(), leak }),
       });
       if (!res.ok) throw new Error(String(res.status));
       // The conversion. Everything upstream is judged against this.

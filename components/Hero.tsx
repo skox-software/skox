@@ -1,6 +1,6 @@
 import { Animate } from "@/components/Animate";
 import { Atmosphere } from "@/components/Atmosphere";
-import { HeroContactForm } from "@/components/HeroContactForm";
+import { PersonalizedDemo } from "@/components/PersonalizedDemo";
 import { Nav } from "@/components/Nav";
 import { heroForm } from "@/content/site";
 
@@ -47,9 +47,9 @@ export function Hero() {
               </Animate>
             </div>
 
-            {/* Right — contact form */}
+            {/* Right — the visitor sees their own business running before they read a word */}
             <Animate delay={700} direction="scale" className="w-full lg:w-auto lg:shrink-0">
-              <HeroContactForm />
+              <PersonalizedDemo />
             </Animate>
           </div>
         </div>

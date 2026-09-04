@@ -31,7 +31,8 @@ function useCountUp(target: number) {
   useEffect(() => {
     if (reduced || !Number.isFinite(target)) {
       from.current = target;
-      return;
+      const t = setTimeout(() => setN(target), 0);
+      return () => clearTimeout(t);
     }
     const start = performance.now();
     const a = from.current;
@@ -43,8 +44,19 @@ function useCountUp(target: number) {
       else from.current = target;
     };
     raf.current = requestAnimationFrame(tick);
+
+    // Safety net. requestAnimationFrame does not fire in a hidden or throttled
+    // tab, and without this the displayed figure stays frozen at its previous
+    // value while the inputs change underneath it — the number silently lies.
+    // Correctness of the figure outranks the count-up flourish.
+    const guard = setTimeout(() => {
+      setN(target);
+      from.current = target;
+    }, 650);
+
     return () => {
       if (raf.current) cancelAnimationFrame(raf.current);
+      clearTimeout(guard);
       from.current = target;
     };
   }, [target, reduced]);

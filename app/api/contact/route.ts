@@ -52,9 +52,15 @@ export async function POST(req: Request) {
   const text = formatLead(lead);
 
   if (!key) {
-    // No mail provider configured — never drop the lead, write it where it survives.
-    console.log(`[SKOX LEAD] ${new Date().toISOString()}\n${text}\n`);
-    return NextResponse.json({ ok: true, delivered: "log" });
+    // No mail provider configured. Log it so it is recoverable, then FAIL LOUDLY.
+    //
+    // Returning ok:true here was a real trap: the client fires its `scope_request`
+    // conversion event on a 200, so the analytics dashboard would report healthy
+    // conversions while nothing reached an inbox — and spend would be scaled on
+    // the strength of a number that meant nothing. A non-200 makes the form show
+    // its mailto: fallback instead, which preserves what the visitor typed.
+    console.error(`[SKOX LEAD — NO MAIL PROVIDER CONFIGURED] ${new Date().toISOString()}\n${text}\n`);
+    return NextResponse.json({ ok: false, error: "no_mail_provider" }, { status: 503 });
   }
 
   const res = await fetch("https://api.resend.com/emails", {
