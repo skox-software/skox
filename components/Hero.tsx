@@ -2,9 +2,11 @@ import { Animate } from "@/components/Animate";
 import { Atmosphere } from "@/components/Atmosphere";
 import { HeroCard } from "@/components/HeroCard";
 import { Nav } from "@/components/Nav";
-import { hero } from "@/content/site";
+import { hero, riskReversal } from "@/content/site";
 
 export function Hero() {
+  const guarantee = hero.guarantee.replace("{REFUND}", String(riskReversal.refundPercent));
+
   return (
     <section id="top" className="relative w-full min-h-screen lg:h-screen overflow-hidden bg-[var(--color-pitch)]">
       <Atmosphere />
@@ -28,8 +30,15 @@ export function Hero() {
                 </h1>
               </Animate>
 
+              <Animate delay={420} direction="up">
+                <p className="mb-5 sm:mb-6 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[15px] sm:text-[17px] font-[450] text-white">
+                  <span className="h-1.5 w-1.5 shrink-0 bg-[var(--color-amber)]" aria-hidden />
+                  {guarantee}
+                </p>
+              </Animate>
+
               <Animate delay={500} direction="up">
-                <p className="text-white/80 text-[16px] sm:text-[18px] md:text-[20px] font-[450] leading-[1.3] max-w-[370px] mb-7 sm:mb-10">
+                <p className="text-white/70 text-[15px] sm:text-[17px] font-[450] leading-[1.4] max-w-[420px] mb-7 sm:mb-9">
                   {hero.sub}
                 </p>
               </Animate>
@@ -52,7 +61,9 @@ export function Hero() {
               </Animate>
 
               <Animate delay={850} direction="up">
-                <p className="mt-6 sm:mt-8 text-white/45 text-[12px] sm:text-[13px] font-mono">{hero.guarantee}</p>
+                <p className="mt-5 sm:mt-7 text-white/45 text-[12.5px] sm:text-[13.5px] leading-[1.5] max-w-[420px]">
+                  {hero.proofline}
+                </p>
               </Animate>
             </div>
 

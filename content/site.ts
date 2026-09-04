@@ -27,9 +27,30 @@ export const hero = {
   eyebrow: "Two builders · fixed scope · fixed date",
   headline: "The software you can't buy off the shelf. Live in days, not quarters.",
   sub: "Websites, custom web apps, live dashboards and internal tools — scoped in writing, priced fixed, delivered on the date we set.",
-  primaryCta: "Get your free scope",
+  primaryCta: "Get my free scope",
   secondaryCta: "See what we build",
-  guarantee: "Written scope, fixed price, a date we commit to.",
+  /** Sits directly under the headline — the top half of the fold gets ~65% of all attention. */
+  guarantee: "Fixed price. Fixed date. If we miss it, you get {REFUND}% back.",
+  proofline: "Free written scope — what gets built, what it costs, the day it goes live. Yours to keep either way.",
+} as const;
+
+/**
+ * The entry offer, named rather than described. Named things get received;
+ * described things get scheduled.
+ */
+export const entryOffer = {
+  name: "The 30-Minute Scope",
+  promise: "A call, then a written scope. Yours whether or not you hire us.",
+  stack: [
+    { item: "A 30-minute call", detail: "You describe what's broken. We ask the questions that price it." },
+    { item: "A written scope document", detail: "Exactly what gets built, in plain language, with nothing hand-waved." },
+    { item: "A fixed price", detail: "Not a range, not an estimate, not billed by the hour." },
+    { item: "A fixed delivery date", detail: "Set before you pay anything, and not re-estimated once work starts." },
+    { item: "{REFUND}% back if we miss it", detail: "The risk of the date sits with us, which is where it belongs." },
+    { item: "You own the code outright", detail: "Your repos, your accounts, from day one. No licence, no hostage hosting." },
+  ],
+  keep: "You keep the scope document whether you hire us or not. No deposit, no obligation, no follow-up sequence.",
+  cost: "Costs you thirty minutes.",
 } as const;
 
 /** Problem stack — specific enough to sting, broad enough to cover the range. */
@@ -80,7 +101,7 @@ export const calculator = {
     "Deliberately conservative: it only counts enquiries you never reached, at your own close rate. No industry multipliers, no assumed lift.",
   payoff:
     "That is the number doing nothing costs. A build is a fraction of it, once, and it is live in days.",
-  cta: "Get your free scope",
+  cta: "Get my free scope",
 } as const;
 
 export const capabilities = [
@@ -273,8 +294,12 @@ export const refusals = {
   ],
   close:
     "We take the work that fits in a fixed scope with a date on it. Everything else breaks the guarantee, and the guarantee is the business.",
+  /** NEEDS_CONFIRMATION — Josh to keep `nextStart` current. Never let this go stale; a
+      scarcity claim that is provably wrong costs more credibility than it buys. */
+  concurrentBuilds: 2,
+  nextStart: "29 September",
   scarcity:
-    "We run a small number of builds at a time. The date we give you assumes a slot is open when you say yes.",
+    "We run {N} builds at a time. That is the whole calendar. Next start date we can commit to is {DATE}.",
 } as const;
 
 export const faq = [
@@ -307,8 +332,9 @@ export const faq = [
 export const form = {
   kicker: "Start here",
   headline: "Tell us what's broken.",
-  sub: "A call, then a written scope with a fixed price and a date. Yours to keep whether or not you hire us.",
+  sub: "Two fields and one sentence. We read every one of these ourselves.",
   submit: "Get my free scope",
+  reassure: "No deposit. No obligation. You keep the scope document either way.",
   submitting: "Sending…",
   successTitle: "Got it.",
   successBody: "We read every one of these ourselves. Expect a reply within one business day.",

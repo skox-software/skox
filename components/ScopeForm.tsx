@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
-import { form as copy, site } from "@/content/site";
-import { formatLead, TIMELINES, validate, type FieldErrors, type Lead } from "@/lib/leads";
+import { entryOffer, form as copy, riskReversal, site } from "@/content/site";
+import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 
 type State = "idle" | "sending" | "done" | "failed";
 
@@ -71,7 +71,34 @@ export function ScopeForm() {
   return (
     <Section id="scope" tone="alt">
       <div className="grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] gap-12 lg:gap-20">
-        <SectionHead kicker={copy.kicker} headline={copy.headline} sub={copy.sub} className="!max-w-none" />
+        <div>
+          <SectionHead kicker={copy.kicker} headline={copy.headline} sub={copy.sub} className="!max-w-none" />
+
+          {/* Scattered benefits read as features. Stacked in one place they read as an offer. */}
+          <div className="reveal mt-10 border-t" style={{ borderColor: "var(--line)" }}>
+            <p className="pt-5 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: "var(--color-amber-dim)" }}>
+              {entryOffer.name} — what you get
+            </p>
+            <ul className="mt-4 space-y-3.5">
+              {entryOffer.stack.map((s2) => (
+                <li key={s2.item} className="flex gap-3.5">
+                  <span aria-hidden className="mt-[9px] h-[5px] w-[5px] shrink-0 bg-[var(--color-amber)]" />
+                  <span>
+                    <span className="block text-[16px] font-[450]" style={{ color: "var(--text)" }}>
+                      {s2.item.replace("{REFUND}", String(riskReversal.refundPercent))}
+                    </span>
+                    <span className="block text-[14px] leading-[1.5] mt-0.5" style={{ color: "var(--text-dim)" }}>
+                      {s2.detail}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-[15px] leading-[1.55]" style={{ color: "var(--text)" }}>
+              {entryOffer.keep} <span style={{ color: "var(--text-dim)" }}>{entryOffer.cost}</span>
+            </p>
+          </div>
+        </div>
 
         <form onSubmit={submit} noValidate className="reveal">
           {/* Honeypot — hidden from people, tempting to bots. */}
@@ -85,10 +112,6 @@ export function ScopeForm() {
           <div className="grid sm:grid-cols-2 gap-5">
             <Field id="name" label="Your name" value={lead.name} onChange={set("name")} error={errors.name} required />
             <Field id="email" label="Email" type="email" value={lead.email} onChange={set("email")} error={errors.email} required />
-          </div>
-
-          <div className="mt-5">
-            <Field id="company" label="Company" value={lead.company} onChange={set("company")} error={errors.company} />
           </div>
 
           <div className="mt-5">
@@ -108,32 +131,6 @@ export function ScopeForm() {
             {errors.broken && <p className="mt-1.5 text-[13px] text-[#c0392b]">{errors.broken}</p>}
           </div>
 
-          <fieldset className="mt-6">
-            <legend className="text-[14px] font-[450] mb-3" style={{ color: "var(--text)" }}>
-              Timeline
-            </legend>
-            <div className="flex flex-wrap gap-2.5">
-              {TIMELINES.map((t) => (
-                <label
-                  key={t}
-                  className={`chamfer-sm cursor-pointer px-4 py-2.5 text-[14px] border transition-colors ${lead.timeline === t ? "bg-[var(--color-ink)] text-[var(--color-paper)] dark:bg-[var(--color-paper)] dark:text-[var(--color-ink)]" : ""}`}
-                  style={
-                    lead.timeline === t ? { borderColor: "transparent" } : { borderColor: "var(--line)", color: "var(--text-dim)" }
-                  }
-                >
-                  <input
-                    type="radio"
-                    name="timeline"
-                    value={t}
-                    checked={lead.timeline === t}
-                    onChange={set("timeline")}
-                    className="sr-only"
-                  />
-                  {t}
-                </label>
-              ))}
-            </div>
-          </fieldset>
 
           <button
             type="submit"
@@ -142,6 +139,9 @@ export function ScopeForm() {
           >
             {state === "sending" ? copy.submitting : copy.submit}
           </button>
+          <p className="mt-3 text-[13.5px]" style={{ color: "var(--text-dim)" }}>
+            {copy.reassure}
+          </p>
 
           {state === "failed" && (
             <div role="alert" className="mt-6 p-5 border chamfer-sm" style={{ borderColor: "#c0392b" }}>

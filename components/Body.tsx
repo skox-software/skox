@@ -2,6 +2,8 @@ import { CtaBlock, Section, SectionHead } from "@/components/Section";
 import { capabilities, faq, offer, problems, refusals, riskReversal, whyUs } from "@/content/site";
 
 const withRefund = (s: string) => s.replace("{REFUND}", String(riskReversal.refundPercent));
+const withScarcity = (s: string) =>
+  s.replace("{N}", String(refusals.concurrentBuilds)).replace("{DATE}", refusals.nextStart);
 
 /* ------------------------------------------------------------ problem stack */
 export function ProblemStack() {
@@ -151,7 +153,7 @@ export function Offer() {
         </p>
       </div>
 
-      <CtaBlock label="Get your free scope" note="A call, then a written scope. Yours to keep." />
+      <CtaBlock label="Get my free scope" note="A call, then a written scope. Yours to keep." />
     </Section>
   );
 }
@@ -234,7 +236,7 @@ export function WhatWeDont() {
 
         <p className="reveal mt-12 text-[17px] sm:text-[19px] leading-[1.5] max-w-[680px] text-white">{refusals.close}</p>
         <p className="reveal mt-5 text-[14px] font-mono leading-[1.6] max-w-[560px] text-[var(--color-amber)]/85">
-          {refusals.scarcity}
+          {withScarcity(refusals.scarcity)}
         </p>
       </div>
     </Section>
@@ -267,7 +269,7 @@ export function Faq() {
           </details>
         ))}
       </div>
-      <CtaBlock label="Get your free scope" note="Thirty minutes. You keep the document either way." />
+      <CtaBlock label="Get my free scope" note="Thirty minutes. You keep the document either way." />
     </Section>
   );
 }
