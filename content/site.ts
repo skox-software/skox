@@ -299,6 +299,37 @@ export const whyUs = [
   },
 ] as const;
 
+export type TeamMember = {
+  name: string;
+  role: string;
+  photo: string;
+  bio: string;
+};
+
+/**
+ * Bios are drawn from each person's own LinkedIn profile. Current employers are
+ * deliberately not named — the day jobs belong to the people, not to SKOX.
+ */
+export const team = {
+  kicker: "Who you're talking to",
+  headline: "Two builders. Nobody in between.",
+  sub: "No account manager, no offshore handoff, no game of telephone between the person who understood the problem and the person writing the code. These are the two people who scope the work, build it, and answer when you call.",
+  members: [
+    {
+      name: "Joshua Fox",
+      role: "Co-founder",
+      photo: "/team/joshua-fox.jpg",
+      bio: "Josh runs strategy and operations for a Florida healthcare group, scaling it through operations, technology and strategy. That means he has spent his working life on the operator's side of the exact problems we get hired to fix — he has been the one staring at the dashboard at eleven at night. MBA from the University of North Florida, former student-athlete.",
+    },
+    {
+      name: "Reiss Skeen",
+      role: "Co-founder",
+      photo: "/team/reiss-skeen.jpg",
+      bio: "Reiss engineers solutions for companies — taking a problem apart and building the thing that actually closes it. He co-founded FocusTap, leading both the technical build and the strategy behind it. Finance graduate of Flagler College and ex-captain of its men's soccer team, with a bias toward what the data actually says.",
+    },
+  ] as TeamMember[],
+};
+
 export const refusals = {
   kicker: "Limits",
   headline: "What we don't do.",
