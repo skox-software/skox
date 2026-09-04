@@ -1,6 +1,8 @@
 /** Scoping-form validation and delivery. Shared by the client and the route. */
 
 export type Lead = {
+  /** Campaign attribution, serialised at submit time. */
+  attribution?: string;
   name: string;
   email: string;
   company: string;
@@ -43,6 +45,7 @@ export function formatLead(lead: Lead): string {
     "",
     "What's broken:",
     lead.broken,
+    lead.attribution || null,
   ]
     .filter(Boolean)
     .join("\n");

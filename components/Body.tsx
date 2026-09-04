@@ -1,18 +1,26 @@
 import { CtaBlock, Section, SectionHead } from "@/components/Section";
-import { capabilities, faq, offer, problems, refusals, riskReversal, whyUs } from "@/content/site";
+import { capabilities, faq, offer, problems, refusals, riskReversal, shipped, whyUs } from "@/content/site";
 
 /**
  * Renders the scarcity claim only while it is still true. Once `nextStart` is in
  * the past the dated version is dropped automatically — a stale scarcity date is
  * worse than no scarcity date.
  */
-function scarcityLine() {
-  const n = String(refusals.concurrentBuilds);
+/**
+ * Renders the scarcity claim only when real numbers exist, and only while the
+ * date is still ahead. Returns null when unset — an invented capacity claim on
+ * a page selling committed dates is worse than no capacity claim at all.
+ */
+function scarcityLine(): string | null {
+  const n = refusals.concurrentBuilds;
+  if (n == null) return null;
+  if (!refusals.nextStart) return refusals.scarcityNoDate.replace("{N}", String(n));
   const start = new Date(refusals.nextStart + "T00:00:00");
-  const stillAhead = Number.isFinite(start.getTime()) && start.getTime() > Date.now();
-  if (!stillAhead) return refusals.scarcityNoDate.replace("{N}", n);
+  if (!Number.isFinite(start.getTime()) || start.getTime() <= Date.now()) {
+    return refusals.scarcityNoDate.replace("{N}", String(n));
+  }
   const label = start.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
-  return refusals.scarcity.replace("{N}", n).replace("{DATE}", label);
+  return refusals.scarcity.replace("{N}", String(n)).replace("{DATE}", label);
 }
 
 /* ------------------------------------------------------------ problem stack */
@@ -168,6 +176,44 @@ export function Offer() {
   );
 }
 
+/* ------------------------------------------------------------------ shipped */
+export function Shipped() {
+  return (
+    <Section id="shipped">
+      <SectionHead
+        kicker="Shipped"
+        headline="Two we built for ourselves."
+        sub="No client logos yet — we are new and we will not invent any. These are ours, and you can look at them."
+      />
+      <div className="mt-12 grid gap-px sm:grid-cols-2" style={{ background: "var(--line)" }}>
+        {shipped.map((p) => (
+          <article key={p.name} className="reveal p-8 sm:p-10" style={{ background: "var(--surface)" }}>
+            <div className="flex items-baseline justify-between gap-4">
+              <h3 className="text-[24px] font-[450] tracking-[-0.02em]" style={{ color: "var(--text)" }}>
+                {p.name}
+              </h3>
+              <span className="whitespace-nowrap font-mono text-[12px] text-[var(--color-amber-dim)]">{p.built}</span>
+            </div>
+            <p className="mt-3 text-[15px] leading-[1.55]" style={{ color: "var(--text-dim)" }}>
+              {p.what}
+            </p>
+            {p.url && (
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener"
+                className="mt-5 inline-flex items-center gap-2 text-[15px] font-[450] underline underline-offset-4 text-[var(--color-amber-dim)]"
+              >
+                Take a look <span aria-hidden>↗</span>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 /* ------------------------------------------------------------ risk reversal */
 export function RiskReversal() {
   return (
@@ -245,9 +291,11 @@ export function WhatWeDont() {
         </ul>
 
         <p className="reveal mt-12 text-[17px] sm:text-[19px] leading-[1.5] max-w-[680px] text-white">{refusals.close}</p>
-        <p className="reveal mt-5 text-[14px] font-mono leading-[1.6] max-w-[560px] text-[var(--color-amber)]/85">
-          {scarcityLine()}
-        </p>
+        {scarcityLine() && (
+          <p className="reveal mt-5 max-w-[560px] font-mono text-[14px] leading-[1.6] text-[var(--color-amber)]/85">
+            {scarcityLine()}
+          </p>
+        )}
       </div>
     </Section>
   );

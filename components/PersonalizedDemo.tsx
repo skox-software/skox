@@ -134,7 +134,7 @@ export function PersonalizedDemo() {
         </div>
       </div>
 
-      <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-white/35 lg:text-left">
+      <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-white/55 lg:text-left">
         Sample data · built to fit your brand
       </p>
     </div>

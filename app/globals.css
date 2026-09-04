@@ -18,6 +18,10 @@
 /* Must live in @layer base: unlayered rules outrank Tailwind's layered
    utilities, so a bare `* { padding: 0 }` silently kills every p-* class. */
 @layer base {
+  /* Without this the browser paints native UI — scrollbars, number spinners and
+     notably Chrome autofill — in light mode over the dark hero. */
+  :root { color-scheme: light dark; }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
@@ -37,8 +41,10 @@
 
 ::selection { background: var(--color-amber); color: var(--color-ink); }
 
+/* Amber on the light ground measures 2.02:1 — below the 3:1 WCAG minimum for a
+   focus indicator. --color-amber-dim flips by theme and clears it on both. */
 :focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-amber-dim);
   outline-offset: 3px;
 }
 

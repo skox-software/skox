@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { CaptureAttribution } from "@/components/CaptureAttribution";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { faq, site } from "@/content/site";
 import "./globals.css";
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         {children}
+        <CaptureAttribution />
         <Analytics />
         <SpeedInsights />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

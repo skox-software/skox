@@ -11,7 +11,7 @@ export const site = {
   name: "SKOX",
   tagline: "Custom software, on a date we commit to.",
   description:
-    "A site in 7 days. A live dashboard in 14. One workflow automated in 10. SKOX builds websites, custom web apps, dashboards and internal tools at a fixed price, on a date agreed in writing before you pay.",
+    "Custom software, live on a date we commit to. A site in 7 days, a live dashboard in 14, one workflow automated in 10 — fixed price, agreed in writing before you pay. Websites, web apps, dashboards and internal tools, built by two people in Winter Park, Florida.",
   email: "snkrpickups@gmail.com",
   url: "https://skox.vercel.app",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
@@ -165,7 +165,7 @@ export const capabilities = [
     items: [
       "MVPs built in days, not funded quarters",
       "Auth, payments, admin — the whole thing",
-      "We have shipped our own: Tender in three days, FocusTap end to end",
+      "We have shipped our own: Tender in three days, and FocusTap end to end",
     ],
   },
   {
@@ -201,6 +201,22 @@ export const capabilities = [
       "Call transcription, summary and drafted follow-ups",
       "Lead scoring and routing, email and ticket triage",
     ],
+  },
+] as const;
+
+/** Things SKOX has actually shipped. Named and linkable beats named alone. */
+export const shipped = [
+  {
+    name: "Tender",
+    what: "A second-opinion marketplace for CFOs — auth, payments, admin, the lot.",
+    built: "Built in three days",
+    url: null as string | null,
+  },
+  {
+    name: "FocusTap",
+    what: "A focus tool, taken end to end from idea to shipped product.",
+    built: "Built end to end",
+    url: null as string | null,
   },
 ] as const;
 
@@ -346,13 +362,15 @@ export const refusals = {
   close:
     "We take the work that fits in a fixed scope with a date on it. Everything else breaks the guarantee, and the guarantee is the business.",
   /**
-   * NEEDS_CONFIRMATION — both values are placeholders until Josh sets the real ones.
-   * `nextStart` is an ISO date so it can be checked; once it passes, the scarcity line
-   * silently drops the date rather than publishing a claim that is provably stale.
-   * A scarcity claim that has expired costs more credibility than it ever bought.
+   * Scarcity is OFF until real numbers exist.
+   *
+   * Set `concurrentBuilds` to the true figure and `nextStart` to a real ISO date to
+   * turn the line back on. Leave `nextStart` null and it renders the undated version.
+   * Nothing here may be a guess: the entire offer rests on "our dates are real", and
+   * one invented date on this page discredits every other date on it.
    */
-  concurrentBuilds: 2,
-  nextStart: "2026-09-29",
+  concurrentBuilds: null as number | null,
+  nextStart: null as string | null,
   scarcity:
     "We run {N} builds at a time. That is the whole calendar. Next start date we can commit to is {DATE}.",
   scarcityNoDate:

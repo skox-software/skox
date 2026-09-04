@@ -45,6 +45,7 @@ export async function POST(req: Request) {
     broken: String(body.broken).trim(),
     timeline: String(body.timeline ?? "").trim(),
     leak: body.leak ? String(body.leak).slice(0, 300) : undefined,
+    attribution: body.attribution ? String(body.attribution).slice(0, 800) : undefined,
   };
 
   const to = process.env.CONTACT_EMAIL ?? "snkrpickups@gmail.com";

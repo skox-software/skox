@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { FrontDeskSection } from "@/components/FrontDeskSection";
 import { Proof } from "@/components/Proof";
 import { Team } from "@/components/Team";
-import { Faq, Offer, ProblemStack, RiskReversal, WhatWeBuild, WhatWeDont, WhyUs } from "@/components/Body";
+import { Faq, Offer, ProblemStack, RiskReversal, Shipped, WhatWeBuild, WhatWeDont, WhyUs } from "@/components/Body";
 
 export default function Page() {
   return (
@@ -19,6 +19,7 @@ export default function Page() {
         <WhatWeBuild />
         <FrontDeskSection />
         <Offer />
+        <Shipped />
         <RiskReversal />
         <Proof />
         <WhyUs />

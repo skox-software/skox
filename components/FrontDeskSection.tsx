@@ -34,7 +34,7 @@ export function FrontDeskSection() {
               <FrontDeskPanel />
             </div>
           </div>
-          <p className="mt-3 text-center lg:text-left text-[11px] font-mono uppercase tracking-[0.14em] text-white/35">
+          <p className="mt-3 text-center lg:text-left text-[11px] font-mono uppercase tracking-[0.14em] text-white/55">
             Live demo · sample business
           </p>
         </div>

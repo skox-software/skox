@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
+import { formatAttribution, readAttribution } from "@/lib/attribution";
 import { COMPANY_KEY } from "@/lib/personalize";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
@@ -11,6 +13,18 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 type State = "idle" | "sending" | "done" | "failed";
 
 const EMPTY: Lead = { name: "", email: "", company: "", broken: "", timeline: "", website: "" };
+
+function readLeak(): string | undefined {
+  try {
+    return sessionStorage.getItem(LEAK_KEY) ?? undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function enrich(lead: Lead): Lead {
+  return { ...lead, company: lead.company || demoCompany(), attribution: formatAttribution(readAttribution()) };
+}
 
 /** Falls back to whatever the visitor typed into the hero demo. */
 function demoCompany(): string {
@@ -25,6 +39,7 @@ export function ScopeForm() {
   const [lead, setLead] = useState<Lead>(EMPTY);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [state, setState] = useState<State>("idle");
+  const router = useRouter();
 
   const set = (k: keyof Lead) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLead((l) => ({ ...l, [k]: e.target.value }));
@@ -53,12 +68,13 @@ export function ScopeForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...lead, company: lead.company || demoCompany(), leak }),
+        body: JSON.stringify({ ...enrich(lead), leak }),
       });
       if (!res.ok) throw new Error(String(res.status));
       // The conversion. Everything upstream is judged against this.
       track("scope_request", { withLeak: Boolean(leak) });
-      setState("done");
+      // A real URL the ad platforms can register as a conversion.
+      router.push("/scope-received");
     } catch {
       // Never swallow a real lead behind a green checkmark.
       track("scope_request_failed");
@@ -94,7 +110,9 @@ export function ScopeForm() {
     );
   }
 
-  const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Scope request — " + (lead.company || lead.name))}&body=${encodeURIComponent(formatLead(lead))}`;
+  // Must carry what the POST carried — the fallback is the only path when delivery fails.
+  const forMail: Lead = { ...enrich(lead), leak: readLeak() };
+  const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Scope request — " + (forMail.company || forMail.name))}&body=${encodeURIComponent(formatLead(forMail))}`;
 
   return (
     <Section id="scope" tone="alt">

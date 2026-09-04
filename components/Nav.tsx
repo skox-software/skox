@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Animate } from "@/components/Animate";
 import { SkoxLogo } from "@/components/SkoxLogo";
-import { ChevronDown, MenuIcon, XIcon } from "@/components/icons";
+import { MenuIcon, XIcon } from "@/components/icons";
 import { hero, nav } from "@/content/site";
 
 export function Nav() {
@@ -27,14 +27,13 @@ export function Nav() {
 
         <Animate delay={100} direction="down" className="hidden lg:block">
           <div className="h-[52px] px-6 flex items-center gap-[30px] bg-[rgba(10,7,7,0.35)] rounded-[11px] backdrop-blur-[17px] ring-1 ring-white/[0.07]">
-            {nav.map((item, i) => (
+            {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 className="flex items-center gap-[5px] text-white/80 text-[14px] font-[450] leading-[14px] hover:text-white transition-colors whitespace-nowrap"
               >
                 {item.label}
-                {i === 0 && <ChevronDown className="w-[10px] h-[10px] opacity-80" />}
               </a>
             ))}
           </div>
@@ -97,7 +96,6 @@ export function Nav() {
                 className={`flex items-center justify-between px-4 py-4 rounded-[12px] text-white/90 text-[18px] font-[450] hover:bg-white/[0.06] transition-all duration-300 ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-3"}`}
               >
                 {item.label}
-                {i === 0 && <ChevronDown className="w-4 h-4 opacity-50" />}
               </a>
             ))}
           </div>

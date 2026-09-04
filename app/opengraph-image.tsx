@@ -22,10 +22,10 @@ export default function OG() {
         <div
           style={{
             position: "absolute",
-            top: -220,
-            left: -140,
-            width: 760,
-            height: 760,
+            top: -420,
+            left: -320,
+            width: 1180,
+            height: 1180,
             borderRadius: 9999,
             background: "radial-gradient(circle, rgba(228,169,7,0.30) 0%, rgba(228,169,7,0) 68%)",
             display: "flex",
@@ -40,11 +40,11 @@ export default function OG() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 62, color: "#fafaf8", lineHeight: 1.06, letterSpacing: -2, maxWidth: 960 }}>
-            A site in 7 days. A live dashboard in 14. One workflow automated in 10.
+          <div style={{ display: "flex", fontSize: 66, color: "#fafaf8", lineHeight: 1.05, letterSpacing: -2, maxWidth: 940 }}>
+            Custom software, live on a date we commit to.
           </div>
           <div style={{ display: "flex", marginTop: 28, fontSize: 26, color: "rgba(250,250,248,0.55)" }}>
-            Websites · custom web apps · Command Centers · internal tools
+            A site in 7 days · a dashboard in 14 · one workflow automated in 10
           </div>
         </div>
 

@@ -18,14 +18,17 @@ export function Footer() {
         </div>
         <nav className="flex flex-wrap gap-x-8 gap-y-3">
           {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-[14px] text-white/60 hover:text-white transition-colors">
+            <a key={n.href} href={n.href} className="text-[14px] text-white/60 transition-colors hover:text-white">
               {n.label}
             </a>
           ))}
+          <a href="/privacy" className="text-[14px] text-white/60 transition-colors hover:text-white">
+            Privacy
+          </a>
         </nav>
       </div>
       <div className="relative w-full max-w-[1800px] mx-auto mt-12 pt-6 border-t border-white/10">
-        <p className="font-mono text-[12px] text-white/35">
+        <p className="font-mono text-[12px] text-white/55">
           © {new Date().getFullYear()} {site.name}
         </p>
       </div>

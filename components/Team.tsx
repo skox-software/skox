@@ -23,7 +23,7 @@ export function Team() {
                 src={m.photo}
                 alt={`${m.name}, ${m.role} at SKOX`}
                 fill
-                sizes="(max-width: 640px) 100vw, 300px"
+                sizes="300px"
                 className="object-cover"
               />
             </div>

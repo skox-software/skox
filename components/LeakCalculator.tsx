@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "reac
 import { track } from "@vercel/analytics";
 import { Section, SectionHead } from "@/components/Section";
 import { calculator } from "@/content/site";
-import { clampField, computeLeak, money } from "@/lib/leak";
+import { LIMITS, clampField, computeLeak, money } from "@/lib/leak";
 
 export const LEAK_KEY = "skox:leak";
 
@@ -99,9 +99,9 @@ export function LeakCalculator() {
   }, [result, missed, value, close]);
 
   const fields = [
-    { ...calculator.fields.missed, v: missed, set: setMissed, key: "missedPerWeek" as const, min: 0, max: 100, step: 1 },
-    { ...calculator.fields.value, v: value, set: setValue, key: "avgValue" as const, min: 0, max: 20000, step: 50 },
-    { ...calculator.fields.close, v: close, set: setClose, key: "closeRate" as const, min: 0, max: 100, step: 1 },
+    { ...calculator.fields.missed, v: missed, set: setMissed, key: "missedPerWeek" as const, min: LIMITS.missedPerWeek.min, max: LIMITS.missedPerWeek.max, step: 1 },
+    { ...calculator.fields.value, v: value, set: setValue, key: "avgValue" as const, min: LIMITS.avgValue.min, max: LIMITS.avgValue.max, step: 50 },
+    { ...calculator.fields.close, v: close, set: setClose, key: "closeRate" as const, min: LIMITS.closeRate.min, max: LIMITS.closeRate.max, step: 1 },
   ];
 
   return (
