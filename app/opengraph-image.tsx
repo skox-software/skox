@@ -40,8 +40,8 @@ export default function OG() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 68, color: "#fafaf8", lineHeight: 1.03, letterSpacing: -2, maxWidth: 900 }}>
-            The software you can&apos;t buy off the shelf. Live in days, not quarters.
+          <div style={{ display: "flex", fontSize: 62, color: "#fafaf8", lineHeight: 1.06, letterSpacing: -2, maxWidth: 960 }}>
+            A site in 7 days. A live dashboard in 14. One workflow automated in 10.
           </div>
           <div style={{ display: "flex", marginTop: 28, fontSize: 26, color: "rgba(250,250,248,0.55)" }}>
             Websites · custom web apps · Command Centers · internal tools
@@ -50,7 +50,7 @@ export default function OG() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 22, color: "#e4a907" }}>
           <div style={{ display: "flex", width: 40, height: 2, background: "#e4a907" }} />
-          Written scope · fixed price · a date we commit to
+          Fixed price and a date, agreed in writing before you pay
         </div>
       </div>
     ),

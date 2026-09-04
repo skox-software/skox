@@ -9,9 +9,9 @@
 
 export const site = {
   name: "SKOX",
-  tagline: "Custom software, shipped in days.",
+  tagline: "Custom software, on a date we commit to.",
   description:
-    "SKOX builds the software a business can't buy off the shelf — AI phone agents, live dashboards, internal tools and full products. Fixed scope, fixed price, fixed date.",
+    "A site in 7 days. A live dashboard in 14. One workflow automated in 10. SKOX builds websites, custom web apps, dashboards and internal tools at a fixed price, on a date agreed in writing before you pay.",
   email: "snkrpickups@gmail.com",
   url: "https://skox.vercel.app",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
