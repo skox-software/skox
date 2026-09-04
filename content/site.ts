@@ -13,7 +13,7 @@ export const site = {
   description:
     "Custom software, live on a date we commit to. A site in 7 days, a live dashboard in 14, one workflow automated in 10 — fixed price, agreed in writing before you pay. Websites, web apps, dashboards and internal tools, built by two people in Winter Park, Florida.",
   email: "snkrpickups@gmail.com",
-  url: "https://skox.vercel.app",
+  url: "https://skoxsoftware.com",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
   bookingUrl: null as string | null,
   /** Drop a redacted scope at public/sample-scope.pdf and set this to "/sample-scope.pdf". */
