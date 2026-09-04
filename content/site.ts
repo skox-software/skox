@@ -39,6 +39,24 @@ export const hero = {
 } as const;
 
 /**
+ * Simplified hero: a plain statement of what we provide, next to a contact form.
+ * Kept separate from `hero` above so the original long-form fold stays intact.
+ */
+export const heroForm = {
+  eyebrow: "Two builders · fixed scope · fixed date",
+  headline: "Custom software, live on a date we commit to.",
+  sub: "Websites, dashboards, internal tools and AI automation — built by two people at a fixed price, on a delivery date agreed in writing before you pay.",
+  provides: [
+    "Websites & custom web apps",
+    "Live dashboards & Command Centers",
+    "Internal tools & integrations",
+    "AI phone & chat automation",
+  ],
+  formTitle: "Get your free scope",
+  formSub: "Tell us what you need — it comes straight to the two of us. A reply within one business day.",
+} as const;
+
+/**
  * The entry offer, named rather than described. Named things get received;
  * described things get scheduled.
  */
