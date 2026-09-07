@@ -23,7 +23,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
-      - run: npm ci
+      # `npm ci` refuses to install when the lock file and package.json
+      # disagree, and Tailwind v4 and sharp both ship platform-specific wasm
+      # fallbacks that npm resolves differently on macOS and Linux — so a lock
+      # written on a Mac can never satisfy it here. `npm install` still honours
+      # the lock file when it matches and reconciles those optional entries
+      # when it doesn't. vercel.json pins the deploy to the same command.
+      - run: npm install --no-audit --no-fund
       - run: npx eslint .
       - run: npm test
       - run: npm run build
