@@ -1,10 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { chips, confirmation, greeting, persona, respond, slots, type Msg } from "@/lib/frontdesk";
+import {
+  chips,
+  confirmation,
+  greeting,
+  persona,
+  respond,
+  slots,
+  type Msg,
+} from "@/lib/frontdesk";
 
 export function FrontDeskPanel() {
-  const [msgs, setMsgs] = useState<Msg[]>([{ id: 0, from: "them", text: greeting }]);
+  const [msgs, setMsgs] = useState<Msg[]>([
+    { id: 0, from: "them", text: greeting },
+  ]);
   const [value, setValue] = useState("");
   const [typing, setTyping] = useState(false);
   const [offer, setOffer] = useState(false);
@@ -68,14 +78,27 @@ export function FrontDeskPanel() {
           <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-amber)]" />
         </span>
         <div className="min-w-0">
-          <p className="text-white text-[14px] font-[450] leading-tight truncate">{persona.business}</p>
-          <p className="text-white/50 text-[11px] font-mono leading-tight">{persona.status}</p>
+          <p className="text-white text-[14px] font-[450] leading-tight truncate">
+            {persona.business}
+          </p>
+          <p className="text-white/50 text-[11px] font-mono leading-tight">
+            {persona.status}
+          </p>
         </div>
       </div>
 
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto space-y-2 pr-1 scroll-smooth" aria-live="polite">
+      <div
+        ref={scrollRef}
+        className="flex-1 min-h-0 overflow-y-auto space-y-2 pr-1 scroll-smooth"
+        aria-live="polite"
+      >
         {msgs.map((m) => (
-          <div key={m.id} className={m.from === "us" ? "flex justify-end" : "flex justify-start"}>
+          <div
+            key={m.id}
+            className={
+              m.from === "us" ? "flex justify-end" : "flex justify-start"
+            }
+          >
             <p
               className={`max-w-[86%] px-3 py-2 text-[13px] leading-[1.45] rounded-[14px] ${
                 m.from === "us"

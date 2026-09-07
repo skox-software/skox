@@ -15,7 +15,9 @@ export function Section({
     <section
       id={id}
       className={`scroll-mt-20 px-5 sm:px-8 md:px-[82px] py-20 sm:py-28 md:py-32 ${className}`}
-      style={{ background: tone === "alt" ? "var(--surface-2)" : "var(--surface)" }}
+      style={{
+        background: tone === "alt" ? "var(--surface-2)" : "var(--surface)",
+      }}
     >
       <div className="w-full max-w-[1800px] mx-auto">{children}</div>
     </section>
@@ -46,7 +48,10 @@ export function SectionHead({
         {headline}
       </h2>
       {sub && (
-        <p className="mt-5 text-[16px] sm:text-[18px] leading-[1.5] max-w-[620px]" style={{ color: "var(--text-dim)" }}>
+        <p
+          className="mt-5 text-[16px] sm:text-[18px] leading-[1.5] max-w-[620px]"
+          style={{ color: "var(--text-dim)" }}
+        >
           {sub}
         </p>
       )}
@@ -65,7 +70,10 @@ export function CtaBlock({ label, note }: { label: string; note?: string }) {
         {label}
       </a>
       {note && (
-        <p className="text-[13px] font-mono" style={{ color: "var(--text-dim)" }}>
+        <p
+          className="text-[13px] font-mono"
+          style={{ color: "var(--text-dim)" }}
+        >
           {note}
         </p>
       )}

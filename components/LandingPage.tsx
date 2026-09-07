@@ -1,0 +1,323 @@
+import { Fragment, type CSSProperties } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { SkoxLogo } from "@/components/SkoxLogo";
+import { BuildSection } from "@/components/BuildSection";
+import { ConversionForm } from "@/components/ConversionForm";
+import { HeroComposer } from "@/components/HeroComposer";
+import { HeroFragments } from "@/components/HeroFragments";
+import { LandingTracking } from "@/components/LandingTracking";
+import { builds, landing, landingFaq, type BuildType } from "@/content/landing";
+import { site } from "@/content/site";
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
+/**
+ * Splits a line into per-word boxes so the headline can rise word by word.
+ * Purely presentational — the words stay in reading order in the DOM, so the
+ * heading is announced as one phrase.
+ */
+function Words({ text, offset = 0 }: { text: string; offset?: number }) {
+  const words = text.split(" ");
+  return words.map((word, index) => (
+    <Fragment key={`${word}-${index}`}>
+      <span
+        className="word"
+        style={{ "--i": index + offset } as CSSProperties}
+      >
+        <span>{word}</span>
+      </span>
+      {index < words.length - 1 ? " " : null}
+    </Fragment>
+  ));
+}
+
+export function LandingPage({ variant }: { variant?: BuildType }) {
+  const chosen = builds.find((build) => build.id === variant);
+  return (
+    <div className="landing-page">
+      <header className="site-header">
+        <div className="shell header-inner">
+          <Link href="/" aria-label="SKOX home">
+            <SkoxLogo className="brand-logo" />
+          </Link>
+          <nav aria-label="Main navigation">
+            <a href="#build">What we build</a>
+            <a href="#process">How it works</a>
+            <a href="#about">Who we are</a>
+          </nav>
+          <a
+            className="button button-dark header-cta"
+            href="#scope"
+            data-cta="header"
+          >
+            Let’s talk <Arrow />
+          </a>
+        </div>
+      </header>
+      <main id="top" tabIndex={-1}>
+        <section className="hero-section" aria-labelledby="hero-title">
+          <div className="shell hero-stage">
+            <HeroFragments />
+            <div className="hero-copy">
+              <p className="eyebrow">
+                <span className="status-dot" />
+                {landing.eyebrow}
+              </p>
+              <h1 id="hero-title">
+                <Words text={chosen?.headline || landing.headline} />
+                <span className="accent">
+                  <span className="accent-ink">
+                    <Words
+                      text={chosen?.accent || landing.accent}
+                      offset={(chosen?.headline || landing.headline).split(" ").length}
+                    />
+                  </span>
+                </span>
+              </h1>
+              <p className="hero-intro">{chosen?.intro || landing.intro}</p>
+              <HeroComposer />
+              <div className="hero-actions">
+                <a
+                  href="#scope"
+                  className="button button-primary"
+                  data-cta="hero"
+                >
+                  {landing.cta}
+                  <Arrow />
+                </a>
+                <a href="#build" className="button button-ghost">
+                  {landing.secondaryCta}
+                  <span aria-hidden>↓</span>
+                </a>
+              </div>
+              <p className="hero-reassurance">{landing.reassurance}</p>
+              <div className="hero-founders">
+                <div className="founder-avatars">
+                  {landing.founders.map((person) => (
+                    <Image
+                      key={person.name}
+                      src={person.photo}
+                      width={40}
+                      height={40}
+                      alt=""
+                    />
+                  ))}
+                </div>
+                <p>
+                  <strong>You work with the builders</strong>, from day one.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className="trust-strip">
+          <div className="shell trust-inner">
+            {landing.trust.map((item, i) => (
+              <p key={item}>
+                <span className="trust-number">0{i + 1}</span>
+                {item}
+                <span className="trust-check" aria-hidden>
+                  ✓
+                </span>
+              </p>
+            ))}
+          </div>
+        </div>
+        <BuildSection variant={variant} />
+        <section
+          className="process-section"
+          id="process"
+          aria-labelledby="process-title"
+        >
+          <div className="shell section">
+            <div className="section-heading rise">
+              <div>
+                <p className="eyebrow">{landing.processEyebrow}</p>
+                <h2 id="process-title">{landing.processTitle}</h2>
+              </div>
+              <p>{landing.processSub}</p>
+            </div>
+            <div className="process-grid rise-stagger">
+              {landing.steps.map((step) => (
+                <article key={step.number}>
+                  <span className="step-number">{step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                  <span className="step-output">
+                    <span aria-hidden>↳</span>
+                    {step.output}
+                  </span>
+                </article>
+              ))}
+            </div>
+            <div className="process-cta rise">
+              <p>A clear scope. A real date. Let’s get yours on paper.</p>
+              <a href="#scope" className="text-link" data-cta="process">
+                {landing.cta}
+                <Arrow />
+              </a>
+            </div>
+          </div>
+        </section>
+        <section
+          className="about-section"
+          id="about"
+          aria-labelledby="about-title"
+        >
+          <div className="shell section">
+            <div className="section-heading rise">
+              <div>
+                <p className="eyebrow">{landing.teamEyebrow}</p>
+                <h2 id="about-title">{landing.teamTitle}</h2>
+              </div>
+              <p>{landing.teamSub}</p>
+            </div>
+            <div className="founder-grid rise-stagger">
+              {landing.founders.map((person) => (
+                <article className="founder-card" key={person.name}>
+                  <Image
+                    src={person.photo}
+                    width={280}
+                    height={320}
+                    sizes="(max-width: 600px) 110px, 180px"
+                    alt={person.name}
+                  />
+                  <div>
+                    <span className="micro">{person.role}</span>
+                    <h3>{person.name}</h3>
+                    <p>{person.bio}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="products-row rise-stagger">
+              <div>
+                <p className="micro">{landing.workEyebrow}</p>
+                <p>{landing.workSub}</p>
+              </div>
+              {landing.projects.map((project) => (
+                <article key={project.name}>
+                  <h3>
+                    {project.name}
+                    <span>{project.type}</span>
+                  </h3>
+                  <p>{project.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section
+          className="section shell faq-section"
+          id="faq"
+          aria-labelledby="faq-title"
+        >
+          <div>
+            <p className="eyebrow">{landing.faqEyebrow}</p>
+            <h2 id="faq-title">{landing.faqTitle}</h2>
+            <p className="faq-contact">
+              Something else on your mind?
+              <br />
+              <a className="text-link" href="#scope" data-cta="faq">
+                Ask us directly
+                <Arrow />
+              </a>
+            </p>
+          </div>
+          <div className="faq-list rise">
+            {landingFaq.map((item, i) => (
+              <details key={item.q}>
+                <summary>
+                  <span className="faq-number">0{i + 1}</span>
+                  {item.q}
+                  <span className="faq-plus" aria-hidden>
+                    +
+                  </span>
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+        <section
+          id="scope"
+          className="scope-section"
+          aria-labelledby="scope-title"
+        >
+          <div className="shell scope-grid">
+            <div className="scope-copy">
+              <p className="eyebrow">{landing.formEyebrow}</p>
+              <h2 id="scope-title">{landing.formTitle}</h2>
+              <p>{landing.formSub}</p>
+              <ul>
+                {landing.formBenefits.map((benefit) => (
+                  <li key={benefit}>
+                    <span aria-hidden>✓</span>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+              <div className="scope-signoff">
+                <span className="handwritten-arrow" aria-hidden>
+                  ↳
+                </span>
+                <p>
+                  One conversation.
+                  <br />
+                  <strong>A concrete next step.</strong>
+                </p>
+              </div>
+            </div>
+            <ConversionForm initial={variant} />
+          </div>
+        </section>
+      </main>
+      <footer className="landing-footer">
+        <div className="shell">
+          <div className="footer-top">
+            <Link href="/" aria-label="SKOX home">
+              <SkoxLogo className="brand-logo" />
+            </Link>
+            <p>{landing.footerLine}</p>
+            <a href={`mailto:${site.email}`}>
+              Email us <Arrow />
+            </a>
+          </div>
+          <div className="footer-bottom">
+            <span>© {new Date().getFullYear()} SKOX</span>
+            <span>Working with clients everywhere</span>
+            <Link href="/privacy">Privacy</Link>
+          </div>
+        </div>
+      </footer>
+      <div className="mobile-cta">
+        <a
+          href="#scope"
+          className="button button-primary"
+          data-cta="mobile-sticky"
+        >
+          {landing.cta}
+          <Arrow />
+        </a>
+      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: landingFaq.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }),
+        }}
+      />
+      <LandingTracking />
+    </div>
+  );
+}

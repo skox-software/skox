@@ -10,7 +10,11 @@ import { team } from "@/content/site";
 export function Team() {
   return (
     <Section id="team">
-      <SectionHead kicker={team.kicker} headline={team.headline} sub={team.sub} />
+      <SectionHead
+        kicker={team.kicker}
+        headline={team.headline}
+        sub={team.sub}
+      />
 
       <div className="reveal mt-14 grid max-w-[860px] gap-12 sm:grid-cols-2 sm:gap-14">
         {team.members.map((m) => (
@@ -29,7 +33,10 @@ export function Team() {
             </div>
 
             <figcaption className="mt-5 max-w-[420px]">
-              <p className="text-[20px] font-[450] tracking-[-0.01em]" style={{ color: "var(--text)" }}>
+              <p
+                className="text-[20px] font-[450] tracking-[-0.01em]"
+                style={{ color: "var(--text)" }}
+              >
                 {m.name}
               </p>
               <p
@@ -39,7 +46,10 @@ export function Team() {
                 {m.role}
               </p>
               {m.bio && (
-                <p className="mt-4 text-[15px] leading-[1.6]" style={{ color: "var(--text-dim)" }}>
+                <p
+                  className="mt-4 text-[15px] leading-[1.6]"
+                  style={{ color: "var(--text-dim)" }}
+                >
                   {m.bio}
                 </p>
               )}

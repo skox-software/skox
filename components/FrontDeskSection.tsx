@@ -7,7 +7,10 @@ import { Section } from "@/components/Section";
  */
 export function FrontDeskSection() {
   return (
-    <Section id="frontdesk" className="!bg-[var(--color-pitch)] relative overflow-hidden">
+    <Section
+      id="frontdesk"
+      className="!bg-[var(--color-pitch)] relative overflow-hidden"
+    >
       <div className="grain absolute inset-0 opacity-60 pointer-events-none" />
       <div className="relative grid lg:grid-cols-[minmax(0,1fr)_405px] gap-12 lg:gap-20 items-center">
         <div className="reveal">
@@ -19,12 +22,14 @@ export function FrontDeskSection() {
             The desk that never goes home.
           </h2>
           <p className="mt-5 text-[16px] sm:text-[18px] leading-[1.5] max-w-[520px] text-white/60">
-            Phone and chat agents that answer in seconds, handle the five questions everyone asks, and put the
-            booking on your calendar — at eleven at night, on a Sunday, while you are with a customer.
+            Phone and chat agents that answer in seconds, handle the five
+            questions everyone asks, and put the booking on your calendar — at
+            eleven at night, on a Sunday, while you are with a customer.
           </p>
           <p className="mt-6 text-[15px] leading-[1.6] max-w-[520px] text-white/45">
-            Ask it what a customer would ask. Scripted to one business for this demo — the version we
-            build you is trained on your whole book, your prices and your calendar.
+            Ask it what a customer would ask. Scripted to one business for this
+            demo — the version we build you is trained on your whole book, your
+            prices and your calendar.
           </p>
         </div>
 

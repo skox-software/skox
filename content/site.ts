@@ -9,9 +9,9 @@
 
 export const site = {
   name: "SKOX",
-  tagline: "Custom software, on a date we commit to.",
+  tagline: "Custom websites, web apps & dashboards. Built at speed.",
   description:
-    "Custom software, live on a date we commit to. A site in 7 days, a live dashboard in 14, one workflow automated in 10 — fixed price, agreed in writing before you pay. Websites, web apps, dashboards and internal tools, built by two people in Winter Park, Florida.",
+    "Custom websites, web apps and dashboards, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
   email: "snkrpickups@gmail.com",
   url: "https://skoxsoftware.com",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
@@ -335,7 +335,7 @@ export const team = {
       name: "Joshua Fox",
       role: "Co-founder",
       photo: "/team/joshua-fox.jpg",
-      bio: "Josh runs strategy and operations for a Florida healthcare group, scaling it through operations, technology and strategy. That means he has spent his working life on the operator's side of the exact problems we get hired to fix — he has been the one staring at the dashboard at eleven at night. MBA from the University of North Florida, former student-athlete.",
+      bio: "Josh runs strategy and operations for a multi-location healthcare group, scaling it through operations, technology and strategy. That means he has spent his working life on the operator's side of the exact problems we get hired to fix — he has been the one staring at the dashboard at eleven at night. MBA from the University of North Florida, former student-athlete.",
     },
     {
       name: "Reiss Skeen",

@@ -1,104 +1,61 @@
 # SKOX
 
-Marketing site for SKOX. Live at **https://skox.vercel.app**
+Next.js 16, React 19, TypeScript and Tailwind v4. Existing Vercel deployment; canonical domain: https://skoxsoftware.com.
 
-Next.js 16 · React 19 · Tailwind v4 · TypeScript · deployed on Vercel.
+## Develop and verify
 
----
-
-## Run it locally
-
-```bash
+```sh
 npm install
-npm run dev
+npm run dev      # http://localhost:3100 (or PORT)
+npm run lint
+npm test         # contact delivery regression tests; no real emails
+npm run build
 ```
 
-Then open http://localhost:3000. No database, no API keys needed to develop — the
-contact form falls back to logging leads to the terminal.
+All three verification commands must pass before merging. CI runs lint, tests and build. Next.js may generate AGENTS.md and CLAUDE.md during development; follow the linked local framework documentation.
 
-```bash
-npm run build     # production build + typecheck
-npm run lint      # eslint
-```
+## Landing page
 
-Both must pass before a PR merges.
+| File | Purpose |
+| --- | --- |
+| `content/landing.ts` | Primary marketing copy, build offers, founders and visible FAQ. |
+| `content/site.ts` | Shared brand, domain, contact address and optional booking URL. Also retains legacy page copy. |
+| `components/LandingPage.tsx` | Shared page structure for home and each service. |
+| `components/BuildPreview.tsx` | Interactive website, app and dashboard concepts. Demo content is illustrative. |
+| `components/ConversionForm.tsx` | Accessible enquiry form, failure fallback and successful-delivery navigation. |
+| `components/LandingTracking.tsx` | CTA-click measurement without form contents. |
+| `app/landing.css` | Responsive landing-page design and scoped brand colors. |
+| `app/[service]/page.tsx` | Static `/websites`, `/web-apps` and `/dashboards` entry pages with relevant metadata and defaults. |
+| `app/api/contact/route.ts` | Validation, rate limit, honeypot and Resend delivery. |
+| `lib/attribution.ts` | Session attribution: UTMs, gclid/fbclid, referrer and entry path. |
+| `docs/conversion-strategy.md` | Site audit, cited market research, positioning and paid-acquisition plan. |
 
----
+The original page components remain available for reference but are not rendered by the new homepage. The existing CSS base reset stays in `@layer base`; moving it outside the layer overrides Tailwind utility spacing.
 
-## Where things are
+## Claims and proof
 
-| Path | What it is |
-|---|---|
-| `content/site.ts` | **Every word on the site.** Headlines, capabilities, engagements, FAQ, refusals. Change copy here, not in components. |
-| `app/globals.css` | Design tokens (colour, type, easing), the animation keyframes, and the `chamfer` clip-path. |
-| `components/HeroCard.tsx` | The hero's tabbed demo — web app + Command Center. |
-| `components/WebAppPanel.tsx` | The per-client restyling demo. Add a client by appending to `BRANDS`. |
-| `components/FrontDeskPanel.tsx` | The AI front-desk chat demo. |
-| `lib/frontdesk.ts` | The front desk's **scripted** replies. Add an intent to `INTENTS`. |
-| `lib/leak.ts` | Cost-of-inaction calculator math. |
-| `app/api/contact/route.ts` | Scoping-form handler. |
-| `components/SkoxLogo.tsx` | The wordmark, as inline SVG. |
+- AI may be described as a customer-facing capability, never as the private method of building the work.
+- Never invent testimonials, results, logos, dates, scarcity or product links.
+- The 7-day website and 14-day dashboard offers apply to focused scopes with content and access ready at kickoff. Confirm calendar/business-day terminology before advertising.
+- The interactive previews are concepts with sample data. Tender and FocusTap are described as SKOX's own products based on existing company copy, not client case studies.
+- No new pricing was invented. Confirm a commercially useful minimum before setting ad budgets.
 
-### Conventions worth knowing
+## Lead delivery and measurement
 
-- **Server components by default.** Only the interactive pieces carry `"use client"`.
-- **The reset lives in `@layer base`.** Do not move `* { padding: 0 }` out of that
-  layer — unlayered rules outrank Tailwind's utilities and it silently kills every
-  padding class on the site.
-- **Colours come from tokens**, not hex literals. `--color-amber-dim` deliberately
-  flips between light and dark because several call sites are inline styles that
-  can't take a `dark:` variant.
-- **Scrollable flex children need `min-h-0`**, or they grow instead of scrolling.
+See `.env.example`.
 
----
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` | Required for email delivery. |
+| `CONTACT_EMAIL` | Receiving inbox; defaults to the existing company contact. |
+| `LEAD_FROM_EMAIL` | Sender on a domain verified in Resend; configure for production. |
 
-## Two rules for anything customer-facing
+Without a mail provider the API returns 503, logs the enquiry for recovery and the form displays an email fallback. Provider failures/timeouts return 502. No success conversion is fired on these failures. Provider acceptance is distinct from verified inbox arrival: production email must be tested separately with authorization.
 
-1. **AI is the product, never the method.** "AI phone agents that answer your
-   after-hours calls" — good. "AI makes us fast" — never. Speed is claimed as a
-   committed date; how the work gets built stays private.
-2. **No invented proof.** No fabricated testimonials, logos, metrics or case
-   studies. `components/Proof.tsx` ships an empty testimonial slot that starts
-   rendering the moment real quotes are added to `quotes`.
+Vercel events: `scope_cta_clicked`, `scope_form_started`, `scope_form_invalid`, `scope_request`, `scope_request_failed`, `scope_email_fallback`, `build_preview_selected`, `app_demo_used`. Successful form delivery navigates to `/scope-received`. These events do not automatically configure Google Ads or Meta. Avoid treating direct visits to the confirmation URL as verified new leads. Record downstream qualification and won business separately.
 
----
+`site.bookingUrl` is optional. Leave it null unless a working booking calendar is available.
 
-## How changes ship
+## Release
 
-Branch → pull request → Vercel builds a preview URL on the PR → merge to `main`
-deploys production.
-
-```bash
-git checkout -b your-change
-# ...
-git push -u origin your-change
-gh pr create
-```
-
-Open the preview link on a phone before merging. The site is mobile-first in
-practice — most people reach it from a DM.
-
----
-
-## Open items
-
-- [ ] **`RESEND_API_KEY` is not set**, so form leads only reach the Vercel logs
-      (search `[SKOX LEAD]`) instead of an inbox. Set it in the Vercel project to
-      start receiving email.
-- [ ] **The refund percentage is a placeholder.** `riskReversal.refundPercent` in
-      `content/site.ts` is `25` and marked `NEEDS_CONFIRMATION` — it is publicly
-      live and promises money back on a missed date.
-- [ ] **No testimonials yet.** Two real client quotes will move this page more
-      than any further design work.
-- [ ] The wordmark is a **vector reconstruction** of a supplied raster (0.225%
-      geometry error), not the original artwork.
-
-## Environment variables
-
-See `.env.example`. None are required for local development.
-
-| Var | Purpose |
-|---|---|
-| `CONTACT_EMAIL` | Where scoping-form leads are delivered. |
-| `RESEND_API_KEY` | Mail provider. Without it, leads are logged, not emailed. |
-| `LEAD_FROM_EMAIL` | Sender address; must be a domain verified in Resend. |
+Use the existing branch → pull request → Vercel preview → main deployment workflow. Review mobile and desktop, confirm production mail delivery and commercial claims, and configure the selected ad conversion before spending. Do not infer a conversion improvement from a local functional test.

@@ -18,15 +18,22 @@ function limited(ip: string) {
 }
 
 export async function POST(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (limited(ip)) {
-    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+    return NextResponse.json(
+      { ok: false, error: "rate_limited" },
+      { status: 429 },
+    );
   }
 
   let body: Partial<Lead>;
   try {
     body = await req.json();
   } catch {
+    return NextResponse.json({ ok: false, error: "bad_json" }, { status: 400 });
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
     return NextResponse.json({ ok: false, error: "bad_json" }, { status: 400 });
   }
 
@@ -44,8 +51,11 @@ export async function POST(req: Request) {
     company: String(body.company ?? "").trim(),
     broken: String(body.broken).trim(),
     timeline: String(body.timeline ?? "").trim(),
+    projectType: body.projectType || undefined,
     leak: body.leak ? String(body.leak).slice(0, 300) : undefined,
-    attribution: body.attribution ? String(body.attribution).slice(0, 800) : undefined,
+    attribution: body.attribution
+      ? String(body.attribution).slice(0, 800)
+      : undefined,
   };
 
   const to = process.env.CONTACT_EMAIL ?? "snkrpickups@gmail.com";
@@ -60,26 +70,47 @@ export async function POST(req: Request) {
     // conversions while nothing reached an inbox — and spend would be scaled on
     // the strength of a number that meant nothing. A non-200 makes the form show
     // its mailto: fallback instead, which preserves what the visitor typed.
-    console.error(`[SKOX LEAD — NO MAIL PROVIDER CONFIGURED] ${new Date().toISOString()}\n${text}\n`);
-    return NextResponse.json({ ok: false, error: "no_mail_provider" }, { status: 503 });
+    console.error(
+      `[SKOX LEAD — NO MAIL PROVIDER CONFIGURED] ${new Date().toISOString()}\n${text}\n`,
+    );
+    return NextResponse.json(
+      { ok: false, error: "no_mail_provider" },
+      { status: 503 },
+    );
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from: process.env.LEAD_FROM_EMAIL ?? "SKOX <onboarding@resend.dev>",
-      to: [to],
-      reply_to: lead.email,
-      subject: `Scope request — ${lead.company || lead.name}`,
-      text,
-    }),
-  });
+  let res: Response;
+  try {
+    res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+      },
+      signal: AbortSignal.timeout(10000),
+      body: JSON.stringify({
+        from: process.env.LEAD_FROM_EMAIL ?? "SKOX <onboarding@resend.dev>",
+        to: [to],
+        reply_to: lead.email,
+        subject: `Scope request — ${lead.company || lead.name}`,
+        text,
+      }),
+    });
+  } catch {
+    console.error(`[SKOX LEAD — PROVIDER UNAVAILABLE]\n${text}\n`);
+    return NextResponse.json(
+      { ok: false, error: "delivery_failed" },
+      { status: 502 },
+    );
+  }
 
   if (!res.ok) {
     // Log it too, so a provider outage can't silently eat a real lead.
     console.error(`[SKOX LEAD — DELIVERY FAILED ${res.status}]\n${text}\n`);
-    return NextResponse.json({ ok: false, error: "delivery_failed" }, { status: 502 });
+    return NextResponse.json(
+      { ok: false, error: "delivery_failed" },
+      { status: 502 },
+    );
   }
 
   return NextResponse.json({ ok: true, delivered: "email" });

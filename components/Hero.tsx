@@ -6,7 +6,10 @@ import { heroForm } from "@/content/site";
 
 export function Hero() {
   return (
-    <section id="top" className="relative w-full min-h-screen overflow-hidden bg-[var(--color-pitch)]">
+    <section
+      id="top"
+      className="relative w-full min-h-screen overflow-hidden bg-[var(--color-pitch)]"
+    >
       <Atmosphere />
 
       <div className="relative z-10 flex min-h-screen flex-col">
@@ -38,8 +41,14 @@ export function Hero() {
               <Animate delay={560} direction="up">
                 <ul className="flex flex-col gap-3">
                   {heroForm.provides.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[15px] font-[450] text-white sm:text-[16px]">
-                      <span aria-hidden className="mt-[9px] h-1.5 w-1.5 shrink-0 bg-[var(--color-amber)]" />
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-[15px] font-[450] text-white sm:text-[16px]"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-[9px] h-1.5 w-1.5 shrink-0 bg-[var(--color-amber)]"
+                      />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -48,7 +57,11 @@ export function Hero() {
             </div>
 
             {/* Right — the capture, above the fold. This is the page's one job. */}
-            <Animate delay={700} direction="scale" className="w-full lg:w-auto lg:shrink-0">
+            <Animate
+              delay={700}
+              direction="scale"
+              className="w-full lg:w-auto lg:shrink-0"
+            >
               <HeroContactForm />
             </Animate>
           </div>

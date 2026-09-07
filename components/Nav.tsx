@@ -92,7 +92,9 @@ export function Nav() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                style={{ transitionDelay: isOpen ? `${100 + i * 50}ms` : "0ms" }}
+                style={{
+                  transitionDelay: isOpen ? `${100 + i * 50}ms` : "0ms",
+                }}
                 className={`flex items-center justify-between px-4 py-4 rounded-[12px] text-white/90 text-[18px] font-[450] hover:bg-white/[0.06] transition-all duration-300 ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-3"}`}
               >
                 {item.label}

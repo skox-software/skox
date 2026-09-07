@@ -9,7 +9,14 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 
 type State = "idle" | "sending" | "done" | "failed";
 
-const EMPTY: Lead = { name: "", email: "", company: "", broken: "", timeline: "", website: "" };
+const EMPTY: Lead = {
+  name: "",
+  email: "",
+  company: "",
+  broken: "",
+  timeline: "",
+  website: "",
+};
 
 /**
  * Contact form that lives inside the hero. Styled for the dark ground and wired
@@ -22,7 +29,10 @@ export function HeroContactForm() {
   const router = useRouter();
 
   /** One object, used for both the POST and the mailto fallback. */
-  const enriched: Lead = { ...lead, attribution: formatAttribution(readAttribution()) };
+  const enriched: Lead = {
+    ...lead,
+    attribution: formatAttribution(readAttribution()),
+  };
 
   const set =
     (k: keyof Lead) =>
@@ -66,7 +76,9 @@ export function HeroContactForm() {
         <h3 className="mt-4 text-white text-[24px] font-normal tracking-[-0.02em]">
           {copy.successTitle}
         </h3>
-        <p className="mt-3 text-white/70 text-[15px] leading-[1.55]">{copy.successBody}</p>
+        <p className="mt-3 text-white/70 text-[15px] leading-[1.55]">
+          {copy.successBody}
+        </p>
       </div>
     );
   }
@@ -84,28 +96,68 @@ export function HeroContactForm() {
       noValidate
       className="w-full max-w-[440px] rounded-[16px] border border-white/10 bg-white/[0.03] p-6 sm:p-7 backdrop-blur-[6px]"
     >
-      <h3 className="text-white text-[19px] font-[450] tracking-[-0.01em]">{heroForm.formTitle}</h3>
-      <p className="mt-1.5 text-white/55 text-[13.5px] leading-[1.45]">{heroForm.formSub}</p>
+      <h3 className="text-white text-[19px] font-[450] tracking-[-0.01em]">
+        {heroForm.formTitle}
+      </h3>
+      <p className="mt-1.5 text-white/55 text-[13.5px] leading-[1.45]">
+        {heroForm.formSub}
+      </p>
 
       {/* Honeypot — hidden from people, tempting to bots. */}
-      <div aria-hidden className="absolute w-px h-px overflow-hidden -left-[9999px]">
+      <div
+        aria-hidden
+        className="absolute w-px h-px overflow-hidden -left-[9999px]"
+      >
         <label>
           Website
-          <input tabIndex={-1} autoComplete="off" value={lead.website} onChange={set("website")} />
+          <input
+            tabIndex={-1}
+            autoComplete="off"
+            value={lead.website}
+            onChange={set("website")}
+          />
         </label>
       </div>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <Field id="hf-name" label="Your name" value={lead.name} onChange={set("name")} error={errors.name} required autoComplete="name" />
-        <Field id="hf-email" label="Email" type="email" value={lead.email} onChange={set("email")} error={errors.email} required autoComplete="email" />
+        <Field
+          id="hf-name"
+          label="Your name"
+          value={lead.name}
+          onChange={set("name")}
+          error={errors.name}
+          required
+          autoComplete="name"
+        />
+        <Field
+          id="hf-email"
+          label="Email"
+          type="email"
+          value={lead.email}
+          onChange={set("email")}
+          error={errors.email}
+          required
+          autoComplete="email"
+        />
       </div>
 
       <div className="mt-4">
-        <Field id="hf-company" label="Company" value={lead.company} onChange={set("company")} error={errors.company} autoComplete="organization" optional />
+        <Field
+          id="hf-company"
+          label="Company"
+          value={lead.company}
+          onChange={set("company")}
+          error={errors.company}
+          autoComplete="organization"
+          optional
+        />
       </div>
 
       <div className="mt-4">
-        <label htmlFor="hf-broken" className="mb-1.5 block text-[13px] font-[450] text-white/70">
+        <label
+          htmlFor="hf-broken"
+          className="mb-1.5 block text-[13px] font-[450] text-white/70"
+        >
           What do you need? <span className="text-[var(--color-amber)]">*</span>
         </label>
         <textarea
@@ -116,9 +168,13 @@ export function HeroContactForm() {
           aria-invalid={Boolean(errors.broken)}
           placeholder="A new site, a dashboard, an internal tool, something automated…"
           className="w-full resize-y rounded-[10px] border bg-white/[0.04] px-3.5 py-2.5 text-[14px] leading-[1.5] text-white placeholder-white/55 outline-none transition-colors focus:border-[var(--color-amber)]"
-          style={{ borderColor: errors.broken ? "#ff8a80" : "rgba(255,255,255,0.15)" }}
+          style={{
+            borderColor: errors.broken ? "#ff8a80" : "rgba(255,255,255,0.15)",
+          }}
         />
-        {errors.broken && <p className="mt-1.5 text-[12.5px] text-[#ff8a80]">{errors.broken}</p>}
+        {errors.broken && (
+          <p className="mt-1.5 text-[12.5px] text-[#ff8a80]">{errors.broken}</p>
+        )}
       </div>
 
       <button
@@ -128,15 +184,24 @@ export function HeroContactForm() {
       >
         {state === "sending" ? copy.submitting : copy.submit}
       </button>
-      <p className="mt-3 text-center text-[12px] leading-[1.5] text-white/60">{copy.reassure}</p>
+      <p className="mt-3 text-center text-[12px] leading-[1.5] text-white/60">
+        {copy.reassure}
+      </p>
 
       {state === "failed" && (
-        <div role="alert" className="mt-4 rounded-[10px] border border-[#ff8a80]/40 bg-[#ff8a80]/[0.06] p-4">
+        <div
+          role="alert"
+          className="mt-4 rounded-[10px] border border-[#ff8a80]/40 bg-[#ff8a80]/[0.06] p-4"
+        >
           <p className="text-[14px] font-[450] text-white">{copy.errorTitle}</p>
           <p className="mt-1.5 text-[13px] leading-[1.5] text-white/60">
-            Rather than lose what you wrote — this opens your mail app with everything filled in.
+            Rather than lose what you wrote — this opens your mail app with
+            everything filled in.
           </p>
-          <a href={mailto} className="mt-2 inline-block text-[13px] font-[450] text-[var(--color-amber)] underline underline-offset-2">
+          <a
+            href={mailto}
+            className="mt-2 inline-block text-[13px] font-[450] text-[var(--color-amber)] underline underline-offset-2"
+          >
             Send it as an email instead
           </a>
         </div>
@@ -168,7 +233,10 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-[13px] font-[450] text-white/70">
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-[13px] font-[450] text-white/70"
+      >
         {label}
         {required && <span className="text-[var(--color-amber)]"> *</span>}
         {optional && <span className="text-white/55"> (optional)</span>}

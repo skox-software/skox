@@ -26,7 +26,10 @@ export function Animate({
   direction?: Direction;
 }) {
   return (
-    <div className={`opacity-0 ${CLASS[direction]} ${className}`} style={{ animationDelay: `${delay}ms` }}>
+    <div
+      className={`opacity-0 ${CLASS[direction]} ${className}`}
+      style={{ animationDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
