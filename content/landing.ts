@@ -132,7 +132,49 @@ export const landing = {
     "Direct access to the builders",
     "You own the code",
   ],
-  offerEyebrow: "01 / What we build",
+  /**
+   * "Why SKOX": the gap between a big dev shop and a freelancer. The two
+   * alternative columns describe typical characteristics only. Never name a
+   * firm, and never put a number on someone else's price or timeline. Every
+   * SKOX answer is a commitment already made elsewhere on this page.
+   */
+  compareEyebrow: "01 / Why SKOX",
+  compareTitle: "Between expensive\nand risky.",
+  compareSub:
+    "Big dev shops are slow and priced for big budgets. Freelancers cost less, but they’re a gamble. We sit in the gap: the people who build it, a fixed price and a date, all in writing.",
+  compareColumns: {
+    us: "SKOX",
+    shop: "Big dev shop",
+    freelancer: "Freelancer or DIY",
+  },
+  compareRows: [
+    {
+      label: "Timeline",
+      us: "A delivery date in writing, before you pay",
+      shop: "Months",
+      freelancer: "Unpredictable",
+    },
+    {
+      label: "Price",
+      us: "Fixed, agreed upfront",
+      shop: "High, often billed by the hour",
+      freelancer: "Low, but a gamble",
+    },
+    {
+      label: "Who you deal with",
+      us: "The two founders building it",
+      shop: "An account manager",
+      freelancer: "One person, if they reply",
+    },
+    {
+      label: "When plans change",
+      us: "Agreed in writing, with a working review halfway",
+      shop: "Change orders",
+      freelancer: "Start over",
+    },
+  ],
+  compareNote: "Free 30-minute scope call. No deposit.",
+  offerEyebrow: "02 / What we build",
   offerTitle: "What do you need to move forward?",
   offerSub:
     "Start with the build that matters most. We’ll help you define the smallest complete version that solves the problem.",
@@ -149,7 +191,7 @@ export const landing = {
     "A delivery date set at kickoff, not re-estimated later",
     "You own the code and the accounts from day one",
   ],
-  processEyebrow: "02 / How we move fast",
+  processEyebrow: "03 / How we move fast",
   processTitle: "A shorter path from\n“we need this” to live.",
   processSub:
     "You work with the people making the decisions and writing the code. A clear scope keeps the build moving. A working preview keeps you in the loop.",
@@ -173,7 +215,7 @@ export const landing = {
       output: "Working software, in your hands",
     },
   ],
-  teamEyebrow: "03 / The people behind the build",
+  teamEyebrow: "04 / The people behind the build",
   teamTitle: "Talk to the builders.\nWork with the founders.",
   teamSub:
     "One of us brings the operator’s perspective, the other product engineering. The people you meet on the first call are the people taking your project live.",
@@ -205,7 +247,7 @@ export const landing = {
       body: "A focus product taken from the initial idea through product strategy and engineering.",
     },
   ],
-  faqEyebrow: "04 / Good questions",
+  faqEyebrow: "05 / Good questions",
   faqTitle: "A few things, upfront.",
   formEyebrow: "Let’s build something useful",
   formTitle: "What do you want\nto get live?",

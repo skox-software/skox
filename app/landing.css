@@ -1579,6 +1579,207 @@
   color: var(--lp-amber-ink);
 }
 
+/* ---- Why SKOX: the comparison ----
+   A real table so each row reads straight across. The SKOX column is the one
+   lit surface on it: white, amber-edged, ticks against muted crosses. It
+   closes with the primary action, so the choice and the button sit together. */
+.landing-page .compare-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.landing-page .compare-col-label {
+  width: 19%;
+}
+.landing-page .compare-col-us {
+  width: 33%;
+}
+.landing-page .compare-table th,
+.landing-page .compare-table td {
+  padding: 22px 24px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--lp-line);
+}
+.landing-page .compare-table thead th,
+.landing-page .compare-table thead td {
+  border-top: 0;
+  padding-block: 28px 20px;
+  vertical-align: bottom;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--lp-muted);
+}
+.landing-page .compare-table tbody th {
+  padding-left: 0;
+  padding-top: 26px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--lp-label);
+}
+.landing-page .compare-table td {
+  color: var(--lp-muted);
+}
+.landing-page .compare-table tbody tr > *:not(.compare-us) {
+  transition: background 0.25s;
+}
+.landing-page .compare-table tbody tr:hover > *:not(.compare-us) {
+  background: var(--lp-fog);
+}
+.landing-page .compare-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.landing-page .compare-who {
+  display: none;
+}
+.landing-page .compare-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+}
+.landing-page .compare-icon svg {
+  width: 12px;
+  height: 12px;
+}
+.landing-page .compare-icon-yes {
+  background: var(--lp-blush);
+  color: var(--lp-brown);
+}
+.landing-page .compare-icon-no {
+  background: var(--lp-mist);
+  color: var(--lp-label);
+}
+/* The SKOX column: one continuous card built from its cells. */
+.landing-page .compare-table .compare-us {
+  background: var(--lp-white);
+  border-left: 2px solid var(--lp-amber);
+  border-right: 2px solid var(--lp-amber);
+  color: var(--lp-ink);
+  font-weight: 500;
+}
+.landing-page .compare-table tbody .compare-us {
+  border-top-color: var(--lp-line-soft);
+}
+.landing-page .compare-table thead .compare-us {
+  border-top: 2px solid var(--lp-amber);
+  border-radius: var(--lp-r-card) var(--lp-r-card) 0 0;
+  padding-bottom: 18px;
+}
+.landing-page .compare-logo {
+  display: block;
+  width: 104px;
+  height: auto;
+}
+.landing-page .compare-table tfoot td {
+  border-top: 0;
+}
+.landing-page .compare-table tfoot .compare-us {
+  padding: 8px 24px 26px;
+  border-bottom: 2px solid var(--lp-amber);
+  border-radius: 0 0 var(--lp-r-card) var(--lp-r-card);
+}
+.landing-page .compare-cta {
+  width: 100%;
+  justify-content: space-between;
+}
+.landing-page .compare-note {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--lp-muted);
+  text-align: center;
+}
+@media (max-width: 1150px) {
+  .landing-page .compare-table th,
+  .landing-page .compare-table td {
+    padding: 18px 16px;
+  }
+  .landing-page .compare-table tbody th {
+    padding-left: 0;
+  }
+  .landing-page .compare-col-label {
+    width: 17%;
+  }
+}
+/* Phone and small tablet: one card per row, SKOX's answer boxed first. */
+@media (max-width: 900px) {
+  .landing-page .compare-table,
+  .landing-page .compare-table tbody,
+  .landing-page .compare-table tfoot,
+  .landing-page .compare-table tr,
+  .landing-page .compare-table th,
+  .landing-page .compare-table td {
+    display: block;
+    width: 100%;
+  }
+  .landing-page .compare-table colgroup,
+  .landing-page .compare-table thead {
+    display: none;
+  }
+  .landing-page .compare-table th,
+  .landing-page .compare-table td {
+    padding: 0;
+    border: 0;
+  }
+  .landing-page .compare-table tbody tr {
+    padding: 22px 0;
+    border-top: 1px solid var(--lp-line);
+  }
+  .landing-page .compare-table tbody tr:hover > *:not(.compare-us) {
+    background: transparent;
+  }
+  .landing-page .compare-table tbody th {
+    padding: 0 0 12px;
+  }
+  .landing-page .compare-table tbody .compare-us {
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    border: 2px solid var(--lp-amber);
+    border-radius: 16px;
+  }
+  .landing-page .compare-table tbody td:not(.compare-us) {
+    padding: 6px 2px;
+    font-size: 15px;
+  }
+  .landing-page .compare-who {
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lp-label);
+  }
+  .landing-page .compare-us .compare-who {
+    color: var(--lp-amber-ink);
+  }
+  .landing-page .compare-table tfoot td:not(.compare-us) {
+    display: none;
+  }
+  .landing-page .compare-table tfoot .compare-us {
+    padding: 24px 0 0;
+    border: 0;
+    border-top: 1px solid var(--lp-line);
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
 /* A demo nobody realises is a demo is just a screenshot. */
 .landing-page .preview-live {
   display: inline-flex;

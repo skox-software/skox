@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SkoxLogo } from "@/components/SkoxLogo";
 import { BuildSection } from "@/components/BuildSection";
+import { CompareSection } from "@/components/CompareSection";
 import { ConversionForm } from "@/components/ConversionForm";
 import { HeroComposer } from "@/components/HeroComposer";
 import { HeroFragments } from "@/components/HeroFragments";
@@ -44,6 +45,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             <SkoxLogo className="brand-logo" />
           </Link>
           <nav aria-label="Main navigation">
+            <a href="#why">Why SKOX</a>
             <a href="#build">What we build</a>
             <a href="#process">How it works</a>
             <a href="#about">Who we are</a>
@@ -126,6 +128,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             ))}
           </div>
         </div>
+        <CompareSection />
         <BuildSection variant={variant} />
         <section
           className="process-section"

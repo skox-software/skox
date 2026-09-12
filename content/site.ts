@@ -12,7 +12,7 @@ export const site = {
   tagline: "Custom websites, web apps & dashboards. Built at speed.",
   description:
     "Custom websites, web apps and dashboards, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
-  email: "snkrpickups@gmail.com",
+  email: "founders@skoxsoftware.com",
   url: "https://skoxsoftware.com",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
   bookingUrl: null as string | null,
