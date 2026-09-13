@@ -97,6 +97,26 @@
 .landing-page .header-inner nav a:hover {
   color: var(--lp-ink);
 }
+.landing-page .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+/* Existing clients: quiet next to the main CTA, never competing with it. */
+.landing-page .header-login {
+  padding-block: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--lp-muted);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.landing-page .header-login:hover {
+  color: var(--lp-ink);
+}
+.landing-page .header-login-short {
+  display: none;
+}
 /* Pills sit flat on the surface — no lift, no shadow. Hover shifts the fill
    only, so the button never leaves the baseline it shares with its pair. */
 .landing-page .button {
@@ -2370,6 +2390,18 @@
     gap: 19px;
     font-size: 12px;
   }
+  .landing-page .header-inner nav a {
+    white-space: nowrap;
+  }
+  .landing-page .header-actions {
+    gap: 14px;
+  }
+  .landing-page .header-login-long {
+    display: none;
+  }
+  .landing-page .header-login-short {
+    display: inline;
+  }
   .landing-page h1 {
     font-size: 68px;
   }
@@ -2508,6 +2540,15 @@
   }
   .landing-page .header-inner nav {
     display: none;
+  }
+  .landing-page .header-actions {
+    gap: 14px;
+  }
+  .landing-page .header-login-long {
+    display: none;
+  }
+  .landing-page .header-login-short {
+    display: inline;
   }
   .landing-page .header-cta {
     min-height: 40px;

@@ -50,13 +50,23 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             <a href="#process">How it works</a>
             <a href="#about">Who we are</a>
           </nav>
-          <a
-            className="button button-dark header-cta"
-            href="#scope"
-            data-cta="header"
-          >
-            Let’s talk <Arrow />
-          </a>
+          <div className="header-actions">
+            <a
+              className="header-login"
+              href="https://portal.skoxsoftware.com"
+              data-cta="client-login"
+            >
+              <span className="header-login-long">Client login</span>
+              <span className="header-login-short">Log in</span>
+            </a>
+            <a
+              className="button button-dark header-cta"
+              href="#scope"
+              data-cta="header"
+            >
+              Let’s talk <Arrow />
+            </a>
+          </div>
         </div>
       </header>
       <main id="top" tabIndex={-1}>
@@ -293,6 +303,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             <span>© {new Date().getFullYear()} SKOX</span>
             <span>Working with clients everywhere</span>
             <Link href="/privacy">Privacy</Link>
+            <a href="https://portal.skoxsoftware.com">Client portal</a>
           </div>
         </div>
       </footer>
