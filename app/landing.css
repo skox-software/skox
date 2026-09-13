@@ -117,6 +117,9 @@
 .landing-page .header-login-short {
   display: none;
 }
+.landing-page .header-cta {
+  white-space: nowrap;
+}
 /* Pills sit flat on the surface — no lift, no shadow. Hover shifts the fill
    only, so the button never leaves the baseline it shares with its pair. */
 .landing-page .button {
