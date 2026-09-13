@@ -1,31 +1,10 @@
 export type BuildType = "websites" | "web-apps" | "dashboards";
 
+/* Order is deliberate: software that runs the business leads; websites come last. */
 export const builds = [
   {
-    id: "websites" as const,
-    number: "01",
-    label: "Websites",
-    title: "Look the part. Win the enquiry.",
-    description:
-      "A custom website that makes your offer clear and gives visitors an easy next step. Designed for your business, from the first screen to the contact form.",
-    includes: [
-      "Custom design, built for mobile",
-      "Lead capture & booking integrations",
-      "An easy-to-update content system",
-    ],
-    timeline: "7-day focused site build",
-    note: "Scope, content and access agreed before kickoff.",
-    cta: "Plan my website",
-    headline: "Your next website.",
-    accent: "Built at speed.",
-    intro:
-      "Turn a dated site into a clear, credible reason to choose you. Custom design, mobile layouts and lead capture, with a fixed price and a launch date agreed upfront.",
-    previewTitle: "A better first impression.",
-    previewCaption: "Website concept · custom design & a clear next step",
-  },
-  {
     id: "web-apps" as const,
-    number: "02",
+    number: "01",
     label: "Web apps",
     title: "Get the idea into people’s hands.",
     description:
@@ -47,7 +26,7 @@ export const builds = [
   },
   {
     id: "dashboards" as const,
-    number: "03",
+    number: "02",
     label: "Dashboards",
     title: "Know what’s happening. Act on it.",
     description:
@@ -66,6 +45,28 @@ export const builds = [
       "Turn disconnected tools and weekly spreadsheet work into one clear view of your business. A focused dashboard build, with scope, price and timing agreed upfront.",
     previewTitle: "Your business. In focus.",
     previewCaption: "Dashboard concept · sample data, not client results",
+  },
+  {
+    id: "websites" as const,
+    number: "03",
+    label: "Websites",
+    title: "Look the part. Win the enquiry.",
+    description:
+      "A custom website that makes your offer clear and gives visitors an easy next step. Designed for your business, from the first screen to the contact form.",
+    includes: [
+      "Custom design, built for mobile",
+      "Lead capture & booking integrations",
+      "An easy-to-update content system",
+    ],
+    timeline: "7-day focused site build",
+    note: "Scope, content and access agreed before kickoff.",
+    cta: "Plan my website",
+    headline: "Your next website.",
+    accent: "Built at speed.",
+    intro:
+      "Turn a dated site into a clear, credible reason to choose you. Custom design, mobile layouts and lead capture, with a fixed price and a launch date agreed upfront.",
+    previewTitle: "A better first impression.",
+    previewCaption: "Website concept · custom design & a clear next step",
   },
 ] as const;
 
@@ -102,7 +103,7 @@ export const landing = {
   headline: "Your next big thing.",
   accent: "Built at speed.",
   intro:
-    "Custom websites, web apps and dashboards. We take what your business needs and turn it into working software—with a fixed price and a delivery date agreed upfront.",
+    "Custom web apps, dashboards and websites. We take what your business needs and turn it into working software—with a fixed price and a delivery date agreed upfront.",
   cta: "Get my price & timeline",
   secondaryCta: "Explore what we build",
   reassurance: "Free 30-minute scope call. No deposit. No obligation.",
@@ -156,7 +157,7 @@ export const landing = {
     },
     {
       label: "Price",
-      us: "Fixed, agreed upfront",
+      us: "Fixed upfront, with no agency overhead",
       shop: "High, often billed by the hour",
       freelancer: "Low, but a gamble",
     },
@@ -286,7 +287,7 @@ export const landing = {
   formError:
     "Your request hasn’t been delivered yet. Try again, or email us with the details below.",
   formEmail: "Email my project instead",
-  footerLine: "Good ideas deserve to get built.",
+  footerLine: "Good ideas deserve to be built.",
 } as const;
 
 export const landingFaq = [

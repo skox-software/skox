@@ -66,8 +66,12 @@ const jsonLd = {
       areaServed: "US",
       serviceType: [
         "Custom software development",
-        "AI automation",
         "Business intelligence dashboards",
+        "Website design and development",
+      ],
+      founder: [
+        { "@type": "Person", name: "Joshua Fox" },
+        { "@type": "Person", name: "Reiss Skeen" },
       ],
     },
   ],
