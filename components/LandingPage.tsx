@@ -53,7 +53,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
           <div className="header-actions">
             <a
               className="header-login"
-              href="https://portal.skoxsoftware.com"
+              href="/portal"
               data-cta="client-login"
             >
               <span className="header-login-long">Client login</span>
@@ -303,7 +303,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             <span>© {new Date().getFullYear()} SKOX</span>
             <span>Working with clients everywhere</span>
             <Link href="/privacy">Privacy</Link>
-            <a href="https://portal.skoxsoftware.com">Client portal</a>
+            <a href="/portal">Client portal</a>
           </div>
         </div>
       </footer>
