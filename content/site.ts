@@ -12,7 +12,7 @@ export const site = {
   tagline: "Custom web apps, dashboards & websites. Built at speed.",
   description:
     "Custom web apps, dashboards and websites, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
-  email: "founders@skoxsoftware.com",
+  email: "founder@skoxsoftware.com",
   /** The domain visitors land on (the bare domain redirects here), so canonicals, OG and the sitemap match. */
   url: "https://www.skoxsoftware.com",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */

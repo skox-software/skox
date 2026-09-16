@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       : undefined,
   };
 
-  const to = process.env.CONTACT_EMAIL ?? "founders@skoxsoftware.com";
+  const to = process.env.CONTACT_EMAIL ?? "founder@skoxsoftware.com";
   const key = process.env.RESEND_API_KEY;
   const text = formatLead(lead);
 
