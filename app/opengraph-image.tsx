@@ -13,24 +13,14 @@ export default function OG() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#faf9f6",
+        backgroundColor: "#faf9f6",
+        // One soft amber glow from the top left, painted on the card itself
+        // (an oversized absolute circle gets clipped into a hard-edged box).
+        backgroundImage:
+          "radial-gradient(circle at 18% 12%, rgba(228,169,7,0.28) 0%, rgba(228,169,7,0.10) 32%, rgba(228,169,7,0) 58%)",
         padding: 72,
-        position: "relative",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: -420,
-          left: -320,
-          width: 1180,
-          height: 1180,
-          borderRadius: 9999,
-          background:
-            "radial-gradient(circle, rgba(228,169,7,0.30) 0%, rgba(228,169,7,0) 68%)",
-          display: "flex",
-        }}
-      />
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <svg
           width="230"
