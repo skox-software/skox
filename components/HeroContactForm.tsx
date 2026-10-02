@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/track";
 import { formatAttribution, readAttribution } from "@/lib/attribution";
 import { heroForm, form as copy, site } from "@/content/site";
 import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";

@@ -4,6 +4,7 @@ import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { CaptureAttribution } from "@/components/CaptureAttribution";
+import { SiteTracking } from "@/components/SiteTracking";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -100,6 +101,7 @@ export default function RootLayout({
         </a>
         {children}
         <CaptureAttribution />
+        <SiteTracking />
         <Analytics />
         <SpeedInsights />
         {/* Apollo.io website visitor tracker. Production only, so local

@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/track";
 import { BuildPreview } from "@/components/BuildPreview";
 import { builds, landing, type BuildType } from "@/content/landing";
 

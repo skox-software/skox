@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/track";
 import { builds, landing, type BuildType } from "@/content/landing";
 import { site } from "@/content/site";
 import { onBrief } from "@/lib/brief";

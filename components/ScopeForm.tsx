@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/track";
 import { formatAttribution, readAttribution } from "@/lib/attribution";
 import { Section, SectionHead } from "@/components/Section";
 import { LEAK_KEY } from "@/components/LeakCalculator";
@@ -71,7 +71,7 @@ export function ScopeForm() {
       });
       if (!res.ok) throw new Error(String(res.status));
       // The conversion. Everything upstream is judged against this.
-      track("scope_request", { withLeak: Boolean(leak) });
+      track("scope_request", { from: "scope", withLeak: Boolean(leak) });
       // A real URL the ad platforms can register as a conversion.
       router.push("/scope-received");
     } catch {

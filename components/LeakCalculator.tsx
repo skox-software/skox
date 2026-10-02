@@ -7,7 +7,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/track";
 import { Section, SectionHead } from "@/components/Section";
 import { calculator } from "@/content/site";
 import { LIMITS, clampField, computeLeak, money } from "@/lib/leak";

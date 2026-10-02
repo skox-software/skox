@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/track";
 export function LandingTracking() {
   useEffect(() => {
     function clicked(event: MouseEvent) {
