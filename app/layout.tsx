@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { CaptureAttribution } from "@/components/CaptureAttribution";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -53,6 +54,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#faf9f6",
 };
+
+/* Google Analytics 4 measurement ID (G-…). Unset means no Google tag at all. */
+const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -114,6 +118,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </body>
+      {/* Google Analytics 4 via the Google tag. Production only, like the
+          Apollo tracker above, so local and preview traffic stays out of the
+          reports. Disclosed on /privacy; keep that page in step if this
+          changes. */}
+      {process.env.VERCEL_ENV === "production" && gaId && (
+        <GoogleAnalytics gaId={gaId} />
+      )}
     </html>
   );
 }

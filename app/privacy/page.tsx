@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "What SKOX collects, why, and how to have it deleted.",
 };
 
-const UPDATED = "12 September 2026";
+const UPDATED = "1 October 2026";
 
 export default function Privacy() {
   return (
@@ -48,7 +48,8 @@ export default function Privacy() {
               The two of us. Enquiries are delivered by email through Resend,
               and the site runs on Vercel — both process data on our behalf as
               hosting and delivery providers. Visit data from the website
-              tracker described below is processed by Apollo.io.
+              tracker described below is processed by Apollo.io, and usage
+              data from Google Analytics is processed by Google.
             </Block>
 
             <Block title="Analytics">
@@ -58,6 +59,19 @@ export default function Privacy() {
               submitted, which enquiry buttons were used and which examples were
               explored. Form contents are not sent as analytics events. It does
               not tell us who you are.
+            </Block>
+
+            <Block title="Google Analytics">
+              We also use Google Analytics 4. It sets cookies to tell one visit
+              from the next and records which pages you view, roughly where you
+              are, what device you use and how you arrived. We use it to see
+              how the site is found and used, not to identify you. Google
+              processes this data under its own privacy policy. Blocking
+              cookies, or installing Google’s{" "}
+              <a href="https://tools.google.com/dlpage/gaoptout">
+                Analytics opt-out add-on
+              </a>
+              , will stop it.
             </Block>
 
             <Block title="Website visitor tracking">
