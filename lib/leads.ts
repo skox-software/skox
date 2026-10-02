@@ -3,6 +3,8 @@
 export type Lead = {
   /** Campaign attribution, serialised at submit time. */
   attribution?: string;
+  /** The visitor's journey (lib/attribution `Journey`) as JSON. */
+  context?: string;
   name: string;
   email: string;
   company: string;
@@ -37,6 +39,7 @@ export function validate(lead: Partial<Lead>): FieldErrors {
     "projectType",
     "attribution",
     "leak",
+    "context",
   ] as const) {
     if (lead[key] !== undefined && typeof lead[key] !== "string")
       e[key] = "Please enter text.";
@@ -61,6 +64,7 @@ export function validate(lead: Partial<Lead>): FieldErrors {
   )
     e.projectType = "Choose a build type.";
   if (lead.timeline && lead.timeline.length > 200) e.timeline = "Too long.";
+  if (lead.context && lead.context.length > 6000) e.context = "Too long.";
   return e;
 }
 
@@ -95,6 +99,7 @@ export type PartialLead = {
   broken?: string;
   projectType?: string;
   attribution?: string;
+  context?: string;
   /** Where in the form they were when this fired. */
   stage?: string;
   /** Honeypot — must stay empty. */
@@ -107,6 +112,7 @@ const PARTIAL_LIMITS: Record<string, number> = {
   broken: 4000,
   projectType: 40,
   attribution: 800,
+  context: 6000,
   stage: 40,
 };
 

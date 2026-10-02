@@ -4,6 +4,8 @@ import {
   validatePartial,
   type PartialLead,
 } from "@/lib/leads";
+import { enrichCompany, formatCompany } from "@/lib/enrich";
+import { formatVisitor, readVisitor } from "@/lib/visitor";
 
 export const runtime = "nodejs";
 
@@ -79,7 +81,10 @@ export async function POST(req: Request) {
 
   const to = process.env.CONTACT_EMAIL ?? "founder@skoxsoftware.com";
   const key = process.env.RESEND_API_KEY;
-  const text = formatPartial(lead);
+  const visitor = readVisitor(req, body.context);
+  const company = await enrichCompany(lead.email);
+  const text =
+    formatPartial(lead) + formatCompany(company, lead.email) + formatVisitor(visitor);
 
   if (!key) {
     // Logged rather than surfaced: nothing on screen is waiting on this, so a

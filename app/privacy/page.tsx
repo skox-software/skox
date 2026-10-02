@@ -29,6 +29,17 @@ export default function Privacy() {
               parameters in the link are recorded alongside it.
             </Block>
 
+            <Block title="What arrives with an enquiry">
+              When you send an enquiry, or leave one unfinished as described
+              below, it also carries: the pages you viewed on this site during
+              that visit, how many times you have visited, how you first found
+              us, your approximate city and region (worked out from your IP
+              address), and your device type. If you use a business email
+              address, we look up public information about the company at that
+              domain, such as its industry, size and location, through Apollo.io.
+              None of this is collected from people who never contact us.
+            </Block>
+
             <Block title="Enquiries you don’t finish">
               If you enter your email address in the enquiry form and then leave
               without sending it, we receive what you had filled in at that
@@ -40,16 +51,20 @@ export default function Privacy() {
 
             <Block title="Why we collect it">
               To reply to you and to prepare a scope for the work you have
-              described. Nothing else. We do not sell it, rent it, or share it
-              with anyone for their own purposes.
+              described, and to understand which kinds of businesses our
+              advertising reaches. We do not sell it or rent it. The only
+              sharing is the advertising measurement described below, which you
+              can opt out of.
             </Block>
 
             <Block title="Who can see it">
               The two of us. Enquiries are delivered by email through Resend,
               and the site runs on Vercel — both process data on our behalf as
               hosting and delivery providers. Visit data from the website
-              tracker described below is processed by Apollo.io, and usage
-              data from Google Analytics is processed by Google.
+              tracker and company lookups are processed by Apollo.io, usage
+              data from Google Analytics is processed by Google, and the
+              advertising tags described below are processed by Meta, Google
+              and LinkedIn.
             </Block>
 
             <Block title="Analytics">
@@ -84,6 +99,22 @@ export default function Privacy() {
               third-party scripts or cookies in your browser will stop it.
             </Block>
 
+            <Block title="Advertising">
+              We advertise on Meta (Facebook and Instagram), Google and
+              LinkedIn, and use their tags on this site to measure whether our
+              ads lead to enquiries and to show our ads to people who have
+              visited. These tags set cookies and tell each platform which pages
+              you viewed. When you send an enquiry, we tell Meta and Google that
+              an enquiry happened and share your email address in a hashed
+              (scrambled) form so they can match it to an account on their
+              platform; they cannot read the address itself. Under California
+              law this may count as “sharing” personal information for
+              advertising. You can opt out by turning on Global Privacy Control
+              in your browser, which this site honours automatically by not
+              loading these tags, or by emailing us. You can also manage ad
+              preferences in your Meta, Google and LinkedIn account settings.
+            </Block>
+
             <Block title="How long we keep it">
               Enquiries stay in our email for as long as the conversation is
               useful. Ask us to delete yours and we will, without asking why.
@@ -91,7 +122,8 @@ export default function Privacy() {
 
             <Block title="Your choices">
               You can ask what we hold about you, ask for it to be corrected, or
-              ask for it to be deleted. Email{" "}
+              ask for it to be deleted, and you can opt out of the advertising
+              sharing described above. Email{" "}
               <a href={`mailto:${site.email}`}>{site.email}</a> and we will
               handle it ourselves.
             </Block>

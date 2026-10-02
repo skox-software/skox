@@ -17,7 +17,7 @@ function load(path, overrides = {}) {
   const sandbox = {
     exports,
     require: (name) =>
-      name === "@/lib/leads" ? load("lib/leads.ts") : dependency(name),
+      name.startsWith("@/lib/") ? load(`lib/${name.slice(6)}.ts`) : dependency(name),
     Response,
     Request,
     AbortSignal,

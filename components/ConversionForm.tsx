@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { track } from "@/lib/track";
+import { identify, track } from "@/lib/track";
 import { builds, landing, type BuildType } from "@/content/landing";
 import { site } from "@/content/site";
 import { onBrief } from "@/lib/brief";
@@ -10,6 +10,7 @@ import {
   captureAttribution,
   formatAttribution,
   readAttribution,
+  readJourney,
 } from "@/lib/attribution";
 import { formatLead, validate, type Lead, type FieldErrors } from "@/lib/leads";
 
@@ -109,6 +110,7 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
         website: current.website,
         stage,
         attribution: formatAttribution(readAttribution()),
+        context: JSON.stringify(readJourney()),
       }),
     }).catch(() => {
       // Nothing on screen is waiting on this. Let the visitor carry on.
@@ -198,13 +200,17 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(enriched),
+        body: JSON.stringify({
+          ...enriched,
+          context: JSON.stringify(readJourney()),
+        }),
         signal: AbortSignal.timeout(15000),
       });
       const result = await response.json();
       if (!response.ok || result.delivered !== "email")
         throw new Error("Delivery not confirmed");
       finished.current = true;
+      identify(lead.email);
       track("scope_request", {
         from: "landing",
         type: lead.projectType || "unspecified",

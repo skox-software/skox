@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { formatLead, validate, type Lead } from "@/lib/leads";
+import { enrichCompany, formatCompany } from "@/lib/enrich";
+import { sendMetaLead } from "@/lib/meta-capi";
+import { formatVisitor, readVisitor } from "@/lib/visitor";
 
 export const runtime = "nodejs";
 
@@ -58,9 +61,13 @@ export async function POST(req: Request) {
       : undefined,
   };
 
+  const visitor = readVisitor(req, body.context);
+  const company = await enrichCompany(lead.email);
+
   const to = process.env.CONTACT_EMAIL ?? "founder@skoxsoftware.com";
   const key = process.env.RESEND_API_KEY;
-  const text = formatLead(lead);
+  const text =
+    formatLead(lead) + formatCompany(company, lead.email) + formatVisitor(visitor);
 
   if (!key) {
     // No mail provider configured. Log it so it is recoverable, then FAIL LOUDLY.
@@ -92,7 +99,7 @@ export async function POST(req: Request) {
         from: process.env.LEAD_FROM_EMAIL ?? "SKOX <onboarding@resend.dev>",
         to: [to],
         reply_to: lead.email,
-        subject: `Scope request — ${lead.company || lead.name}`,
+        subject: `Scope request — ${lead.company || company?.name || lead.name}`,
         text,
       }),
     });
@@ -112,6 +119,9 @@ export async function POST(req: Request) {
       { status: 502 },
     );
   }
+
+  // After delivery, so an ad platform outage can never cost the lead itself.
+  await sendMetaLead(req, lead, visitor);
 
   return NextResponse.json({ ok: true, delivered: "email" });
 }
