@@ -41,6 +41,8 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
   const captured = useRef("");
   /** Set the moment a real submit lands, so no partial follows it out. */
   const finished = useRef(false);
+  /** The delayed send after the email field is left, cancelled by a submit. */
+  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   /** Read by the leave handler, which is bound once and would otherwise see
       the state as it was on mount. */
   const latest = useRef(lead);
@@ -84,9 +86,11 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
    * lands on its own route so it can never be mistaken for a conversion.
    */
   function captureUnfinished(stage: string) {
+    clearTimeout(pending.current);
     const current = latest.current;
     const email = current.email.trim();
-    if (finished.current || !email || captured.current === email) return;
+    if (finished.current || submitting.current) return;
+    if (!email || captured.current === email) return;
     if (validate({ ...current, name: "x", broken: "x" }).email) return;
 
     captured.current = email;
@@ -124,6 +128,7 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
     return () => {
       window.removeEventListener("pagehide", leaving);
       document.removeEventListener("visibilitychange", hidden);
+      clearTimeout(pending.current);
     };
     // Bound once; everything it reads comes through `latest`.
   }, []);
@@ -143,7 +148,13 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
   function checkOne(key: keyof Lead) {
     const found = validate(lead)[key];
     setErrors((previous) => ({ ...previous, [key]: found }));
-    if (key === "email" && !found) captureUnfinished("email-entered");
+    // Email is often the last field before Submit, and leaving it is part of
+    // pressing the button. Wait long enough to see whether a real submit
+    // follows; leaving the page still sends at once.
+    if (key === "email" && !found) {
+      clearTimeout(pending.current);
+      pending.current = setTimeout(() => captureUnfinished("email-entered"), 10_000);
+    }
   }
 
   function chooseType(value: string) {
@@ -173,6 +184,7 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
       return;
     }
     submitting.current = true;
+    clearTimeout(pending.current);
     setState("sending");
     captureAttribution();
     const enriched = {
