@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { formatLead, validate, type Lead } from "@/lib/leads";
 import { enrichCompany, formatCompany } from "@/lib/enrich";
 import { sendMetaLead } from "@/lib/meta-capi";
+import { sendToPortal } from "@/lib/portal";
 import { formatVisitor, readVisitor } from "@/lib/visitor";
 
 export const runtime = "nodejs";
@@ -120,8 +121,24 @@ export async function POST(req: Request) {
     );
   }
 
-  // After delivery, so an ad platform outage can never cost the lead itself.
-  await sendMetaLead(req, lead, visitor);
+  // After delivery, so a portal or ad platform outage can never cost the lead.
+  await Promise.all([
+    sendToPortal(
+      {
+        status: "submitted",
+        email: lead.email,
+        name: lead.name,
+        company: lead.company,
+        projectType: lead.projectType,
+        message: lead.broken,
+        timeline: lead.timeline,
+        attribution: lead.attribution,
+      },
+      visitor,
+      company,
+    ),
+    sendMetaLead(req, lead, visitor),
+  ]);
 
   return NextResponse.json({ ok: true, delivered: "email" });
 }

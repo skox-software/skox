@@ -5,6 +5,7 @@ import {
   type PartialLead,
 } from "@/lib/leads";
 import { enrichCompany, formatCompany } from "@/lib/enrich";
+import { sendToPortal } from "@/lib/portal";
 import { formatVisitor, readVisitor } from "@/lib/visitor";
 
 export const runtime = "nodejs";
@@ -131,6 +132,19 @@ export async function POST(req: Request) {
       { status: 502 },
     );
   }
+
+  await sendToPortal(
+    {
+      status: "unfinished",
+      email: lead.email,
+      name: lead.name,
+      projectType: lead.projectType,
+      message: lead.broken,
+      attribution: lead.attribution,
+    },
+    visitor,
+    company,
+  );
 
   return NextResponse.json({ ok: true });
 }
