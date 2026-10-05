@@ -12,10 +12,16 @@ export const site = {
   tagline: "Custom websites, web apps & dashboards. Built at speed.",
   description:
     "Custom websites, web apps and dashboards, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
-  email: "founders@skoxsoftware.com",
+  email: "founder@skoxsoftware.com",
   url: "https://skoxsoftware.com",
-  /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
-  bookingUrl: null as string | null,
+  /**
+   * Public scheduling page owned by founder@skoxsoftware.com. Kept in the
+   * environment so changing providers or availability never requires a code
+   * change. Only HTTPS pages are allowed into the conversion flow.
+   */
+  bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.startsWith("https://")
+    ? process.env.NEXT_PUBLIC_BOOKING_URL
+    : null,
   /** Drop a redacted scope at public/sample-scope.pdf and set this to "/sample-scope.pdf". */
   sampleScopeUrl: null as string | null,
 } as const;
@@ -411,8 +417,10 @@ export const form = {
   submit: "Get my free scope",
   reassure: "No deposit. No obligation. You keep the scope document either way.",
   submitting: "Sending…",
-  successTitle: "Got it.",
-  successBody: "We read every one of these ourselves. Expect a reply within one business day.",
-  successBooking: "Now pick your thirty minutes. If nothing on there works, just reply to the email we've sent you.",
+  successTitle: "Your project is in.",
+  successBody:
+    "Reiss will read it and reply within one business day with a way to book your scope call.",
+  successBooking:
+    "Your project details have been sent to Reiss. Pick a time now and the call will be added to his calendar.",
   errorTitle: "That didn't send.",
 } as const;

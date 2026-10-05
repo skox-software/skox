@@ -11,7 +11,15 @@ import {
   formatAttribution,
   readAttribution,
 } from "@/lib/attribution";
-import { formatLead, validate, type Lead, type FieldErrors } from "@/lib/leads";
+import {
+  BUDGETS,
+  DECISION_ROLES,
+  TIMELINES,
+  formatLead,
+  validate,
+  type Lead,
+  type FieldErrors,
+} from "@/lib/leads";
 
 /** The build chips, plus the honest escape hatch for people who don't know. */
 const TYPE_OPTIONS = [
@@ -25,7 +33,11 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
     email: "",
     broken: "",
     company: "",
+    industry: "",
     timeline: "",
+    budget: "",
+    decisionRole: "",
+    industryEligibility: "",
     website: "",
     projectType: initial || "",
   });
@@ -129,7 +141,9 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
   }, []);
 
   function change(
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) {
     const key = event.target.name as keyof Lead;
     setLead((previous) => ({ ...previous, [key]: event.target.value }));
@@ -222,7 +236,11 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
       }}
     >
       <h3>{landing.formTitleSmall}</h3>
-      <p className="form-description">{landing.formNote}</p>
+      <p className="form-description">
+        {site.bookingUrl
+          ? landing.formNote
+          : "Describe the project first. Reiss will reply within one business day to arrange your scope call."}
+      </p>
       <div className="honeypot" aria-hidden="true">
         <label>
           Website
@@ -329,6 +347,106 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
           </div>
         ))}
       </div>
+
+      <div className="form-row">
+        {(["company", "industry"] as const).map((key) => (
+          <div className="field" key={key}>
+            <label htmlFor={`project-${key}`}>
+              {landing.formLabels[key]} <span aria-hidden>*</span>
+            </label>
+            <input
+              id={`project-${key}`}
+              name={key}
+              type="text"
+              autoComplete={key === "company" ? "organization" : "off"}
+              required
+              maxLength={200}
+              value={lead[key]}
+              onChange={change}
+              onBlur={() => checkOne(key)}
+              aria-invalid={!!errors[key]}
+              aria-describedby={errors[key] ? `${key}-error` : undefined}
+            />
+            {errors[key] && (
+              <p className="field-error" id={`${key}-error`}>
+                {errors[key]}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <p className="form-fit-note">{landing.formFitNote}</p>
+
+      <div className="field">
+        <label htmlFor="project-budget">
+          {landing.formLabels.budget} <span aria-hidden>*</span>
+        </label>
+        <select
+          id="project-budget"
+          name="budget"
+          required
+          value={lead.budget}
+          onChange={change}
+          onBlur={() => checkOne("budget")}
+          aria-invalid={!!errors.budget}
+        >
+          <option value="">Choose a range</option>
+          {BUDGETS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        {errors.budget && <p className="field-error">{errors.budget}</p>}
+      </div>
+
+      <div className="form-row">
+        <SelectField
+          name="timeline"
+          label={landing.formLabels.timeline}
+          value={lead.timeline}
+          options={TIMELINES}
+          error={errors.timeline}
+          onChange={change}
+          onBlur={() => checkOne("timeline")}
+        />
+        <SelectField
+          name="decisionRole"
+          label={landing.formLabels.decisionRole}
+          value={lead.decisionRole}
+          options={DECISION_ROLES}
+          error={errors.decisionRole}
+          onChange={change}
+          onBlur={() => checkOne("decisionRole")}
+        />
+      </div>
+
+      <div className="field eligibility-field">
+        <label>
+          <input
+            name="industryEligibility"
+            type="checkbox"
+            value="confirmed"
+            checked={lead.industryEligibility === "confirmed"}
+            onChange={(event) => {
+              setLead((previous) => ({
+                ...previous,
+                industryEligibility: event.target.checked ? "confirmed" : "",
+              }));
+              setErrors((previous) => ({
+                ...previous,
+                industryEligibility: undefined,
+              }));
+            }}
+            aria-invalid={!!errors.industryEligibility}
+          />
+          <span>{landing.formEligibility}</span>
+        </label>
+        {errors.industryEligibility && (
+          <p className="field-error">{errors.industryEligibility}</p>
+        )}
+      </div>
       <p className="form-reassure" id="email-reassure">
         {landing.formReassure}
       </p>
@@ -346,13 +464,68 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
         disabled={state === "sending"}
         type="submit"
       >
-        {state === "sending" ? landing.formSubmitting : landing.formSubmit}
+        {state === "sending"
+          ? landing.formSubmitting
+          : site.bookingUrl
+            ? landing.formSubmit
+            : "Send my project"}
         <span aria-hidden>↗</span>
       </button>
-      <p className="form-next">{landing.formNext}</p>
+      <p className="form-next">
+        {site.bookingUrl
+          ? landing.formNext
+          : "Next: Reiss reviews it and replies within one business day to arrange the call."}
+      </p>
       <p className="form-privacy">
         {landing.formPrivacy} <Link href="/privacy">Privacy</Link>
       </p>
     </form>
+  );
+}
+
+function SelectField({
+  name,
+  label,
+  value,
+  options,
+  error,
+  onChange,
+  onBlur,
+}: {
+  name: "timeline" | "decisionRole";
+  label: string;
+  value: string;
+  options: readonly string[];
+  error?: string;
+  onChange: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => void;
+  onBlur: () => void;
+}) {
+  return (
+    <div className="field">
+      <label htmlFor={`project-${name}`}>
+        {label} <span aria-hidden>*</span>
+      </label>
+      <select
+        id={`project-${name}`}
+        name={name}
+        required
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        aria-invalid={!!error}
+      >
+        <option value="">Choose one</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      {error && <p className="field-error">{error}</p>}
+    </div>
   );
 }

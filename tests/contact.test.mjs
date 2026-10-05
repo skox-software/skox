@@ -32,8 +32,12 @@ const valid = {
   name: "QA",
   email: "qa@example.com",
   broken: "A client portal",
-  company: "",
-  timeline: "",
+  company: "Acme Operations",
+  industry: "Commercial construction",
+  timeline: "1–3 months",
+  budget: "$10,000–$20,000",
+  decisionRole: "I can approve the project",
+  industryEligibility: "confirmed",
   projectType: "web-apps",
   attribution: "utm_source: test",
 };
@@ -95,6 +99,18 @@ test("confirmed delivery includes project type and attribution", async () => {
   assert.match(payload.text, /utm_source: test/);
   assert.equal(payload.reply_to, valid.email);
 });
+test("confirmed delivery defaults to the founder booking inbox", async () => {
+  let payload;
+  const route = load("app/api/contact/route.ts", {
+    process: { env: { RESEND_API_KEY: "test-only" } },
+    fetch: async (_url, options) => {
+      payload = JSON.parse(options.body);
+      return new Response('{"id":"test"}', { status: 200 });
+    },
+  });
+  assert.equal((await route.POST(request(valid))).status, 200);
+  assert.deepEqual(payload.to, ["founder@skoxsoftware.com"]);
+});
 test("honeypot submissions never call the mail provider or report email delivery", async () => {
   let sent = false;
   const route = load("app/api/contact/route.ts", {
@@ -120,4 +136,17 @@ test("validation rejects invalid build types and overlong email", () => {
   assert.ok(
     validate({ ...valid, email: "a".repeat(250) + "@example.com" }).email,
   );
+});
+test("validation requires sales qualification fields", () => {
+  const { validate } = load("lib/leads.ts");
+  for (const key of [
+    "company",
+    "industry",
+    "timeline",
+    "budget",
+    "decisionRole",
+    "industryEligibility",
+  ]) {
+    assert.ok(validate({ ...valid, [key]: "" })[key]);
+  }
 });

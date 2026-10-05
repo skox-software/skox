@@ -49,8 +49,12 @@ export async function POST(req: Request) {
     name: String(body.name).trim(),
     email: String(body.email).trim(),
     company: String(body.company ?? "").trim(),
+    industry: String(body.industry ?? "").trim(),
     broken: String(body.broken).trim(),
     timeline: String(body.timeline ?? "").trim(),
+    budget: String(body.budget ?? "").trim(),
+    decisionRole: String(body.decisionRole ?? "").trim(),
+    industryEligibility: String(body.industryEligibility ?? "").trim(),
     projectType: body.projectType || undefined,
     leak: body.leak ? String(body.leak).slice(0, 300) : undefined,
     attribution: body.attribution
@@ -58,7 +62,7 @@ export async function POST(req: Request) {
       : undefined,
   };
 
-  const to = process.env.CONTACT_EMAIL ?? "founders@skoxsoftware.com";
+  const to = process.env.CONTACT_EMAIL ?? "founder@skoxsoftware.com";
   const key = process.env.RESEND_API_KEY;
   const text = formatLead(lead);
 

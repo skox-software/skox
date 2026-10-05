@@ -47,14 +47,15 @@ See `.env.example`.
 | Variable | Purpose |
 | --- | --- |
 | `RESEND_API_KEY` | Required for email delivery. |
-| `CONTACT_EMAIL` | Receiving inbox; defaults to the existing company contact. |
+| `CONTACT_EMAIL` | Receiving inbox; defaults to `founder@skoxsoftware.com`. |
 | `LEAD_FROM_EMAIL` | Sender on a domain verified in Resend; configure for production. |
+| `NEXT_PUBLIC_BOOKING_URL` | HTTPS scheduling page owned by `founder@skoxsoftware.com`. Enables the post-submit booking step. |
 
 Without a mail provider the API returns 503, logs the enquiry for recovery and the form displays an email fallback. Provider failures/timeouts return 502. No success conversion is fired on these failures. Provider acceptance is distinct from verified inbox arrival: production email must be tested separately with authorization.
 
-Vercel events: `scope_cta_clicked`, `scope_form_started`, `scope_form_invalid`, `scope_request`, `scope_request_failed`, `scope_email_fallback`, `build_preview_selected`, `app_demo_used`. Successful form delivery navigates to `/scope-received`. These events do not automatically configure Google Ads or Meta. Avoid treating direct visits to the confirmation URL as verified new leads. Record downstream qualification and won business separately.
+Vercel events: `scope_cta_clicked`, `scope_form_started`, `scope_form_invalid`, `scope_request`, `scope_request_failed`, `scope_email_fallback`, `booking_started`, `build_preview_selected`, `app_demo_used`. Successful form delivery navigates to `/scope-received`, where `booking_started` records the handoff to the scheduling provider. These events do not automatically configure Google Ads or Meta. Avoid treating direct visits to the confirmation URL as verified new leads. Record downstream qualification, booked calls, attended calls and won business separately.
 
-`site.bookingUrl` is optional. Leave it null unless a working booking calendar is available.
+Set `NEXT_PUBLIC_BOOKING_URL` only after the public booking page has been tested against the `founder@skoxsoftware.com` calendar. Without it, the confirmation page honestly falls back to a one-business-day reply instead of exposing a broken booking action.
 
 ## Release
 

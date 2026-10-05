@@ -6,8 +6,12 @@ export type Lead = {
   name: string;
   email: string;
   company: string;
+  industry: string;
   broken: string;
   timeline: string;
+  budget: string;
+  decisionRole: string;
+  industryEligibility: string;
   projectType?: string;
   leak?: string;
   /** Honeypot — must stay empty. */
@@ -19,9 +23,22 @@ export type FieldErrors = Partial<Record<keyof Lead, string>>;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export const TIMELINES = [
-  "This month",
-  "This quarter",
-  "Just exploring",
+  "Within 30 days",
+  "1–3 months",
+  "3–6 months",
+  "Planning ahead",
+] as const;
+
+export const BUDGETS = [
+  "$10,000–$20,000",
+  "$20,000–$50,000",
+  "$50,000+",
+] as const;
+
+export const DECISION_ROLES = [
+  "I can approve the project",
+  "I am part of the decision",
+  "I am researching for my team",
 ] as const;
 
 export function validate(lead: Partial<Lead>): FieldErrors {
@@ -31,8 +48,12 @@ export function validate(lead: Partial<Lead>): FieldErrors {
     "name",
     "email",
     "company",
+    "industry",
     "broken",
     "timeline",
+    "budget",
+    "decisionRole",
+    "industryEligibility",
     "website",
     "projectType",
     "attribution",
@@ -54,13 +75,28 @@ export function validate(lead: Partial<Lead>): FieldErrors {
   else if (lead.broken.trim().length > 4000)
     e.broken = "Too long — give us the short version.";
 
-  if (lead.company && lead.company.length > 200) e.company = "Too long.";
+  if (!lead.company?.trim()) e.company = "Required.";
+  else if (lead.company.length > 200) e.company = "Too long.";
+  if (!lead.industry?.trim()) e.industry = "Required.";
+  else if (lead.industry.length > 200) e.industry = "Too long.";
+  if (!BUDGETS.includes(lead.budget as (typeof BUDGETS)[number]))
+    e.budget = "Choose a project budget.";
+  if (!TIMELINES.includes(lead.timeline as (typeof TIMELINES)[number]))
+    e.timeline = "Choose a target start date.";
+  if (
+    !DECISION_ROLES.includes(
+      lead.decisionRole as (typeof DECISION_ROLES)[number],
+    )
+  )
+    e.decisionRole = "Choose your role in the decision.";
+  if (lead.industryEligibility !== "confirmed")
+    e.industryEligibility =
+      "Confirm this is not a healthcare or financial-services project.";
   if (
     lead.projectType &&
     !["websites", "web-apps", "dashboards", "other"].includes(lead.projectType)
   )
     e.projectType = "Choose a build type.";
-  if (lead.timeline && lead.timeline.length > 200) e.timeline = "Too long.";
   return e;
 }
 
@@ -70,7 +106,11 @@ export function formatLead(lead: Lead): string {
     `Name:     ${lead.name}`,
     `Email:    ${lead.email}`,
     `Company:  ${lead.company || "—"}`,
+    `Industry: ${lead.industry}`,
+    `Budget:   ${lead.budget}`,
     `Timeline: ${lead.timeline || "—"}`,
+    `Role:     ${lead.decisionRole}`,
+    `Eligible: ${lead.industryEligibility === "confirmed" ? "Not healthcare or financial services" : "Not confirmed"}`,
     `Build:    ${lead.projectType || "Not specified"}`,
     lead.leak ? `Leak:     ${lead.leak}` : null,
     "",

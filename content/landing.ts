@@ -120,10 +120,10 @@ export const landing = {
     "One dashboard for all my locations",
     "A quoting tool my team will actually use",
     "A customer portal for my clients",
-    "A booking site for my clinic",
+    "A booking site for my service team",
   ],
   composerExamples: [
-    "A booking site for my clinic",
+    "A booking site for my service team",
     "A customer portal for my clients",
     "One dashboard for all my locations",
   ],
@@ -252,17 +252,22 @@ export const landing = {
   formEyebrow: "Let’s build something useful",
   formTitle: "What do you want\nto get live?",
   formSub:
-    "Tell us a little about it. We’ll reply within one business day to arrange your free scope call.",
+    "Tell us a little about it, then choose a time for your free scope call with Reiss.",
   formBenefits: [
-    "A 30-minute conversation with a founder",
+    "A 30-minute scope call with Reiss",
     "A written scope, fixed price and delivery date",
     "The plan is yours, whether you hire us or not",
   ],
-  formTitleSmall: "Start with your project",
-  formNote: "Describe it in a sentence. Your details come after.",
+  formTitleSmall: "Tell Reiss what you need",
+  formNote: "Describe the project first. You’ll choose a call time after this form.",
   formLabels: {
     name: "Your name",
     email: "Email address",
+    company: "Company",
+    industry: "Industry",
+    budget: "Expected project budget",
+    timeline: "When do you want to start?",
+    decisionRole: "Your role in the decision",
     projectType: "What are we building?",
     broken: "What would you like to build?",
     unspecified: "Help me figure it out",
@@ -277,10 +282,14 @@ export const landing = {
     "One reply from a founder. No newsletter, no sales sequence. Once you enter your address we may follow up about this enquiry, even if you don’t finish the form.",
   /* Sits under the button: the click has a known consequence. */
   formNext:
-    "Next: a reply within one business day to arrange your free 30-minute scope call.",
+    "Next: choose a time for your free 30-minute scope call with Reiss.",
   formPlaceholder:
     "For example: a client portal where customers approve quotes.",
-  formSubmit: "Get my price & timeline",
+  formSubmit: "Submit & book my call",
+  formFitNote:
+    "Custom software projects generally start at $10,000. SKOX does not take healthcare or financial-services projects.",
+  formEligibility:
+    "I confirm this project is not for healthcare or financial services.",
   formSubmitting: "Sending your request…",
   formPrivacy: "We’ll only use your details to respond to your enquiry.",
   formError:

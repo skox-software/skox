@@ -1,0 +1,88 @@
+healthcare
+"health care"
+medical
+medicine
+medtech
+hospital
+hospitals
+clinic
+clinics
+patient
+patients
+doctor
+doctors
+physician
+physicians
+surgeon
+surgeons
+hipaa
+ehr
+emr
+pharmacy
+pharmacies
+pharmaceutical
+pharmaceuticals
+dental
+dentist
+dentists
+telehealth
+telemedicine
+"medical billing"
+"practice management"
+"home health"
+"assisted living"
+nursing
+"mental health"
+"behavioral health"
+therapist
+therapists
+rehab
+rehabilitation
+hospice
+fintech
+cryptocurrency
+crypto
+bank
+banks
+banking
+"credit union"
+"credit unions"
+lending
+lender
+lenders
+loan
+loans
+mortgage
+mortgages
+brokerage
+"broker dealer"
+"broker dealers"
+securities
+investment
+investments
+investing
+trading
+"wealth management"
+"asset management"
+"investment banking"
+"private equity"
+insurance
+insurer
+insurers
+insurtech
+"financial services"
+"financial advisor"
+"financial advisors"
+"financial adviser"
+"financial advisers"
+"accounting firm"
+"accounting firms"
+"tax preparation"
+"payment processor"
+"payment processors"
+"money transmitter"
+"money transmitters"
+"debt collection"
+"credit repair"
+"payday loan"
+"payday loans"

@@ -264,7 +264,11 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             <div className="scope-copy">
               <p className="eyebrow">{landing.formEyebrow}</p>
               <h2 id="scope-title">{landing.formTitle}</h2>
-              <p>{landing.formSub}</p>
+              <p>
+                {site.bookingUrl
+                  ? landing.formSub
+                  : "Tell us about the project. Reiss will review it and reply within one business day to arrange your free scope call."}
+              </p>
               <ul>
                 {landing.formBenefits.map((benefit) => (
                   <li key={benefit}>

@@ -7,4 +7,5 @@ next-env.d.ts
 .DS_Store
 .diff/
 .env*
+!.env.example
 .gstack/

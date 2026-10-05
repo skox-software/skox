@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BookingLink } from "@/components/BookingLink";
 import { SkoxLogo } from "@/components/SkoxLogo";
 import { form as copy, site } from "@/content/site";
 
@@ -23,21 +24,20 @@ export default function ScopeReceived() {
         <div>
           <SkoxLogo className="brand-logo" />
 
-          <p className="eyebrow">Received</p>
+          <p className="eyebrow">Request received</p>
           <h1>{copy.successTitle}</h1>
           <p>{site.bookingUrl ? copy.successBooking : copy.successBody}</p>
 
           <div className="page-actions">
             {site.bookingUrl && (
-              <a
+              <BookingLink
                 href={site.bookingUrl}
-                target="_blank"
-                rel="noopener"
+                surface="scope-received"
                 className="button button-primary"
               >
-                Pick my 30 minutes
+                Book my call with Reiss
                 <span aria-hidden="true">↗</span>
-              </a>
+              </BookingLink>
             )}
             <Link href="/" className="button button-ghost">
               Back to the site
@@ -45,7 +45,7 @@ export default function ScopeReceived() {
           </div>
 
           <p className="page-meta">
-            Nothing else to do. If it is urgent, reply straight to{" "}
+            Your project details were sent to Reiss. If it is urgent, email{" "}
             <a href={`mailto:${site.email}`}>{site.email}</a>.
           </p>
         </div>

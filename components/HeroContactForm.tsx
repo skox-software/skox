@@ -5,7 +5,15 @@ import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { formatAttribution, readAttribution } from "@/lib/attribution";
 import { heroForm, form as copy, site } from "@/content/site";
-import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
+import {
+  BUDGETS,
+  DECISION_ROLES,
+  TIMELINES,
+  formatLead,
+  validate,
+  type FieldErrors,
+  type Lead,
+} from "@/lib/leads";
 
 type State = "idle" | "sending" | "done" | "failed";
 
@@ -13,8 +21,12 @@ const EMPTY: Lead = {
   name: "",
   email: "",
   company: "",
+  industry: "",
   broken: "",
   timeline: "",
+  budget: "",
+  decisionRole: "",
+  industryEligibility: "",
   website: "",
 };
 
@@ -36,7 +48,9 @@ export function HeroContactForm() {
 
   const set =
     (k: keyof Lead) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >) => {
       setLead((l) => ({ ...l, [k]: e.target.value }));
       if (errors[k]) setErrors((x) => ({ ...x, [k]: undefined }));
     };
@@ -149,7 +163,18 @@ export function HeroContactForm() {
           onChange={set("company")}
           error={errors.company}
           autoComplete="organization"
-          optional
+          required
+        />
+      </div>
+
+      <div className="mt-4">
+        <Field
+          id="hf-industry"
+          label="Industry"
+          value={lead.industry}
+          onChange={set("industry")}
+          error={errors.industry}
+          required
         />
       </div>
 
@@ -174,6 +199,69 @@ export function HeroContactForm() {
         />
         {errors.broken && (
           <p className="mt-1.5 text-[12.5px] text-[#ff8a80]">{errors.broken}</p>
+        )}
+      </div>
+
+      <p className="mt-4 border-l-2 border-[var(--color-amber)] pl-3 text-[12.5px] leading-[1.5] text-white/65">
+        Projects generally start at $10,000. We do not take healthcare or
+        financial-services work.
+      </p>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <DarkSelect
+          id="hf-budget"
+          label="Project budget"
+          value={lead.budget}
+          options={BUDGETS}
+          onChange={set("budget")}
+          error={errors.budget}
+        />
+        <DarkSelect
+          id="hf-timeline"
+          label="Target start"
+          value={lead.timeline}
+          options={TIMELINES}
+          onChange={set("timeline")}
+          error={errors.timeline}
+        />
+      </div>
+
+      <div className="mt-4">
+        <DarkSelect
+          id="hf-decision-role"
+          label="Your role in the decision"
+          value={lead.decisionRole}
+          options={DECISION_ROLES}
+          onChange={set("decisionRole")}
+          error={errors.decisionRole}
+        />
+      </div>
+
+      <div className="mt-4">
+        <label className="flex items-start gap-2.5 text-[12.5px] leading-[1.5] text-white/70">
+          <input
+            type="checkbox"
+            checked={lead.industryEligibility === "confirmed"}
+            onChange={(event) => {
+              setLead((previous) => ({
+                ...previous,
+                industryEligibility: event.target.checked ? "confirmed" : "",
+              }));
+              setErrors((previous) => ({
+                ...previous,
+                industryEligibility: undefined,
+              }));
+            }}
+            className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--color-amber)]"
+          />
+          <span>
+            This project is not for healthcare or financial services.
+          </span>
+        </label>
+        {errors.industryEligibility && (
+          <p className="mt-1.5 text-[12.5px] text-[#ff8a80]">
+            {errors.industryEligibility}
+          </p>
         )}
       </div>
 
@@ -224,7 +312,11 @@ function Field({
   id: string;
   label: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => void;
   error?: string;
   type?: string;
   required?: boolean;
@@ -251,6 +343,49 @@ function Field({
         className="h-[46px] w-full rounded-[10px] border bg-white/[0.04] px-3.5 text-[14px] text-white placeholder-white/55 outline-none transition-colors focus:border-[var(--color-amber)]"
         style={{ borderColor: error ? "#ff8a80" : "rgba(255,255,255,0.15)" }}
       />
+      {error && <p className="mt-1.5 text-[12.5px] text-[#ff8a80]">{error}</p>}
+    </div>
+  );
+}
+
+function DarkSelect({
+  id,
+  label,
+  value,
+  options,
+  onChange,
+  error,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  options: readonly string[];
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  error?: string;
+}) {
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-[13px] font-[450] text-white/70"
+      >
+        {label} <span className="text-[var(--color-amber)]">*</span>
+      </label>
+      <select
+        id={id}
+        value={value}
+        onChange={onChange}
+        aria-invalid={Boolean(error)}
+        className="h-[46px] w-full rounded-[10px] border bg-[#171717] px-3.5 text-[14px] text-white outline-none transition-colors focus:border-[var(--color-amber)]"
+        style={{ borderColor: error ? "#ff8a80" : "rgba(255,255,255,0.15)" }}
+      >
+        <option value="">Choose one</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
       {error && <p className="mt-1.5 text-[12.5px] text-[#ff8a80]">{error}</p>}
     </div>
   );
