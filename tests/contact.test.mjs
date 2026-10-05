@@ -99,7 +99,7 @@ test("confirmed delivery includes project type and attribution", async () => {
   assert.match(payload.text, /utm_source: test/);
   assert.equal(payload.reply_to, valid.email);
 });
-test("confirmed delivery defaults to the founder booking inbox", async () => {
+test("confirmed delivery defaults to Reiss's lead inbox", async () => {
   let payload;
   const route = load("app/api/contact/route.ts", {
     process: { env: { RESEND_API_KEY: "test-only" } },

@@ -14,14 +14,6 @@ export const site = {
     "Custom websites, web apps and dashboards, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
   email: "founder@skoxsoftware.com",
   url: "https://skoxsoftware.com",
-  /**
-   * Public scheduling page owned by founder@skoxsoftware.com. Kept in the
-   * environment so changing providers or availability never requires a code
-   * change. Only HTTPS pages are allowed into the conversion flow.
-   */
-  bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.startsWith("https://")
-    ? process.env.NEXT_PUBLIC_BOOKING_URL
-    : null,
   /** Drop a redacted scope at public/sample-scope.pdf and set this to "/sample-scope.pdf". */
   sampleScopeUrl: null as string | null,
 } as const;
@@ -420,7 +412,5 @@ export const form = {
   successTitle: "Your project is in.",
   successBody:
     "Reiss will read it and reply within one business day with a way to book your scope call.",
-  successBooking:
-    "Your project details have been sent to Reiss. Pick a time now and the call will be added to his calendar.",
   errorTitle: "That didn't send.",
 } as const;

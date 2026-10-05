@@ -236,11 +236,7 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
       }}
     >
       <h3>{landing.formTitleSmall}</h3>
-      <p className="form-description">
-        {site.bookingUrl
-          ? landing.formNote
-          : "Describe the project first. Reiss will reply within one business day to arrange your scope call."}
-      </p>
+      <p className="form-description">{landing.formNote}</p>
       <div className="honeypot" aria-hidden="true">
         <label>
           Website
@@ -464,18 +460,10 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
         disabled={state === "sending"}
         type="submit"
       >
-        {state === "sending"
-          ? landing.formSubmitting
-          : site.bookingUrl
-            ? landing.formSubmit
-            : "Send my project"}
+        {state === "sending" ? landing.formSubmitting : landing.formSubmit}
         <span aria-hidden>↗</span>
       </button>
-      <p className="form-next">
-        {site.bookingUrl
-          ? landing.formNext
-          : "Next: Reiss reviews it and replies within one business day to arrange the call."}
-      </p>
+      <p className="form-next">{landing.formNext}</p>
       <p className="form-privacy">
         {landing.formPrivacy} <Link href="/privacy">Privacy</Link>
       </p>

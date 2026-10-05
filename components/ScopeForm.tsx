@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { formatAttribution, readAttribution } from "@/lib/attribution";
 import { Section, SectionHead } from "@/components/Section";
-import { BookingLink } from "@/components/BookingLink";
 import { LEAK_KEY } from "@/components/LeakCalculator";
 import { entryOffer, form as copy, site } from "@/content/site";
 import {
@@ -113,17 +112,8 @@ export function ScopeForm() {
             className="mt-4 text-[17px] leading-[1.55]"
             style={{ color: "var(--text-dim)" }}
           >
-            {site.bookingUrl ? copy.successBooking : copy.successBody}
+            {copy.successBody}
           </p>
-          {site.bookingUrl && (
-            <BookingLink
-              href={site.bookingUrl}
-              surface="legacy-form"
-              className="chamfer mt-7 h-[51px] px-[27px] inline-flex items-center bg-[var(--color-ink)] dark:bg-[var(--color-paper)] text-[var(--color-paper)] dark:text-[var(--color-ink)] text-[15.5px] font-[450] transition-opacity hover:opacity-88"
-            >
-              Book my call with Reiss
-            </BookingLink>
-          )}
         </div>
       </Section>
     );

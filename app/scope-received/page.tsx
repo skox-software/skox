@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookingLink } from "@/components/BookingLink";
 import { SkoxLogo } from "@/components/SkoxLogo";
 import { form as copy, site } from "@/content/site";
 
@@ -26,19 +25,9 @@ export default function ScopeReceived() {
 
           <p className="eyebrow">Request received</p>
           <h1>{copy.successTitle}</h1>
-          <p>{site.bookingUrl ? copy.successBooking : copy.successBody}</p>
+          <p>{copy.successBody}</p>
 
           <div className="page-actions">
-            {site.bookingUrl && (
-              <BookingLink
-                href={site.bookingUrl}
-                surface="scope-received"
-                className="button button-primary"
-              >
-                Book my call with Reiss
-                <span aria-hidden="true">↗</span>
-              </BookingLink>
-            )}
             <Link href="/" className="button button-ghost">
               Back to the site
             </Link>

@@ -252,14 +252,15 @@ export const landing = {
   formEyebrow: "Let’s build something useful",
   formTitle: "What do you want\nto get live?",
   formSub:
-    "Tell us a little about it, then choose a time for your free scope call with Reiss.",
+    "Tell us about the project. Reiss will review it and reply within one business day to arrange your free scope call.",
   formBenefits: [
     "A 30-minute scope call with Reiss",
     "A written scope, fixed price and delivery date",
     "The plan is yours, whether you hire us or not",
   ],
   formTitleSmall: "Tell Reiss what you need",
-  formNote: "Describe the project first. You’ll choose a call time after this form.",
+  formNote:
+    "Describe the project first. Reiss will review it before arranging the call.",
   formLabels: {
     name: "Your name",
     email: "Email address",
@@ -282,10 +283,10 @@ export const landing = {
     "One reply from a founder. No newsletter, no sales sequence. Once you enter your address we may follow up about this enquiry, even if you don’t finish the form.",
   /* Sits under the button: the click has a known consequence. */
   formNext:
-    "Next: choose a time for your free 30-minute scope call with Reiss.",
+    "Next: Reiss reviews it and replies within one business day to arrange the call.",
   formPlaceholder:
     "For example: a client portal where customers approve quotes.",
-  formSubmit: "Submit & book my call",
+  formSubmit: "Send my project",
   formFitNote:
     "Custom software projects generally start at $10,000. SKOX does not take healthcare or financial-services projects.",
   formEligibility:

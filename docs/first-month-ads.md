@@ -82,7 +82,7 @@ Recommended measurement sequence:
 3. Qualified opportunity: import after a founder confirms authority, business need, timing and budget fit.
 4. Won project and value: import when a signed project closes; use this later for value-based bidding.
 
-The current site sends a successful form submission to `/scope-received`, but `site.bookingUrl` is null. Visitors can explain the project at `/web-apps#scope`; they cannot yet choose a call time. Connect and test a real Cal.com, Calendly or equivalent calendar before representing the flow as instant booking.
+The current site sends a successful form submission to `/scope-received`. The user selected manual follow-up: visitors explain the project and complete the qualification fields at `/web-apps#scope`, then Reiss reviews the details and replies within one business day to arrange the call. Do not represent the flow as instant booking.
 
 ## Search terms and exclusions
 
@@ -153,7 +153,7 @@ Do not count form starts, partial enquiries, demo clicks or direct visits to `/s
 
 The source defaults lead delivery to founders@skoxsoftware.com, while the previously inspected live page's email link used founder@skoxsoftware.com. Neither establishes the production form's configured recipient. Verify actual routing; ad sign-in does not change the receiving inbox.
 
-Live inspection on October 5 verified `/web-apps` renders the expected portal, internal-tool and integration copy and the earlier enquiry form. The stronger qualification fields are currently local only. No public scheduling URL is configured, so the revised form truthfully promises a reply within one business day to arrange the call. No enquiry was submitted; inbox delivery and advertising conversions remain unverified.
+Live inspection on October 5 verified `/web-apps` renders the expected portal, internal-tool and integration copy and the earlier enquiry form. The stronger qualification fields are currently on the campaign branch only. The chosen manual follow-up flow promises a reply within one business day to arrange the call. No enquiry was submitted; inbox delivery and advertising conversions remain unverified.
 
 ## Promotional-credit terms
 
@@ -189,4 +189,4 @@ The current Google interface estimates $1.11 average CPC at the draft settings, 
 
 ## Remaining work
 
-Deploy the qualifying form, configure a real calendar URL if instant booking is desired, and verify production lead delivery. In the signed-in account, find and verify the account-only completion path before any billing submission; arrange the payment profile with the user, then access the full campaign controls to set a true total budget and start/end dates. Retain the prepared assets/settings when creating the final total-budget campaign, apply the prepared account-level regulated-industry list and campaign-level intent list, inspect search demand/CPC, and verify the form-success conversion. Recheck billing charges, other account spend and promotion activation. **The USD 300 media ceiling is authorized, but the cap remains unset in Google Ads. Keep the campaign unpublished until the cap, exclusions and conversion path are verified.**
+Deploy the qualifying form and verify production lead delivery and the manual follow-up workflow. In the signed-in account, find and verify the account-only completion path before any billing submission; arrange the payment profile with the user, then access the full campaign controls to set a true total budget and start/end dates. Retain the prepared assets/settings when creating the final total-budget campaign, apply the prepared account-level regulated-industry list and campaign-level intent list, inspect search demand/CPC, and verify the form-success conversion. Recheck billing charges, other account spend and promotion activation. **The USD 300 media ceiling is authorized, but the cap remains unset in Google Ads. Keep the campaign unpublished until the cap, exclusions and conversion path are verified.**

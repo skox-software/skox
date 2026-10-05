@@ -19,7 +19,7 @@ All three verification commands must pass before merging. CI runs lint, tests an
 | File | Purpose |
 | --- | --- |
 | `content/landing.ts` | Primary marketing copy, build offers, founders and visible FAQ. |
-| `content/site.ts` | Shared brand, domain, contact address and optional booking URL. Also retains legacy page copy. |
+| `content/site.ts` | Shared brand, domain and contact address. Also retains legacy page copy. |
 | `components/LandingPage.tsx` | Shared page structure for home and each service. |
 | `components/BuildPreview.tsx` | Interactive website, app and dashboard concepts. Demo content is illustrative. |
 | `components/ConversionForm.tsx` | Accessible enquiry form, failure fallback and successful-delivery navigation. |
@@ -49,13 +49,10 @@ See `.env.example`.
 | `RESEND_API_KEY` | Required for email delivery. |
 | `CONTACT_EMAIL` | Receiving inbox; defaults to `founder@skoxsoftware.com`. |
 | `LEAD_FROM_EMAIL` | Sender on a domain verified in Resend; configure for production. |
-| `NEXT_PUBLIC_BOOKING_URL` | HTTPS scheduling page owned by `founder@skoxsoftware.com`. Enables the post-submit booking step. |
 
 Without a mail provider the API returns 503, logs the enquiry for recovery and the form displays an email fallback. Provider failures/timeouts return 502. No success conversion is fired on these failures. Provider acceptance is distinct from verified inbox arrival: production email must be tested separately with authorization.
 
-Vercel events: `scope_cta_clicked`, `scope_form_started`, `scope_form_invalid`, `scope_request`, `scope_request_failed`, `scope_email_fallback`, `booking_started`, `build_preview_selected`, `app_demo_used`. Successful form delivery navigates to `/scope-received`, where `booking_started` records the handoff to the scheduling provider. These events do not automatically configure Google Ads or Meta. Avoid treating direct visits to the confirmation URL as verified new leads. Record downstream qualification, booked calls, attended calls and won business separately.
-
-Set `NEXT_PUBLIC_BOOKING_URL` only after the public booking page has been tested against the `founder@skoxsoftware.com` calendar. Without it, the confirmation page honestly falls back to a one-business-day reply instead of exposing a broken booking action.
+Vercel events: `scope_cta_clicked`, `scope_form_started`, `scope_form_invalid`, `scope_request`, `scope_request_failed`, `scope_email_fallback`, `build_preview_selected`, `app_demo_used`. Successful form delivery navigates to `/scope-received`. Reiss reviews the submitted qualification details and replies within one business day to arrange the call. These events do not automatically configure Google Ads or Meta. Avoid treating direct visits to the confirmation URL as verified new leads. Record downstream qualification, booked calls, attended calls and won business separately.
 
 ## Release
 
