@@ -225,6 +225,7 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
 
   return (
     <form
+      data-clarity-mask="true"
       ref={formRef}
       method="post"
       action="/api/contact"

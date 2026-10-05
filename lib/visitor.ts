@@ -86,6 +86,8 @@ export function formatVisitor(v: Visitor): string {
     firstSource && `  first found us via: ${firstSource}${ft?.at ? ` on ${ft.at.slice(0, 10)}` : ""}`,
     ft?.landing && `  first landing page: ${ft.landing}`,
     j.pages?.length && `  pages this visit: ${j.pages.join(" → ")}`,
+    // Clarity → Recordings → filter by custom tag lead_event_id = this value.
+    j.eventId && `  recording tag (Clarity lead_event_id): ${j.eventId}`,
   ].filter(Boolean);
   return lines.length ? `\n\nVisitor:\n${lines.join("\n")}` : "";
 }

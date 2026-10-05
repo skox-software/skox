@@ -133,7 +133,7 @@ export function HeroComposer() {
 
   return (
     <div className="hero-console" data-open={open ? "true" : "false"}>
-      <form className="hero-composer" onSubmit={submit}>
+      <form data-clarity-mask="true" className="hero-composer" onSubmit={submit}>
         <label className="sr-only" htmlFor="hero-brief">
           {landing.composerLabel}
         </label>

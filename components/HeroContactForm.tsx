@@ -92,6 +92,7 @@ export function HeroContactForm() {
 
   return (
     <form
+      data-clarity-mask="true"
       onSubmit={submit}
       noValidate
       className="w-full max-w-[440px] rounded-[16px] border border-white/10 bg-white/[0.03] p-6 sm:p-7 backdrop-blur-[6px]"

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "What SKOX collects, why, and how to have it deleted.",
 };
 
-const UPDATED = "1 October 2026";
+const UPDATED = "5 October 2026";
 
 export default function Privacy() {
   return (
@@ -64,7 +64,8 @@ export default function Privacy() {
               tracker and company lookups are processed by Apollo.io, usage
               data from Google Analytics is processed by Google, and the
               advertising tags described below are processed by Meta, Google
-              and LinkedIn.
+              and LinkedIn, and session recordings are processed by Microsoft
+              Clarity.
             </Block>
 
             <Block title="Analytics">
@@ -97,6 +98,19 @@ export default function Privacy() {
               interested in what we build. Apollo processes this data under its
               own privacy policy. If you would rather not be tracked, blocking
               third-party scripts or cookies in your browser will stop it.
+            </Block>
+
+            <Block title="Session recordings">
+              We use Microsoft Clarity to record how visitors use this site:
+              mouse movements, clicks, scrolling and the pages you move
+              between, which we can replay to see where the site is confusing
+              or broken, and summarise as heatmaps. Anything you type into a
+              form is masked and never recorded. If you send an enquiry, we
+              link the recording of that visit to your enquiry so we can see
+              how you found what you were looking for. Clarity sets cookies,
+              and Microsoft processes this data under its own privacy
+              statement. Turning on Global Privacy Control in your browser
+              stops it, as does blocking third-party scripts or cookies.
             </Block>
 
             <Block title="Advertising">

@@ -188,7 +188,7 @@ export function ScopeForm() {
           </div>
         </div>
 
-        <form onSubmit={submit} noValidate className="reveal">
+        <form data-clarity-mask="true" onSubmit={submit} noValidate className="reveal">
           {/* Honeypot — hidden from people, tempting to bots. */}
           <div
             aria-hidden

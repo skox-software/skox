@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { CaptureAttribution } from "@/components/CaptureAttribution";
 import { SiteTracking } from "@/components/SiteTracking";
 import { AdPixels } from "@/components/AdPixels";
+import { ClarityTracker } from "@/components/ClarityTracker";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -109,6 +110,7 @@ export default function RootLayout({
             development and Vercel preview links never count as visits.
             Disclosed on /privacy; keep that page in step if this changes. */}
         {process.env.VERCEL_ENV === "production" && <AdPixels />}
+        {process.env.VERCEL_ENV === "production" && <ClarityTracker />}
         {process.env.VERCEL_ENV === "production" && (
           <Script id="apollo-tracker" strategy="afterInteractive">
             {`function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");

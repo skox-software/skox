@@ -1,4 +1,5 @@
 import { track as vercelTrack } from "@vercel/analytics";
+import Clarity from "@microsoft/clarity";
 import { leadEventId } from "@/lib/attribution";
 
 type Props = Record<string, string | number | boolean | null | undefined>;
@@ -42,6 +43,21 @@ function adConversion(name: string, props?: Props): void {
   }
 }
 
+/*
+ * Mark the recording too, so Clarity can filter by any site event. A lead's
+ * recording is kept in full and tagged with the same event id the lead email
+ * carries, so the session behind any enquiry can be found and replayed.
+ * A no-op unless ClarityTracker started Clarity on this page.
+ */
+function clarity(name: string): void {
+  if (!process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || !(window as { clarity?: unknown }).clarity) return;
+  Clarity.event(name);
+  if (name === "scope_request") {
+    Clarity.setTag("lead_event_id", leadEventId());
+    Clarity.upgrade("lead");
+  }
+}
+
 /**
  * Hand the lead's email to Google's tag for enhanced conversions, which hashes
  * it before it leaves the browser. It never goes to GA as an event parameter.
@@ -63,6 +79,7 @@ export function track(name: string, props?: Props): void {
       page: props?.page ?? window.location.pathname,
     });
     adConversion(name, props);
+    clarity(name);
   } catch {
     /* analytics never breaks the page */
   }
