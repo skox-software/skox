@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import type { Visitor } from "@/lib/visitor";
+import { requestOptedOut } from "@/lib/consent";
 
 const sha = (v: string) => createHash("sha256").update(v.trim().toLowerCase()).digest("hex");
 
@@ -18,7 +19,7 @@ export async function sendMetaLead(
   const token = process.env.META_CAPI_TOKEN;
   if (!pixel || !token) return;
   // Same opt-out the browser tag honours.
-  if (req.headers.get("sec-gpc") === "1") return;
+  if (requestOptedOut(req)) return;
 
   const [first, ...rest] = (lead.name ?? "").trim().split(/\s+/);
   const cookies = Object.fromEntries(

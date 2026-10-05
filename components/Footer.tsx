@@ -35,6 +35,12 @@ export function Footer() {
           >
             Privacy
           </Link>
+          <Link
+            href="/privacy#choices"
+            className="text-[14px] text-white/60 transition-colors hover:text-white"
+          >
+            Your Privacy Choices
+          </Link>
         </nav>
       </div>
       <div className="relative w-full max-w-[1800px] mx-auto mt-12 pt-6 border-t border-white/10">

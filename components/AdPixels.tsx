@@ -1,16 +1,17 @@
 import Script from "next/script";
+import { TRACKING_ALLOWED_JS } from "@/lib/consent";
 
 /*
  * Ad platform tags. Each one is off until its ID is set in Vercel, and all of
- * them stay off for visitors whose browser sends Global Privacy Control: under
- * California law an ad pixel counts as "sharing", and GPC is the opt-out we
- * honour automatically. Disclosed on /privacy; keep that page in step.
+ * them stay off for visitors who opted out (Global Privacy Control or the
+ * switch on /privacy; see lib/consent.ts): under several US state laws an ad
+ * pixel counts as "sharing", and these are the opt-outs we honour. Disclosed on /privacy; keep that page in step.
  */
 const META = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const GOOGLE_ADS = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 const LINKEDIN = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
 
-const GPC = "navigator.globalPrivacyControl!==true";
+const GPC = TRACKING_ALLOWED_JS;
 
 export function AdPixels() {
   return (

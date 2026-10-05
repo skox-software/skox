@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/content/site";
+import { PrivacyChoices } from "@/components/PrivacyChoices";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -37,7 +38,7 @@ export default function Privacy() {
               address), and your device type. If you use a business email
               address, we look up public information about the company at that
               domain, such as its industry, size and location, through Apollo.io.
-              None of this is collected from people who never contact us.
+              This summary is only put together when you contact us.
             </Block>
 
             <Block title="Enquiries you don’t finish">
@@ -109,8 +110,8 @@ export default function Privacy() {
               link the recording of that visit to your enquiry so we can see
               how you found what you were looking for. Clarity sets cookies,
               and Microsoft processes this data under its own privacy
-              statement. Turning on Global Privacy Control in your browser
-              stops it, as does blocking third-party scripts or cookies.
+              statement. You can switch it off under “Your Privacy Choices”
+              below.
             </Block>
 
             <Block title="Advertising">
@@ -124,8 +125,8 @@ export default function Privacy() {
               platform; they cannot read the address itself. Under California
               law this may count as “sharing” personal information for
               advertising. You can opt out by turning on Global Privacy Control
-              in your browser, which this site honours automatically by not
-              loading these tags, or by emailing us. You can also manage ad
+              in your browser, which this site honours automatically, by using
+              the switch under “Your Privacy Choices” below, or by emailing us. You can also manage ad
               preferences in your Meta, Google and LinkedIn account settings.
             </Block>
 
@@ -134,12 +135,28 @@ export default function Privacy() {
               useful. Ask us to delete yours and we will, without asking why.
             </Block>
 
-            <Block title="Your choices">
-              You can ask what we hold about you, ask for it to be corrected, or
-              ask for it to be deleted, and you can opt out of the advertising
-              sharing described above. Email{" "}
+            <Block title="Your Privacy Choices" id="choices">
+              You can switch off the analytics, session recording and
+              advertising tools described above at any time. Your browser will
+              remember it, and the site works exactly the same either way.{" "}
+              <PrivacyChoices />
+            </Block>
+
+            <Block title="Your rights">
+              Wherever you live, you can ask what we hold about you, ask for it
+              to be corrected or deleted, or opt out of the advertising
+              measurement described above. Email{" "}
               <a href={`mailto:${site.email}`}>{site.email}</a> and we will
-              handle it ourselves.
+              handle it ourselves, usually within a few days and always within
+              45. We will never treat you differently for asking.
+            </Block>
+
+            <Block title="Global Privacy Control and Do Not Track">
+              If your browser sends a Global Privacy Control signal, we treat it
+              as a request to opt out and the tools above don’t load. Browsers
+              have stopped agreeing on what the older Do Not Track signal means,
+              so we don’t act on it separately; Global Privacy Control or the
+              switch above does the same job.
             </Block>
 
             <Block title="Children">
@@ -159,13 +176,15 @@ export default function Privacy() {
 
 function Block({
   title,
+  id,
   children,
 }: {
   title: string;
+  id?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section id={id}>
       <h2>{title}</h2>
       <p>{children}</p>
     </section>

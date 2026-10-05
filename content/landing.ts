@@ -283,7 +283,8 @@ export const landing = {
     "For example: a client portal where customers approve quotes.",
   formSubmit: "Get my price & timeline",
   formSubmitting: "Sending your request…",
-  formPrivacy: "We’ll only use your details to respond to your enquiry.",
+  formPrivacy:
+    "We save your answers as you go, so nothing’s lost if you get interrupted. Your details are used to reply to you and to see which of our ads work. We never sell them.",
   formError:
     "Your request hasn’t been delivered yet. Try again, or email us with the details below.",
   formEmail: "Email my project instead",

@@ -303,6 +303,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             <span>© {new Date().getFullYear()} SKOX</span>
             <span>Working with clients everywhere</span>
             <Link href="/privacy">Privacy</Link>
+            <Link href="/privacy#choices">Your Privacy Choices</Link>
             <a href="/portal">Client portal</a>
           </div>
         </div>
