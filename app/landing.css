@@ -3192,3 +3192,100 @@
     animation: none !important;
   }
 }
+
+/* ---------- Search: the H1's keyword line and the service-page detail ---------- */
+/* Set like the eyebrow so the slogan still reads as the headline; it is part of
+   the H1 so search engines read the phrase people actually search for. */
+.landing-page h1 .h1-keyword {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lp-muted);
+  margin-bottom: 14px;
+}
+.landing-page .topic-examples {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.landing-page .topic-examples article {
+  background: var(--lp-mist);
+  border-radius: var(--lp-r-card);
+  padding: 32px 24px;
+}
+.landing-page .topic-examples h3,
+.landing-page .topic-columns h3 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.023em;
+  margin-bottom: 12px;
+}
+.landing-page .topic-examples p,
+.landing-page .topic-columns p,
+.landing-page .topic-columns li {
+  color: var(--lp-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.landing-page .topic-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--lp-line);
+}
+.landing-page .topic-columns ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.landing-page .topic-columns li {
+  display: flex;
+  gap: 10px;
+}
+.landing-page .topic-columns li > span {
+  color: var(--lp-label);
+  flex-shrink: 0;
+}
+.landing-page .topic-columns p {
+  margin-bottom: 18px;
+}
+.landing-page .topic-related {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin-top: 48px;
+}
+.landing-page .topic-related a,
+.landing-page .footer-services a {
+  color: var(--lp-muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+.landing-page .topic-related a:hover,
+.landing-page .footer-services a:hover {
+  color: var(--lp-ink);
+}
+.landing-page .footer-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding: 28px 0;
+}
+@media (max-width: 900px) {
+  .landing-page .topic-examples,
+  .landing-page .topic-columns {
+    grid-template-columns: 1fr;
+  }
+  .landing-page .topic-columns {
+    gap: 32px;
+  }
+}

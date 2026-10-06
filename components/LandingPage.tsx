@@ -8,8 +8,10 @@ import { ConversionForm } from "@/components/ConversionForm";
 import { HeroComposer } from "@/components/HeroComposer";
 import { HeroFragments } from "@/components/HeroFragments";
 import { LandingTracking } from "@/components/LandingTracking";
+import { TopicSection } from "@/components/TopicSection";
 import { builds, landing, landingFaq, type BuildType } from "@/content/landing";
 import { site } from "@/content/site";
+import { topics, type Topic } from "@/content/topics";
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -35,8 +37,17 @@ function Words({ text, offset = 0 }: { text: string; offset?: number }) {
   ));
 }
 
-export function LandingPage({ variant }: { variant?: BuildType }) {
-  const chosen = builds.find((build) => build.id === variant);
+/** The search phrase that opens the homepage's H1. */
+const HOME_KEYWORD = "Custom software development";
+
+export function LandingPage({ topic }: { topic?: Topic }) {
+  const variant: BuildType | undefined = topic?.build;
+  const chosen = builds.find((build) => build.id === topic?.slug);
+  const headline = topic?.headline || chosen?.headline || landing.headline;
+  const accent = topic?.accent || chosen?.accent || landing.accent;
+  const intro = topic?.intro || chosen?.intro || landing.intro;
+  // A page's own questions first; the general ones still apply everywhere.
+  const faq = [...(topic?.faq ?? []), ...landingFaq];
   return (
     <div className="landing-page">
       <header className="site-header">
@@ -79,17 +90,16 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
                 {landing.eyebrow}
               </p>
               <h1 id="hero-title">
-                <Words text={chosen?.headline || landing.headline} />
+                {/* What people search for, said plainly, ahead of the slogan. */}
+                <span className="h1-keyword">{topic?.keyword ?? HOME_KEYWORD}</span>
+                <Words text={headline} />
                 <span className="accent">
                   <span className="accent-ink">
-                    <Words
-                      text={chosen?.accent || landing.accent}
-                      offset={(chosen?.headline || landing.headline).split(" ").length}
-                    />
+                    <Words text={accent} offset={headline.split(" ").length} />
                   </span>
                 </span>
               </h1>
-              <p className="hero-intro">{chosen?.intro || landing.intro}</p>
+              <p className="hero-intro">{intro}</p>
               <HeroComposer />
               <div className="hero-actions">
                 <a
@@ -138,6 +148,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             ))}
           </div>
         </div>
+        {topic && <TopicSection topic={topic} />}
         <CompareSection />
         <BuildSection variant={variant} />
         <section
@@ -241,10 +252,10 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
             </p>
           </div>
           <div className="faq-list rise">
-            {landingFaq.map((item, i) => (
+            {faq.map((item, i) => (
               <details key={item.q}>
                 <summary>
-                  <span className="faq-number">0{i + 1}</span>
+                  <span className="faq-number">{String(i + 1).padStart(2, "0")}</span>
                   {item.q}
                   <span className="faq-plus" aria-hidden>
                     +
@@ -299,6 +310,13 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
               Email us <Arrow />
             </a>
           </div>
+          <nav className="footer-services" aria-label="What we build">
+            {topics.map((t) => (
+              <Link key={t.slug} href={`/${t.slug}`}>
+                {t.keyword}
+              </Link>
+            ))}
+          </nav>
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} SKOX</span>
             <span>Working with clients everywhere</span>
@@ -324,7 +342,7 @@ export function LandingPage({ variant }: { variant?: BuildType }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: landingFaq.map((item) => ({
+            mainEntity: faq.map((item) => ({
               "@type": "Question",
               name: item.q,
               acceptedAnswer: { "@type": "Answer", text: item.a },

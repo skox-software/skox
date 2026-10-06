@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LandingPage } from "@/components/LandingPage";
-import { builds } from "@/content/landing";
+import { site } from "@/content/site";
+import { topicBySlug, topics } from "@/content/topics";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return builds.map((build) => ({ service: build.id }));
+  return topics.map((topic) => ({ service: topic.slug }));
 }
 export async function generateMetadata({
   params,
@@ -13,20 +14,20 @@ export async function generateMetadata({
   params: Promise<{ service: string }>;
 }): Promise<Metadata> {
   const { service } = await params;
-  const build = builds.find((item) => item.id === service);
-  if (!build) return {};
+  const topic = topicBySlug(service);
+  if (!topic) return {};
   return {
-    title: `Custom ${build.label.toLowerCase()}, built at speed`,
-    description: build.intro,
-    alternates: { canonical: `/${service}` },
+    title: topic.title,
+    description: topic.description,
+    alternates: { canonical: `/${topic.slug}` },
     openGraph: {
-      title: `SKOX — ${build.headline} ${build.accent}`,
-      description: build.intro,
-      url: `/${service}`,
+      title: `${topic.keyword} — SKOX`,
+      description: topic.description,
+      url: `/${topic.slug}`,
     },
     twitter: {
-      title: `SKOX — ${build.headline} ${build.accent}`,
-      description: build.intro,
+      title: `${topic.keyword} — SKOX`,
+      description: topic.description,
     },
   };
 }
@@ -36,7 +37,38 @@ export default async function ServicePage({
   params: Promise<{ service: string }>;
 }) {
   const { service } = await params;
-  const build = builds.find((item) => item.id === service);
-  if (!build) notFound();
-  return <LandingPage variant={build.id} />;
+  const topic = topicBySlug(service);
+  if (!topic) notFound();
+  const url = `${site.url}/${topic.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: topic.keyword,
+        serviceType: topic.serviceType,
+        description: topic.description,
+        url,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: { "@type": "Country", name: "United States" },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: site.name, item: site.url },
+          { "@type": "ListItem", position: 2, name: topic.name, item: url },
+        ],
+      },
+    ],
+  };
+  return (
+    <>
+      <LandingPage topic={topic} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </>
+  );
 }

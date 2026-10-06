@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { builds } from "@/content/landing";
 import { site } from "@/content/site";
+import { topics } from "@/content/topics";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -11,8 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    ...builds.map((build) => ({
-      url: `${site.url}/${build.id}`,
+    ...topics.map((topic) => ({
+      url: `${site.url}/${topic.slug}`,
+      lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),

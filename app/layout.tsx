@@ -10,6 +10,8 @@ import { ClarityTracker } from "@/components/ClarityTracker";
 import { TRACKING_ALLOWED_JS } from "@/lib/consent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/content/site";
+import { landing } from "@/content/landing";
+import { topics } from "@/content/topics";
 import "./globals.css";
 import "./landing.css";
 
@@ -36,7 +38,7 @@ const serif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: `Custom software development: web apps, dashboards & websites — ${site.name}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
@@ -53,6 +55,14 @@ export const metadata: Metadata = {
     description: site.description,
   },
   robots: { index: true, follow: true },
+  // Search Console and Bing Webmaster Tools ownership tags. Set the codes in
+  // Vercel; until then nothing is printed.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 export const viewport: Viewport = {
@@ -62,25 +72,45 @@ export const viewport: Viewport = {
 /* Google Analytics 4 measurement ID (G-…). Unset means no Google tag at all. */
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+/* Who SKOX is, for search engines and AI answers. Service pages add their own
+   Service and BreadcrumbList that point back at #organization. No address:
+   the location stays private. */
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "ProfessionalService",
+      "@id": `${site.url}/#organization`,
       name: site.name,
       description: site.description,
       url: site.url,
       email: site.email,
-      areaServed: "US",
-      serviceType: [
-        "Custom software development",
-        "Business intelligence dashboards",
-        "Website design and development",
-      ],
-      founder: [
-        { "@type": "Person", name: "Joshua Fox" },
-        { "@type": "Person", name: "Reiss Skeen" },
-      ],
+      logo: `${site.url}/icon.png`,
+      image: `${site.url}/opengraph-image`,
+      slogan: "Built at speed.",
+      areaServed: { "@type": "Country", name: "United States" },
+      knowsAbout: topics.map((t) => t.serviceType),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "What we build",
+        itemListElement: topics.map((t) => ({
+          "@type": "Offer",
+          itemOffered: { "@id": `${site.url}/${t.slug}#service` },
+        })),
+      },
+      founder: landing.founders.map((f) => ({
+        "@type": "Person",
+        name: f.name,
+        jobTitle: f.role.replace(/^Co-founder · /, "Co-founder, "),
+        image: `${site.url}${f.photo}`,
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      publisher: { "@id": `${site.url}/#organization` },
     },
   ],
 };
