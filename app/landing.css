@@ -3289,3 +3289,29 @@
     gap: 32px;
   }
 }
+
+/* ---- Links into the examples and trade pages ---- */
+.landing-page .build-examples {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 450;
+  color: var(--lp-amber-ink);
+}
+.landing-page .build-examples:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.landing-page .footer-trades {
+  padding-top: 0;
+  align-items: baseline;
+}
+.landing-page .footer-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lp-label);
+}

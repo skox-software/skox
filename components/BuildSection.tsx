@@ -1,8 +1,15 @@
 "use client";
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { track } from "@/lib/track";
 import { BuildPreview } from "@/components/BuildPreview";
 import { builds, landing, type BuildType } from "@/content/landing";
+
+/** Where each build's working examples live. Websites have none yet. */
+const EXAMPLE_PAGES: Partial<Record<BuildType, string>> = {
+  dashboards: "/dashboard-examples",
+  "web-apps": "/internal-tool-examples",
+};
 
 /**
  * "What we build" — the demo and the three build cards, sharing one selection.
@@ -88,6 +95,11 @@ export function BuildSection({ variant }: { variant?: BuildType }) {
               <strong>{build.timeline}</strong>
               <span>{build.note}</span>
             </div>
+            {EXAMPLE_PAGES[build.id] && (
+              <Link className="build-examples" href={EXAMPLE_PAGES[build.id]!} data-cta={`examples-${build.id}`}>
+                Try four working examples <span aria-hidden="true">→</span>
+              </Link>
+            )}
             <a
               className="build-link"
               href={variant === build.id ? "#scope" : `/${build.id}#scope`}

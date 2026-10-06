@@ -25,6 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     {
+      url: `${site.url}/examples`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${site.url}/internal-tool-examples`,
       lastModified: now,
       changeFrequency: "monthly",

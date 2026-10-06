@@ -12,6 +12,7 @@ import { TopicSection } from "@/components/TopicSection";
 import { builds, landing, landingFaq, type BuildType } from "@/content/landing";
 import { site } from "@/content/site";
 import { topics, type Topic } from "@/content/topics";
+import { trades } from "@/content/trades";
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -58,6 +59,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           <nav aria-label="Main navigation">
             <a href="#why">Why SKOX</a>
             <a href="#build">What we build</a>
+            <Link href="/examples">Examples</Link>
             <a href="#process">How it works</a>
             <a href="#about">Who we are</a>
           </nav>
@@ -314,6 +316,16 @@ export function LandingPage({ topic }: { topic?: Topic }) {
             {topics.map((t) => (
               <Link key={t.slug} href={`/${t.slug}`}>
                 {t.keyword}
+              </Link>
+            ))}
+            <Link href="/examples">Examples you can try</Link>
+            <Link href="/scorecard">Free Monday scorecard</Link>
+          </nav>
+          <nav className="footer-services footer-trades" aria-label="Built for">
+            <span className="footer-label">Built for</span>
+            {trades.map((t) => (
+              <Link key={t.slug} href={`/for/${t.slug}`}>
+                {t.name}
               </Link>
             ))}
           </nav>
