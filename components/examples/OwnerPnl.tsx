@@ -37,7 +37,7 @@ const CHANNELS = [
   { name: "Door hangers", c: "#ef6b6b", v: [142, 139, 150, 146, 151, 158, 161, 156, 149, 153, 160, 165] },
 ];
 const COSTS_RAW = [
-  { name: "Technician labour", v: 912000, c: "#7c83ff" },
+  { name: "Technician labor", v: 912000, c: "#7c83ff" },
   { name: "Products & materials", v: 386000, c: "#a77cf5" },
   { name: "Fleet & fuel", v: 268000, c: "#d773e0" },
   { name: "Marketing", v: 214000, c: "#f2c94c" },

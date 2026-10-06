@@ -73,7 +73,7 @@ export function CrewOps() {
               <span className="chip-amber">82%</span>
             </div>
             <div className="chip-wide">
-              <small>Crew utilisation</small>
+              <small>Crew utilization</small>
               <span className="chip-stripe">
                 <b style={{ width: "71%" }}>71%</b>
               </span>

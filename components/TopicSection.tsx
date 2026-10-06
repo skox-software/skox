@@ -66,6 +66,11 @@ export function TopicSection({ topic }: { topic: Topic }) {
               Dashboard examples <span aria-hidden="true">→</span>
             </Link>
           )}
+          {(topic.slug === "internal-tools" || topic.slug === "customer-portals" || topic.slug === "web-apps") && (
+            <Link href="/internal-tool-examples">
+              Internal tool examples <span aria-hidden="true">→</span>
+            </Link>
+          )}
           {related.map((t) => (
             <Link key={t.slug} href={`/${t.slug}`}>
               {t.keyword} <span aria-hidden="true">→</span>

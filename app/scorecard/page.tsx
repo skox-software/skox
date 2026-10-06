@@ -7,7 +7,7 @@ import "./scorecard.css";
 export const metadata: Metadata = {
   title: "Free Monday Locations Scorecard for service businesses",
   description:
-    "A free Excel and Google Sheets template that puts every location side by side: revenue, jobs, labour and ad spend against your own targets, and flags who's slipping.",
+    "A free Excel and Google Sheets template that puts every location side by side: revenue, jobs, labor and ad spend against your own targets, and flags who's slipping.",
   alternates: { canonical: "/scorecard" },
   openGraph: {
     title: "Free Monday Locations Scorecard",
@@ -18,20 +18,20 @@ export const metadata: Metadata = {
 
 /* The template's own sample data, week of Sep 28 2026. Invented, and labelled so. */
 const SAMPLE = [
-  { name: "Northside", revenue: "$18,300", target: "+1.7%", labour: "30.1%", watch: "On track", ok: true },
+  { name: "Northside", revenue: "$18,300", target: "+1.7%", labor: "30.1%", watch: "On track", ok: true },
   {
     name: "Downtown",
     revenue: "$19,550",
     target: "−11.1%",
-    labour: "34.8%",
-    watch: "Below revenue target. Labour over target. Booked jobs costing too much.",
+    labor: "34.8%",
+    watch: "Below revenue target. Labor over target. Booked jobs costing too much.",
     ok: false,
   },
-  { name: "Riverside", revenue: "$14,950", target: "+6.8%", labour: "37.7%", watch: "Labour over target.", ok: false },
+  { name: "Riverside", revenue: "$14,950", target: "+6.8%", labor: "37.7%", watch: "Labor over target.", ok: false },
 ];
 
 const INSIDE = [
-  { title: "Setup", body: "Your locations and a weekly target for each: revenue, labour, cost per booked job, close rate." },
+  { title: "Setup", body: "Your locations and a weekly target for each: revenue, labor, cost per booked job, close rate." },
   { title: "Weekly input", body: "One row per location each Monday, from your job software, payroll and ad accounts." },
   { title: "Scorecard", body: "Every location side by side against its targets and last week, with a plain-English Watch column." },
   { title: "Trend", body: "Eight weeks of revenue and booked jobs per location, so you see a slide before the bank does." },
@@ -53,11 +53,11 @@ export default function ScorecardPage() {
             <h1>Every location, side by side.</h1>
             <p className="scorecard-intro">
               A free Monday scorecard for service businesses with more than one location, territory or crew. Revenue,
-              jobs, labour and ad spend against your own targets, in about ten minutes a week.
+              jobs, labor and ad spend against your own targets, in about ten minutes a week.
             </p>
             <ul className="scorecard-points">
               <li>See which location is slipping, and why, in one table.</li>
-              <li>Cost per booked job and labour % for every location.</li>
+              <li>Cost per booked job and labor % for every location.</li>
               <li>Eight-week trend, so a slide shows up before the bank statement.</li>
             </ul>
           </div>
@@ -76,7 +76,7 @@ export default function ScorecardPage() {
                   <th scope="col">Location</th>
                   <th scope="col">Revenue</th>
                   <th scope="col">vs target</th>
-                  <th scope="col">Labour %</th>
+                  <th scope="col">Labor %</th>
                   <th scope="col">Watch</th>
                 </tr>
               </thead>
@@ -86,7 +86,7 @@ export default function ScorecardPage() {
                     <th scope="row">{row.name}</th>
                     <td>{row.revenue}</td>
                     <td className={row.target.startsWith("−") ? "is-bad" : "is-good"}>{row.target}</td>
-                    <td>{row.labour}</td>
+                    <td>{row.labor}</td>
                     <td className={row.ok ? "is-good" : "is-bad"}>{row.watch}</td>
                   </tr>
                 ))}

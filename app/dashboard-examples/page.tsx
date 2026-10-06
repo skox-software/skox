@@ -57,7 +57,7 @@ const EXAMPLES = [
     for: "A landscaping company with trucks, mowers and trailers that wants fuel, battery and engine health per unit, with alerts to the crew lead.",
     connects: "Telematics, equipment sensors, service log, text alerts",
     style: "Slate and green, builder layout",
-    try: "Switch units, pick a widget, then change its colour and labels in the inspector.",
+    try: "Switch units, pick a widget, then change its color and labels in the inspector.",
     Component: FleetMonitor,
   },
 ];

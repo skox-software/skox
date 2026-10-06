@@ -151,7 +151,7 @@ export function FleetMonitor() {
                 ))}
               </svg>
             ) : (
-              <p className="fl-empty">No engine on this unit. Swap the widget for brake and tyre checks.</p>
+              <p className="fl-empty">No engine on this unit. Swap the widget for brake and tire checks.</p>
             )}
           </article>
         </div>
@@ -170,13 +170,13 @@ export function FleetMonitor() {
           </ul>
           <div className="fl-panel-head">Inspector · {selected}</div>
           <div className="fl-inspect">
-            <span className="fl-prop">Accent colour</span>
+            <span className="fl-prop">Accent color</span>
             <div className="fl-swatches">
               {SWATCHES.map((c) => (
                 <button
                   key={c}
                   style={{ background: c }}
-                  aria-label={`Set colour ${c}`}
+                  aria-label={`Set color ${c}`}
                   aria-pressed={colors[selected] === c}
                   onClick={() => setColors((x) => ({ ...x, [selected]: c }))}
                 />
