@@ -30,6 +30,15 @@ export default function Privacy() {
               parameters in the link are recorded alongside it.
             </Block>
 
+            <Block title="The free scorecard">
+              If you request the Monday Locations Scorecard, we collect your
+              email address and, if you give them, your first name and how many
+              locations you run. We use them to email you the download link and,
+              at most, one personal note from a founder about it. The same
+              visit details described below arrive with the request. We never
+              add you to a newsletter or a sales sequence.
+            </Block>
+
             <Block title="What arrives with an enquiry">
               When you send an enquiry, or leave one unfinished as described
               below, it also carries: the pages you viewed on this site during

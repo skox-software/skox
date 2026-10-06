@@ -36,6 +36,12 @@ function adConversion(name: string, props?: Props): void {
     if (ads) gtag("event", "conversion", { send_to: ads, transaction_id: eventID });
     const li = process.env.NEXT_PUBLIC_LINKEDIN_LEAD_CONVERSION_ID;
     if (li) w.lintrk?.("track", { conversion_id: Number(li) });
+  } else if (name === "scorecard_download") {
+    // A template download, not an enquiry. Kept off Meta's `Lead` so the
+    // scope-call retargeting can still reach the people who downloaded it.
+    w.fbq?.("track", "CompleteRegistration", { content_name: "scorecard" }, { eventID: leadEventId() });
+    const ads = process.env.NEXT_PUBLIC_GOOGLE_ADS_SCORECARD_LABEL;
+    if (ads) gtag("event", "conversion", { send_to: ads, transaction_id: leadEventId() });
   } else if (name === "email_click" || name === "phone_click") {
     w.fbq?.("track", "Contact");
   } else if (name === "scope_form_started") {

@@ -61,6 +61,11 @@ export function TopicSection({ topic }: { topic: Topic }) {
       {related.length > 0 && (
         <nav className="topic-related rise" aria-label="Related builds">
           <p className="micro">Related</p>
+          {topic.build === "dashboards" && (
+            <Link href="/dashboard-examples">
+              Dashboard examples <span aria-hidden="true">→</span>
+            </Link>
+          )}
           {related.map((t) => (
             <Link key={t.slug} href={`/${t.slug}`}>
               {t.keyword} <span aria-hidden="true">→</span>
