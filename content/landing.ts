@@ -234,9 +234,15 @@ export const landing = {
       bio: "Co-founded FocusTap and led its technical build and product strategy. Turns business problems into practical software, from the first workflow to the finished product.",
     },
   ],
-  workEyebrow: "Products we’ve built",
-  workSub: "Our own products, from idea to working software.",
+  workEyebrow: "What we’ve built",
+  workSub: "Client work and our own products, from idea to live.",
   projects: [
+    {
+      name: "Lorenzen Motors",
+      type: "Client site",
+      body: "The website for an independent Mercedes-Benz specialist in St. Augustine, Florida.",
+      url: "https://lorenzenmotors.com",
+    },
     {
       name: "Tender",
       type: "Marketplace",
@@ -247,7 +253,12 @@ export const landing = {
       type: "Focus tool",
       body: "A focus product taken from the initial idea through product strategy and engineering.",
     },
-  ],
+  ] as { name: string; type: string; body: string; url?: string }[],
+  pipeline: {
+    count: "4",
+    label: "builds in the pipeline right now",
+    cta: "Get yours in line",
+  },
   faqEyebrow: "05 / Good questions",
   faqTitle: "A few things, upfront.",
   formEyebrow: "Let’s build something useful",

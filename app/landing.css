@@ -1958,7 +1958,7 @@
 }
 .landing-page .products-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-top: 40px;
 }
@@ -1992,6 +1992,60 @@
   color: var(--lp-label);
   letter-spacing: 0.1em;
   font-weight: 400;
+}
+.landing-page .products-row .project-link {
+  margin-top: 8px;
+  min-height: 0;
+  font-size: 14px;
+  color: var(--lp-amber-ink);
+}
+/* The pipeline teaser: a full-width row under the project cards. */
+.landing-page .pipeline-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px;
+  border: 1px solid var(--lp-line);
+  border-radius: var(--lp-r-card);
+  font-size: 16px;
+  color: var(--lp-ink);
+}
+.landing-page .pipeline-strip strong {
+  font-weight: 600;
+}
+.landing-page .pipeline-strip:hover {
+  border-color: var(--lp-amber);
+}
+.landing-page .pipeline-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lp-amber);
+  box-shadow: 0 0 0 4px rgba(228, 169, 7, 0.18);
+}
+.landing-page .pipeline-cta {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 10px;
+  font-weight: 450;
+  color: var(--lp-amber-ink);
+  white-space: nowrap;
+}
+@media (max-width: 1150px) {
+  .landing-page .products-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .landing-page .pipeline-strip {
+    flex-wrap: wrap;
+    padding: 18px 20px;
+  }
+  .landing-page .pipeline-cta {
+    margin-left: 24px;
+  }
 }
 .landing-page .faq-section {
   display: grid;

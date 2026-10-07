@@ -231,8 +231,33 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                     <span>{project.type}</span>
                   </h3>
                   <p>{project.body}</p>
+                  {project.url && (
+                    <a
+                      className="text-link project-link"
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener"
+                      data-cta="project-link"
+                    >
+                      {project.url.replace(/^https?:\/\//, "")} <Arrow />
+                    </a>
+                  )}
                 </article>
               ))}
+              <a
+                className="pipeline-strip"
+                href="#scope"
+                data-cta="pipeline"
+              >
+                <span className="pipeline-dot" aria-hidden="true" />
+                <span>
+                  <strong>{landing.pipeline.count}</strong>{" "}
+                  {landing.pipeline.label}
+                </span>
+                <span className="pipeline-cta">
+                  {landing.pipeline.cta} <Arrow />
+                </span>
+              </a>
             </div>
           </div>
         </section>
