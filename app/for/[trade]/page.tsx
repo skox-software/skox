@@ -132,6 +132,9 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
               </ul>
             </div>
             <p className="tr-call">
+              Focused builds start at {STARTING_PRICE}. <a href="#own">See how that compares ↓</a>
+            </p>
+            <p className="tr-call">
               Rather talk now? Call <a href={site.phone.href}>{site.phone.display}</a>
             </p>
           </div>
