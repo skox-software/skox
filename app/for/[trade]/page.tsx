@@ -8,6 +8,7 @@ import { ConversionForm } from "@/components/ConversionForm";
 import { LandingTracking } from "@/components/LandingTracking";
 import { TradeStickyBar } from "@/components/TradeStickyBar";
 import { ExampleUseTracker } from "@/components/ExampleUseTracker";
+import { OwnVsRent } from "@/components/OwnVsRent";
 import { ShowcaseFrame } from "@/components/examples/Showcase";
 import { CrewOps } from "@/components/examples/CrewOps";
 import { RevenueBookings } from "@/components/examples/RevenueBookings";
@@ -44,6 +45,11 @@ const ALONGSIDE_FAQ = {
   q: "Do we have to replace the software we already use?",
   a: "No. If your current software allows a connection, such as an API or an export, we build alongside it. If it doesn't, or it's holding you back, we can replace it. We confirm which during the free scope call, before you pay anything.",
 };
+/** T09, Josh 2026-10-14: the "custom means expensive" objection. */
+const COST_FAQ = {
+  q: "Isn't custom software expensive?",
+  a: "Not the way it used to be. Two founders build it, so there are no account managers or hourly billing in the price, and you get a fixed price in writing before you pay anything. Start with the one tool that hurts most: a focused build, not a six-figure project.",
+};
 /** The homepage's own answers on cost and after-launch, word for word. */
 const SHARED_FAQ = landingFaq.filter((f) => f.q === "What does a project cost?" || f.q === "Can you help after launch?");
 
@@ -71,7 +77,7 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
   if (!trade) notFound();
   const Example = EXAMPLES[trade.example];
   const others = trades.filter((t) => t.slug !== trade.slug);
-  const faqs = [ALONGSIDE_FAQ, ...trade.faq, ...SHARED_FAQ];
+  const faqs = [COST_FAQ, ALONGSIDE_FAQ, ...trade.faq, ...SHARED_FAQ];
   const placeholder = trade.placeholder ?? `For example: ${trade.builds[0].title.replace(/^A /, "a ").toLowerCase()}.`;
 
   const faqLd = {
@@ -181,6 +187,22 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
               </a>
             </div>
           </div>
+        </section>
+
+        <section id="own" className="tr-own shell" aria-labelledby="own-title">
+          <div className="tr-own-copy">
+            <p className="eyebrow">Own it, don&apos;t rent it</p>
+            <h2 id="own-title">Custom doesn&apos;t mean a six-figure project anymore.</h2>
+            <p>
+              Two founders build it, so you&apos;re not paying for account managers or hourly billing. You get a fixed
+              price in writing before you pay anything, and you own what we build.
+            </p>
+            <p>
+              Subscription apps charge you every month, per user, for features built for someone else. A build you own
+              is priced once, built around how you work, and yours to keep. Care plans are optional.
+            </p>
+          </div>
+          <OwnVsRent build={trade.build} />
         </section>
 
         <section id="build" className="tr-build shell" aria-labelledby="build-title">

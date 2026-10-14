@@ -564,3 +564,165 @@
     transition: none;
   }
 }
+
+/* own vs rent */
+.trade-page .tr-own {
+  padding-block: 64px;
+  border-top: 1px solid var(--lp-line);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: start;
+}
+.trade-page .tr-own h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.8vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin-top: 10px;
+}
+.trade-page .tr-own-copy p:not(.eyebrow) {
+  margin-top: 14px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--lp-muted);
+}
+.trade-page .tr-rent {
+  padding: 26px;
+  border-radius: var(--lp-r-card);
+  background: var(--lp-fog);
+  display: grid;
+  gap: 18px;
+}
+.trade-page .tr-rent-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.trade-page .tr-rent-inputs label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--lp-muted);
+}
+.trade-page .tr-rent-inputs input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  font-size: 18px;
+  border: 1px solid var(--lp-line);
+  border-radius: 12px;
+  background: var(--lp-canvas);
+  color: var(--lp-ink);
+}
+.trade-page .tr-rent-money {
+  position: relative;
+  display: block;
+}
+.trade-page .tr-rent-money > span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--lp-muted);
+}
+.trade-page .tr-rent-money input {
+  padding-left: 30px;
+}
+.trade-page .tr-rent fieldset {
+  grid-column: 1 / -1;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--lp-muted);
+}
+.trade-page .tr-rent fieldset legend {
+  float: left;
+  margin-right: 4px;
+}
+.trade-page .tr-rent fieldset button {
+  min-height: 40px;
+  padding: 6px 16px;
+  border-radius: var(--lp-r-pill);
+  border: 1px solid var(--lp-line);
+  background: var(--lp-canvas);
+  color: var(--lp-ink);
+  font-size: 14px;
+}
+.trade-page .tr-rent fieldset button[aria-pressed="true"] {
+  background: var(--lp-ink);
+  border-color: var(--lp-ink);
+  color: #f6f4ee;
+}
+.trade-page .tr-rent-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.trade-page .tr-rent-result > div {
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--lp-canvas);
+}
+.trade-page .tr-rent-result .is-own {
+  background: var(--lp-ink);
+  color: #f6f4ee;
+}
+.trade-page .tr-rent-result strong {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.05;
+}
+.trade-page .tr-rent-result p:not(.micro) {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--lp-muted);
+}
+.trade-page .tr-rent-result .is-own p:not(.micro) {
+  color: #c9c7bd;
+}
+.trade-page .tr-rent-result .is-own .micro {
+  color: var(--lp-amber);
+}
+.trade-page .tr-rent-note {
+  font-size: 13px;
+  color: var(--lp-label);
+}
+.trade-page .tr-rent > .button {
+  justify-self: start;
+}
+@media (max-width: 960px) {
+  .trade-page .tr-own {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+@media (max-width: 560px) {
+  .trade-page .tr-rent {
+    padding: 18px;
+  }
+  .trade-page .tr-rent-inputs,
+  .trade-page .tr-rent-result {
+    grid-template-columns: 1fr;
+  }
+  .trade-page .tr-rent > .button {
+    justify-self: stretch;
+  }
+}
+@media (max-width: 360px) {
+  .trade-page .tr-sticky .button {
+    padding-inline: 14px;
+    font-size: 15px;
+    gap: 8px;
+  }
+}
