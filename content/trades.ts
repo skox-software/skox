@@ -153,28 +153,30 @@ export const trades: Trade[] = [
     slug: "landscaping",
     name: "Lawn & landscaping",
     company: "a landscaping company",
-    keyword: "Landscaping fleet and equipment dashboards",
-    title: "Landscaping fleet dashboards, built at speed",
+    // Leads with what "landscaping software" searchers want: running the
+    // company. Fleet health stays as the live example, one part of it.
+    keyword: "Custom landscaping software",
+    title: "Custom landscaping software, built at speed",
     description:
-      "Custom fleet and equipment dashboards for landscaping companies: fuel, battery and engine health per truck and mower, with alerts to the crew lead. Fixed price agreed upfront.",
+      "Custom software for landscaping companies: crews, routes, equipment and job costs in one place, built around how you already work. Fixed price and delivery date agreed upfront.",
     intro:
-      "Fuel, battery and engine health for every truck, mower and trailer, with alerts going to the crew lead before a unit fails on a job. Fixed price and delivery date agreed in writing before you pay.",
-    build: "dashboards",
+      "Built around how your company actually runs: crews, routes, equipment and what each property really costs you. Start with the part that hurts most. Fixed price and delivery date agreed in writing before you pay.",
+    build: "web-apps",
     example: "fleet-monitor",
-    exampleTitle: "Fleet and equipment health",
+    exampleTitle: "One piece of it: fleet and equipment health",
     exampleTry: "Switch units, pick a widget, then change its color and labels in the inspector.",
     pains: [
+      { title: "The day lives in five apps and a whiteboard.", body: "Crews, routes, equipment and changes never sit in one place, so the office spends the morning on the phone." },
       { title: "A mower dies on site and a crew stands still.", body: "Equipment problems surface when a crew calls in, not when the warning signs started." },
-      { title: "Service schedules live on a whiteboard.", body: "Oil changes, blades and brake checks get missed in peak season because nobody owns the list." },
-      { title: "Fuel spend climbs and nobody knows why.", body: "Cards, receipts and telematics never meet, so you can't see which unit is burning money." },
+      { title: "You can't tell which properties make money.", body: "Hours, fuel and materials never meet the contract price, so underpriced accounts hide until year end." },
     ],
     builds: [
-      { title: "A fleet and equipment dashboard", body: "Fuel, battery, engine hours and temperature per unit, with alerts sent to the crew lead." },
-      { title: "A service log that nags", body: "Every unit's maintenance schedule, with reminders before a check is due." },
-      { title: "A fuel and cost view", body: "Spend per truck and mower, so the expensive units stand out." },
+      { title: "A fleet and equipment dashboard", body: "Fuel, battery, engine hours and service due per truck and mower, with alerts sent to the crew lead." },
+      { title: "A crew and route board", body: "Who is on which property today and in what order, with changes sent to the crew lead's phone." },
+      { title: "A job-costing view", body: "Hours, fuel and materials against what you charge, per property, so the underpriced ones stand out." },
     ],
-    connects: "Telematics, equipment sensors, fuel cards, service log, text alerts",
-    faq: [DASH_FAQ, CONNECT_FAQ, OWN_FAQ],
+    connects: "Scheduling and invoicing software, telematics, fuel cards, text alerts",
+    faq: [TOOL_FAQ, CONNECT_FAQ, OWN_FAQ],
     more: DASH_MORE,
   },
   {

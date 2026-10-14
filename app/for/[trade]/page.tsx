@@ -4,6 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SkoxLogo } from "@/components/SkoxLogo";
 import { ConversionForm } from "@/components/ConversionForm";
+import { LandingTracking } from "@/components/LandingTracking";
+import { TradeStickyBar } from "@/components/TradeStickyBar";
+import { ExampleUseTracker } from "@/components/ExampleUseTracker";
 import { ShowcaseFrame } from "@/components/examples/Showcase";
 import { CrewOps } from "@/components/examples/CrewOps";
 import { RevenueBookings } from "@/components/examples/RevenueBookings";
@@ -90,11 +93,14 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
               <a href="#scope" className="button button-primary" data-cta="trade-hero">
                 {landing.cta} <span aria-hidden>↗</span>
               </a>
-              <a href="#example" className="button button-ghost">
+              <a href="#example" className="button button-ghost" data-cta="trade-hero-example">
                 Try the example <span aria-hidden>↓</span>
               </a>
             </div>
             <p className="tr-reassure">{landing.reassurance}</p>
+            <p className="tr-call">
+              Rather talk now? Call <a href={site.phone.href}>{site.phone.display}</a>
+            </p>
           </div>
           <ul className="tr-trust" aria-label="What you can count on">
             {landing.trust.map((t) => (
@@ -127,13 +133,29 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
               <strong>Try it:</strong> {trade.exampleTry}
             </p>
           </div>
-          <ShowcaseFrame label={`${trade.name} example`}>
-            <Example />
-          </ShowcaseFrame>
+          <ExampleUseTracker example={trade.example}>
+            <ShowcaseFrame label={`${trade.name} example`}>
+              <Example />
+            </ShowcaseFrame>
+          </ExampleUseTracker>
           <p className="tr-example-note">
             A concept with invented sample data, not a client&apos;s system. Yours is built around your numbers.{" "}
             <Link href={trade.more.href}>{trade.more.label} →</Link>
           </p>
+          <div className="tr-inline-cta">
+            <div>
+              <h3>Want yours built around how you work?</h3>
+              <p>{landing.reassurance}</p>
+            </div>
+            <div className="tr-inline-actions">
+              <a href="#scope" className="button button-primary" data-cta="trade-after-example">
+                {landing.cta} <span aria-hidden>↗</span>
+              </a>
+              <a href={site.phone.href} className="button button-ghost">
+                Call {site.phone.display}
+              </a>
+            </div>
+          </div>
         </section>
 
         <section id="build" className="tr-build shell" aria-labelledby="build-title">
@@ -223,9 +245,11 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
         </nav>
         <p>
           SKOX, an independent software studio · <a href={`mailto:${site.email}`}>{site.email}</a> ·{" "}
-          <Link href="/privacy">Privacy</Link>
+          <a href={site.phone.href}>{site.phone.display}</a> · <Link href="/privacy">Privacy</Link>
         </p>
       </footer>
+      <TradeStickyBar />
+      <LandingTracking />
     </div>
   );
 }

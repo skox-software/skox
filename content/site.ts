@@ -13,6 +13,8 @@ export const site = {
   description:
     "Custom web apps, dashboards and websites, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
   email: "founder@skoxsoftware.com",
+  /** The number on the Google ads' call asset. Shown on the trade pages. */
+  phone: { display: "(904) 792-0720", href: "tel:+19047920720" },
   /** The domain visitors land on (the bare domain redirects here), so canonicals, OG and the sitemap match. */
   url: "https://www.skoxsoftware.com",
   /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */

@@ -415,3 +415,100 @@
     white-space: normal;
   }
 }
+
+/* hero call line */
+.trade-page .tr-call {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--lp-muted);
+}
+.trade-page .tr-call a {
+  color: var(--lp-ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* the next step, right where interest peaks */
+.trade-page .tr-inline-cta {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 30px;
+  border-radius: var(--lp-r-card);
+  background: var(--lp-ink);
+  color: #f6f4ee;
+}
+.trade-page .tr-inline-cta h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.1;
+}
+.trade-page .tr-inline-cta p {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #c9c7bd;
+}
+.trade-page .tr-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.trade-page .tr-inline-cta .button-ghost {
+  color: #f6f4ee;
+  border-color: rgba(246, 244, 238, 0.4);
+}
+.trade-page .tr-inline-cta .button-ghost:hover {
+  background: #f6f4ee;
+  color: var(--lp-ink);
+}
+
+/* phones: the next step stays on screen */
+.trade-page .tr-sticky {
+  display: none;
+}
+@media (max-width: 760px) {
+  .trade-page {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+  .trade-page .tr-sticky {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--lp-canvas);
+    border-top: 1px solid var(--lp-line);
+    box-shadow: 0 -6px 24px rgba(20, 20, 18, 0.08);
+    transform: translateY(110%);
+    transition: transform 0.25s ease;
+  }
+  .trade-page .tr-sticky[data-shown="true"] {
+    transform: none;
+  }
+  .trade-page .tr-sticky .button {
+    justify-content: center;
+    min-height: 48px;
+  }
+  .trade-page .tr-inline-cta {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 22px;
+  }
+  .trade-page .tr-inline-actions .button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trade-page .tr-sticky {
+    transition: none;
+  }
+}
