@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SkoxLogo } from "@/components/SkoxLogo";
@@ -16,7 +17,7 @@ import { QuoteBuilder } from "@/components/tools/QuoteBuilder";
 import { DispatchBoard } from "@/components/tools/DispatchBoard";
 import { ApprovalPortal } from "@/components/tools/ApprovalPortal";
 import { TruckStock } from "@/components/tools/TruckStock";
-import { landing } from "@/content/landing";
+import { landing, landingFaq } from "@/content/landing";
 import { site } from "@/content/site";
 import { trades, tradeBySlug, type ExampleKey } from "@/content/trades";
 import "../../dashboard-examples/examples.css";
@@ -32,6 +33,19 @@ const EXAMPLES: Record<ExampleKey, ComponentType> = {
   "approval-portal": ApprovalPortal,
   "truck-stock": TruckStock,
 };
+
+/** C04 as claims.md asks: the deposit-free part is the call, not the build. */
+const REASSURANCE = "Free 30-minute scope call. No deposit for the call. No obligation.";
+/** T08: T06 + C07. A trade can override it (landscaping's intro already says "built around"). */
+const MECHANISM = "Built for your company, connected to the tools you already use. You own the code.";
+
+/** T07, Josh 2026-10-14. */
+const ALONGSIDE_FAQ = {
+  q: "Do we have to replace the software we already use?",
+  a: "No. If your current software allows a connection, such as an API or an export, we build alongside it. If it doesn't, or it's holding you back, we can replace it. We confirm which during the free scope call, before you pay anything.",
+};
+/** The homepage's own answers on cost and after-launch, word for word. */
+const SHARED_FAQ = landingFaq.filter((f) => f.q === "What does a project cost?" || f.q === "Can you help after launch?");
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -57,11 +71,13 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
   if (!trade) notFound();
   const Example = EXAMPLES[trade.example];
   const others = trades.filter((t) => t.slug !== trade.slug);
+  const faqs = [ALONGSIDE_FAQ, ...trade.faq, ...SHARED_FAQ];
+  const placeholder = trade.placeholder ?? `For example: ${trade.builds[0].title.replace(/^A /, "a ").toLowerCase()}.`;
 
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: trade.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
 
   return (
@@ -88,6 +104,7 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
             <h1>
               {trade.keyword}. <em>Built at speed.</em>
             </h1>
+            <p className="tr-mechanism">{trade.mechanism ?? MECHANISM}</p>
             <p className="tr-intro">{trade.intro}</p>
             <div className="tr-actions">
               <a href="#scope" className="button button-primary" data-cta="trade-hero">
@@ -97,7 +114,15 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
                 Try the example <span aria-hidden>↓</span>
               </a>
             </div>
-            <p className="tr-reassure">{landing.reassurance}</p>
+            <p className="tr-reassure">{REASSURANCE}</p>
+            <div className="tr-benefits">
+              <p>What you get from the free call:</p>
+              <ul>
+                {landing.formBenefits.map((benefit) => (
+                  <li key={benefit}>{benefit}</li>
+                ))}
+              </ul>
+            </div>
             <p className="tr-call">
               Rather talk now? Call <a href={site.phone.href}>{site.phone.display}</a>
             </p>
@@ -145,7 +170,7 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
           <div className="tr-inline-cta">
             <div>
               <h3>Want yours built around how you work?</h3>
-              <p>{landing.reassurance}</p>
+              <p>{REASSURANCE}</p>
             </div>
             <div className="tr-inline-actions">
               <a href="#scope" className="button button-primary" data-cta="trade-after-example">
@@ -172,6 +197,26 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
                 <span className="tr-num">{i === 0 ? "Shown above" : `Also`}</span>
                 <h3>{b.title}</h3>
                 <p>{b.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="tr-founders shell" aria-labelledby="founders-title">
+          <div className="tr-build-head">
+            <p className="eyebrow">Who you&apos;ll work with</p>
+            <h2 id="founders-title">{landing.teamTitle.replace("\n", " ")}</h2>
+            <p>{landing.teamSub}</p>
+          </div>
+          <div className="founder-grid">
+            {landing.founders.map((person) => (
+              <article className="founder-card" key={person.name}>
+                <Image src={person.photo} width={280} height={320} sizes="(max-width: 600px) 110px, 180px" alt={person.name} />
+                <div>
+                  <span className="micro">{person.role}</span>
+                  <h3>{person.name}</h3>
+                  <p>{person.bio}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -205,7 +250,7 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
         <section id="faq" className="tr-faq shell" aria-labelledby="faq-title">
           <h2 id="faq-title">Good questions</h2>
           <div>
-            {trade.faq.map((f) => (
+            {faqs.map((f) => (
               <details key={f.q}>
                 <summary>{f.q}</summary>
                 <p>{f.a}</p>
@@ -229,7 +274,7 @@ export default async function TradePage({ params }: { params: Promise<{ trade: s
                 ))}
               </ul>
             </div>
-            <ConversionForm initial={trade.build} />
+            <ConversionForm initial={trade.build} placeholder={placeholder} />
           </div>
         </section>
       </main>

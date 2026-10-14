@@ -416,6 +416,58 @@
   }
 }
 
+/* hero: what it is, then what the call gives you */
+.trade-page .tr-mechanism {
+  margin-top: 18px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--lp-ink);
+  max-width: 36em;
+}
+.trade-page .tr-mechanism + .tr-intro {
+  margin-top: 10px;
+}
+.trade-page .tr-benefits {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--lp-muted);
+}
+.trade-page .tr-benefits ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.trade-page .tr-benefits li {
+  display: flex;
+  gap: 10px;
+  color: var(--lp-ink);
+}
+.trade-page .tr-benefits li::before {
+  content: "✓";
+  color: var(--lp-amber-ink);
+  font-weight: 600;
+}
+
+/* founders */
+.trade-page .tr-founders {
+  padding-block: 64px;
+  border-top: 1px solid var(--lp-line);
+}
+.trade-page .tr-founders h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.8vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin-top: 10px;
+}
+.trade-page .tr-founders .founder-grid {
+  margin-top: 32px;
+}
+
 /* hero call line */
 .trade-page .tr-call {
   margin-top: 6px;

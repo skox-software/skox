@@ -286,7 +286,7 @@ export const landing = {
      makes that follow-up something the visitor was told about rather than
      something done to them. Reword it freely; do not remove it. */
   formReassure:
-    "One reply from a founder. No newsletter, no sales sequence. Once you enter your address we may follow up about this enquiry, even if you don’t finish the form.",
+    "One reply from a founder. No newsletter, no sales sequence. Once you enter your address we may follow up about this inquiry, even if you don’t finish the form.",
   /* Sits under the button: the click has a known consequence. */
   formNext:
     "Next: a reply within one business day to arrange your free 30-minute scope call.",

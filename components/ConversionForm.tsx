@@ -20,7 +20,7 @@ const TYPE_OPTIONS = [
   { value: "other", label: landing.formLabels.other },
 ];
 
-export function ConversionForm({ initial }: { initial?: BuildType }) {
+export function ConversionForm({ initial, placeholder }: { initial?: BuildType; placeholder?: string }) {
   const [lead, setLead] = useState<Lead>({
     name: "",
     email: "",
@@ -274,7 +274,7 @@ export function ConversionForm({ initial }: { initial?: BuildType }) {
           required
           rows={3}
           maxLength={4000}
-          placeholder={landing.formPlaceholder}
+          placeholder={placeholder ?? landing.formPlaceholder}
           value={lead.broken}
           onChange={change}
           onBlur={() => checkOne("broken")}

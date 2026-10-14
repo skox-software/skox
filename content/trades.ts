@@ -42,6 +42,10 @@ export type Trade = {
   faq: { q: string; a: string }[];
   /** Where the full set of examples lives. */
   more: { href: string; label: string };
+  /** Line under the H1. Defaults to the shared one in the page (claim T08). */
+  mechanism?: string;
+  /** Form example. Defaults to "For example: <first build>." */
+  placeholder?: string;
 };
 
 const DASH_MORE = { href: "/dashboard-examples", label: "See all four dashboard examples" };
@@ -164,7 +168,7 @@ export const trades: Trade[] = [
     build: "web-apps",
     example: "fleet-monitor",
     exampleTitle: "One piece of it: fleet and equipment health",
-    exampleTry: "Switch units, pick a widget, then change its color and labels in the inspector.",
+    exampleTry: "Tap the truck, mower or trailer and watch fuel, battery and engine temperature change.",
     pains: [
       { title: "The day lives in five apps and a whiteboard.", body: "Crews, routes, equipment and changes never sit in one place, so the office spends the morning on the phone." },
       { title: "A mower dies on site and a crew stands still.", body: "Equipment problems surface when a crew calls in, not when the warning signs started." },
@@ -178,6 +182,9 @@ export const trades: Trade[] = [
     connects: "Scheduling and invoicing software, telematics, fuel cards, text alerts",
     faq: [TOOL_FAQ, CONNECT_FAQ, OWN_FAQ],
     more: DASH_MORE,
+    // The intro already opens with "Built around how your company actually runs".
+    mechanism: "Connected to the tools you already use. You own the code and the accounts.",
+    placeholder: "For example: see which properties lose money.",
   },
   {
     slug: "roofing",
@@ -206,6 +213,7 @@ export const trades: Trade[] = [
     connects: "Aerial measurement reports, your price list, job software, e-signature",
     faq: [TOOL_FAQ, CONNECT_FAQ, OWN_FAQ],
     more: TOOL_MORE,
+    placeholder: "For example: turn our quote spreadsheet into a quote builder.",
   },
   {
     slug: "plumbing",
