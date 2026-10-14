@@ -726,3 +726,12 @@
     gap: 8px;
   }
 }
+
+.trade-page .tr-own-copy .tr-own-price {
+  font-size: 20px;
+  color: var(--lp-ink);
+}
+.trade-page .tr-own-price strong {
+  font-weight: 600;
+  color: var(--lp-amber-ink);
+}

@@ -12,10 +12,10 @@ const money = (n: number) =>
 
 /**
  * Rent vs. own, with the visitor's own numbers. It only multiplies what they
- * type in: no SKOX price, no assumed subscription price. The build side stays
- * "a fixed price, quoted in writing" until Josh sets a starting price.
+ * type in, with no assumed subscription price. The build side shows the public
+ * starting price (claim T11) and the fixed-price promise.
  */
-export function OwnVsRent({ build }: { build: BuildType }) {
+export function OwnVsRent({ build, startingPrice }: { build: BuildType; startingPrice: string }) {
   const id = useId();
   const [users, setUsers] = useState(8);
   const [perUser, setPerUser] = useState(40);
@@ -98,8 +98,8 @@ export function OwnVsRent({ build }: { build: BuildType }) {
         </div>
         <div className="is-own">
           <p className="micro">Owning, with SKOX</p>
-          <strong>One fixed price</strong>
-          <p>Quoted in writing before you pay. Built around how you work, and yours to keep. Care plan optional.</p>
+          <strong>From {startingPrice}</strong>
+          <p>One fixed price, quoted in writing before you pay. Built around how you work, and yours to keep. Care plan optional.</p>
         </div>
       </div>
 
