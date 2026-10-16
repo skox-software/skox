@@ -1,0 +1,684 @@
+/* McCaughey Properties concept. Everything is scoped under .mcc so the SKOX
+   site's own styles never leak in or out. Colours are lifted from the render:
+   blue-hour navy, the warm horizon, and the amber of the lit homes. */
+.mcc {
+  --ink: #f3ede4;
+  --ink-2: #b9b2a8;
+  --ink-3: #847d74;
+  --bg: #0b0d14;
+  --bg-2: #12151f;
+  --line: rgba(243, 237, 228, 0.12);
+  --amber: #ff8a3d;
+  --amber-2: #ffb37a;
+  --lake: #5f86c4;
+  --display: var(--font-mcc-display), Georgia, serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-geist), system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.mcc *,
+.mcc *::before,
+.mcc *::after {
+  box-sizing: border-box;
+}
+.mcc a {
+  color: inherit;
+}
+.mcc .shell {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+.mcc .skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.mcc .skip-link:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 8px 12px;
+}
+
+.mcc .concept-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 16px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: #05060a;
+  position: relative;
+  z-index: 30;
+}
+
+/* ---------- nav: floats over the flight */
+.mcc .nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 32px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.mcc .nav-mark {
+  font-family: var(--display);
+  font-size: 22px;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.mcc .nav-mark span {
+  font-style: italic;
+  color: var(--amber-2);
+}
+.mcc .nav-links {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+}
+.mcc .nav-links a {
+  text-decoration: none;
+  color: var(--ink-2);
+}
+.mcc .nav-links a:hover {
+  color: var(--ink);
+}
+
+/* ---------- buttons */
+.mcc .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  background: var(--amber);
+  color: #1b0d03;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid var(--amber);
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s, background 0.2s;
+}
+.mcc .btn:hover {
+  background: var(--amber-2);
+  transform: translateY(-1px);
+}
+.mcc .btn-ghost {
+  background: rgba(11, 13, 20, 0.4);
+  color: var(--ink);
+  border-color: rgba(243, 237, 228, 0.35);
+}
+.mcc .btn-ghost:hover {
+  background: rgba(243, 237, 228, 0.1);
+}
+.mcc .btn-sm {
+  padding: 9px 16px;
+  font-size: 14px;
+}
+
+.mcc .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber-2);
+  margin: 0 0 14px;
+}
+
+/* ---------- the flight */
+.mcc .flight {
+  height: 1400vh;
+  position: relative;
+  margin-top: -1px;
+}
+.mcc .flight-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.mcc .flight-canvas {
+  will-change: transform;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #1b2430;
+}
+.mcc .flight-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(8, 9, 14, 0.78) 0%, rgba(8, 9, 14, 0.25) 42%, transparent 60%),
+    linear-gradient(0deg, rgba(8, 9, 14, 0.6) 0%, transparent 30%);
+}
+
+.mcc .flight-copy {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mcc .chap {
+  position: absolute;
+  left: 0;
+  bottom: 12vh;
+  max-width: 520px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.mcc .chap.is-on {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.mcc .chap h1,
+.mcc .chap h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+.mcc .chap h1 {
+  font-size: clamp(48px, 8vw, 104px);
+  line-height: 0.95;
+}
+.mcc .chap h2 {
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1;
+}
+.mcc .lede {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0 0 24px;
+}
+.mcc .scroll-hint {
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mcc .scroll-hint::after {
+  content: "";
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(var(--amber), transparent);
+  animation: mcc-drip 1.8s ease-in-out infinite;
+}
+@keyframes mcc-drip {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.mcc .chap-card {
+  padding: 28px;
+  background: rgba(11, 13, 20, 0.86);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+/* The closing overview has Erin St bottom-left, so its copy sits right. */
+.mcc .chap-right {
+  left: auto;
+  right: 0;
+  text-align: right;
+}
+.mcc .chap-right .chap-actions {
+  justify-content: flex-end;
+}
+.mcc [data-chapter="outro"] .flight-vignette {
+  background:
+    linear-gradient(270deg, rgba(8, 9, 14, 0.78) 0%, rgba(8, 9, 14, 0.2) 42%, transparent 60%),
+    linear-gradient(0deg, rgba(8, 9, 14, 0.6) 0%, transparent 30%);
+}
+.mcc .chap-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mcc .facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+.mcc .facts li {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.mcc .facts b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.mcc .facts .is-rented,
+.mcc .is-rented {
+  color: var(--ink-3);
+}
+
+/* ---------- pins that ride on the render */
+.mcc .flight-pins {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mcc .pin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+.mcc .pin-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 6px rgba(255, 138, 61, 0.25), 0 0 24px var(--amber);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.4s, transform 0.4s;
+}
+.mcc .pin-capitol .pin-dot {
+  background: var(--ink);
+  box-shadow: 0 0 0 6px rgba(243, 237, 228, 0.18);
+}
+.mcc .pin-card {
+  position: absolute;
+  left: 18px;
+  top: -56px;
+  display: grid;
+  gap: 2px;
+  white-space: nowrap;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(11, 13, 20, 0.9);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--ink-2);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+/* Near the right edge the label opens to the left of the pin. */
+.mcc .pin-flip .pin-card {
+  left: auto;
+  right: 18px;
+  text-align: right;
+}
+.mcc .pin-card strong {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+.mcc .pin-card em {
+  font-style: normal;
+  color: var(--amber-2);
+  margin-left: 8px;
+}
+.mcc .pin-card em.is-rented {
+  color: var(--ink-3);
+}
+.mcc .pin.is-on .pin-dot {
+  opacity: 1;
+  transform: none;
+}
+.mcc .pin.is-on .pin-card {
+  opacity: 1;
+  transform: none;
+}
+
+/* The pin opens into the homes' own photos. Clip-path and transforms only,
+   so it stays on the compositor while scrolling. */
+.mcc .stop-photos {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  clip-path: circle(0 at 50% 50%);
+  background: #0b0d14;
+  will-change: clip-path;
+}
+.mcc .stop-photo {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+.mcc .stop-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+.mcc .stop-photo figcaption {
+  position: absolute;
+  right: 24px;
+  top: 96px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(11, 13, 20, 0.82);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+.mcc .facts .is-live {
+  border-color: rgba(255, 138, 61, 0.6);
+  color: var(--amber-2);
+}
+.mcc .flight-credit {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  margin: 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+.mcc .flight-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(243, 237, 228, 0.08);
+}
+.mcc .flight-progress span {
+  display: block;
+  height: 100%;
+  background: var(--amber);
+  transform-origin: left;
+}
+
+/* ---------- below the flight */
+.mcc .block {
+  padding: 120px 0 40px;
+}
+.mcc .block-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0 0 40px;
+}
+.mcc .listings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 24px;
+}
+.mcc .listing {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+}
+.mcc .listing-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+.mcc .listing-media img,
+.mcc .hood img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mcc .badge {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--amber);
+  color: #1b0d03;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mcc .badge.is-rented {
+  background: rgba(11, 13, 20, 0.8);
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+}
+.mcc .listing-body {
+  padding: 28px;
+}
+.mcc .listing-area {
+  color: var(--ink-3);
+  font-size: 13px;
+  margin: 0 0 6px;
+}
+.mcc .listing h3,
+.mcc .hood h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 32px;
+  margin: 0 0 16px;
+}
+.mcc .listing p,
+.mcc .hood p {
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.mcc .hoods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 24px;
+}
+.mcc .hood {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.mcc .hood img {
+  aspect-ratio: 16 / 9;
+}
+.mcc .hood-body {
+  padding: 28px;
+}
+.mcc .hood p {
+  margin: 0;
+}
+
+.mcc .about blockquote {
+  font-family: var(--display);
+  font-size: clamp(26px, 3.4vw, 44px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 920px;
+  text-wrap: pretty;
+}
+
+.mcc .residents {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  align-items: start;
+}
+.mcc .res-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.mcc .res {
+  display: grid;
+  gap: 6px;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.mcc .res:hover {
+  border-color: rgba(255, 138, 61, 0.6);
+}
+.mcc .res strong {
+  font-size: 17px;
+}
+.mcc .res span {
+  color: var(--ink-3);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.mcc .res-main {
+  grid-column: 1 / -1;
+  background: linear-gradient(120deg, rgba(255, 138, 61, 0.18), rgba(95, 134, 196, 0.12));
+}
+
+.mcc .showing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 120px;
+}
+.mcc .contact-lines {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.mcc .contact-lines a {
+  color: var(--ink);
+}
+.mcc .form {
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+}
+.mcc .form label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.mcc .form input,
+.mcc .form select {
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.mcc .form input:focus,
+.mcc .form select:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+}
+.mcc .form .btn {
+  justify-content: center;
+}
+.mcc .form-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.mcc .foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 32px 0 48px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+/* ---------- small screens */
+@media (max-width: 760px) {
+  .mcc .nav-links {
+    display: none;
+  }
+  .mcc .flight {
+    height: 1100vh;
+  }
+  .mcc .stop-photo figcaption {
+    top: 72px;
+    right: 16px;
+  }
+  .mcc .flight-vignette {
+    background: linear-gradient(0deg, rgba(8, 9, 14, 0.92) 0%, rgba(8, 9, 14, 0.55) 45%, transparent 70%);
+  }
+  .mcc .chap {
+    bottom: 6vh;
+    right: 0;
+  }
+  .mcc .chap-card {
+    padding: 20px;
+  }
+  .mcc .lede {
+    font-size: 16px;
+  }
+  .mcc .pin-card {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .mcc .residents,
+  .mcc .showing {
+    grid-template-columns: 1fr;
+  }
+  .mcc .res-grid {
+    grid-template-columns: 1fr;
+  }
+  .mcc .chap-right {
+    text-align: left;
+  }
+  .mcc .chap-right .chap-actions {
+    justify-content: flex-start;
+  }
+  .mcc [data-chapter="outro"] .flight-vignette {
+    background: linear-gradient(0deg, rgba(8, 9, 14, 0.92) 0%, rgba(8, 9, 14, 0.55) 45%, transparent 70%);
+  }
+  /* No room for labels under the closing copy on a phone. */
+  .mcc [data-chapter="outro"] .pin-card {
+    display: none;
+  }
+  .mcc .block {
+    padding-top: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcc .chap,
+  .mcc .pin-dot,
+  .mcc .pin-card {
+    transition: none;
+  }
+  .mcc .scroll-hint::after {
+    animation: none;
+  }
+}
