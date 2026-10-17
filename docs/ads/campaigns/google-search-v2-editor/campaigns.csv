@@ -1,0 +1,18 @@
+Campaign,Campaign Type,Campaign Status,Networks,Budget,Bid Strategy Type,Language,Location,Location ID,Final URL suffix,Ad Group,Ad Group Status,Max CPC
+"Search – Trades – US",Search,Paused,Google Search,6.50,Maximize clicks,en,,,"utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_content={adgroupid}&utm_term={keyword}",,,
+"Search – Services – US",Search,Paused,Google Search,3.30,Manual CPC,en,,,"utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_content={adgroupid}&utm_term={keyword}",,,
+"Search – Trades – US",,,,,,,United States,2840,,,,
+"Search – Services – US",,,,,,,United States,2840,,,,
+"Search – Trades – US",,,,,,,,,,HVAC,Enabled,
+"Search – Trades – US",,,,,,,,,,Pool service,Enabled,
+"Search – Trades – US",,,,,,,,,,Pest control,Enabled,
+"Search – Trades – US",,,,,,,,,,Landscaping,Enabled,
+"Search – Trades – US",,,,,,,,,,Roofing,Enabled,
+"Search – Trades – US",,,,,,,,,,Plumbing,Enabled,
+"Search – Trades – US",,,,,,,,,,Garage doors,Enabled,
+"Search – Trades – US",,,,,,,,,,Electrical,Enabled,
+"Search – Trades – US",,,,,,,,,,Multi-location dashboards,Enabled,
+"Search – Services – US",,,,,,,,,,Dashboards,Enabled,3.00
+"Search – Services – US",,,,,,,,,,Internal tools,Enabled,3.00
+"Search – Services – US",,,,,,,,,,Customer portals,Enabled,3.00
+"Search – Services – US",,,,,,,,,,Web apps,Enabled,3.00

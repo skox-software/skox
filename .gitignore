@@ -8,3 +8,8 @@ next-env.d.ts
 .diff/
 .env*
 .gstack/
+
+# Large local-only material: rendered videos, a separate client prototype repo, scraped lead data
+/output/
+/prototypes/
+/scripts/lead-scan/data/

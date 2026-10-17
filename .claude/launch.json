@@ -4,9 +4,63 @@
     {
       "name": "skox",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3100,
       "autoPort": true
+    },
+    {
+      "name": "skox-portal",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "/Users/josh/skox-portal",
+        "--port",
+        "3300"
+      ],
+      "port": 3300
+    },
+    {
+      "name": "portal-basepath-wip",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /private/tmp/skox-portal-checkout && PORT=3310 npm run dev"
+      ],
+      "port": 3310
+    },
+    {
+      "name": "creditsnitch",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/josh/creditsnitch && npm run dev"
+      ],
+      "port": 3400
+    },
+    {
+      "name": "skox-portal-dev",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/josh/skox-portal && PORT=3300 npm run dev"
+      ],
+      "port": 3300
+    },
+    {
+      "name": "advantage-osborne",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3500",
+        "--directory",
+        "output/advantage-osborne"
+      ],
+      "port": 3500
     }
   ]
 }
