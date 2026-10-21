@@ -122,7 +122,7 @@ The routine saves `preview_url` on the deal, sets `ready`, and posts to Reiss (S
 ### What has to be built, in order
 
 1. Portal: the columns above, the call-desk tap, a `GET /api/previews/queue` and `PATCH /api/previews/:dealId` guarded by a service secret, and the approve buttons on the deal note.
-2. Repo: lift the reusable concept components (concept bar, compare slider, estimate, order builder, credentials, video facade) into `app/concepts/_shared/` so a build is mostly data plus a few new sections.
+2. ~~Repo: lift the reusable concept components (concept bar, compare slider, estimate, order builder, credentials, video facade) into `app/concepts/_shared/` so a build is mostly data plus a few new sections.~~ Done 2026-10-21; Stage 3 of the master prompt now points at them.
 3. The routine: a scheduled Claude Code job that reads the queue and runs the master prompt with the deal's row as INPUT, in `research-only` then `full` mode depending on `preview_status`.
 4. The `preview_open` listener and the Reiss notification.
 

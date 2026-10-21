@@ -1,22 +1,30 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
-import AskForm from "./AskForm";
-import Compare from "./Compare";
-import Credentials from "./Credentials";
-import Video from "./Video";
-import Estimate from "./Estimate";
-import Reveal from "./Reveal";
-import Beacon from "./Beacon";
-import MenuTabs from "./MenuTabs";
-import OrderBuilder from "./OrderBuilder";
 import {
+  Beacon,
+  Compare,
+  ConceptBar,
+  Credentials,
+  Estimate,
+  OrderBuilder,
+  Reveal,
+  Video,
+  previewMetadata,
+} from "../_shared";
+import MenuTabs from "./MenuTabs";
+import {
+  BAG_MENU,
+  BAG_SIZES,
+  BUSINESS,
+  CREDENTIALS,
   EVENT_TYPES,
   PHONE_DISPLAY,
   PHONE_TEL,
   RATING,
   REVIEWS,
   SERVICE_AREA,
+  SLUG,
+  TAG_LABEL,
 } from "./data";
 import "./concept.css";
 
@@ -27,12 +35,7 @@ import "./concept.css";
  * standing concept bar. Every fact traces to
  * docs/prospects/previews/artisans-kitchen-flagstaff/ledger.md.
  */
-export const metadata: Metadata = {
-  title: "Artisan's Kitchen Catering — concept by SKOX",
-  description:
-    "A private website concept for Artisan's Kitchen Catering in Flagstaff, built by SKOX. Not the live site.",
-  robots: { index: false, follow: false, nocache: true },
-};
+export const metadata = previewMetadata(SLUG, BUSINESS, { place: "Flagstaff" });
 
 /* This concept's own type, not SKOX's. Fraunces for the printed-menu display
    voice, Source Sans 3 for everything else. */
@@ -57,24 +60,19 @@ const BOOK = "https://www.skoxsoftware.com/#scope";
 export default function ArtisansKitchenConcept() {
   return (
     <div className={`ak ${display.variable} ${text.variable}`}>
-      <Beacon />
-      <Reveal />
+      <Beacon slug={SLUG} />
+      <Reveal selector=".ak section" />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
 
-      <div className="concept-bar" role="region" aria-label="About this concept">
-        <p>
-          <strong>Concept built by SKOX for Artisan&rsquo;s Kitchen.</strong> Not live. Nothing here is
-          public.
-        </p>
-        <div className="concept-bar-actions">
-          <AskForm />
-          <a className="btn btn-small btn-primary" href={BOOK}>
-            Book 15 min with Reiss
-          </a>
-        </div>
-      </div>
+      <ConceptBar
+        slug={SLUG}
+        business={BUSINESS}
+        shortName="Artisan’s Kitchen"
+        bookUrl={BOOK}
+        askPlaceholder="Can we keep our phone number on every page?"
+      />
 
       <header className="masthead shell">
         <a href="#main" className="wordmark">
@@ -142,7 +140,16 @@ export default function ArtisansKitchenConcept() {
           </div>
         </section>
 
-        <Credentials chamberLogo={`${IMG}/chamber-logo.png`} />
+        <Credentials
+          items={CREDENTIALS}
+          footnote={
+            <>
+              Cooked for the Americana Motor Hotel&rsquo;s Christmas party, the Museum of Northern Arizona, a
+              60-person community picnic and weddings of 20 to 100 guests, according to their customers&rsquo;
+              reviews and photos.
+            </>
+          }
+        />
 
         {/* 2 · THE WORKING UPGRADE */}
         <section id="order" className="order shell" aria-labelledby="order-title">
@@ -156,7 +163,24 @@ export default function ArtisansKitchenConcept() {
               </p>
             </div>
           </div>
-          <OrderBuilder />
+          <OrderBuilder
+            slug={SLUG}
+            items={BAG_MENU}
+            tagLabels={TAG_LABEL}
+            packSizes={BAG_SIZES}
+            packNoun="bag"
+            meals={["Breakfast", "Lunch", "Dinner"]}
+            copy={{
+              requestTitle: "Boil-bag order request",
+              companyFallback: "Artisan's Kitchen preview",
+              companyLabel: "Outfitter or group",
+              failed: `That didn’t send. Call ${PHONE_DISPLAY} and we’ll take it by phone.`,
+              note:
+                "Pricing is confirmed by the kitchen. Boil bags keep 30 days in a cooler and 3+ years frozen; most are ready in 45 minutes of boiling or 10 in a microwave.",
+              doneBody:
+                "On the live site this goes straight to the kitchen with a confirmation text to you. On this concept it went to Reiss at SKOX, who will text you back so you can see how fast it lands.",
+            }}
+          />
           <p className="works-note">
             <strong>This form works.</strong> On the live site it goes to the kitchen. Here it goes to
             Reiss at SKOX, so you can see how a web order arrives.
@@ -182,7 +206,21 @@ export default function ArtisansKitchenConcept() {
               ))}
             </ul>
             <div className="pricing-card">
-              <Estimate />
+              {/* Ledger L11, L13, L14. Bar and rentals are flagged, not priced: the
+                  site publishes no numbers for them. */}
+              <Estimate
+                title="Weddings, in plain numbers"
+                low={35}
+                high={65}
+                depositPct={20}
+                tasting={{ label: "Tasting for two, by appointment", price: 50 }}
+                flags={[
+                  { label: "Bar service", short: "Bar" },
+                  { label: "Rentals", short: "Rentals" },
+                ]}
+                disclaimer="A range, not a quote. The final number depends on guest count, venue, rentals, bar and menu."
+                cta={{ href: `tel:${PHONE_TEL}`, label: `Call ${PHONE_DISPLAY} to book a tasting` }}
+              />
             </div>
           </div>
         </section>
@@ -258,7 +296,14 @@ export default function ArtisansKitchenConcept() {
                 Photos are from the current site. On the scope call we&rsquo;ll ask for the originals and
                 the 42 on your Google profile; a half-day shoot is in the build.
               </p>
-              <Video id="iS7bGkMFPow" poster={`${IMG}/video-poster.jpg`} />
+              {/* Ledger C4: the September 2026 promo video. */}
+              <Video
+                id="iS7bGkMFPow"
+                poster={`${IMG}/video-poster.jpg`}
+                title="Artisan's Kitchen promo video"
+                playLabel="Play the Artisan's Kitchen video"
+                caption="Watch 1:22 · filmed September 2026"
+              />
             </div>
           </div>
         </section>
@@ -273,7 +318,11 @@ export default function ArtisansKitchenConcept() {
             </div>
           </div>
           <div className="before-grid">
-            <Compare before={`${IMG}/before-mobile.png`} after={`${IMG}/after-mobile-3.png`} />
+            <Compare
+              before={`${IMG}/before-mobile.png`}
+              after={`${IMG}/after-mobile-3.png`}
+              beforeAlt="The current artisanskitchenflagstaff.com homepage on a phone: fixed-width layout, tiny navigation, text too small to read"
+            />
             <ul className="before-list">
               <li>The Dinner menu page returns &ldquo;resource has been removed&rdquo;.</li>
               <li>No form, booking or payment anywhere. Every page ends in &ldquo;call us&rdquo;.</li>

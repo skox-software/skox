@@ -3,8 +3,32 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 
-/** Drag to compare: the current site and this concept, both on a phone. */
-export default function Compare({ before, after }: { before: string; after: string }) {
+/**
+ * Drag to compare two phone screenshots: the site today and this concept.
+ * Pointer drag on the screen, plus a range input for keyboard users.
+ */
+export default function Compare({
+  before,
+  after,
+  beforeAlt,
+  afterAlt = "This concept on a phone",
+  width = 554,
+  height = 1200,
+  labels = ["Today", "Concept"],
+  rangeLabel = "Compare the current site with this concept",
+  caption = "Drag the line. Left is today, right is this concept.",
+}: {
+  before: string;
+  after: string;
+  /** Describe what is broken in the current site's screenshot. */
+  beforeAlt: string;
+  afterAlt?: string;
+  width?: number;
+  height?: number;
+  labels?: [string, string];
+  rangeLabel?: string;
+  caption?: string;
+}) {
   const [pos, setPos] = useState(50);
   const box = useRef<HTMLDivElement>(null);
   const down = useRef(false);
@@ -31,18 +55,11 @@ export default function Compare({ before, after }: { before: string; after: stri
         onPointerUp={() => (down.current = false)}
         onPointerCancel={() => (down.current = false)}
       >
-        <Image src={after} alt="This concept on a phone" width={554} height={1200} className="cmp-after" draggable={false} />
-        <Image
-          src={before}
-          alt="The current artisanskitchenflagstaff.com homepage on a phone: fixed-width layout, tiny navigation, text too small to read"
-          width={554}
-          height={1200}
-          className="cmp-before"
-          draggable={false}
-        />
+        <Image src={after} alt={afterAlt} width={width} height={height} className="cmp-after" draggable={false} />
+        <Image src={before} alt={beforeAlt} width={width} height={height} className="cmp-before" draggable={false} />
         <div className="cmp-handle" aria-hidden="true">
-          <span>Today</span>
-          <span>Concept</span>
+          <span>{labels[0]}</span>
+          <span>{labels[1]}</span>
         </div>
         <input
           className="cmp-range"
@@ -51,10 +68,10 @@ export default function Compare({ before, after }: { before: string; after: stri
           max={100}
           value={Math.round(pos)}
           onChange={(e) => setPos(Number(e.target.value))}
-          aria-label="Compare the current site with this concept"
+          aria-label={rangeLabel}
         />
       </div>
-      <figcaption>Drag the line. Left is today, right is this concept.</figcaption>
+      <figcaption>{caption}</figcaption>
     </figure>
   );
 }

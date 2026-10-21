@@ -94,6 +94,17 @@ Josh reads `brief.md` and replies `go`, `go with changes: ...` or `no-go`. Apply
 
 Budget: 45 minutes. Route: `app/concepts/<slug>-<8 random hex>/page.tsx` plus a scoped CSS file and any components. Load the `anthropic-skills:distinctive-frontend` skill before writing UI.
 
+Use the shared components in `app/concepts/_shared/` and write only the sections that are specific to this business. Import them from `../_shared`:
+
+- `previewMetadata(slug, business, { place })` for the page's `metadata` (noindex, nofollow, nocache; it refuses a slug without the 8-hex suffix).
+- `ConceptBar` (section 1), with the `AskForm` question posting to `/api/contact` tagged `preview:<slug>`.
+- `Credentials` (section 3): a list of `{ href, mark, big, text, small }`; marks are `"google"`, `"facebook"`, `"tripadvisor"`, `{ initials }` or `{ image }`.
+- `OrderBuilder` (a ready-made working upgrade for anything ordered per head: menu items with tags and courses, pack sizes, people × days × meals; posts tagged). Build a bespoke upgrade only when the brief calls for something it can't do.
+- `Estimate` (per-head low/high, deposit percent, tasting price, flag chips for anything unpriced; always a range, never a quote).
+- `Compare` (section 9, before/after phone slider), `Video` (YouTube facade, nocookie embed on click), `Beacon` (the first-open beacon) and `Reveal` (scroll-in).
+
+They render plain class hooks (`.concept-bar`, `.cred`, `.ob`, `.est`, `.cmp`, `.video`, …) and ship no CSS: style them in this concept's own `concept.css`, starting from `app/concepts/artisans-kitchen-b1aaf555/concept.css`. Every string you pass them is copy on the page, so it still needs a ledger row. If a shared component needs a new option, add it there with a default that leaves existing concepts unchanged.
+
 Design standard: this must look like a site a $15k agency shipped, not a template. Deliberate type pairing, a real colour system derived from their brand, generous spacing, one strong hero, photography treated well (consistent crop, grading if the pack calls for it), restrained motion. No stock-photo clichés, no gradient blobs, no emoji icons, no three-identical-cards-with-icons unless the pack justifies it.
 
 Required sections, in this order unless the pack says otherwise:
@@ -117,7 +128,7 @@ Technical requirements:
 - Confirm `app/robots.ts` and `app/sitemap.ts` still exclude `/concepts/`.
 - Lighthouse mobile: Performance 90+, Accessibility 95+. Images via Next's image pipeline, sized, with alt text from the manifest.
 - Tap-to-call and tap-to-map links. Form fields with labels, error states, and a success state.
-- Add a tiny view beacon that posts `{ slug, first_open, device }` to the existing analytics path so Reiss gets a first-open alert. Do not add any third-party tracker.
+- Render `<Beacon slug={SLUG} />` so Reiss gets a first-open alert (`preview_open` via `lib/track`, once per browser session). Do not add any third-party tracker.
 - No `console.log`, no lorem ipsum, no `TODO` left in the page.
 
 ## STAGE 4: QA (write `qa.md`)

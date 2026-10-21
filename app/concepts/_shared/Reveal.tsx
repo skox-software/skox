@@ -2,11 +2,14 @@
 
 import { useEffect } from "react";
 
-/** Adds .is-in to each section as it enters the viewport. CSS does the rest. */
-export default function Reveal() {
+/**
+ * Adds .is-in to each element matching `selector` (usually the concept's
+ * sections, e.g. ".ak section") as it enters the viewport. CSS does the rest.
+ */
+export default function Reveal({ selector }: { selector: string }) {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      document.querySelectorAll(".ak section").forEach((s) => s.classList.add("is-in"));
+      document.querySelectorAll(selector).forEach((s) => s.classList.add("is-in"));
       return;
     }
     const io = new IntersectionObserver(
@@ -20,8 +23,8 @@ export default function Reveal() {
       },
       { rootMargin: "0px 0px -10% 0px" },
     );
-    document.querySelectorAll(".ak section").forEach((s) => io.observe(s));
+    document.querySelectorAll(selector).forEach((s) => io.observe(s));
     return () => io.disconnect();
-  }, []);
+  }, [selector]);
   return null;
 }

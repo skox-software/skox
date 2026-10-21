@@ -4,6 +4,8 @@
  * reviews.md. Nothing is invented. Keep it that way.
  */
 
+import type { Credential, OrderItem } from "../_shared";
+
 export const SLUG = "artisans-kitchen-b1aaf555";
 export const PHONE_DISPLAY = "928.779.3662"; // L3
 export const PHONE_TEL = "+19287793662";
@@ -29,8 +31,17 @@ export const EVENT_TYPES = [
   "Glamping companies",
 ]; // L7
 
+export const BUSINESS = "Artisan's Kitchen Catering";
+
 export type Tag = "GF" | "LF" | "VT";
-export type BagItem = { name: string; tags: Tag[]; course: "BBQ" | "Italian" | "Asian" | "Mexican" | "Sides" | "Breakfast" };
+export type BagItem = OrderItem & { tags: Tag[]; course: "BBQ" | "Italian" | "Asian" | "Mexican" | "Sides" | "Breakfast" };
+
+/** The GF/LF/VT tags as the Boil-Bag page prints them. */
+export const TAG_LABEL: Record<Tag, string> = {
+  GF: "Gluten-free",
+  LF: "Lactose-free",
+  VT: "Vegetarian",
+};
 
 /** L25–L30. Tags exactly as printed on the Boil-Bag page. */
 export const BAG_MENU: BagItem[] = [
@@ -71,6 +82,44 @@ export const BAG_MENU: BagItem[] = [
 ];
 
 export const BAG_SIZES = [2, 4, 6, 8]; // L23
+
+/**
+ * Credibility strip (P1–P7, C1–C4). No awards were found for this business,
+ * so none are shown.
+ */
+const GOOGLE_PROFILE =
+  "https://www.google.com/maps/place/Artisans+Kitchen/@35.2121152,-111.5770749,17z/data=!4m8!3m7!1s0x872d8ea6a6160d65:0xc33347b8630865df!8m2!3d35.2121152!4d-111.5770749!9m1!1b1!16s%2Fg%2F11by_fcv4h";
+
+export const CREDENTIALS: Credential[] = [
+  { href: GOOGLE_PROFILE, mark: "google", big: "4.3", text: "on Google", small: "27 reviews" },
+  {
+    href: "https://www.facebook.com/ArtisansKitchen/reviews",
+    mark: "facebook",
+    big: "100%",
+    text: "recommend on Facebook",
+    small: "5 reviews",
+  },
+  {
+    href: "https://www.tripadvisor.com/Restaurant_Review-g60971-d9598626-Reviews-ARTISAN_S_KITCHEN-Flagstaff_Arizona.html",
+    mark: "tripadvisor",
+    big: "4.4",
+    text: "on Tripadvisor",
+    small: "7 reviews",
+  },
+  {
+    href: "https://business.flagstaffchamber.com/members/member/artisan-s-kitchen-11293",
+    mark: { image: "/concepts/artisans-kitchen/chamber-logo.png" },
+    big: "Member",
+    text: "Greater Flagstaff Chamber of Commerce",
+  },
+  {
+    href: "https://podcasts.apple.com/us/podcast/artisans-kitchen/id1630235450?i=1000681456204",
+    mark: { initials: "CB" },
+    big: "Cordon Bleu",
+    text: "certified, Scottsdale Culinary Institute",
+  },
+  { mark: { initials: "07" }, big: "Incorporated 2007", text: "Artisan\u2019s Kitchen, Inc." },
+];
 
 /** L17–L18 and L16: the dinner and wedding menus, by cuisine. */
 export const DINNER_MENUS: Record<string, string[]> = {

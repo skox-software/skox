@@ -1,10 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { SLUG } from "./data";
+import { sendPreviewLead } from "./contact";
 
 /** The concept bar's one-field question. Posts to SKOX, tagged with the slug. */
-export default function AskForm() {
+export default function AskForm({
+  slug,
+  business,
+  placeholder,
+}: {
+  slug: string;
+  /** Sent as the lead's company. */
+  business: string;
+  placeholder: string;
+}) {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
   const [email, setEmail] = useState("");
@@ -15,20 +24,13 @@ export default function AskForm() {
     if (!q.trim() || !email.trim()) return;
     setState("sending");
     try {
-      const r = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: "Question from the preview",
-          email: email.trim(),
-          company: "Artisan's Kitchen Catering",
-          broken: `[preview:${SLUG}] Question: ${q.trim()}`,
-          timeline: `preview:${SLUG}`,
-          projectType: "websites",
-        }),
-        signal: AbortSignal.timeout(15000),
+      await sendPreviewLead(slug, {
+        name: "Question from the preview",
+        email: email.trim(),
+        company: business,
+        message: `[preview:${slug}] Question: ${q.trim()}`,
+        projectType: "websites",
       });
-      if (!r.ok) throw new Error("bad");
       setState("sent");
     } catch {
       setState("failed");
@@ -48,7 +50,7 @@ export default function AskForm() {
             <>
               <label>
                 Your question
-                <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Can we keep our phone number on every page?" required />
+                <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={placeholder} required />
               </label>
               <label>
                 Email
