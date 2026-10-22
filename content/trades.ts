@@ -18,7 +18,8 @@ export type ExampleKey =
   | "quote-builder"
   | "dispatch-board"
   | "approval-portal"
-  | "truck-stock";
+  | "truck-stock"
+  | "maintenance-desk";
 
 export type Trade = {
   slug: string;
@@ -298,6 +299,38 @@ export const trades: Trade[] = [
     connects: "Inventory, purchasing, job software, barcode scanners",
     faq: [TOOL_FAQ, CONNECT_FAQ, OWN_FAQ],
     more: TOOL_MORE,
+  },
+  {
+    // The one segment with warm replies in our own outreach (2026-10-21):
+    // independent property managers. Pitched as a web app for owners and
+    // tenants, not a replacement for their accounting system.
+    slug: "property-management",
+    name: "Property management",
+    company: "a property management company",
+    keyword: "Custom property management software",
+    title: "Custom property management software, built at speed",
+    description:
+      "Custom software for property management companies: maintenance requests, owner portals and online rental applications, built around how you already work. Fixed price and delivery date agreed upfront.",
+    intro:
+      "Maintenance requests, owner updates and rental applications in one place, built around how your office already runs. Start with the part that eats the most phone time. Fixed price and delivery date agreed in writing before you pay.",
+    build: "web-apps",
+    example: "maintenance-desk",
+    exampleTitle: "A maintenance desk that routes every request",
+    exampleTry: "Send a request as the tenant, get the vendor quote, approve it as the owner, then close it and watch the owner's statement update.",
+    pains: [
+      { title: "Repair requests arrive by text, email and voicemail.", body: "A tenant reports a leak three ways, nobody owns it, and the owner hears about it from the tenant first." },
+      { title: "Owners call to ask what's going on.", body: "Every update on a unit, a repair or a payment is a phone call or a report someone builds by hand." },
+      { title: "Applications still arrive as PDFs.", body: "Prospects print, scan and email forms, so a good applicant waits days while the unit sits empty." },
+    ],
+    builds: [
+      { title: "A maintenance request desk", body: "Tenants send requests with photos, you assign a vendor, and repairs over an owner's limit wait for their OK." },
+      { title: "An owner portal", body: "Each owner sees their units, open repairs, costs and statements without calling the office." },
+      { title: "Online rental applications", body: "Prospects apply from their phone with documents attached, and every application lands in one queue." },
+    ],
+    connects: "Property management and accounting software, payments, email and text messages",
+    faq: [TOOL_FAQ, CONNECT_FAQ, OWN_FAQ],
+    more: TOOL_MORE,
+    placeholder: "For example: an owner portal with repairs and statements.",
   },
 ];
 

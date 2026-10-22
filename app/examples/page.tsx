@@ -8,11 +8,11 @@ import "./hub.css";
 export const metadata: Metadata = {
   title: "Examples: dashboards and internal tools you can try",
   description:
-    "Eight interactive concept builds for service businesses: four dashboards and four internal tools, across eight trades. Sample data. Click around, they work.",
+    "Eight interactive concept builds for service businesses: four dashboards and four internal tools. Sample data. Click around, they work.",
   alternates: { canonical: "/examples" },
   openGraph: {
     title: "SKOX examples: dashboards and internal tools you can try",
-    description: "Eight interactive concepts across eight trades. Sample data.",
+    description: "Eight interactive concepts for service businesses. Sample data.",
     url: "/examples",
   },
 };
