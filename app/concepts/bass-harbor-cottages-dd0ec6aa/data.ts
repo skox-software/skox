@@ -7,6 +7,8 @@
 import type { Credential } from "../_shared";
 
 export const SLUG = "bass-harbor-cottages-dd0ec6aa";
+/** The portal deal, so the first open after sending alerts the team. */
+export const DEAL_ID = "e7405417-9f74-4eae-8d53-e3db84fef087";
 export const BUSINESS = "Bass Harbor Cottages and Country Inn"; // L1
 export const PHONE_DISPLAY = "(207) 244-3460"; // L3
 export const PHONE_TEL = "+12072443460";

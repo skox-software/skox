@@ -11,6 +11,7 @@ import {
   BRING,
   BUSINESS,
   CREDENTIALS,
+  DEAL_ID,
   EMAIL,
   FAVS,
   INN,
@@ -121,7 +122,7 @@ export default function BassHarborConcept() {
   const [pine, carriage, boathouse, johns, tapley] = PLACES;
   return (
     <div className={`bh ${display.variable} ${text.variable}`}>
-      <Beacon slug={SLUG} />
+      <Beacon slug={SLUG} dealId={DEAL_ID} />
       <Reveal selector=".bh section" />
       <a className="skip-link" href="#main">
         Skip to content

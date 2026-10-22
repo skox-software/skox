@@ -124,7 +124,11 @@ The routine saves `preview_url` on the deal, sets `ready`, and posts to Reiss (S
 1. ~~Portal: the columns above, the call-desk tap, a queue and update API guarded by a service secret, and the approve buttons.~~ Done 2026-10-21 (portal PR #25): `GET /portal/api/lead-previews/queue` and `PATCH /portal/api/lead-previews/<dealId>` with `Authorization: Bearer $PREVIEW_SERVICE_SECRET` (`/api/previews` was already taken by project design previews). Gate A is in the lead panel. See the portal's docs/PIPELINE.md.
 2. ~~Repo: lift the reusable concept components (concept bar, compare slider, estimate, order builder, credentials, video facade) into `app/concepts/_shared/` so a build is mostly data plus a few new sections.~~ Done 2026-10-21; Stage 3 of the master prompt now points at them.
 3. The routine: a scheduled Claude Code job that reads the queue and runs the master prompt with the deal's row as INPUT, in `research-only` then `full` mode depending on `preview_status`.
-4. The `preview_open` listener and the Reiss notification.
+4. ~~The `preview_open` listener and the Reiss notification.~~ Done 2026-10-21: the concept's `Beacon` posts to `/portal/api/lead-previews/open`; views count only after the preview is `sent` (set automatically when a portal email or Inbox reply carries the link, or with "Mark sent"); the first one sets `opened` and emails the team with the lead's phone; later views go in the lead's history. `?team` on the link marks a browser as the team's.
+
+### Where the link lives (learned on Bass Harbor, 2026-10-21)
+
+The `skox` project's PR previews sit behind Vercel's login, so an owner can't open them. Instead: merge the concept PR (it lives at `/concepts/<slug>-<hash>`, noindex, robots-disallowed), then add one rewrite to `skox-software/prospect-previews` `vercel.json` so `previews.skoxsoftware.com/<short-slug>` serves it. The shared `/_next`, `/concepts`, `/api/contact` and `/portal/api/lead-previews/open` rewrites are already there. Save the short link as the deal's `preview_url`.
 
 ### Honest limits
 
