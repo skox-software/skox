@@ -25,9 +25,12 @@ Run 2026-10-21 on localhost (dev and production build). The checks on the Vercel
 | Finding us: white farmhouse, boardwalk | L18 |
 | Before/after list: no phone layout, Happy Spring, availabilityonline, two August prices, deposit by check, Island Explorer 2022 | L49, L51, L54, L53, L55, L52 |
 | Reviews R1–R6, verbatim excerpts with "…" where trimmed | reviews.md |
+| Today on the harbor: live tide (NOAA station 8413651) and sunset computed for the harbor | L75 |
+| Area notes: lighthouse, ferry, Cadillac sunrise, dark skies, quietside | L65–L72 |
+| Where our guests go: Thurston's, Little Notch (guest quotes, reviews.md), Wendell Gilley and Seal Cove (their Things to Do page T, plus the museums' own sites) | L73, L74, L15 |
 | Logo redraw | assets/manifest.json note (original: images/slideshow-logo-overlay.png) |
 
-**Result: 0 FAIL.** Copy removed during the audit because it had no ledger row: "We read every request ourselves", "weekly rates apply", "We'll do the rest", "free wifi" for every unit (the Boat House is "basic wifi"), "shrunk to a third". The hero alt text said "goldenrod" but the plant is forsythia; it now reads "yellow flowering shrubs".
+**Result: 0 FAIL.** Three area claims were dropped after the source check: the Acadia Night Sky Festival (it ended in 2022), "most photographed lighthouse in Maine" (the source only supports "one of Acadia's most photographed"), and Sawyer's Market (no 2026 source). Thurston's address is from its current site. Copy removed during the audit because it had no ledger row: "We read every request ourselves", "weekly rates apply", "We'll do the rest", "free wifi" for every unit (the Boat House is "basic wifi"), "shrunk to a third". The hero alt text said "goldenrod" but the plant is forsythia; it now reads "yellow flowering shrubs".
 
 Not a ledger fact, and labelled as the upgrade: the planner's behaviour (enforcing minimums and occupancy, showing a rate per month) and the "In the build" cards.
 

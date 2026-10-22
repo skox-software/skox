@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Cormorant_Garamond, Libre_Franklin } from "next/font/google";
 import { Beacon, Compare, ConceptBar, Credentials, Reveal, money, previewMetadata } from "../_shared";
 import BookBar from "./BookBar";
+import Harbor from "./Harbor";
 import Logo from "./Logo";
 import Planner from "./Planner";
 import QuietHours from "./QuietHours";
@@ -11,9 +12,11 @@ import {
   BUSINESS,
   CREDENTIALS,
   EMAIL,
+  FAVS,
   INN,
   MAP_URL,
   NEARBY,
+  NOTES,
   PHONE_DISPLAY,
   PHONE_TEL,
   PLACES,
@@ -208,6 +211,17 @@ export default function BassHarborConcept() {
           }
         />
 
+        {/* TODAY ON THE HARBOR (live) */}
+        <section className="today shell" aria-labelledby="today-title">
+          <div className="section-head">
+            <p className="eyebrow">Today on the harbor</p>
+            <h2 id="today-title">
+              The tide, <em>right now.</em>
+            </h2>
+          </div>
+          <Harbor />
+        </section>
+
         {/* PLACES */}
         <section id="places" className="places shell" aria-labelledby="places-title">
           <div className="section-head">
@@ -340,6 +354,32 @@ export default function BassHarborConcept() {
                 </li>
               ))}
             </ol>
+          </div>
+          <div className="shell">
+            <div className="notes">
+              {NOTES.map((n) => (
+                <div className="note" key={n.title}>
+                  <h3>{n.title}</h3>
+                  <p>{n.body}</p>
+                  <a className="src" href={n.src}>
+                    Source: {n.srcLabel}
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className="favs">
+              <h3>Where our guests go</h3>
+              <ul className="fav-list">
+                {FAVS.map((f) => (
+                  <li key={f.name}>
+                    <strong>{f.url ? <a href={f.url}>{f.name}</a> : f.name}</strong>
+                    <small>{f.where}</small>
+                    {f.by.startsWith("From") ? <span>{f.why}</span> : <q>{f.why}</q>}
+                    <small>{f.by}</small>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 

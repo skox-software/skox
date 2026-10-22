@@ -104,3 +104,14 @@ See `reviews.md` (filled from the research agent's notes). Rating rows get numbe
 | # | claim | exact wording seen | source |
 |---|---|---|---|
 | L64 | Wifi and streaming | "Our high-speed wifi supports Roku streaming television." | D |
+| L65 | Lighthouse built 1858, fourth-order Fresnel lens (lantern 1901) | "constructed in 1858" / "The lantern (1901) is a fourth-order Fresnel lens." | https://www.nps.gov/acad/planyourvisit/explore-bass-harbor-head-light-station.htm |
+| L66 | One of Acadia's most photographed; grounds open, tower closed | "one of Acadia National Park's most photographed and beloved historic landmarks" / "The lighthouse itself is not open to the public, but visitors may explore the grounds." | https://home.nps.gov/places/bass-harbor-head-light-station.htm |
+| L67 | Swan's Island ferry 40 min | "Crossing Distance: 6 miles Crossing Time: 40 minutes" | https://www.maine.gov/dot/programs-services/ferry/swans-island-ferry |
+| L68 | Frenchboro ferry 50 min | "Crossing Distance: 8.25 miles Crossing Time: 50 minutes" | https://www.maine.gov/dot/programs-services/ferry/frenchboro-ferry |
+| L69 | Cadillac first sunrise, Oct 7 – Mar 6 | "From October 7 to March 6, Cadillac Mountain is the first place in the country you can see the sun rise." | https://www.nps.gov/places/cadillac-mountain.htm |
+| L70 | Summit road reservations in season | "Vehicle reservations are required for Cadillac Summit Road from Wed May 20 through Sun Oct 25, 2026." | https://www.nps.gov/acad/planyourvisit/vehicle_reservations.htm |
+| L71 | Dark skies | "Acadia possesses remarkably dark skies for its proximity to Portland, Boston, and New York." | https://www.nps.gov/acad/learn/nature/night-skies.htm |
+| L72 | Quietside | "The west side of Acadia is a quieter, more secluded area of Mount Desert Island" / Acadia Chamber: "On the Quietside of Mount Desert Island … Southwest Harbor and Tremont." | https://www.nps.gov/acad/planyourvisit/west-side.htm, https://acadiachamber.com/about |
+| L73 | Thurston's: Bernard, season | "9 Thurston Road - Bernard, Maine 04612" / "From Memorial Day weekend through mid October" | https://thurstonforlobster.com |
+| L74 | Wendell Gilley Museum; Seal Cove Auto Museum | "honoring the legacy of noted bird carver Wendell Gilley" / "some of the earliest automobiles and motorcycles … from 1895 through the early 192[0s]" | wendellgilleymuseum.org/our-mission, sealcoveautomuseum.org |
+| L75 | Live tide and sunset | NOAA tide predictions, station 8413651 "Bass Harbor, ME" (44.2417, -68.3533), fetched live; sunset computed with NOAA's solar approximation for 44.2452, -68.3455 | api.tidesandcurrents.noaa.gov |

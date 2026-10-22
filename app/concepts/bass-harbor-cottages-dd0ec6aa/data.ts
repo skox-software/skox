@@ -276,3 +276,72 @@ export const REVIEWS: Review[] = [
     url: "https://www.tripadvisor.com/Hotel_Review-g40504-d77137-Reviews-Bass_Harbor_Cottages_and_Country_Inn-Bass_Harbor_Tremont_Mount_Desert_Island_Maine.html",
   },
 ];
+
+export type Note = { title: string; body: string; src: string; srcLabel: string };
+
+/** Ledger L65–L74: public facts about the area, each from an official source. */
+export const NOTES: Note[] = [
+  {
+    title: "The lighthouse down the road",
+    body: "Bass Harbor Head Light was built in 1858, and its lantern still holds a fourth-order Fresnel lens. It is one of Acadia's most photographed landmarks. The tower is closed, but you can walk the grounds, five minutes from your porch.",
+    src: "https://www.nps.gov/acad/planyourvisit/explore-bass-harbor-head-light-station.htm",
+    srcLabel: "National Park Service",
+  },
+  {
+    title: "An island day trip, from our own harbor",
+    body: "The Maine State Ferry leaves Bass Harbor for Swan's Island, a 40-minute crossing, and for Frenchboro, about 50 minutes out.",
+    src: "https://www.maine.gov/dot/programs-services/ferry/swans-island-ferry",
+    srcLabel: "Maine State Ferry Service",
+  },
+  {
+    title: "First sunrise in the country",
+    body: "From October 7 to March 6, Cadillac Mountain is the first place in the country to see the sun rise. In season, the summit road needs a vehicle reservation.",
+    src: "https://www.nps.gov/places/cadillac-mountain.htm",
+    srcLabel: "National Park Service",
+  },
+  {
+    title: "Dark skies over the harbor",
+    body: "The Park Service notes Acadia's remarkably dark skies for somewhere so close to Portland, Boston and New York. On a clear night, gaze at the stars from the shore.",
+    src: "https://www.nps.gov/acad/learn/nature/night-skies.htm",
+    srcLabel: "National Park Service",
+  },
+  {
+    title: "Why they call it the quietside",
+    body: "The west side of Acadia is the quieter, more secluded half of Mount Desert Island. It is home to Southwest Harbor, Tremont and Bass Harbor, away from the Bar Harbor crowds.",
+    src: "https://www.nps.gov/acad/planyourvisit/west-side.htm",
+    srcLabel: "National Park Service",
+  },
+];
+
+export type Fav = { name: string; where: string; why: string; by: string; url?: string };
+
+/** Places our guests name in their reviews (reviews.md), and two from our own Things to Do page (T). */
+export const FAVS: Fav[] = [
+  {
+    name: "Thurston's Lobster Pound",
+    where: "Bernard, Memorial Day weekend through mid October",
+    why: "If you want a great Lobster meal with all the fixings don't miss Thurston's",
+    by: "Jorge, Airbnb guest, July 2025",
+    url: "https://thurstonforlobster.com/",
+  },
+  {
+    name: "Little Notch Bakery",
+    where: "Southwest Harbor",
+    why: "Some of the best pizza at Little Notch bakery there.",
+    by: "Elizabeth, Pine Cottage guest, July 2025",
+  },
+  {
+    name: "Wendell Gilley Museum",
+    where: "Southwest Harbor",
+    why: "An art and nature museum honoring the bird carver Wendell Gilley.",
+    by: "From our Things to Do list",
+    url: "https://www.wendellgilleymuseum.org/",
+  },
+  {
+    name: "Seal Cove Auto Museum",
+    where: "Tremont",
+    why: "Some of the earliest automobiles and motorcycles, from 1895 into the 1920s.",
+    by: "From our Things to Do list",
+    url: "https://www.sealcoveautomuseum.org/",
+  },
+];

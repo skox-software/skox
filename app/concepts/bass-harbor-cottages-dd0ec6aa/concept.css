@@ -1499,3 +1499,153 @@
     white-space: nowrap;
   }
 }
+
+/* today on the harbor (live) */
+.bh .today {
+  padding-block: 56px;
+}
+.bh .today .section-head {
+  margin-bottom: 28px;
+}
+.bh .harbor-today {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.bh .harbor-today > div {
+  background: var(--paper);
+  padding: 22px 20px;
+}
+@media (min-width: 900px) {
+  .bh .harbor-today {
+    grid-template-columns: 2.2fr 1fr;
+  }
+  .bh .harbor-today > div {
+    padding: 28px 32px;
+  }
+}
+.bh .ht-label {
+  font: 600 12px/1.3 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.bh .ht-big {
+  font: 500 clamp(30px, 4vw, 42px) / 1.05 var(--serif);
+  margin-bottom: 8px;
+}
+.bh .ht-big small {
+  font: 400 16px var(--sans);
+  color: var(--ink-soft);
+}
+.bh .ht-wait {
+  color: var(--ink-soft);
+}
+.bh .ht-next {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--slate);
+}
+.bh .ht-curve {
+  display: block;
+  width: 100%;
+  height: 110px;
+  margin: 6px 0 10px;
+}
+.bh .ht-water {
+  fill: var(--slate);
+  opacity: 0.12;
+}
+.bh .ht-line {
+  fill: none;
+  stroke: var(--slate);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.bh .ht-now {
+  fill: var(--buoy);
+  stroke: var(--paper);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+.bh .ht-sunset {
+  stroke: var(--buoy);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.6;
+}
+.bh .ht-fine {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* around: local notes */
+.bh .notes {
+  display: grid;
+  gap: 0 48px;
+  margin-top: 56px;
+}
+@media (min-width: 900px) {
+  .bh .notes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.bh .note {
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+}
+.bh .note h3 {
+  margin-bottom: 8px;
+}
+.bh .note p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.bh .note .src {
+  font-size: 13px;
+}
+.bh .favs {
+  margin-top: 56px;
+}
+.bh .favs h3 {
+  margin-bottom: 16px;
+}
+.bh .fav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0 48px;
+}
+@media (min-width: 900px) {
+  .bh .fav-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.bh .fav-list li {
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 16px;
+}
+.bh .fav-list strong {
+  font: 600 20px var(--serif);
+  display: block;
+}
+.bh .fav-list q {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.bh .fav-list small {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
