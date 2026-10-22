@@ -64,6 +64,8 @@ export function LandingPage({ topic }: { topic?: Topic }) {
             <a href="#about">Who we are</a>
           </nav>
           <div className="header-actions">
+            {/* /portal is a separate Next app behind a rewrite, so it needs a full page load. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
               className="header-login"
               href="/portal"
@@ -359,6 +361,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
             <span>Working with clients everywhere</span>
             <Link href="/privacy">Privacy</Link>
             <Link href="/privacy#choices">Your Privacy Choices</Link>
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- separate app, see header */}
             <a href="/portal">Client portal</a>
           </div>
         </div>
