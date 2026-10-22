@@ -18,6 +18,7 @@ import { QuoteBuilder } from "@/components/tools/QuoteBuilder";
 import { DispatchBoard } from "@/components/tools/DispatchBoard";
 import { ApprovalPortal } from "@/components/tools/ApprovalPortal";
 import { TruckStock } from "@/components/tools/TruckStock";
+import { MaintenanceDesk } from "@/components/tools/MaintenanceDesk";
 import { landing, landingFaq } from "@/content/landing";
 import { site } from "@/content/site";
 import { trades, tradeBySlug, type ExampleKey } from "@/content/trades";
@@ -33,6 +34,7 @@ const EXAMPLES: Record<ExampleKey, ComponentType> = {
   "dispatch-board": DispatchBoard,
   "approval-portal": ApprovalPortal,
   "truck-stock": TruckStock,
+  "maintenance-desk": MaintenanceDesk,
 };
 
 /** C04 as claims.md asks: the deposit-free part is the call, not the build. */
