@@ -1,0 +1,453 @@
+{
+ "note": "All images from their own site. Logo = images/slideshow-logo-overlay.png (243x173 raster, cropped wreath); SVG redraw for the concept.",
+ "images": [
+  {
+   "file": "images__banner__1.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/1.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__2-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/2-11_2013.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__3-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/3-11_2013.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__boathouse__1-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/boathouse/1-11_2013.jpg",
+   "unit": "boathouse",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__boathouse__2.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/boathouse/2.jpg",
+   "unit": "boathouse",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__boathouse__3-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/boathouse/3-11_2013.jpg",
+   "unit": "boathouse",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__boathouse__4-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/boathouse/4-11_2013.jpg",
+   "unit": "boathouse",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__carriage__1.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/carriage/1.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__carriage__2-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/carriage/2-11_2013.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__carriage__3-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/carriage/3-11_2013.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__carriage__4-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/carriage/4-11_2013.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__inn__1-08-2022.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/inn/1-08-2022.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__inn__2.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/inn/2.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__inn__3-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/inn/3-11_2013.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__inn__4-08-2022.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/inn/4-08-2022.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__pine__1.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/pine/1.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__pine__2.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/pine/2.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__pine__3.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/pine/3.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__banner__pine__4-11_2013.jpg",
+   "source": "https://www.bassharborcottages.com/images/banner/pine/4-11_2013.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__blurb-acc.png",
+   "source": "https://www.bassharborcottages.com/images/blurb-acc.png",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__foliage-todo.jpg",
+   "source": "https://www.bassharborcottages.com/images/foliage-todo.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__header-1.jpg",
+   "source": "https://www.bassharborcottages.com/images/header-1.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__header-2.jpg",
+   "source": "https://www.bassharborcottages.com/images/header-2.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__header-3.jpg",
+   "source": "https://www.bassharborcottages.com/images/header-3.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P3270044.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P3270044.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P3310068.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P3310068.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P3310071.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P3310071.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P3310073.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P3310073.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P3310078.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P3310078.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P6040021.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P6040021.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P6080012.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P6080012.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P6080015.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P6080015.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__carriage__P6140004.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/carriage/P6140004.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-01.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-01.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-02.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-02.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-03.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-03.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-04.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-04.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-05.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-05.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-06.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-06.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-07.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-07.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-08.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-08.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-09.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-09.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-10.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-10.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-11.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-11.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__country-inn-gallery-12.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/country-inn-gallery-12.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__inn__view_from_room_1_porch.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/inn/view%20from%20room%201%20porch.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__P6030014.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/P6030014.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__P6050002.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/P6050002.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__P6050009.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/P6050009.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-01.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-01.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-02.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-02.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-03.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-03.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-04.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-04.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-05.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-05.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-06.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-06.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-07.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-07.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-08.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-08.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__hq__pine__pine-cottage-gallery-09.jpg",
+   "source": "https://www.bassharborcottages.com/images/hq/pine/pine-cottage-gallery-09.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__rainbow-over-bass-harbor.jpg",
+   "source": "https://www.bassharborcottages.com/images/rainbow-over-bass-harbor.jpg",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__thumb-boathousecottage.jpg",
+   "source": "https://www.bassharborcottages.com/images/thumb-boathousecottage.jpg",
+   "unit": "boathouse",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__thumb-carriagehouse.jpg",
+   "source": "https://www.bassharborcottages.com/images/thumb-carriagehouse.jpg",
+   "unit": "carriage",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__thumb-countryinn-color.jpg",
+   "source": "https://www.bassharborcottages.com/images/thumb-countryinn-color.jpg",
+   "unit": "inn",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "images__thumb-pinecottage.jpg",
+   "source": "https://www.bassharborcottages.com/images/thumb-pinecottage.jpg",
+   "unit": "pine",
+   "seen": "2026-10-21",
+   "theirs": true
+  },
+  {
+   "file": "logo-overlay.png",
+   "source": "https://www.bassharborcottages.com/logo-overlay.png",
+   "unit": "grounds",
+   "seen": "2026-10-21",
+   "theirs": true
+  }
+ ]
+}
