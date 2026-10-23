@@ -9,6 +9,8 @@ import type { NextConfig } from "next";
  * than app/[service].
  */
 const PORTAL_ORIGIN = process.env.PORTAL_ORIGIN ?? "https://portal.skoxsoftware.com";
+/** Office Chief, the Ireland & Associates Surveying demo: its own Next app, built with basePath /irelandsurveying. */
+const IRELAND_ORIGIN = process.env.IRELAND_ORIGIN ?? "https://quote-desk-pi.vercel.app";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -17,6 +19,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/portal", destination: `${PORTAL_ORIGIN}/portal` },
       { source: "/portal/:path*", destination: `${PORTAL_ORIGIN}/portal/:path*` },
+      { source: "/irelandsurveying", destination: `${IRELAND_ORIGIN}/irelandsurveying` },
+      { source: "/irelandsurveying/:path*", destination: `${IRELAND_ORIGIN}/irelandsurveying/:path*` },
     ];
   },
 };
