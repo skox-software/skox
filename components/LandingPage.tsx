@@ -53,7 +53,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
   // A page's own questions first; the general ones still apply everywhere.
   const faq = [...(topic?.faq ?? []), ...landingFaq];
   return (
-    <div className="landing-page">
+    <div className={`landing-page${topic ? "" : " homepage-warm"}`}>
       <header className="site-header">
         <div className="shell header-inner">
           <Link href="/" aria-label="SKOX home">
@@ -83,7 +83,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
       <main id="top" tabIndex={-1}>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="shell hero-stage">
-            <HeroFragments />
+            {topic && <HeroFragments />}
             <div className="hero-copy">
               <p className="eyebrow">
                 <span className="status-dot" />
@@ -100,18 +100,18 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </span>
               </h1>
               <p className="hero-intro">{intro}</p>
-              <HeroComposer />
+              {topic && <HeroComposer />}
               <div className="hero-actions">
                 <a
                   href="#scope"
                   className="button button-primary"
                   data-cta="hero"
                 >
-                  {landing.cta}
+                  {topic ? landing.cta : "Book a free scope call"}
                   <Arrow />
                 </a>
-                <a href="#build" className="button button-ghost">
-                  {landing.secondaryCta}
+                <a href={topic ? "#build" : "#home-services"} className="button button-ghost">
+                  {topic ? landing.secondaryCta : "Explore our services"}
                   <span aria-hidden>↓</span>
                 </a>
               </div>
@@ -133,6 +133,13 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </p>
               </div>
             </div>
+            {!topic && <aside className="home-people" aria-label="Meet your SKOX founders">
+              <div className="home-people-photos">{landing.founders.map(person => <figure key={person.name}>
+                <Image src={person.photo} width={280} height={350} sizes="(max-width: 600px) 40vw, 240px" alt={person.name} />
+                <figcaption>{person.name}<span>Co-founder</span></figcaption>
+              </figure>)}</div>
+              <div className="home-people-note"><p className="eyebrow">Real people. Right here with you.</p><h2>Let’s build something<br />you’re proud of.</h2><p>You’ll work directly with us, from the first conversation to launch.</p><a className="text-link" href="#about">Get to know us <Arrow /></a></div>
+            </aside>}
           </div>
         </section>
         <div className="trust-strip">
@@ -150,7 +157,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
         </div>
         {topic && <TopicSection topic={topic} />}
         {!topic && <HomeServices />}
-        <CompareSection />
+        {topic && <CompareSection />}
         <BuildSection variant={variant} />
         <section
           className="process-section"
