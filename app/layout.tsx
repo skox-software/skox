@@ -38,7 +38,7 @@ const serif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `Custom software development: web apps, dashboards & websites — ${site.name}`,
+    default: `Website design, development & local SEO — ${site.name}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
@@ -89,7 +89,7 @@ const jsonLd = {
       image: `${site.url}/opengraph-image`,
       slogan: "Built at speed.",
       areaServed: { "@type": "Country", name: "United States" },
-      knowsAbout: topics.map((t) => t.serviceType),
+      knowsAbout: ["Website design and development", "Local SEO", "Custom automation tools", ...topics.map((t) => t.serviceType)],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "What we build",

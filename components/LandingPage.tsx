@@ -7,6 +7,9 @@ import { CompareSection } from "@/components/CompareSection";
 import { ConversionForm } from "@/components/ConversionForm";
 import { HeroComposer } from "@/components/HeroComposer";
 import { HeroFragments } from "@/components/HeroFragments";
+import { SiteNavigation } from "@/components/SiteNavigation";
+import { HomeServices } from "@/components/HomeServices";
+import { AutomationSection } from "@/components/AutomationSection";
 import { LandingTracking } from "@/components/LandingTracking";
 import { TopicSection } from "@/components/TopicSection";
 import { builds, landing, landingFaq, type BuildType } from "@/content/landing";
@@ -39,7 +42,7 @@ function Words({ text, offset = 0 }: { text: string; offset?: number }) {
 }
 
 /** The search phrase that opens the homepage's H1. */
-const HOME_KEYWORD = "Custom software development";
+const HOME_KEYWORD = "Website design, development & local SEO";
 
 export function LandingPage({ topic }: { topic?: Topic }) {
   const variant: BuildType | undefined = topic?.build;
@@ -50,22 +53,15 @@ export function LandingPage({ topic }: { topic?: Topic }) {
   // A page's own questions first; the general ones still apply everywhere.
   const faq = [...(topic?.faq ?? []), ...landingFaq];
   return (
-    <div className="landing-page">
+    <div className={`landing-page${topic ? "" : " homepage-warm"}`}>
       <header className="site-header">
         <div className="shell header-inner">
           <Link href="/" aria-label="SKOX home">
             <SkoxLogo className="brand-logo" />
           </Link>
-          <nav aria-label="Main navigation">
-            <a href="#why">Why SKOX</a>
-            <a href="#build">What we build</a>
-            <Link href="/examples">Examples</Link>
-            <a href="#process">How it works</a>
-            <a href="#about">Who we are</a>
-          </nav>
+          <SiteNavigation />
           <div className="header-actions">
-            {/* /portal is a separate Next app behind a rewrite, so it needs a full page load. */}
-            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- The portal is a separate Next.js app and needs a full navigation. */}
             <a
               className="header-login"
               href="/portal"
@@ -87,7 +83,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
       <main id="top" tabIndex={-1}>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="shell hero-stage">
-            <HeroFragments />
+            {topic && <HeroFragments />}
             <div className="hero-copy">
               <p className="eyebrow">
                 <span className="status-dot" />
@@ -104,23 +100,23 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </span>
               </h1>
               <p className="hero-intro">{intro}</p>
-              <HeroComposer />
+              {topic && <HeroComposer />}
               <div className="hero-actions">
                 <a
                   href="#scope"
                   className="button button-primary"
                   data-cta="hero"
                 >
-                  {landing.cta}
+                  {topic ? landing.cta : "Get a free discovery session"}
                   <Arrow />
                 </a>
-                <a href="#build" className="button button-ghost">
-                  {landing.secondaryCta}
+                <a href={topic ? "#build" : "#home-services"} className="button button-ghost">
+                  {topic ? landing.secondaryCta : "Explore our services"}
                   <span aria-hidden>↓</span>
                 </a>
               </div>
               <p className="hero-reassurance">{landing.reassurance}</p>
-              <div className="hero-founders">
+              {topic && <div className="hero-founders">
                 <div className="founder-avatars">
                   {landing.founders.map((person) => (
                     <Image
@@ -135,7 +131,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 <p>
                   <strong>You work with the builders</strong>, from day one.
                 </p>
-              </div>
+              </div>}
             </div>
           </div>
         </section>
@@ -153,7 +149,8 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           </div>
         </div>
         {topic && <TopicSection topic={topic} />}
-        <CompareSection />
+        {!topic && <HomeServices />}
+        {topic && <CompareSection />}
         <BuildSection variant={variant} />
         <section
           className="process-section"
@@ -303,8 +300,8 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           <div className="shell scope-grid">
             <div className="scope-copy">
               <p className="eyebrow">{landing.formEyebrow}</p>
-              <h2 id="scope-title">{landing.formTitle}</h2>
-              <p>{landing.formSub}</p>
+              <h2 id="scope-title">{topic ? landing.formTitle : "Get a free discovery session"}</h2>
+              <p>{topic ? landing.formSub : "Tell us a little about your business. We’ll reply within one business day to arrange a free meeting with us."}</p>
               <ul>
                 {landing.formBenefits.map((benefit) => (
                   <li key={benefit}>
@@ -324,9 +321,10 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </p>
               </div>
             </div>
-            <ConversionForm initial={variant} />
+            <ConversionForm initial={variant} submitLabel={topic ? undefined : "Request my free discovery session"} />
           </div>
         </section>
+        {!topic && <AutomationSection />}
       </main>
       <footer className="landing-footer">
         <div className="shell">
@@ -361,7 +359,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
             <span>Working with clients everywhere</span>
             <Link href="/privacy">Privacy</Link>
             <Link href="/privacy#choices">Your Privacy Choices</Link>
-            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- separate app, see header */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- Cross-app navigation. */}
             <a href="/portal">Client portal</a>
           </div>
         </div>
@@ -372,7 +370,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           className="button button-primary"
           data-cta="mobile-sticky"
         >
-          {landing.cta}
+          {topic ? landing.cta : "Get a free discovery session"}
           <Arrow />
         </a>
       </div>

@@ -128,7 +128,7 @@ Technical requirements:
 - Confirm `app/robots.ts` and `app/sitemap.ts` still exclude `/concepts/`.
 - Lighthouse mobile: Performance 90+, Accessibility 95+. Images via Next's image pipeline, sized, with alt text from the manifest.
 - Tap-to-call and tap-to-map links. Form fields with labels, error states, and a success state.
-- Render `<Beacon slug={SLUG} />` so Reiss gets a first-open alert (`preview_open` via `lib/track`, once per browser session). Do not add any third-party tracker.
+- Render `<Beacon slug={SLUG} dealId={DEAL_ID} />` with the portal deal id from the INPUT. Once the preview is marked sent (automatic when the link goes out in a portal email; a "Mark sent" button otherwise), the first view emails the team and every view lands in the lead's history. The team previews with `?team` (the portal's "Open preview" button adds it) so their own looks never count. Do not add any third-party tracker.
 - No `console.log`, no lorem ipsum, no `TODO` left in the page.
 
 ## STAGE 4: QA (write `qa.md`)

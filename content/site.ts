@@ -9,9 +9,9 @@
 
 export const site = {
   name: "SKOX",
-  tagline: "Custom web apps, dashboards & websites. Built at speed.",
+  tagline: "Website design, development & local SEO.",
   description:
-    "Custom web apps, dashboards and websites, built at speed. Work directly with the SKOX founders. A clear scope, fixed price and delivery date, agreed before you pay.",
+    "Website design, development, local SEO and custom automation tools. Work directly with the SKOX founders, with a clear scope, fixed price and timeline agreed upfront.",
   email: "founder@skoxsoftware.com",
   /** The number on the Google ads' call asset. Shown on the trade pages. */
   phone: { display: "(904) 792-0720", href: "tel:+19047920720" },
