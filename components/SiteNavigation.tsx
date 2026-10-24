@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 
 const groups = [
   { label: "Services", links: [["/websites", "Website design & development"], ["/#local-seo", "Local SEO"], ["/#automation", "Custom Automation Tools"]] },
+  { label: "Examples", links: [["/dashboard-examples", "Dashboards"], ["/internal-tool-examples", "Internal tools"], ["/dashboard-examples#hvac", "HVAC"], ["/examples", "All examples"]] },
   { label: "About SKOX", links: [["/#home-services", "How we help"], ["/#process", "How it works"], ["/#about", "Meet the founders"], ["/#faq", "Questions & answers"]] },
 ];
 
@@ -32,6 +33,5 @@ export function SiteNavigation() {
       <summary>{group.label} <span aria-hidden="true">⌄</span></summary>
       <div className="site-nav-menu">{group.links.map(([href, label]) => <Link key={href} href={href} onClick={event => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</Link>)}</div>
     </details>)}
-    <Link href="/examples">Examples</Link>
   </nav>;
 }

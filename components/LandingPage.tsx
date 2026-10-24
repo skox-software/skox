@@ -107,7 +107,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                   className="button button-primary"
                   data-cta="hero"
                 >
-                  {topic ? landing.cta : "Book a free scope call"}
+                  {topic ? landing.cta : "Get a free discovery session"}
                   <Arrow />
                 </a>
                 <a href={topic ? "#build" : "#home-services"} className="button button-ghost">
@@ -116,7 +116,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </a>
               </div>
               <p className="hero-reassurance">{landing.reassurance}</p>
-              <div className="hero-founders">
+              {topic && <div className="hero-founders">
                 <div className="founder-avatars">
                   {landing.founders.map((person) => (
                     <Image
@@ -131,15 +131,8 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 <p>
                   <strong>You work with the builders</strong>, from day one.
                 </p>
-              </div>
+              </div>}
             </div>
-            {!topic && <aside className="home-people" aria-label="Meet your SKOX founders">
-              <div className="home-people-photos">{landing.founders.map(person => <figure key={person.name}>
-                <Image src={person.photo} width={280} height={350} sizes="(max-width: 600px) 40vw, 240px" alt={person.name} />
-                <figcaption>{person.name}<span>Co-founder</span></figcaption>
-              </figure>)}</div>
-              <div className="home-people-note"><p className="eyebrow">Real people. Right here with you.</p><h2>Let’s build something<br />you’re proud of.</h2><p>You’ll work directly with us, from the first conversation to launch.</p><a className="text-link" href="#about">Get to know us <Arrow /></a></div>
-            </aside>}
           </div>
         </section>
         <div className="trust-strip">
@@ -307,8 +300,8 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           <div className="shell scope-grid">
             <div className="scope-copy">
               <p className="eyebrow">{landing.formEyebrow}</p>
-              <h2 id="scope-title">{landing.formTitle}</h2>
-              <p>{landing.formSub}</p>
+              <h2 id="scope-title">{topic ? landing.formTitle : "Get a free discovery session"}</h2>
+              <p>{topic ? landing.formSub : "Tell us a little about your business. We’ll reply within one business day to arrange a free meeting with us."}</p>
               <ul>
                 {landing.formBenefits.map((benefit) => (
                   <li key={benefit}>
@@ -328,7 +321,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </p>
               </div>
             </div>
-            <ConversionForm initial={variant} />
+            <ConversionForm initial={variant} submitLabel={topic ? undefined : "Request my free discovery session"} />
           </div>
         </section>
         {!topic && <AutomationSection />}
@@ -377,7 +370,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           className="button button-primary"
           data-cta="mobile-sticky"
         >
-          {landing.cta}
+          {topic ? landing.cta : "Get a free discovery session"}
           <Arrow />
         </a>
       </div>
