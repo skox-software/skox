@@ -107,7 +107,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                   className="button button-primary"
                   data-cta="hero"
                 >
-                  {topic ? landing.cta : "Book a free scope call"}
+                  {topic ? landing.cta : "Get a free discovery session"}
                   <Arrow />
                 </a>
                 <a href={topic ? "#build" : "#home-services"} className="button button-ghost">
@@ -300,8 +300,8 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           <div className="shell scope-grid">
             <div className="scope-copy">
               <p className="eyebrow">{landing.formEyebrow}</p>
-              <h2 id="scope-title">{landing.formTitle}</h2>
-              <p>{landing.formSub}</p>
+              <h2 id="scope-title">{topic ? landing.formTitle : "Get a free discovery session"}</h2>
+              <p>{topic ? landing.formSub : "Tell us a little about your business. We’ll reply within one business day to arrange a free meeting with us."}</p>
               <ul>
                 {landing.formBenefits.map((benefit) => (
                   <li key={benefit}>
@@ -321,7 +321,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </p>
               </div>
             </div>
-            <ConversionForm initial={variant} />
+            <ConversionForm initial={variant} submitLabel={topic ? undefined : "Request my free discovery session"} />
           </div>
         </section>
         {!topic && <AutomationSection />}
@@ -370,7 +370,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           className="button button-primary"
           data-cta="mobile-sticky"
         >
-          {landing.cta}
+          {topic ? landing.cta : "Get a free discovery session"}
           <Arrow />
         </a>
       </div>
