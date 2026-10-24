@@ -89,7 +89,7 @@ const jsonLd = {
       image: `${site.url}/opengraph-image`,
       slogan: "Built at speed.",
       areaServed: { "@type": "Country", name: "United States" },
-      knowsAbout: topics.map((t) => t.serviceType),
+      knowsAbout: ["Website design and development", "Local SEO", "Custom automation tools", ...topics.map((t) => t.serviceType)],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "What we build",
