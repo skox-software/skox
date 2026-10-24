@@ -38,7 +38,7 @@ const serif = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `Custom software development: web apps, dashboards & websites — ${site.name}`,
+    default: `Website design, development & local SEO — ${site.name}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
