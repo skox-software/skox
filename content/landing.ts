@@ -99,11 +99,11 @@ export const heroFragments = {
 } as const;
 
 export const landing = {
-  eyebrow: "Independent software studio · Working everywhere",
-  headline: "Your next big thing.",
-  accent: "Built at speed.",
+  eyebrow: "Your business, with room to grow",
+  headline: "Your business, online.",
+  accent: "Let’s help it grow.",
   intro:
-    "Custom web apps, dashboards and websites. We take what your business needs and turn it into working software—with a fixed price and a delivery date agreed upfront.",
+    "Website design, development and local SEO to help customers find you and get in touch. Work directly with our founders, with a clear scope, fixed price and timeline agreed upfront.",
   cta: "Get my price & timeline",
   secondaryCta: "Explore what we build",
   reassurance: "Free 30-minute scope call. No deposit. No obligation.",

@@ -21,7 +21,7 @@ const EXAMPLE_PAGES: Partial<Record<BuildType, string>> = {
  */
 export function BuildSection({ variant }: { variant?: BuildType }) {
   const chosen = builds.find((build) => build.id === variant);
-  const [selected, setSelected] = useState<BuildType>(variant || "dashboards");
+  const [selected, setSelected] = useState<BuildType>(variant || "websites");
   const preview = useRef<HTMLDivElement>(null);
   const cards = useRef<HTMLDivElement>(null);
 
