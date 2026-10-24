@@ -3443,3 +3443,41 @@
 @media (max-width: 600px) {
   .landing-page .home-services-grid article { padding: 24px; }
 }
+
+/* The homepage introduces the people behind the work before the product demos. */
+.landing-page.homepage-warm .hero-section { padding-block: 64px 72px; background: linear-gradient(115deg, #faf9f6 55%, #edf2e8); }
+.landing-page.homepage-warm .hero-stage { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: 64px; }
+.landing-page.homepage-warm .hero-copy { margin: 0; text-align: left; }
+.landing-page.homepage-warm .hero-copy .eyebrow, .landing-page.homepage-warm .hero-actions { justify-content: flex-start; }
+.landing-page.homepage-warm .hero-intro { margin-inline: 0; font-size: 18px; line-height: 1.7; }
+.landing-page.homepage-warm h1 { font-family: var(--font-geist), sans-serif; font-size: clamp(40px, 4.5vw, 64px); font-weight: 600; line-height: 1.12; letter-spacing: -.045em; text-wrap: initial; }
+.landing-page.homepage-warm h1 > span.accent { font-style: normal; color: #50694f; }
+.landing-page.homepage-warm .hero-founders { display: none; }
+.landing-page.homepage-warm .eyebrow { font-family: var(--font-geist), sans-serif; letter-spacing: .035em; }
+.landing-page.homepage-warm .hero-copy .h1-keyword { font-family: var(--font-geist), sans-serif; letter-spacing: .02em; line-height: 1.6; }
+.landing-page .home-people { min-width: 0; padding: 20px; border: 1px solid #dce3d4; border-radius: 32px; background: #fffef9; }
+.landing-page .home-people-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.landing-page .home-people figure { margin: 0; min-width: 0; }
+.landing-page .home-people img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; }
+.landing-page .home-people figcaption { padding: 12px 2px; font-size: 15px; font-weight: 600; }
+.landing-page .home-people figcaption span { display: block; margin-top: 3px; color: var(--lp-muted); font-size: 12px; font-weight: 400; }
+.landing-page .home-people-note { padding: 18px 12px 8px; }
+.landing-page .home-people-note .eyebrow { margin-bottom: 12px; font-size: 11px; }
+.landing-page .home-people-note h2 { font: 500 30px/1.2 var(--font-geist), sans-serif; letter-spacing: -.035em; }
+.landing-page .home-people-note > p:not(.eyebrow) { margin-top: 14px; color: var(--lp-muted); line-height: 1.6; font-size: 15px; }
+.landing-page .home-people-note .text-link { margin-top: 12px; }
+.landing-page.homepage-warm .home-services h2 { font-family: var(--font-geist), sans-serif; font-weight: 500; font-size: clamp(30px, 3.5vw, 44px); line-height: 1.2; letter-spacing: -.035em; }
+#home-services { scroll-margin-top: 140px; }
+@media (max-width: 1000px) {
+  .landing-page.homepage-warm .hero-stage { gap: 32px; }
+  .landing-page.homepage-warm .hero-actions { gap: 10px; }
+}
+@media (max-width: 760px) {
+  .landing-page.homepage-warm .hero-section { padding-block: 36px 48px; }
+  .landing-page.homepage-warm .hero-stage { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .landing-page.homepage-warm h1 { font-size: clamp(40px, 7vw, 52px); }
+  .landing-page.homepage-warm .hero-copy { max-width: 100%; }
+  .landing-page .home-people { max-width: 520px; width: 100%; padding: 16px; }
+  .landing-page .home-people-note { padding-inline: 4px; }
+  .landing-page .home-people-note h2 { font-size: 28px; }
+}

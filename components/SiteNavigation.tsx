@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 
 const groups = [
   { label: "Services", links: [["/websites", "Website design & development"], ["/#local-seo", "Local SEO"], ["/#automation", "Custom Automation Tools"]] },
-  { label: "About SKOX", links: [["/#why", "Why SKOX"], ["/#process", "How it works"], ["/#about", "Meet the founders"], ["/#faq", "Questions & answers"]] },
+  { label: "About SKOX", links: [["/#home-services", "How we help"], ["/#process", "How it works"], ["/#about", "Meet the founders"], ["/#faq", "Questions & answers"]] },
 ];
 
 export function SiteNavigation() {
