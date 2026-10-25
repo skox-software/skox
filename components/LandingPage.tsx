@@ -133,6 +133,15 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </p>
               </div>}
             </div>
+            {!topic && (
+              <div id="scope" className="discovery-card">
+                <ConversionForm
+                  discovery
+                  placeholder="A new website, more local customers, or an idea you’d like to explore…"
+                  submitLabel="Request my free discovery call"
+                />
+              </div>
+            )}
           </div>
         </section>
         <div className="trust-strip">
@@ -293,7 +302,7 @@ export function LandingPage({ topic }: { topic?: Topic }) {
           </div>
         </section>
         <section
-          id="scope"
+          id={topic ? "scope" : "discovery"}
           className="scope-section"
           aria-labelledby="scope-title"
         >
@@ -321,7 +330,14 @@ export function LandingPage({ topic }: { topic?: Topic }) {
                 </p>
               </div>
             </div>
-            <ConversionForm initial={variant} submitLabel={topic ? undefined : "Request my free discovery session"} />
+            {topic ? <ConversionForm initial={variant} /> : (
+              <div className="discovery-return">
+                <p>A fresh perspective on your website. A clear next step for your business.</p>
+                <a href="#scope" className="button button-primary" data-cta="discovery-footer">
+                  Request my free discovery call <Arrow />
+                </a>
+              </div>
+            )}
           </div>
         </section>
         {!topic && <AutomationSection />}
