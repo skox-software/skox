@@ -20,7 +20,7 @@ const TYPE_OPTIONS = [
   { value: "other", label: landing.formLabels.other },
 ];
 
-export function ConversionForm({ initial, placeholder, submitLabel }: { initial?: BuildType; placeholder?: string; submitLabel?: string }) {
+export function ConversionForm({ initial, placeholder, submitLabel, discovery = false }: { initial?: BuildType; placeholder?: string; submitLabel?: string; discovery?: boolean }) {
   const [lead, setLead] = useState<Lead>({
     name: "",
     email: "",
@@ -231,7 +231,7 @@ export function ConversionForm({ initial, placeholder, submitLabel }: { initial?
       action="/api/contact"
       onSubmit={submit}
       noValidate
-      className="conversion-form"
+      className={`conversion-form${discovery ? " discovery-form" : ""}`}
       aria-busy={state === "sending"}
       onFocusCapture={() => {
         if (!started.current) {
@@ -240,8 +240,10 @@ export function ConversionForm({ initial, placeholder, submitLabel }: { initial?
         }
       }}
     >
-      <h3>{landing.formTitleSmall}</h3>
-      <p className="form-description">{landing.formNote}</p>
+      {discovery && <p className="discovery-kicker"><span aria-hidden>✦</span> A friendly first conversation</p>}
+      <h3>{discovery ? "Let’s talk about your business" : landing.formTitleSmall}</h3>
+      <p className="form-description">{discovery ? "Tell us a little about what you need. We’ll be in touch to arrange your free 30-minute discovery call." : landing.formNote}</p>
+      {discovery && <p className="discovery-perks">Free 30-minute call <span aria-hidden>·</span> No pressure <span aria-hidden>·</span> Practical advice</p>}
       <div className="honeypot" aria-hidden="true">
         <label>
           Website
@@ -260,7 +262,7 @@ export function ConversionForm({ initial, placeholder, submitLabel }: { initial?
           they have described the thing they want is the step they finish. */}
       <div className="field">
         <label htmlFor="project-broken">
-          {landing.formLabels.broken} <span aria-hidden>*</span>
+          {discovery ? "How can we help?" : landing.formLabels.broken} <span aria-hidden>*</span>
           {isDone("broken") && (
             <span className="field-done" aria-hidden>
               ✓
@@ -290,7 +292,7 @@ export function ConversionForm({ initial, placeholder, submitLabel }: { initial?
 
       {/* One tap, no dropdown to open. Pre-selected when the hero already read
           the brief, so most visitors never touch it. */}
-      <fieldset className="field type-field">
+      {!discovery && <fieldset className="field type-field">
         <legend>
           {landing.formLabels.projectType}{" "}
           <span className="optional">{landing.formLabels.optional}</span>
@@ -308,7 +310,7 @@ export function ConversionForm({ initial, placeholder, submitLabel }: { initial?
           ))}
         </div>
         <input type="hidden" name="projectType" value={lead.projectType} />
-      </fieldset>
+      </fieldset>}
 
       <div className="form-row">
         {(["name", "email"] as const).map((key) => (
@@ -368,7 +370,7 @@ export function ConversionForm({ initial, placeholder, submitLabel }: { initial?
         {state === "sending" ? landing.formSubmitting : (submitLabel ?? landing.formSubmit)}
         <span aria-hidden>↗</span>
       </button>
-      <p className="form-next">{landing.formNext}</p>
+      <p className="form-next">{discovery ? "We’ll reply within one business day to find a time that works for you." : landing.formNext}</p>
       <p className="form-privacy">
         {landing.formPrivacy} <Link href="/privacy">Privacy</Link>
       </p>
