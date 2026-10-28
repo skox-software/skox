@@ -59,10 +59,10 @@
   <section id="how"><div class="wrap grid sec">
     <div class="c1-3"><div class="n num">01</div><h2>A desk does the legwork. Your people make the calls.</h2><p class="intro">Every desk has the same four parts, built around how your office actually works.</p></div>
     <div class="c4-12 rows">
-      <div class="row"><div class="n num">Collect</div><div><h3>Pulls documents and data in by itself.</h3><p>County sites, email, uploads, QuickBooks, the software you already run. Nothing is retyped.</p></div></div>
-      <div class="row"><div class="n num">Read</div><div><h3>Reads each document and applies your rules.</h3><p>A new threshold, county or staff member is a setting you change yourself, not a rebuild.</p></div></div>
-      <div class="row"><div class="n num">Prepare</div><div><h3>Produces the thing that needs checking.</h3><p>The quote, the filing, the packet or the statement, ready for a person to look at.</p></div></div>
-      <div class="row"><div class="n num">Hand off</div><div><h3>Stops at your decision. Every time.</h3><p>A person approves, signs or sends. The desk logs it and learns from it.</p></div></div>
+      <div class="row"><div class="n num">Collect<span class="small">The desk</span></div><div><h3>Pulls documents and data in by itself.</h3><p>County sites, email, uploads, QuickBooks, the software you already run. Nothing is retyped.</p></div></div>
+      <div class="row"><div class="n num">Read<span class="small">The desk</span></div><div><h3>Reads each document and applies your rules.</h3><p>A new threshold, county or staff member is a setting you change yourself, not a rebuild.</p></div></div>
+      <div class="row"><div class="n num">Prepare<span class="small">The desk</span></div><div><h3>Every job arrives as a finished draft.</h3><p>The quote, the filing, the packet or the statement, written and filed, ready for a person to look at.</p></div></div>
+      <div class="row"><div class="n num">Hand off<span class="small">Yours</span></div><div><h3>Stops at your decision. Every time.</h3><p>You approve, sign or send. The desk logs it and learns from it. The judgement, the signature and the client stay yours.</p></div></div>
     </div>
   </div></section>
 
@@ -75,8 +75,14 @@
   </div></section>
 
   <section id="math"><div class="wrap grid sec">
-    <div class="c1-3"><div class="n num">03</div><h2>Hire vs. build.</h2><p class="intro">The plain comparison. Your own numbers go in on the call.</p></div>
+    <div class="c1-3"><div class="n num">03</div><h2>Hire vs. build.</h2><p class="intro">What owners usually try first, then the plain comparison. Your own numbers go in on the call.</p></div>
     <div class="c4-12">
+      <div class="rows" style="margin-bottom:48px">
+        <div class="row"><div class="n num">01</div><div><h3>The next hire.</h3><p>Works until they leave. Four to eight weeks to train, out sick in busy season, and the cost comes back every year.</p></div></div>
+        <div class="row"><div class="n num">02</div><div><h3>The all-in-one app.</h3><p>Answers the phone and builds the website. It has never read a plat, a W-9 or a work order, so your staff still retype into it.</p></div></div>
+        <div class="row"><div class="n num">03</div><div><h3>ChatGPT on a laptop.</h3><p>Answers questions when someone asks. It doesn't pull the records, doesn't know your rates and doesn't file anything.</p></div></div>
+        <div class="row"><div class="n num">04</div><div><h3>A desk.</h3><p>Does the job, in your systems, with your rules, and stops at your decision. Priced against the hire, below.</p></div></div>
+      </div>
       <div class="figs">
         <div class="fig"><div><h3>The next admin hire</h3><ul><li>Every year, for as long as they stay</li><li>Four to eight weeks to hire and train</li><li>Out sick in busy season</li></ul></div><div class="amt num">$47,540<small>a year, before benefits</small></div></div>
         <div class="fig"><div><h3>A desk</h3><ul><li>One-time setup that covers configuring it to your office</li><li>A fixed monthly fee, about a quarter of what the work costs you now</li><li>Your data and rules, exportable any day</li></ul></div><div class="amt num">$1,500<small>a month, to start</small></div></div>
@@ -107,5 +113,17 @@
   <div class="c10-12 links"><a class="link" href="#">Privacy</a><a class="link" href="#">Your privacy choices</a><a class="link" href="#">Sign in</a></div>
 </div></footer>
 
+
+<script>
+  // The sheet fills in row by row, once, the way the desk's log does. 4 min 12 s compressed to about five seconds.
+  (function(){
+    var sheet=document.querySelector('.sheet'); if(!sheet) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    sheet.classList.add('run');
+    var rows=[].slice.call(sheet.querySelectorAll('tbody tr')), foot=sheet.querySelector('.foot');
+    rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); }, 500+i*650); });
+    setTimeout(function(){ foot.classList.add('on'); }, 500+rows.length*650+200);
+  })();
+</script>
 </body>
 </html>

@@ -145,7 +145,7 @@ No scroll-triggered effects. The sticky header is the only scroll behavior.
 Rows and table rows: paper-2 background. Links: blue underline. Buttons as above. All transitions 150ms.
 
 ### Special
-One: the blue dot after "Book a free review" grows from 10px to 12px on hover (transform: scale(1.2), 150ms). That's the whole budget.
+Two. The blue dot after "Book a free review" grows from 10px to 12px on hover (transform: scale(1.2), 150ms). And the job sheet runs once on load: its rows fade up one by one, 650ms apart, the foot line last, so "4 min 12 s" plays out in about five seconds (added 2026-10-27 after Josh's review of giga.ai and zaro.ai; the product is shown working, not pictured). Nothing counts up, nothing loops. That's the whole budget.
 
 ### Reduced motion
 ```css

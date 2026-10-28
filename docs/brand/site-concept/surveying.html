@@ -62,13 +62,13 @@
   </div>
 
   <section id="jobs"><div class="wrap grid sec">
-    <div class="c1-3"><div class="n num">01</div><h2>What the desk takes off your team.</h2><p class="intro">The jobs as your office would name them. Each one is a setting, not a rebuild.</p></div>
+    <div class="c1-3"><div class="n num">01</div><h2>One address, start to finish.</h2><p class="intro">The sample job above, step by step. Each step is a setting in your rulebook, not a rebuild.</p></div>
     <div class="c4-12 rows">
-      <div class="row"><div class="n num">Collect</div><div><h3>Pulls the appraiser record, plat and deed for every new address.</h3><p>From the county sites your staff open today. A new county is added once and works for every job after.</p></div></div>
-      <div class="row"><div class="n num">Read</div><div><h3>Checks the flood zone, zoning and setbacks.</h3><p>Reads the FEMA layer and the municipal code and writes down what it found, with the source.</p></div></div>
-      <div class="row"><div class="n num">Read</div><div><h3>Finds your prior jobs nearby.</h3><p>Searches the firm's own folders by distance, so a lot you surveyed last year is priced like one.</p></div></div>
-      <div class="row"><div class="n num">Prepare</div><div><h3>Drafts the quote from your rate sheet.</h3><p>Your rates, your job types, your wording. Written into the quote template the office already sends.</p></div></div>
-      <div class="row"><div class="n num">Hand off</div><div><h3>Files everything in the job folder and waits.</h3><p>The records, the notes and the draft, in the folder structure the crew uses. Nothing goes out until a person approves it.</p></div></div>
+      <div class="row"><div class="n num">01<span class="small">Collect</span></div><div><h3>A new address comes in. The desk pulls the appraiser record, plat and deed.</h3><p>From the county sites your staff open today. A new county is added once and works for every job after.</p></div></div>
+      <div class="row"><div class="n num">02<span class="small">Read</span></div><div><h3>It checks the flood zone, zoning and setbacks.</h3><p>Reads the FEMA layer and the municipal code and writes down what it found, with the source.</p></div></div>
+      <div class="row"><div class="n num">03<span class="small">Read</span></div><div><h3>It finds your prior jobs nearby.</h3><p>Searches the firm's own folders by distance, so a lot you surveyed last year is priced like one.</p></div></div>
+      <div class="row"><div class="n num">04<span class="small">Prepare</span></div><div><h3>The quote arrives as a finished draft, from your rate sheet.</h3><p>Your rates, your job types, your wording. Written into the quote template the office already sends.</p></div></div>
+      <div class="row"><div class="n num">05<span class="small">Yours</span></div><div><h3>Everything is filed in the job folder. The surveyor approves, changes or sends.</h3><p>The records, the notes and the draft, in the folder structure the crew uses. Nothing goes out until a person says so.</p></div></div>
     </div>
   </div></section>
 
@@ -114,5 +114,17 @@
   <div class="c10-12 links"><a class="link" href="#">Privacy</a><a class="link" href="#">Your privacy choices</a><a class="link" href="#">Sign in</a></div>
 </div></footer>
 
+
+<script>
+  // The sheet fills in row by row, once, the way the desk's log does. 4 min 12 s compressed to about five seconds.
+  (function(){
+    var sheet=document.querySelector('.sheet'); if(!sheet) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    sheet.classList.add('run');
+    var rows=[].slice.call(sheet.querySelectorAll('tbody tr')), foot=sheet.querySelector('.foot');
+    rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); }, 500+i*650); });
+    setTimeout(function(){ foot.classList.add('on'); }, 500+rows.length*650+200);
+  })();
+</script>
 </body>
 </html>

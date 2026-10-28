@@ -15,6 +15,25 @@ Status: **approved by Josh, 2026-10-27.** Nothing is built yet; building starts 
 | 7 | The sample job sheet | Real counties, a sample address, status line "Waiting on the owner" until Pat says yes to being named. | Ireland is named only with Pat's OK. |
 | 8 | `makemeunbusy.com` | Not part of launch. If bought later, 308 everything to `gounbusy.com`. | A fun redirect, nothing more. |
 
+## 0.1 Elements borrowed from the four reference sites (Josh, 2026-10-27)
+
+Josh reviewed giga.ai, legora.com, zaro.ai and beside.com. What each contributes, all inside `DESIGN.md` (no palette, layout or component changes):
+
+| From | Element | Where it lands |
+| --- | --- | --- |
+| Giga | The product runs in the fold, not a screenshot | The job sheet fills in row by row on load (about five seconds for "4 min 12 s"), ending on the blue "Waiting on the owner" row. Plays once; reduced-motion shows it finished. The one motion exception in `DESIGN.md` §7. |
+| Giga | One ticket told in numbered steps | Industry pages: "One address, start to finish", rows 01–05 following the sample job (Collect, Read, Read, Prepare, Yours). |
+| Giga | "See what it would resolve at your company" | The heading over the review form: "See what a desk would take off your team." |
+| Legora | Serious register, few words per screen, trust stated as flat facts | "Your data" block on the review page: exportable any day; your rulebook is a document you keep; never used to train anything. |
+| Zaro | The "what you already bought" ladder | Hire vs. build opens with four rows: 01 the next hire, 02 the all-in-one app, 03 ChatGPT on a laptop, 04 a desk. Never names a competitor. |
+| Zaro | Timestamps as the argument | The Time and Source columns stay on every sheet; the time is the proof. |
+| Beside | "Handled by / Yours again" | The number column of "How a desk works" carries "The desk" under Collect, Read, Prepare and "Yours" under Hand off. |
+| Beside | "Every move arrives as a finished draft" | The Prepare row: "Every job arrives as a finished draft." |
+
+Explicitly not taken: dark palettes and gradients, mono or uppercase labels, logo bars, stats and quotes we don't have, email-gated demos, the instant "free audit" widget (the SKOX scorecard already proved it produces nothing here), and any headline that names the category ("AI operating system", "aOS").
+
+The review page also answers the site's question under its H1: "Can AI run this part of your office? Usually, yes. The review is where we find out which part."
+
 ## 1. What the site is for
 
 One job: get an owner of a 5–50 person firm to book a free operations review. Every page ends in that button. No pricing calculator, no scorecard, no "get my price", no portfolio.
@@ -58,11 +77,11 @@ Copy, section by section:
 
 **The sheet.** Caption: "Quote Desk, one job, as it ran". Small: "Sample job. Real counties, sample address. Times are the desk's own log." Five rows (property appraiser record, plat and deed, flood zone, zoning and setbacks, quote) as in the mockup. Foot: "4 min 12 s from address to quote. Staff hours: 0." and the outline button "Approve quote ●" (decorative, links to `/surveying`).
 
-**01 A desk does the legwork. Your people make the calls.** Intro: "Every desk has the same four parts, built around how your office actually works." Rows Collect / Read / Prepare / Hand off, copy as in the mockup.
+**01 A desk does the legwork. Your people make the calls.** Intro: "Every desk has the same four parts, built around how your office actually works." Rows Collect / Read / Prepare ("Every job arrives as a finished draft.") / Hand off ("Stops at your decision. Every time. … The judgement, the signature and the client stay yours."), with "The desk" / "Yours" under the row labels.
 
 **02 Start with the question you're already asking.** Intro: "Each page shows a desk running in that trade, on sample data, labelled as a sample." Rows: Surveying, Property management (day one); Accounting, Title and escrow (when live).
 
-**03 Hire vs. build.** As in the mockup: "$47,540 a year, before benefits" (BLS OEWS May 2025, cited in small text) against "$1,500 a month, to start". Bullets as in the mockup. Add one line of small text under the desk figure: "The monthly fee is about a quarter of what the work costs you now, fixed for the term. The setup fee covers configuring the desk to your office."
+**03 Hire vs. build.** Intro: "What owners usually try first, then the plain comparison. Your own numbers go in on the call." The ladder first (01 the next hire, 02 the all-in-one app, 03 ChatGPT on a laptop, 04 a desk; copy in the mockup), then the figures as in the mockup: "$47,540 a year, before benefits" (BLS OEWS May 2025, cited in small text) against "$1,500 a month, to start". Bullets as in the mockup. Add one line of small text under the desk figure: "The monthly fee is about a quarter of what the work costs you now, fixed for the term. The setup fee covers configuring the desk to your office."
 
 **04 The review.** Steps 1–3 as in the mockup (60–90 minutes; proposal in your own numbers; decide, proposal good for 14 days). "Proof, the honest version" paragraph as in the mockup. No names (decision 5). Filled button to `/review`.
 
@@ -72,7 +91,7 @@ One template, one content file per industry. Same header and footer. Structure, 
 
 1. **Hero.** H1 is the question. Lead: one sentence on what the desk does in that trade. Aside: the three-line summary (what goes in, what comes out, where it stops). Filled button "Book a free review ●".
 2. **The sheet.** One job as it ran, on sample data, in that trade's own documents. The same table component as the homepage. Caption names the desk ("Quote Desk", "Maintenance Desk", "Title Desk", "1099 Desk").
-3. **01 What the desk takes off your team.** Rows: the four or five jobs it runs, each one sentence, written as the owner would say them ("Pull the appraiser record and the plat for every new address").
+3. **01 One address, start to finish.** The sample job as numbered steps 01–05 (Collect, Read, Read, Prepare, Yours), each one sentence in the owner's words, following the rows of the sheet above.
 4. **02 Where it stops.** Two or three rows: the decisions that stay with a person in that trade (the quote amount, the vendor to send, the filing to sign).
 5. **03 Hire vs. build**, with the trade's own hire named (survey tech, maintenance coordinator, title processor, seasonal 1099 preparer) and the same cited wage line or the trade's own BLS figure.
 6. **04 The review.** Same three steps. Filled button. Recording of the desk running goes here when one exists (the plan calls for a 3-minute recording per page; none exists yet, so the slot is omitted, not faked).
@@ -81,7 +100,7 @@ Industry copy to write once Josh confirms the page list; the surveying page draw
 
 ### 2.3 The review (`/review`)
 
-H1: "Book a free operations review." Lead: "60 to 90 minutes, in your office or on a screen share. We watch how one part of your office runs today and come back with a proposal in your own numbers. Free. No pitch deck." Three steps repeated in short. The form is on this page, left column; the right column holds the "what to have ready" list (the systems you use, who does the work, roughly how many jobs a month). No phone number (decision 6).
+H1: "Book a free operations review." Under it: "Can AI run this part of your office? Usually, yes. The review is where we find out which part." Aside: "60 to 90 minutes, in your office or on a screen share. We watch how one part of your office runs today and come back with a proposal in your own numbers. Free. No pitch deck." Three steps repeated in short. The form is on this page, left column; headed "See what a desk would take off your team."; the right column holds "What to have ready" (the systems you use, who does the work, roughly how many a month), "What you get" (the proposal; the yes/no job list and the 90-day out) and "Your data" (exportable any day; your rulebook is a document you keep; never used to train anything). No phone number (decision 6).
 
 **Form fields** (replacing the SKOX scope form):
 

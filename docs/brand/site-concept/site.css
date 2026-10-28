@@ -124,3 +124,9 @@
     .fig .amt small { display:block; margin:4px 0 0; }
   }
   @media (prefers-reduced-motion:reduce) { .enter { animation:none; opacity:1; transform:none; } * { transition:none !important; } html { scroll-behavior:auto; } }
+
+/* the sheet runs once on load (reduced-motion shows it finished) */
+.sheet.run tbody tr, .sheet.run .foot { opacity:0; transform:translateY(4px); transition:opacity .3s ease-out, transform .3s ease-out; }
+.sheet.run tbody tr.on, .sheet.run .foot.on { opacity:1; transform:none; }
+.row .n .small { display:block; font-weight:400; margin-top:2px; }
+@media (prefers-reduced-motion:reduce) { .sheet.run tbody tr, .sheet.run .foot { opacity:1; transform:none; transition:none; } }
