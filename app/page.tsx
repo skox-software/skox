@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Sheet } from "@/components/site/Sheet";
-import { PhotoHero } from "@/components/site/PhotoHero";
+import { DeskMockup } from "@/components/site/DeskMockup";
 import { Figures, ReviewSection, SectionHead, Strike, Strip } from "@/components/site/Bits";
-import { films, home, quoteDeskJob, stills, wall } from "@/content/site";
+import { home, quoteDeskJob, quoteDeskMock, stills, wall } from "@/content/site";
 
 export const metadata = { alternates: { canonical: "/" } };
 
@@ -15,19 +15,30 @@ export default function Home() {
     <div className="ub">
       <Header />
       <main id="top" tabIndex={-1}>
-        <PhotoHero
-          eyebrow={hero.eyebrow}
-          headlineBefore={hero.headlineBefore}
-          struck={hero.struck}
-          headlineAfter={hero.headlineAfter}
-          lead={hero.lead}
-          primary={hero.primary}
-          secondary={{ label: hero.secondary, href: "/review" }}
-          before={stills.home}
-          after={stills.homeAfter}
-          film={films.home}
-          caption="Photograph: a sample week's paperwork. Nothing here is a client's."
-        />
+        <div className="mock-hero">
+          <div className="wrap grid">
+            <div className="c1-5">
+              <div className="inner">
+                <p className="q">{hero.eyebrow}</p>
+                <h1>
+                  {hero.headlineBefore} <Strike>{hero.struck}</Strike> {hero.headlineAfter}
+                </h1>
+                <p className="lead">{hero.lead}</p>
+                <div className="actions">
+                  <Link className="btn paper" href="/review" data-cta="hero">
+                    {hero.primary} <span className="dot" />
+                  </Link>
+                  <Link className="link" href="/review" data-cta="hero-secondary">
+                    {hero.secondary}
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="c6-12">
+              <DeskMockup mock={quoteDeskMock} />
+            </div>
+          </div>
+        </div>
 
         <section id="cost">
           <div className="wrap">

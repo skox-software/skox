@@ -31,10 +31,6 @@ export const stills = {
   home: { src: "/brand/stills/pile.jpg", bg: "#0058F0", alt: "A stack of manila folders labelled Invoices, Clients, Follow up, County and Payroll, an open ledger of handwritten figures, a rubber stamp and an ink pad, laid out on a blue surface." },
   surveying: { src: "/brand/stills/surveying.jpg", bg: "#0159EE", alt: "A folded county plat, a property appraiser printout, a FEMA flood map, a surveyor's field book, a brass plumb bob and a rubber stamp, laid out on a blue surface." },
   "property-management": { src: "/brand/stills/maintenance.jpg", bg: "#025BE9", alt: "A clipboard with a maintenance work order, a tenant's handwritten note, a ring of keys tagged 2B, a lease page with a highlighted clause and a rubber stamp, laid out on a blue surface." },
-  /* The same desks, cleared: the stamp, the ink pad and one approved sheet. */
-  homeAfter: { src: "/brand/stills/pile-filed.jpg", bg: "#0058F0", alt: "The same blue surface: the paperwork filed in one squared stack, the top sheet a quote stamped Approved, a till receipt reading 5 documents, 4 read, 1 quote drafted, 4 min 12 s, staff hours 0." },
-  surveyingAfter: { src: "/brand/stills/surveying-after.jpg", bg: "#0159EE", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one quote stamped Approved." },
-  "property-managementAfter": { src: "/brand/stills/maintenance-after.jpg", bg: "#025BE9", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one work order stamped Sent." },
 } as const;
 
 /**
@@ -42,10 +38,6 @@ export const stills = {
  * question they are already asking. Trades with a live page link to it;
  * the rest go to the review with the trade filled in.
  */
-/** The hero films: the paperwork stamping and filing itself. Desktop only; phones get the wipe. */
-export const films = {
-  home: { mp4: "/brand/stills/pile-filed.mp4", webm: "/brand/stills/pile-filed.webm" },
-} as const;
 
 export const wall = [
   { slug: "surveying", trade: "Land surveying", question: "Can AI pull the county records for every survey job?", src: "/brand/stills/surveying.jpg", live: true },
@@ -59,6 +51,42 @@ export const wall = [
   { slug: "freight", trade: "Freight and trucking", question: "Can AI match the bills of lading to the rate confirmations?", src: "/brand/stills/freight.jpg", live: false },
   { slug: "hvac", trade: "HVAC and plumbing", question: "Can AI turn the service tickets into invoices?", src: "/brand/stills/hvac.jpg", live: false },
 ] as const;
+
+/**
+ * The desk, as the hero shows it: what came in, what the desk did, what
+ * came back. Sample firm, sample job; the month's numbers are the sample
+ * firm's arithmetic from the cost ledger below the hero, never a client's.
+ */
+export const quoteDeskMock = {
+  desk: "Quote Desk",
+  inbox: [
+    { kind: "Email", label: "New survey request: a platted lot in Lake Mary" },
+    { kind: "Attachment", label: "Prior survey, 2019.pdf" },
+    { kind: "County portal", label: "Seminole County Property Appraiser" },
+    { kind: "Spreadsheet", label: "Rates 2026.xlsx" },
+  ],
+  work: [
+    { label: "Pulled the appraiser record", time: "0:41" },
+    { label: "Pulled the plat and deed from the Clerk", time: "1:07" },
+    { label: "Read the FEMA flood layer: Zone X", time: "0:12" },
+    { label: "Read zoning and setbacks: R-1", time: "0:19" },
+    { label: "Found two prior jobs within 0.3 miles", time: "0:08" },
+    { label: "Drafted the quote from the rate sheet", time: "1:45" },
+  ],
+  out: {
+    title: "Quote: boundary survey, platted lot",
+    lines: ["Records attached, four sources", "Priced from the firm's own rates", "Filed in the job folder"],
+    stamp: "Waiting on the owner",
+    action: "Approve",
+  },
+  meter: [
+    { n: "40", label: "quotes drafted" },
+    { n: "30", label: "office hours back" },
+    { n: "$890", label: "of payroll not spent" },
+  ],
+  meterNote: "Sample firm: 40 quotes a month at 45 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
+  total: "4:12",
+} as const;
 
 export const nav = {
   links: [

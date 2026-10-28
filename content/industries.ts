@@ -1,4 +1,5 @@
-import { quoteDeskJob, type SheetRow, type TicketHead } from "@/content/site";
+import { quoteDeskJob, quoteDeskMock, type SheetRow, type TicketHead } from "@/content/site";
+import type { DeskMock } from "@/components/site/DeskMockup";
 
 /**
  * One question page per industry. A page ships only when a sample desk runs
@@ -14,6 +15,7 @@ export type Industry = {
   question: string;
   description: string;
   lead: string;
+  mock: DeskMock;
   sheet: {
     caption: string;
     sample: string;
@@ -47,6 +49,7 @@ export const industries: Industry[] = [
     description:
       "A new address comes in; the Quote Desk collects the appraiser record, plat, flood zone and zoning, finds your prior jobs nearby and drafts the quote from your rates. The surveyor approves it.",
     lead: "Usually, yes. A new address comes in; the desk collects the appraiser record, plat, flood zone and zoning, finds your prior jobs nearby and drafts the quote from your rates. The surveyor approves it.",
+    mock: quoteDeskMock,
     sheet: {
       caption: quoteDeskJob.caption,
       sample: quoteDeskJob.sample,
@@ -113,6 +116,36 @@ export const industries: Industry[] = [
     description:
       "A tenant's request comes in by email, text or portal; the Maintenance Desk reads it, checks the lease and the unit's history, picks the vendor from your list and drafts the work order. Your coordinator sends it.",
     lead: "Usually, yes. A request comes in by email, text or portal; the desk reads it, checks the lease and the unit's history, picks the vendor from your own list and drafts the work order. Your coordinator approves and sends it.",
+    mock: {
+      desk: "Maintenance Desk",
+      inbox: [
+        { kind: "Tenant portal", label: "\"Water under the kitchen sink since last night\", unit 2B" },
+        { kind: "Photo", label: "IMG_4471.jpg, the cabinet floor" },
+        { kind: "Lease file", label: "2B lease, maintenance clause" },
+        { kind: "Vendor list", label: "Plumbers you use for this building" },
+      ],
+      work: [
+        { label: "Read the request and the photo", time: "0:04" },
+        { label: "Checked the lease: landlord's repair", time: "0:06" },
+        { label: "Found two prior plumbing calls on 2B", time: "0:05" },
+        { label: "Set urgency from your rules: same day", time: "0:03" },
+        { label: "Picked the plumber from your list", time: "0:06" },
+        { label: "Drafted the work order with access notes", time: "0:38" },
+      ],
+      out: {
+        title: "Work order: 2B, active leak, same day",
+        lines: ["Vendor: your plumber for this building", "Not-to-exceed from your rulebook", "Photos and access notes attached"],
+        stamp: "Waiting on the coordinator",
+        action: "Send",
+      },
+      meter: [
+        { n: "120", label: "requests triaged" },
+        { n: "40", label: "office hours back" },
+        { n: "$1,190", label: "of payroll not spent" },
+      ],
+      meterNote: "Sample firm: 120 requests a month at 20 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
+      total: "1:02",
+    },
     sheet: {
       caption: "The Maintenance Desk, one request, as it ran",
       sample: "Sample request. Sample building, sample tenant.",

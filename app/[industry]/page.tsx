@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Sheet } from "@/components/site/Sheet";
-import { PhotoHero } from "@/components/site/PhotoHero";
+import { DeskMockup } from "@/components/site/DeskMockup";
+import Link from "next/link";
 import { Figures, ReviewSection, SectionHead, Steps, Strip } from "@/components/site/Bits";
 import { home, site, stills } from "@/content/site";
 import { industries, industryBySlug } from "@/content/industries";
@@ -33,22 +34,35 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
   const industry = industryBySlug(slug);
   if (!industry) notFound();
   const still = stills[industry.slug as keyof typeof stills] ?? stills.home;
-  const after = stills[`${industry.slug}After` as keyof typeof stills];
 
   return (
     <div className="ub">
       <Header />
       <main id="top" tabIndex={-1}>
-        <PhotoHero
-          eyebrow={`${industry.trade}: ${industry.desk}`}
-          headlineBefore={industry.question}
-          lead={industry.lead}
-          primary="Book a free review"
-          secondary={{ label: "Watch one job run", href: "#job" }}
-          before={still}
-          after={after}
-          caption="Photograph: sample paperwork. Nothing here is a client's."
-        />
+        <div className="mock-hero">
+          <div className="wrap grid">
+            <div className="c1-5">
+              <div className="inner">
+                <p className="q">
+                  {industry.trade}: {industry.desk}
+                </p>
+                <h1>{industry.question}</h1>
+                <p className="lead">{industry.lead}</p>
+                <div className="actions">
+                  <Link className="btn paper" href="/review" data-cta="hero">
+                    Book a free review <span className="dot" />
+                  </Link>
+                  <Link className="link" href="#job">
+                    See the whole job
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="c6-12">
+              <DeskMockup mock={industry.mock} />
+            </div>
+          </div>
+        </div>
 
         <section id="job">
           <div className="wrap">

@@ -36,9 +36,9 @@ Explicitly not taken: dark palettes and gradients, mono or uppercase labels, log
 
 The review page also answers the site's question under its H1: "Can AI run this part of your office? Usually, yes. The review is where we find out which part."
 
-## 0.2 The photographs (Josh, 2026-10-28)
+## 0.2 The photographs and the desk mockup (Josh, 2026-10-28)
 
-After three passes on the type and chrome Josh still read the site as AI-made. The fix was imagery with a point of view: still-life photographs of each trade's real paperwork, shot flat on the brand blue (DESIGN.md §1 and §12). Each page opens on one, with an "after" plate of the same desk cleared; the home page carries a wall of ten trades so any owner finds their own pile. JPEGs ship from `public/brand/stills`; the 2K PNG masters are in `docs/brand/stills` in Josh's main checkout (not committed; ~40 MB). Wall tiles without a live page open `/review?industry=…` with the trade filled in.
+After three passes on the type and chrome Josh still read the site as AI-made. The fix was imagery with a point of view: still-life photographs of each trade's real paperwork, shot flat on the brand blue (DESIGN.md §1 and §12). The home page carries a wall of ten of them so any owner finds their own pile. Later the same day Josh ruled the photographs out of the heroes (the work is on screens, not paper) and asked for an UnBusy-branded mockup instead: the hero is now the desk drawn in the brand (what came in, what the desk did, what came back, the sample month), see DESIGN.md §14; the photographs stay on the wall. JPEGs ship from `public/brand/stills`; the 2K PNG masters are in `docs/brand/stills` in Josh's main checkout (not committed; ~40 MB). Wall tiles without a live page open `/review?industry=…` with the trade filled in.
 
 ## 1. What the site is for
 
