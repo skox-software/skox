@@ -86,6 +86,7 @@ export const quoteDeskMock = {
   ],
   meterNote: "Sample firm: 40 quotes a month at 45 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
   total: "4:12",
+  before: { src: "/brand/stills/surveying.jpg", alt: "", title: "Today: the same job, by hand.", line: "Four county sites, a PDF, a spreadsheet, an email. About 45 minutes of someone's time, 40 times a month." },
 } as const;
 
 export const nav = {

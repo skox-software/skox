@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 export type DeskMock = {
@@ -15,6 +16,8 @@ export type DeskMock = {
   meter: readonly { n: string; label: string }[];
   meterNote: string;
   total: string;
+  /** The pile, before: a photograph of the busywork and what it costs today. Wipes away into the desk. */
+  before?: { src: string; alt: string; title: string; line: string };
 };
 
 /**
@@ -35,7 +38,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
     let raf = 0;
 
     const finish = () => {
-      node.classList.add("done");
+      node.classList.add("done", "swept");
       node.querySelectorAll<HTMLElement>("[data-step]").forEach((el) => el.classList.add("on"));
       node.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => (el.textContent = el.dataset.count ?? ""));
       const t = node.querySelector<HTMLElement>("[data-timer]");
@@ -46,12 +49,15 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       timers.forEach(clearTimeout);
       timers = [];
       cancelAnimationFrame(raf);
-      node.classList.remove("done");
+      node.classList.remove("done", "swept");
       node.querySelectorAll<HTMLElement>("[data-step]").forEach((el) => el.classList.remove("on"));
       node.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => (el.textContent = "0"));
       const steps = Array.from(node.querySelectorAll<HTMLElement>("[data-step]"));
       // Step timing: inbox items 220ms apart, then the desk's lines 480ms apart, then the output.
-      let at = 200;
+      // The pile first: it holds for a beat, then wipes away and the desk starts.
+      const hold = mock.before ? 1400 : 0;
+      if (mock.before) timers.push(setTimeout(() => node.classList.add("swept"), 900));
+      let at = 200 + hold;
       steps.forEach((el) => {
         const gap = Number(el.dataset.step);
         at += gap;
@@ -60,7 +66,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       });
       // The timer runs while the desk works.
       const timer = node.querySelector<HTMLElement>("[data-timer]");
-      const workStart = 200 + mock.inbox.length * 220 + 200;
+      const workStart = 200 + hold + mock.inbox.length * 220 + 200;
       const workEnd = at;
       const [m, s] = mock.total.replace(/[^\d:]/g, "").split(":").map(Number);
       const totalSec = (m || 0) * 60 + (s || 0);
@@ -119,6 +125,15 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
           Play again
         </button>
       </div>
+      {mock.before && (
+        <div className="mock-before" aria-hidden>
+          <Image src={mock.before.src} alt="" fill sizes="(max-width: 980px) 100vw, 60vw" />
+          <div className="mock-before-cap">
+            <b>{mock.before.title}</b>
+            <span>{mock.before.line}</span>
+          </div>
+        </div>
+      )}
       <div className="mock-cols">
         <div className="mock-col in">
           <div className="mock-h">What came in</div>
