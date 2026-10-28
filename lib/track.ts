@@ -8,7 +8,7 @@ type Props = Record<string, string | number | boolean | null | undefined>;
  * GA4's recommended name for a lead. Marked as a key event in GA Admin, it is
  * the number every traffic source gets judged by.
  */
-const GA_RENAMES: Record<string, string> = { scope_request: "generate_lead" };
+const GA_RENAMES: Record<string, string> = { review_request: "generate_lead" };
 
 type AdWindow = {
   dataLayer?: unknown[];
@@ -29,22 +29,16 @@ function gtag(..._args: unknown[]): void {
 /** Tell the ad platforms a lead happened. Each is a no-op when its tag is off. */
 function adConversion(name: string, props?: Props): void {
   const w = window as unknown as AdWindow;
-  if (name === "scope_request") {
+  if (name === "review_request") {
     const eventID = leadEventId();
-    w.fbq?.("track", "Lead", { content_category: props?.type }, { eventID });
+    w.fbq?.("track", "Lead", { content_category: props?.industry }, { eventID });
     const ads = process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL;
     if (ads) gtag("event", "conversion", { send_to: ads, transaction_id: eventID });
     const li = process.env.NEXT_PUBLIC_LINKEDIN_LEAD_CONVERSION_ID;
     if (li) w.lintrk?.("track", { conversion_id: Number(li) });
-  } else if (name === "scorecard_download") {
-    // A template download, not an enquiry. Kept off Meta's `Lead` so the
-    // scope-call retargeting can still reach the people who downloaded it.
-    w.fbq?.("track", "CompleteRegistration", { content_name: "scorecard" }, { eventID: leadEventId() });
-    const ads = process.env.NEXT_PUBLIC_GOOGLE_ADS_SCORECARD_LABEL;
-    if (ads) gtag("event", "conversion", { send_to: ads, transaction_id: leadEventId() });
   } else if (name === "email_click" || name === "phone_click") {
     w.fbq?.("track", "Contact");
-  } else if (name === "scope_form_started") {
+  } else if (name === "review_form_started") {
     w.fbq?.("trackCustom", "LeadFormStarted");
   }
 }
@@ -58,7 +52,7 @@ function adConversion(name: string, props?: Props): void {
 function clarity(name: string): void {
   if (!process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || !(window as { clarity?: unknown }).clarity) return;
   Clarity.event(name);
-  if (name === "scope_request") {
+  if (name === "review_request") {
     Clarity.setTag("lead_event_id", leadEventId());
     Clarity.upgrade("lead");
   }

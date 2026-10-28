@@ -1,184 +1,85 @@
 # UnBusy site: DESIGN.md
 
-Scope: the public site (homepage, industry question pages, operations review page). Written 2026-10-26 to replace the first mockup, which read as a generic AI-generated SaaS page. Seed: Swiss Grid, set on paper. Interaction tier: L1 (refined static) by decision, not omission: the audience is owners of 5–50 person firms, and the brand sells calm.
+Scope: the public site (homepage, industry question pages, the review page, privacy). Rewritten 2026-10-27 after Josh rejected the first "Swiss ledger" direction as a tax form with no character, and reviewed giga.ai, legora.com, zaro.ai, beside.com and ramp.com. The mockups beside this file (`index.html`, `surveying.html`, `review.html`, sharing `site.css`) are the reference; `app/site.css` in the repo is the same sheet scoped under `.ub`.
 
-## 1. Visual Theme & Atmosphere
+## 1. Visual theme
 
-A well-set document, not a product page. Think a surveyor's job sheet or a ledger typeset by a Swiss printer: paper, ink, rules, numbers that line up, one blue dot. The page is left-aligned on a strict 12-column grid, uses rules instead of boxes, numbers instead of icons, and sentences instead of slogans. Nothing glows, floats, blurs or pulses.
+Blue paper. The brand's three colours (ink, paper, the logo blue) used with nerve: blue is a surface, not a dot. The product is shown as a sheet of paper, running. One signature device, the strike, carries the name: busywork is a word with a blue line through it.
 
-One line: **the office, in order.**
+One line: **the busywork, struck off.**
 
-Atmosphere words: plain, exact, unhurried, operator, printed.
+Atmosphere words: confident, plain, quick, operator, blue.
 
-## 2. Color Palette & Roles
+## 2. Colour
 
 ```css
-:root {
-  --ink: #15181D;        --ink-rgb: 21, 24, 29;        /* all text, rules, the one filled button */
-  --ink-2: #5B6168;      --ink-2-rgb: 91, 97, 104;     /* secondary text, sources, footnotes */
-  --paper: #FAFAF8;      --paper-rgb: 250, 250, 248;   /* page background */
-  --paper-2: #F1F1EE;    --paper-2-rgb: 241, 241, 238; /* row hover, table header band */
-  --rule: rgba(21, 24, 29, .18);                        /* hairlines */
-  --rule-strong: var(--ink);                            /* section and table top rules */
-  --blue: #0B5CFF;       --blue-rgb: 11, 92, 255;      /* the dot, link underlines on hover, focus ring. Never text on paper. */
-  --blue-ink: #0A3FB0;   --blue-ink-rgb: 10, 63, 176;  /* blue when it must be text (4.5:1 on paper) */
-}
+--ink:#15181D;  --ink-2:#5B6168;         /* text on paper; secondary text */
+--paper:#FAFAF8; --paper-2:#F1F1EE;     /* page; quiet bands */
+--blue:#0B5CFF;  --blue-deep:#0845C2;    /* hero surface, buttons, numerals, the strike, the price card; hover */
+--sky:#E9F0FF;   --sky-2:#D6E3FF;        /* the "a desk" row, the proof panel, focus rings */
+--rule:rgba(21,24,29,.14); --rule-paper:rgba(250,250,248,.28);
 ```
 
-Roles: ink does everything. Blue is punctuation: the logo dot, the dot after the primary action, the underline on hover, the focus ring. Blue as body text only in `--blue-ink`. There is no third color. Status is written in words, never colored chips.
+Roles. Blue: the homepage and industry heroes, every primary button, the section numerals, the strike, the desk's price card. Ink: text, the stats strip, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
 
-## 3. Typography Rules
+## 3. Type
 
-```html
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-```
-
-- Display: `"Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif`, weight 600, letter-spacing -0.035em, line-height 0.98.
-- Body: `Inter, "Helvetica Neue", Helvetica, Arial, sans-serif`, weight 400, line-height 1.5. `font-feature-settings: "tnum" 1, "ss01" 1` on figures and tables.
-- The wordmark in the header is the logo image, not live text.
+Inter Tight 700 for display, Inter 400/500/600 for text, via `next/font/google` (`--font-display`, `--font-body`).
 
 | Level | Size | Weight | Tracking | Use |
 | --- | --- | --- | --- | --- |
-| Display | clamp(44px, 7vw, 104px) | 600 | -0.035em | Hero only |
-| H2 | clamp(30px, 3.6vw, 48px) | 600 | -0.03em | Section titles |
-| H3 | 24px | 600 | -0.02em | Row titles, question rows |
-| Lead | 20px | 400 | 0 | Hero paragraph |
+| H1 | clamp(46px, 6.2vw, 96px) | 700 | -0.04em, line-height .96 | Hero. Inner pages clamp(40px, 5vw, 76px) |
+| Numeral | clamp(64px, 8vw, 120px) | 700 | -0.05em, blue | 01–04 at the head of each section |
+| H2 | clamp(34px, 4.4vw, 60px) | 700 | -0.03em | Section titles |
+| H3 | 22px | 600 (Inter) | -0.015em | Row and part titles |
+| Lead | 21–22px | 400 | 0 | Hero paragraph |
 | Body | 17px | 400 | 0 | Everything else |
-| Small | 14px | 400/500 | 0 | Sources, footnotes, table meta |
-| Number | same as its row | 500 | 0 | Section numbers "01", table figures, tabular |
+| Small | 14–15px | 400/500 | 0 | Eyebrows, sources, notices |
+| Strip | 34px | 700 | -0.03em | The four numbers on the ink band |
 
-Forbidden: monospace for labels, uppercase tracked eyebrows, serif display, gradient or shadowed text, weights above 600.
+Tabular figures (`tnum`) on anything numeric. No monospace, no uppercase tracking, no serif.
 
-## 4. Component Stylings
+## 4. Components
 
-### Buttons
+- **Buttons.** Pills, 56px (44px in the nav, 48px in the sheet). `blue` (primary), `paper` (on blue), `ink` (inside the sheet). Each ends with a 10px dot: white on blue and ink, blue on paper. Hover lifts 1px; nothing else.
+- **The strike.** `<span class="strike">busywork</span>`: an `::after` line at 54% height, .09em thick, blue on paper and paper on blue, scaling in from the left over 500ms, once, 700ms after load (`.now` runs on a 400ms delay for rows further down). Used in the hero H1, the review H1, and through the first three rungs of Hire vs. build. Never elsewhere.
+- **The sheet.** A white document (`.paper-doc`: 6px radius, one deep soft shadow) with two translucent sheets stacked behind it. Caption, four-column table (Document, Source, Status, Time), a foot line with the total and an ink button. On the blue hero it sits in columns 6–12. Rows fade up one by one on load, 600ms apart, the foot last; reduced-motion shows it finished.
+- **The strip.** Ink band, four numbers with one-line labels. Only the sample job's own figures; never a counter.
+- **Section head.** Blue numeral, H2 in columns 1–6, intro bottom-aligned in 7–12.
+- **Parts.** Four columns, 3px top border (blue for the desk's three, ink for "Yours"), a small label, H3, body.
+- **Question rows (`.qs`).** On the dark band: trade in small text, the question at 24–36px, a blue arrow; the row shifts right 12px on hover.
+- **The ladder.** Numbered rows with a right-hand status word; the first three struck; the fourth, "A desk.", on a sky row with blue numeral and tag.
+- **Figures.** Two cards: paper with a hairline for the hire, blue for the desk. Amount at up to 64px.
+- **Steps.** Numbered list, blue numerals, hairlines.
+- **Proof panel.** Sky, 8px radius, one paragraph.
+- **Form.** 52px fields, 1.5px hairline borders, 8px radius, blue border and sky ring on focus; a two-option segmented control for on site / screen share; blue pill submit. Labels above fields in small 500.
+- **Header.** Sticky, paper at 90% with blur, logo left, three links, the blue pill. Under 600px: logo and pill only.
+- **Footer.** Ink, dark lockup, one line, three links.
 
-Two kinds only. One filled button per screen at most.
+## 5. Layout
 
-```css
-.btn { display:inline-flex; align-items:center; gap:12px; min-height:48px; padding:0 20px; border:1px solid var(--ink); border-radius:0; background:var(--paper); color:var(--ink); font:500 17px/1 Inter, sans-serif; cursor:pointer; transition:background .15s, color .15s; }
-.btn:hover { background:var(--paper-2); }
-.btn:active { background:var(--ink); color:var(--paper); }
-.btn:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
-.btn[disabled] { opacity:.4; cursor:not-allowed; }
-.btn.fill { background:var(--ink); color:var(--paper); }
-.btn.fill:hover { background:#000; }
-.btn.fill:active { background:var(--paper); color:var(--ink); }
-.btn .dot { width:10px; height:10px; border-radius:50%; background:var(--blue); }
-```
+Container 1240px, 28px gutters (18px under 600px). 12 columns, 28px gap. Heroes: copy 1–5, sheet 6–12, bottom-aligned. Sections 120px tall (72px under 980px). Rounded corners exist only on pills, the sheet, the sky row and the two figure cards (6–8px). Depth exists only on the sheet (one shadow) and the stacked pages behind it.
 
-### Rows (replace cards)
+## 6. Motion
 
-Content that would be a card is a row between hairlines.
+- Load: hero elements fade up 10px over 500ms, staggered 80ms.
+- The strike draws once.
+- The sheet fills in once.
+- Hover: buttons lift 1px; question rows slide 12px.
+- Nothing scroll-triggered, nothing looping, nothing that counts. `prefers-reduced-motion` turns all of it off.
 
-```css
-.rows { border-top:1px solid var(--rule-strong); }
-.row { display:grid; grid-template-columns:72px 1fr; gap:24px; padding:28px 0; border-bottom:1px solid var(--rule); }
-.row:hover { background:var(--paper-2); }           /* only when the whole row is a link */
-.row:focus-within { outline:2px solid var(--blue); outline-offset:-2px; }
-.row .n { font-weight:500; font-feature-settings:"tnum" 1; color:var(--ink-2); }
-```
+## 7. Copy rules on the page
 
-### Table (the desk sample)
+- "AI" appears once per page, in the owner's question (the eyebrow or the H1). Never as a feature.
+- "UnBusy" names the company only in the logo, the title tag and legal lines; the word for people and work is "busywork", struck.
+- Every sample says "sample" in its caption. Named clients only with their permission.
+- No founder names, photos or phone numbers anywhere.
+- No category words in headlines: not "AI agency", "automation", "software", "operating system".
 
-```css
-table { width:100%; border-collapse:collapse; border-top:2px solid var(--rule-strong); font-size:16px; }
-th { text-align:left; font-weight:500; color:var(--ink-2); padding:12px 0; border-bottom:1px solid var(--rule); font-size:14px; }
-td { padding:14px 0; border-bottom:1px solid var(--rule); vertical-align:top; }
-td.num { font-feature-settings:"tnum" 1; text-align:right; }
-tr:hover td { background:var(--paper-2); }
-```
+## 8. Don't
 
-Status is a word ("Collected", "Read", "Waiting on Pat") with a 6px dot before it: ink dot for done, blue dot for the step waiting on a person.
+Gradients, glows, grain; logo bars; stats or quotes that aren't ours; counters that invent activity; uppercase tracked eyebrows; monospace; email-gated demos; a dark page (one dark band per page is the limit); a second accent colour.
 
-### Navigation
+## 9. Responsive
 
-A single hairline under the header. Logo left (image), links right as plain text; the last link is the action with the blue dot. No filled button in the nav.
-
-```css
-header { position:sticky; top:0; background:rgba(var(--paper-rgb), .92); border-bottom:1px solid var(--rule); }
-nav a { color:var(--ink); padding:8px 0; border-bottom:1px solid transparent; }
-nav a:hover, nav a:focus-visible { border-bottom-color:var(--blue); outline:none; }
-nav a:active { color:var(--ink-2); }
-```
-
-### Links
-
-Body links: ink, underlined 1px with `text-underline-offset: 3px`; hover: underline color blue; focus-visible: 2px blue outline; active: `--ink-2`; visited: same as default.
-
-### Tags / Badges
-
-None. The word "Sample" is set in body text in the table caption, not a chip.
-
-## 5. Layout Principles
-
-- Container: max 1200px, 24px side gutter (16px under 600px).
-- Grid: 12 columns, 24px gap. Hero title spans 1–9; hero aside spans 10–12 and sits on the title's baseline. Section number and title span 1–3; content spans 4–12. Asymmetry is the point.
-- Vertical rhythm: 8px base. Section padding 112px (64px on phones). Row padding 28px. Rules carry the rhythm; there is no boxed spacing.
-- Alignment: everything left. Nothing centered except the footer's single line on phones.
-- Negative space: generous; the hero has a full empty column before the aside.
-
-## 6. Depth & Elevation
-
-None. Zero box-shadow, zero blur, zero gradient. Depth is expressed by rules (hairline vs. 2px) and by the paper-2 band. The sample table is flat on the page, not in a window.
-
-## 7. Animation & Interaction
-
-Tier L1. No dependencies.
-
-### Base
-`html { scroll-behavior: smooth; }` and `:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }`.
-
-### Entrance
-Hero elements fade up once on load, 400ms, ease-out, staggered 60ms: title, lead, actions, aside, table. Nothing else animates on entry.
-
-```css
-.enter { opacity:0; transform:translateY(8px); animation:enter .4s ease-out forwards; }
-.enter:nth-child(2){animation-delay:.06s} .enter:nth-child(3){animation-delay:.12s} .enter:nth-child(4){animation-delay:.18s}
-@keyframes enter { to { opacity:1; transform:none; } }
-```
-
-### Scroll
-No scroll-triggered effects. The sticky header is the only scroll behavior.
-
-### Hover & Focus
-Rows and table rows: paper-2 background. Links: blue underline. Buttons as above. All transitions 150ms.
-
-### Special
-Two. The blue dot after "Book a free review" grows from 10px to 12px on hover (transform: scale(1.2), 150ms). And the job sheet runs once on load: its rows fade up one by one, 650ms apart, the foot line last, so "4 min 12 s" plays out in about five seconds (added 2026-10-27 after Josh's review of giga.ai and zaro.ai; the product is shown working, not pictured). Nothing counts up, nothing loops. That's the whole budget.
-
-### Reduced motion
-```css
-@media (prefers-reduced-motion: reduce) { .enter { animation:none; opacity:1; transform:none; } * { transition:none !important; } html { scroll-behavior:auto; } }
-```
-
-## 8. Do's and Don'ts
-
-### Do
-1. Use rules, numbers and sentences to structure the page.
-2. Show the product as a document or a table on the page, flat.
-3. Write status as words. Cite every figure in small text under it.
-4. Keep blue to punctuation: the dot, hover underlines, focus.
-5. Left-align everything and let the grid be uneven.
-6. Label every sample as a sample, in words.
-7. Keep one filled button per screen.
-8. Write like an operator: short sentences, specific nouns, no adjectives doing the work.
-
-### Don't
-1. No cards, no card grids, no rounded panels with borders.
-2. No pills, chips or badges; no colored status.
-3. No uppercase tracked eyebrows, no monospace labels.
-4. No gradients, glows, blurs, grain or shadows, on anything.
-5. No dark sections or dark cards on the light page.
-6. No icons as decoration; numbers or words instead.
-7. No centered hero, no three-up feature grid, no logo bar, no testimonials that don't exist.
-8. No "AI", "automation" or "software company" in a headline.
-9. No animation beyond the load fade and hover states.
-
-## 9. Responsive Behavior
-
-- Breakpoints: 600px (phone), 900px (tablet), 1200px (container max).
-- Under 900px: the 12-column grid becomes one column; the hero aside moves under the title; section number sits above its title; the table keeps four columns but drops the Source column under the Document name as small text.
-- Under 600px: the table hides the Time column; nav shows the logo and the action only; section padding 64px.
-- Touch targets: every link row and button is at least 48px tall.
-- No horizontal overflow at 360px; long addresses wrap.
+Breakpoints 980px and 600px. Under 980px: one column, the sheet below the hero copy with its stacked pages hidden, parts two-up, question rows stack their label above the question, figures stack. Under 600px: nav shows logo and pill, the sheet hides its Time column and the Source column (source moves under the document name on the live site), parts one-up. No horizontal overflow at 360px.

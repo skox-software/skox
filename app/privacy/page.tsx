@@ -2,42 +2,39 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { PrivacyChoices } from "@/components/PrivacyChoices";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
 
 export const metadata: Metadata = {
   title: "Privacy",
-  description: "What SKOX collects, why, and how to have it deleted.",
+  description: "What UnBusy collects, why, and how to have it deleted.",
 };
 
-const UPDATED = "5 October 2026";
+const UPDATED = "27 October 2026";
 
 export default function Privacy() {
   return (
-    <div className="landing-page">
-      <main className="page-narrow">
+    <div className="ub">
+      <Header />
+      <main className="page">
         <div>
-          <Link href="/" className="page-back">
-            ← SKOX
+          <Link href="/" className="back">
+            ← UnBusy
           </Link>
 
           <h1>Privacy</h1>
-          <p className="page-meta">Last updated {UPDATED}</p>
+          <p className="meta">Last updated {UPDATED}</p>
 
-          <div className="page-prose">
+          <div className="prose">
             <Block title="What we collect">
-              What you type into the enquiry form: your name, your email
-              address, your project description and, optionally, the type of
-              project. If you reached us from an ad or a search, the campaign
-              parameters in the link are recorded alongside it.
+              What you type into the review form: your name, your email
+              address, your firm, what it does, the busywork you describe and,
+              optionally, your phone number, the size of your office and
+              whether you&apos;d rather meet on site or on a screen share. If you
+              reached us from an ad or a search, the campaign parameters in the
+              link are recorded alongside it.
             </Block>
 
-            <Block title="The free scorecard">
-              If you request the Monday Locations Scorecard, we collect your
-              email address and, if you give them, your first name and how many
-              locations you run. We use them to email you the download link and,
-              at most, one personal note from a founder about it. The same
-              visit details described below arrive with the request. We never
-              add you to a newsletter or a sales sequence.
-            </Block>
 
             <Block title="What arrives with an enquiry">
               When you send an enquiry, or leave one unfinished as described
@@ -51,7 +48,7 @@ export default function Privacy() {
             </Block>
 
             <Block title="Enquiries you don’t finish">
-              If you enter your email address in the enquiry form and then leave
+              If you enter your email address in the review form and then leave
               without sending it, we receive what you had filled in at that
               point — your address, and anything already typed above it — and we
               may follow up about it. The form says so beside the address field.
@@ -60,9 +57,9 @@ export default function Privacy() {
             </Block>
 
             <Block title="Why we collect it">
-              To reply to you and to prepare a scope for the work you have
-              described, and to understand which kinds of businesses our
-              advertising reaches. We do not sell it or rent it. The only
+              To reply to you, to set up the operations review and to prepare
+              a proposal for the work you have described, and to understand
+              which kinds of businesses our advertising reaches. We do not sell it or rent it. The only
               sharing is the advertising measurement described below, which you
               can opt out of.
             </Block>
@@ -179,6 +176,7 @@ export default function Privacy() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

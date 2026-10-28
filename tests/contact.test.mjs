@@ -116,7 +116,6 @@ test("rate limiter rejects the sixth request in its window", async () => {
 });
 test("validation rejects invalid build types and overlong email", () => {
   const { validate } = load("lib/leads.ts");
-  assert.ok(validate({ ...valid, projectType: "invalid" }).projectType);
   assert.ok(
     validate({ ...valid, email: "a".repeat(250) + "@example.com" }).email,
   );

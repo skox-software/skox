@@ -1,6 +1,5 @@
-import { landing, landingFaq } from "@/content/landing";
-import { site } from "@/content/site";
-import { topics } from "@/content/topics";
+import { home, site } from "@/content/site";
+import { industries } from "@/content/industries";
 
 /*
  * /llms.txt: a plain-text summary for AI assistants and answer engines
@@ -14,21 +13,19 @@ export function GET() {
     "",
     `> ${site.description}`,
     "",
-    "SKOX is an independent software studio run by its two founders, " +
-      landing.founders.map((f) => `${f.name} (${f.role.replace(/^Co-founder · /, "")})`).join(" and ") +
-      ". Every build has a written scope, a fixed price and a delivery date agreed before the client pays. Clients own the code and accounts.",
+    "UnBusy builds and runs desks for owner-run firms of 5 to 50 people. A desk collects documents and data from the systems the office already uses, reads them against the firm's own rules, prepares the quote, filing, packet or work order as a finished draft, and stops at a person's decision. It is priced as a fixed monthly fee against the hire it replaces, with a one-time setup fee. The client's data and rulebook are theirs and exportable at any time. Every engagement starts with a free operations review.",
     "",
-    "## What we build",
+    "## Question pages",
     "",
-    ...topics.map((t) => `- [${t.keyword}](${site.url}/${t.slug}): ${t.description}`),
+    ...industries.map((i) => `- [${i.question}](${site.url}/${i.slug}): ${i.description}`),
     "",
-    "## Questions",
+    "## How a desk works",
     "",
-    ...landingFaq.map((f) => `- **${f.q}** ${f.a}`),
+    ...home.how.parts.map((p) => `- **${p.title}** (${p.who}): ${p.body}`),
     "",
     "## Contact",
     "",
-    `- Free 30-minute scope call: ${site.url}/#scope`,
+    `- Free operations review: ${site.url}/review`,
     `- Email: ${site.email}`,
     `- Privacy: ${site.url}/privacy`,
     "",
