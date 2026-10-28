@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UnBusy — Get the busywork off your team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#15181D; --ink-2:#5B6168; --paper:#FAFAF8; --paper-2:#F1F1EE;
+    --blue:#0B5CFF; --blue-deep:#0845C2; --sky:#E9F0FF; --sky-2:#D6E3FF;
+    --rule:rgba(21,24,29,.14); --rule-paper:rgba(250,250,248,.28);
+    --display:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:400 17px/1.5 var(--body); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  p { margin:0; }
+  h1,h2,h3 { margin:0; font-family:var(--display); font-weight:700; letter-spacing:-0.03em; }
+  h1 { font-size:clamp(46px,6.2vw,96px); line-height:.96; letter-spacing:-0.04em; }
+  h2 { font-size:clamp(34px,4.4vw,60px); line-height:1; }
+  h3 { font-size:22px; line-height:1.2; letter-spacing:-0.015em; font-family:var(--body); font-weight:600; }
+  .small { font-size:14px; }
+  .num { font-feature-settings:"tnum" 1; font-variant-numeric:tabular-nums; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 28px; }
+  .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:28px; }
+  .c1-5{grid-column:1/6} .c6-12{grid-column:6/13} .c1-4{grid-column:1/5} .c5-12{grid-column:5/13} .c1-12{grid-column:1/13} .c1-6{grid-column:1/7} .c7-12{grid-column:7/13}
+
+  .btn { display:inline-flex; align-items:center; gap:12px; min-height:56px; padding:0 24px; border-radius:999px; font:600 17px/1 var(--body); cursor:pointer; transition:transform .15s, background .15s; border:0; }
+  .btn:hover { transform:translateY(-1px); }
+  .btn.blue { background:var(--blue); color:#fff; } .btn.blue:hover { background:var(--blue-deep); }
+  .btn.paper { background:var(--paper); color:var(--ink); } .btn.paper:hover { background:#fff; }
+  .btn.ink { background:var(--ink); color:var(--paper); }
+  .btn .dot { width:10px; height:10px; border-radius:50%; background:var(--blue); }
+  .btn.blue .dot, .btn.ink .dot { background:#fff; }
+  .link { text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1.5px; font-weight:500; }
+
+  /* the signature device: a blue line strikes the word through, once, on load */
+  .strike { position:relative; white-space:nowrap; }
+  .strike::after { content:""; position:absolute; left:-2%; right:-2%; top:54%; height:.09em; background:var(--blue); transform:scaleX(0); transform-origin:left; animation:strike .5s cubic-bezier(.2,.8,.2,1) .7s forwards; }
+  .on-blue .strike::after { background:var(--paper); }
+  @keyframes strike { to { transform:scaleX(1); } }
+  .strike.now::after { animation-delay:0s; }
+
+  header { position:sticky; top:0; z-index:5; background:rgba(250,250,248,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
+  nav { display:flex; align-items:center; justify-content:space-between; height:76px; }
+  nav img { display:block; height:36px; }
+  nav .links { display:flex; gap:36px; align-items:center; font-weight:500; }
+  nav .links .btn { min-height:44px; padding:0 18px; font-size:15px; }
+
+  /* hero: blue surface, the product as a sheet of paper on it */
+  .hero { background:var(--blue); color:var(--paper); padding:88px 0 0; overflow:hidden; }
+  .hero .grid { align-items:end; }
+  .hero .lead { font-size:22px; line-height:1.4; max-width:34ch; margin-top:28px; color:rgba(250,250,248,.88); }
+  .hero .actions { display:flex; gap:24px; align-items:center; flex-wrap:wrap; margin:36px 0 72px; }
+  .hero .q { font-weight:500; font-size:15px; letter-spacing:.01em; color:rgba(250,250,248,.72); margin-bottom:24px; }
+
+  .stack { position:relative; padding:0 0 0 0; }
+  .paper-doc { background:#fff; color:var(--ink); border-radius:6px; box-shadow:0 30px 60px rgba(0,0,0,.25), 0 2px 0 rgba(0,0,0,.08); }
+  .stack .behind { position:absolute; left:28px; right:-20px; top:-26px; height:100%; background:rgba(255,255,255,.55); border-radius:6px; }
+  .stack .behind.two { left:56px; right:-40px; top:-50px; background:rgba(255,255,255,.3); }
+  .sheet { position:relative; padding:24px 28px 22px; }
+  .sheet .cap { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding-bottom:12px; }
+  .sheet .cap h3 { font-size:18px; }
+  .sheet .cap .small { color:var(--ink-2); }
+  table { width:100%; border-collapse:collapse; font-size:15px; border-top:2px solid var(--ink); }
+  th { text-align:left; font-weight:500; color:var(--ink-2); padding:10px 0; border-bottom:1px solid var(--rule); font-size:13px; }
+  td { padding:11px 0; border-bottom:1px solid var(--rule); vertical-align:top; }
+  td.right, th.right { text-align:right; }
+  td .src { display:block; font-size:13px; color:var(--ink-2); }
+  .st { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; padding-right:16px; }
+  .st::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--ink); }
+  .st.wait::before { background:var(--blue); box-shadow:0 0 0 4px var(--sky); }
+  .sheet .foot { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-top:16px; }
+  .sheet .foot strong { font-family:var(--display); font-size:26px; font-weight:700; letter-spacing:-0.02em; }
+  .sheet .foot .ink2 { color:var(--ink-2); }
+  .sheet.run tbody tr, .sheet.run .foot { opacity:0; transform:translateY(5px); transition:opacity .3s ease-out, transform .3s ease-out; }
+  .sheet.run tbody tr.on, .sheet.run .foot.on { opacity:1; transform:none; }
+
+  /* the strip: the sample job's own log, in numbers */
+  .strip { background:var(--ink); color:var(--paper); }
+  .strip .wrap { display:flex; gap:0; flex-wrap:wrap; }
+  .strip div { flex:1 1 160px; padding:22px 24px 22px 0; border-right:1px solid rgba(250,250,248,.14); margin-right:24px; }
+  .strip div:last-child { border:0; }
+  .strip b { display:block; font-family:var(--display); font-size:34px; font-weight:700; letter-spacing:-0.03em; line-height:1; margin-bottom:6px; }
+  .strip span { font-size:14px; color:rgba(250,250,248,.7); }
+
+  section { padding:120px 0; }
+  .n { font-family:var(--display); font-weight:700; font-size:clamp(64px,8vw,120px); line-height:.9; letter-spacing:-0.05em; color:var(--blue); }
+  .sec h2 { margin-top:18px; max-width:14ch; }
+  .sec .intro { margin-top:18px; max-width:36ch; color:var(--ink-2); font-size:18px; }
+
+  .parts { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:0; }
+  .part { padding-top:20px; border-top:3px solid var(--blue); }
+  .part.yours { border-top-color:var(--ink); }
+  .part .k { font-weight:600; color:var(--blue); font-size:14px; letter-spacing:.02em; }
+  .part.yours .k { color:var(--ink); }
+  .part h3 { margin-top:10px; }
+  .part p { margin-top:10px; color:var(--ink-2); }
+
+  .dark { background:var(--ink); color:var(--paper); }
+  .dark .intro { color:rgba(250,250,248,.7); }
+  .qs { border-top:1px solid var(--rule-paper); }
+  .qs a { display:grid; grid-template-columns:200px 1fr auto; gap:24px; align-items:center; padding:34px 0; border-bottom:1px solid var(--rule-paper); font-family:var(--display); font-weight:600; font-size:clamp(24px,2.6vw,36px); letter-spacing:-0.025em; transition:padding-left .2s; }
+  .qs a:hover { padding-left:12px; }
+  .qs a .t { font:500 15px/1.4 var(--body); color:rgba(250,250,248,.7); }
+  .qs a .arrow { color:var(--blue); font-size:40px; font-family:var(--body); }
+
+  .ladder { border-top:2px solid var(--ink); }
+  .ladder .r { display:grid; grid-template-columns:80px 1fr auto; gap:24px; align-items:center; padding:26px 0; border-bottom:1px solid var(--rule); }
+  .ladder .r .i { font-family:var(--display); font-weight:700; font-size:28px; color:var(--ink-2); letter-spacing:-0.02em; }
+  .ladder .r h3 { font-family:var(--display); font-size:30px; font-weight:700; letter-spacing:-0.03em; }
+  .ladder .r p { color:var(--ink-2); margin-top:6px; max-width:52ch; }
+  .ladder .r .tag { font-weight:500; color:var(--ink-2); white-space:nowrap; }
+  .ladder .r.desk { background:var(--sky); margin:0 -28px; padding:30px 28px; border-radius:8px; border-bottom:0; }
+  .ladder .r.desk .i, .ladder .r.desk .tag { color:var(--blue); font-weight:600; }
+  .figs { margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .fig { padding:28px; border-radius:8px; background:#fff; border:1px solid var(--rule); }
+  .fig.blue { background:var(--blue); color:#fff; border:0; }
+  .fig .amt { font-family:var(--display); font-weight:700; font-size:clamp(40px,4.6vw,64px); letter-spacing:-0.04em; line-height:1; }
+  .fig .amt small { display:block; font:400 15px/1.4 var(--body); letter-spacing:0; margin-top:8px; opacity:.75; }
+  .fig h3 { margin-top:26px; }
+  .fig ul { margin:10px 0 0; padding-left:18px; opacity:.85; } .fig li { margin:4px 0; }
+
+  .steps { counter-reset:s; list-style:none; margin:0; padding:0; border-top:2px solid var(--ink); }
+  .steps li { counter-increment:s; display:grid; grid-template-columns:72px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--rule); }
+  .steps li::before { content:counter(s,decimal-leading-zero); font-family:var(--display); font-weight:700; font-size:28px; color:var(--blue); letter-spacing:-0.02em; }
+  .steps p { color:var(--ink-2); margin-top:6px; }
+  .proof { background:var(--sky); border-radius:8px; padding:32px; }
+  .proof p { color:var(--ink-2); margin-top:12px; }
+
+  footer { background:var(--ink); color:var(--paper); padding:56px 0 72px; }
+  footer img { height:30px; display:block; }
+  footer .grid { align-items:start; }
+  footer .links { display:flex; gap:28px; flex-wrap:wrap; font-weight:500; }
+  footer .line { color:rgba(250,250,248,.85); font-size:18px; max-width:40ch; }
+
+  .enter { opacity:0; transform:translateY(10px); animation:enter .5s ease-out forwards; }
+  .enter.d1{animation-delay:.08s} .enter.d2{animation-delay:.16s} .enter.d3{animation-delay:.24s}
+  @keyframes enter { to { opacity:1; transform:none; } }
+
+  @media (max-width:980px) {
+    .grid { grid-template-columns:1fr; gap:20px; } .grid > * { grid-column:auto; }
+    .hero { padding-top:56px; } .hero .actions { margin-bottom:48px; }
+    .stack { margin-top:20px; } .stack .behind { display:none; }
+    .parts { grid-template-columns:1fr 1fr; } section { padding:72px 0; }
+    .qs a { grid-template-columns:1fr auto; } .qs a .t { grid-column:1/3; order:-1; }
+    .figs { grid-template-columns:1fr; }
+    .ladder .r { grid-template-columns:56px 1fr; } .ladder .r .tag { grid-column:2; }
+    th.src-col, td.src-col { display:none; }
+  }
+  @media (max-width:600px) { .wrap { padding:0 18px; } nav .links a:not(.btn) { display:none; } .parts { grid-template-columns:1fr; } th.time, td.time { display:none; } .ladder .r.desk { margin:0 -18px; padding:24px 18px; } }
+  @media (prefers-reduced-motion:reduce) { .enter, .strike::after { animation:none; opacity:1; transform:none; } .sheet.run tbody tr, .sheet.run .foot { opacity:1; transform:none; transition:none; } * { transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+  <a href="#" aria-label="UnBusy home"><img src="../final/03-lockup-horizontal-light.png" alt="UnBusy"></a>
+  <div class="links">
+    <a href="#how">How a desk works</a>
+    <a href="#industries">Industries</a>
+    <a href="#math">Hire vs. build</a>
+    <a class="btn blue" href="review.html">Book a free review <span class="dot"></span></a>
+  </div>
+</nav></div></header>
+
+<main>
+  <div class="hero on-blue"><div class="wrap grid">
+    <div class="c1-5">
+      <p class="q enter">Can AI run this part of your office?</p>
+      <h1 class="enter">Get the <span class="strike">busywork</span> off your team.</h1>
+      <p class="lead enter d1">A desk collects the documents, reads them, drafts the job and stops at your decision. We build it around how your office already runs.</p>
+      <div class="actions enter d2">
+        <a class="btn paper" href="review.html">Book a free review <span class="dot"></span></a>
+        <a class="link" href="#how">Let's look at how it runs today</a>
+      </div>
+    </div>
+    <div class="c6-12 stack enter d2">
+      <div class="behind two"></div><div class="behind"></div>
+      <div class="paper-doc sheet" id="sheet">
+        <div class="cap"><h3>Quote Desk · one job, as it ran</h3><span class="small">Sample job. Real counties, sample address.</span></div>
+        <table>
+          <thead><tr><th>Document</th><th class="src-col">Source</th><th>Status</th><th class="right time">Time</th></tr></thead>
+          <tbody>
+            <tr><td>Property appraiser record</td><td class="src-col">Seminole County Property Appraiser</td><td><span class="st">Collected</span></td><td class="right num time">0:41</td></tr>
+            <tr><td>Plat and deed</td><td class="src-col">Clerk of Court, book 41, page 12</td><td><span class="st">Collected</span></td><td class="right num time">1:07</td></tr>
+            <tr><td>Flood zone</td><td class="src-col">FEMA NFHL, Zone X</td><td><span class="st">Read</span></td><td class="right num time">0:12</td></tr>
+            <tr><td>Zoning and setbacks</td><td class="src-col">City of Lake Mary, R-1</td><td><span class="st">Read</span></td><td class="right num time">0:19</td></tr>
+            <tr><td>Quote<span class="src">Platted lot, two prior jobs within 0.3 miles</span></td><td class="src-col">From the firm's own rates</td><td><span class="st wait">Waiting on the owner</span></td><td class="right num time">1:53</td></tr>
+          </tbody>
+        </table>
+        <div class="foot"><span><strong>4 min 12 s</strong> <span class="ink2">address to quote. Staff hours: 0.</span></span><a class="btn ink" href="surveying.html" style="min-height:48px">Approve quote <span class="dot"></span></a></div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="strip"><div class="wrap num">
+    <div><b>5</b><span>documents collected, from four county sources</span></div>
+    <div><b>4</b><span>read against the firm's rulebook</span></div>
+    <div><b>1</b><span>quote drafted from the firm's own rates</span></div>
+    <div><b>0</b><span>staff hours. One decision left for a person.</span></div>
+  </div></div>
+
+  <section id="how"><div class="wrap">
+    <div class="grid sec" style="margin-bottom:64px">
+      <div class="c1-6"><div class="n">01</div><h2>A desk does the legwork. Your people make the calls.</h2></div>
+      <div class="c7-12" style="align-self:end"><p class="intro">Every desk has the same four parts, built around how your office already works. Three are the desk's. The last one is yours.</p></div>
+    </div>
+    <div class="parts">
+      <div class="part"><div class="k">The desk</div><h3>Collect</h3><p>Pulls documents and data in by itself: county sites, email, uploads, QuickBooks, the software you already run. Nothing is retyped.</p></div>
+      <div class="part"><div class="k">The desk</div><h3>Read</h3><p>Reads each document and applies your rules. A new threshold, county or staff member is a setting you change, not a rebuild.</p></div>
+      <div class="part"><div class="k">The desk</div><h3>Prepare</h3><p>Every job arrives as a finished draft: the quote, the filing, the packet or the statement, written and filed.</p></div>
+      <div class="part yours"><div class="k">Yours</div><h3>Decide</h3><p>You approve, sign or send. The desk logs it and learns from it. The judgement, the signature and the client stay yours.</p></div>
+    </div>
+  </div></section>
+
+  <section id="industries" class="dark"><div class="wrap">
+    <div class="grid sec" style="margin-bottom:48px">
+      <div class="c1-6"><div class="n">02</div><h2>Start with the question you're already asking.</h2></div>
+      <div class="c7-12" style="align-self:end"><p class="intro">Each page shows a desk running in that trade, on sample data, labelled as a sample.</p></div>
+    </div>
+    <div class="qs">
+      <a href="surveying.html"><span class="t">Surveying</span><span>Can AI pull the county records for every survey job?</span><span class="arrow">→</span></a>
+      <a href="#"><span class="t">Property management</span><span>Can AI triage every maintenance request?</span><span class="arrow">→</span></a>
+      <a href="#"><span class="t">Accounting · soon</span><span>Can AI run my 1099 season?</span><span class="arrow">→</span></a>
+      <a href="#"><span class="t">Title and escrow · soon</span><span>Can AI order the records for a title file?</span><span class="arrow">→</span></a>
+    </div>
+  </div></section>
+
+  <section id="math"><div class="wrap">
+    <div class="grid sec" style="margin-bottom:56px">
+      <div class="c1-6"><div class="n">03</div><h2>Hire vs. build.</h2></div>
+      <div class="c7-12" style="align-self:end"><p class="intro">What owners usually try first, then the plain comparison. Your own numbers go in on the call.</p></div>
+    </div>
+    <div class="ladder">
+      <div class="r"><div class="i">01</div><div><h3><span class="strike now">The next hire.</span></h3><p>Works until they leave. Four to eight weeks to train, out sick in busy season, and the cost comes back every year.</p></div><div class="tag">Costs every year</div></div>
+      <div class="r"><div class="i">02</div><div><h3><span class="strike now">The all-in-one app.</span></h3><p>Answers the phone and builds the website. It has never read a plat, a W-9 or a work order, so your staff still retype into it.</p></div><div class="tag">Still retyped</div></div>
+      <div class="r"><div class="i">03</div><div><h3><span class="strike now">ChatGPT on a laptop.</span></h3><p>Answers questions when someone asks. It doesn't pull the records, doesn't know your rates and doesn't file anything.</p></div><div class="tag">Files nothing</div></div>
+      <div class="r desk"><div class="i">04</div><div><h3>A desk.</h3><p>Does the job, in your systems, with your rules, and stops at your decision. Priced against the hire.</p></div><div class="tag">Stops at your decision</div></div>
+    </div>
+    <div class="figs">
+      <div class="fig"><div class="amt num">$47,540<small>a year, before benefits</small></div><h3>The next admin hire</h3><ul><li>Every year, for as long as they stay</li><li>Four to eight weeks to hire and train</li><li>Out sick in busy season</li></ul></div>
+      <div class="fig blue"><div class="amt num">$1,500<small>a month, to start</small></div><h3>A desk</h3><ul><li>One-time setup that covers configuring it to your office</li><li>A fixed monthly fee, about a quarter of what the work costs you now</li><li>Your data and rules, exportable any day</li></ul></div>
+    </div>
+    <p class="small" style="margin-top:16px;color:var(--ink-2)">Wage: US median for secretaries and administrative assistants, Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.</p>
+  </div></section>
+
+  <section id="live" style="padding-top:0"><div class="wrap">
+    <div class="grid sec" style="margin-bottom:56px">
+      <div class="c1-6"><div class="n">04</div><h2>The review.</h2></div>
+      <div class="c7-12" style="align-self:end"><p class="intro">We start by watching the work, not by pitching it. Free, 60 to 90 minutes, in your office or on a screen share.</p></div>
+    </div>
+    <div class="grid">
+      <div class="c1-6">
+        <ol class="steps">
+          <li><div><h3>Show us how it runs today.</h3><p>Your systems, your steps, your hours.</p></div></li>
+          <li><div><h3>Get a proposal in your own numbers.</h3><p>What the work costs you now, the desk that takes it over, and the monthly fee.</p></div></li>
+          <li><div><h3>Decide.</h3><p>The review is free. The proposal is good for 14 days.</p></div></li>
+        </ol>
+        <div style="margin-top:32px"><a class="btn blue" href="review.html">Book a free review <span class="dot"></span></a></div>
+      </div>
+      <div class="c7-12 proof"><h3>Proof, the honest version</h3><p>Every screen on this site is a working sample and says so. Named clients and measured hours appear here when owners say yes, and not before. If you want to know what a desk would do with your process, that is what the review is for.</p></div>
+    </div>
+  </div></section>
+</main>
+
+<footer><div class="wrap grid">
+  <div class="c1-4"><img src="../final/07-lockup-horizontal-dark.png" alt="UnBusy" style="height:30px"></div>
+  <div class="c5-12" style="display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:start">
+    <p class="line">Your data and your rules are yours. The system is ours to keep improving.</p>
+    <div class="links"><a href="#">Privacy</a><a href="#">Your privacy choices</a><a href="#">Sign in</a></div>
+  </div>
+</div></footer>
+
+<script>
+  (function(){
+    var sheet=document.getElementById('sheet'); if(!sheet) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    sheet.classList.add('run');
+    var rows=[].slice.call(sheet.querySelectorAll('tbody tr')), foot=sheet.querySelector('.foot');
+    rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); }, 700+i*600); });
+    setTimeout(function(){ foot.classList.add('on'); }, 700+rows.length*600+200);
+  })();
+</script>
+</body>
+</html>
