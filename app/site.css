@@ -489,3 +489,5 @@
 .ub .mock-hand b { display:block; font-family:var(--display); font-size:40px; font-weight:700; letter-spacing:-0.03em; line-height:1; }
 .ub .mock.done .mock-before { display:none; }
 @media (prefers-reduced-motion:reduce) { .ub .mock-before { display:none; } }
+
+.ub .mock-hand { background:rgba(11,92,255,.92); padding:8px 12px 10px; border-radius:6px; }

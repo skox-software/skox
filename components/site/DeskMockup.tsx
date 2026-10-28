@@ -21,6 +21,8 @@ export type DeskMock = {
 
 const COLS = 8;
 const ROWS = 5;
+/** The still-lifes are 2688×1520. */
+const PHOTO = { w: 2688, h: 1520, focusX: 0.7, focusY: 0.5 };
 
 const secs = (t: string) => {
   const [m, s] = t.replace(/[^\d:]/g, "").split(":").map(Number);
@@ -63,6 +65,31 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
     const counters = () => Array.from(node.querySelectorAll<HTMLElement>("[data-count]"));
     const timer = node.querySelector<HTMLElement>("[data-timer]");
     const hand = node.querySelector<HTMLElement>("[data-hand]");
+
+    /* The tiles show a cover crop of the photograph, not a stretch: size and offset are measured from the window. */
+    const grid = node.querySelector<HTMLElement>(".tiles");
+    const layoutTiles = () => {
+      if (!grid) return;
+      const w = grid.clientWidth;
+      const h = grid.clientHeight;
+      if (!w || !h) return;
+      const scale = Math.max(w / PHOTO.w, h / PHOTO.h);
+      const bw = PHOTO.w * scale;
+      const bh = PHOTO.h * scale;
+      const ox = (w - bw) * PHOTO.focusX;
+      const oy = (h - bh) * PHOTO.focusY;
+      const tw = w / COLS;
+      const th = h / ROWS;
+      grid.querySelectorAll<HTMLElement>(".tile").forEach((tile, i) => {
+        const c = i % COLS;
+        const r = Math.floor(i / COLS);
+        tile.style.backgroundSize = `${bw}px ${bh}px`;
+        tile.style.backgroundPosition = `${ox - c * tw}px ${oy - r * th}px`;
+      });
+    };
+    layoutTiles();
+    const ro = typeof ResizeObserver !== "undefined" && grid ? new ResizeObserver(layoutTiles) : null;
+    if (grid && ro) ro.observe(grid);
 
     const finish = () => {
       node.classList.add("swept", "done", "settled");
@@ -195,6 +222,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       timers.forEach(clearTimeout);
       cancelAnimationFrame(raf);
       replay?.removeEventListener("click", onReplay);
+      ro?.disconnect();
     };
   }, [mock, delay]);
 
@@ -224,8 +252,6 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
                   key={i}
                   style={{
                     backgroundImage: `url(${mock.before!.src})`,
-                    backgroundSize: `${COLS * 100}% ${ROWS * 100}%`,
-                    backgroundPosition: `${(c / (COLS - 1)) * 100}% ${(r / (ROWS - 1)) * 100}%`,
                     transitionDelay: `${c * 55 + r * 22}ms`,
                   }}
                 />
