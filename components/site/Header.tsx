@@ -10,7 +10,7 @@ export function Header() {
       <div className="wrap">
         <nav aria-label="Main">
           <Link href="/" aria-label="UnBusy home">
-            <Image src={lockup} alt="UnBusy" height={36} priority />
+            <Image src={lockup} alt="UnBusy" height={40} priority />
           </Link>
           <div className="links">
             {nav.links.map((link) => (

@@ -8,7 +8,7 @@ export function Footer() {
     <footer>
       <div className="wrap grid">
         <div className="c1-4">
-          <Image src={lockup} alt="UnBusy" height={30} />
+          <Image src={lockup} alt="UnBusy" height={36} />
         </div>
         <div className="c5-12 foot-right">
           <p className="line">{footer.line}</p>
