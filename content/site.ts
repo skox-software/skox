@@ -91,9 +91,9 @@ export const quoteDeskMock = {
 
 export const nav = {
   links: [
+    { label: "What we do", href: "/#offer" },
     { label: "How a desk works", href: "/#how" },
     { label: "Industries", href: "/#industries" },
-    { label: "Hire vs. build", href: "/#math" },
   ],
   action: { label: "Book a free review", href: "/review" },
 } as const;
@@ -174,6 +174,53 @@ export const home = {
   industries: {
     title: "Start with the question you're already asking.",
     intro: "Every trade has its own pile. Two of these have a page that shows a desk running on it; the rest start with the review.",
+  },
+  /**
+   * What we sell, said plainly. The four things an owner can buy, in the
+   * order they buy them, and the desks we build by trade. Prices are the
+   * ones in the business plan; no tiers, no packages.
+   */
+  offer: {
+    title: "What we do.",
+    intro: "We take one job your office does by hand, build the software that does it, and run it for you. You approve the result. That's a desk.",
+    steps: [
+      {
+        name: "A free operations review",
+        what: "We sit with you, in your office or on a screen share, and watch one job get done the way it's done today. 60 to 90 minutes.",
+        get: "A written proposal in your own numbers: what the job costs you now, what the desk would do, and what it costs. Good for 14 days.",
+        price: "Free",
+      },
+      {
+        name: "A desk",
+        what: "We build the software that does that job: it collects the documents, reads them, prepares the quote, filing or work order, and hands it to you to approve. Then we run it, fix it and keep it current.",
+        get: "The job done every time it comes in, nights and weekends included, with nobody retyping anything. Your data and your rules stay yours.",
+        price: "From $1,500 a month, plus a one-time setup",
+      },
+      {
+        name: "The next desk",
+        what: "Once the first one is running, we take the next job: the invoices, the renewals, the intake, the follow-ups.",
+        get: "More of the office off your team's plate, on the same terms.",
+        price: "Half the setup fee",
+      },
+      {
+        name: "The website that feeds it",
+        what: "A site where customers request quotes, apply, book or report problems, and every submission lands straight in your desk instead of an inbox.",
+        get: "A website that works for the business, not a brochure. Fixed price, and you own it.",
+        price: "Fixed price, once a desk is live",
+      },
+    ],
+    desksTitle: "Desks we build, for example",
+    desks: [
+      { trade: "Land surveying", desk: "Quote Desk", job: "Pulls the county records for a new address and drafts the quote." },
+      { trade: "Property management", desk: "Maintenance Desk", job: "Reads the tenant's request, checks the lease and drafts the work order." },
+      { trade: "Accounting", desk: "1099 Desk", job: "Collects the W-9s, matches vendors and prepares the filings." },
+      { trade: "Title and escrow", desk: "Title Desk", job: "Orders the records for a file and lists what needs clearing." },
+      { trade: "Insurance agencies", desk: "Certificate Desk", job: "Issues the certificates and chases the renewals." },
+      { trade: "Contractors", desk: "Permit Desk", job: "Pulls the permits and collects the lien waivers." },
+      { trade: "Medical and dental offices", desk: "Intake Desk", job: "Takes the intake forms and prepares the insurance paperwork." },
+      { trade: "Any office", desk: "Your desk", job: "If someone retypes it, chases it or files it every week, it can be a desk." },
+    ],
+    cta: "Book a free review",
   },
   /**
    * What the work costs now, in the owner's units. A worked sample, labelled
