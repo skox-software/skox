@@ -21,12 +21,11 @@ export function Strip({ items }: { items: readonly { n: string; label: string }[
   );
 }
 
-/** Big blue numeral, title, intro: the head of every section. */
-export function SectionHead({ n, title, intro, gap = 56 }: { n: string; title: string; intro: string; gap?: number }) {
+/** Title in columns 1–6, intro bottom-aligned in 7–12: the head of every section. */
+export function SectionHead({ title, intro, gap = 56 }: { title: string; intro: string; gap?: number }) {
   return (
     <div className="grid sec" style={{ marginBottom: gap }}>
       <div className="c1-6">
-        <div className="n">{n}</div>
         <h2>{title}</h2>
       </div>
       <div className="c7-12" style={{ alignSelf: "end" }}>
@@ -78,8 +77,7 @@ export function Figures({ hire, desk, source }: { hire: Fig; desk: Fig; source: 
 }
 
 /** The review, as the closing section of the home and industry pages. */
-export function ReviewSection({ n, title, intro, steps, cta, proofTitle, proof }: {
-  n: string;
+export function ReviewSection({ title, intro, steps, cta, proofTitle, proof }: {
   title: string;
   intro: string;
   steps: readonly { title: string; body: string }[];
@@ -90,7 +88,7 @@ export function ReviewSection({ n, title, intro, steps, cta, proofTitle, proof }
   return (
     <section id="live" style={{ paddingTop: 0 }}>
       <div className="wrap">
-        <SectionHead n={n} title={title} intro={intro} />
+        <SectionHead title={title} intro={intro} />
         <div className="grid">
           <div className="c1-6">
             <Steps steps={steps} />

@@ -37,12 +37,12 @@ export default function ReviewPage() {
         <div className="hero paper">
           <div className="wrap grid">
             <div className="c1-6">
-              <p className="q enter">{review.eyebrow}</p>
-              <h1 className="enter">
+              <p className="q">{review.eyebrow}</p>
+              <h1>
                 {review.headlineBefore} <Strike>{review.struck}</Strike>
                 {review.headlineAfter}
               </h1>
-              <p className="lead enter d1">{review.lead}</p>
+              <p className="lead">{review.lead}</p>
             </div>
           </div>
         </div>

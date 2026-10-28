@@ -39,12 +39,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
         <div className="hero inner on-blue">
           <div className="wrap grid tight">
             <div className="c1-5 pad">
-              <p className="t enter">
-                {industry.trade} · {industry.desk}
+              <p className="t">
+                {industry.trade}: {industry.desk}
               </p>
-              <h1 className="enter">{industry.question}</h1>
-              <p className="lead enter d1">{industry.lead}</p>
-              <div className="actions enter d2">
+              <h1>{industry.question}</h1>
+              <p className="lead">{industry.lead}</p>
+              <div className="actions">
                 <Link className="btn paper" href="/review" data-cta="hero">
                   Book a free review <span className="dot" />
                 </Link>
@@ -53,7 +53,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
                 </Link>
               </div>
             </div>
-            <div className="c6-12 stack enter d2">
+            <div className="c6-12 stack">
               <div className="behind two" />
               <div className="behind" />
               <Sheet {...industry.sheet} approveHref="/review" />
@@ -65,18 +65,17 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
 
         <section id="job">
           <div className="wrap">
-            <SectionHead n="01" title={industry.job.title} intro={industry.job.intro} />
+            <SectionHead title={industry.job.title} intro={industry.job.intro} />
             <Steps steps={industry.job.steps} />
           </div>
         </section>
 
         <section id="stops" className="dark">
           <div className="wrap">
-            <SectionHead n="02" title={industry.stops.title} intro={industry.stops.intro} gap={48} />
+            <SectionHead title={industry.stops.title} intro={industry.stops.intro} gap={48} />
             <div className="qs">
-              {industry.stops.items.map((item, i) => (
+              {industry.stops.items.map((item) => (
                 <div className="q-row" key={item}>
-                  <span className="t">{String(i + 1).padStart(2, "0")}</span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -86,13 +85,12 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
 
         <section id="math">
           <div className="wrap">
-            <SectionHead n="03" title={home.math.title} intro={industry.math.intro} />
+            <SectionHead title={home.math.title} intro={industry.math.intro} />
             <Figures hire={industry.math.hire} desk={industry.math.desk} source={industry.math.source} />
           </div>
         </section>
 
         <ReviewSection
-          n="04"
           title={home.review.title}
           intro={industry.review.intro}
           steps={industry.review.steps}

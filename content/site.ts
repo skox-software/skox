@@ -52,7 +52,7 @@ export type SheetRow = {
 };
 
 export const quoteDeskJob = {
-  caption: "Quote Desk · one job, as it ran",
+  caption: "The Quote Desk, one job, as it ran",
   sample: "Sample job. Real counties, sample address.",
   rows: [
     { doc: "Property appraiser record", source: "Seminole County Property Appraiser", status: "Collected", time: "0:41" },
@@ -87,7 +87,6 @@ export const home = {
     { n: "0", label: "staff hours. One decision left for a person." },
   ],
   how: {
-    n: "01",
     title: "A desk does the legwork. Your people make the calls.",
     intro: "Every desk has the same four parts, built around how your office already works. Three are the desk's. The last one is yours.",
     parts: [
@@ -98,12 +97,10 @@ export const home = {
     ],
   },
   industries: {
-    n: "02",
     title: "Start with the question you're already asking.",
     intro: "Each page shows a desk running in that trade, on sample data, labelled as a sample.",
   },
   math: {
-    n: "03",
     title: "Hire vs. build.",
     intro: "What owners usually try first, then the plain comparison. Your own numbers go in on the call.",
     ladder: [
@@ -127,7 +124,6 @@ export const home = {
     source: "Wage: US median for secretaries and administrative assistants, Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.",
   },
   review: {
-    n: "04",
     title: "The review.",
     intro: "We start by watching the work, not by pitching it. Free, 60 to 90 minutes, in your office or on a screen share.",
     steps: [

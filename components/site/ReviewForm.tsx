@@ -254,7 +254,7 @@ export function ReviewForm() {
         <div className="form-failure" role="alert">
           <p>{copy.error}</p>
           <a href={fallback} onClick={() => track("review_email_fallback")}>
-            {copy.emailUs} ↗
+            {copy.emailUs}
           </a>
         </div>
       )}

@@ -20,7 +20,7 @@ Atmosphere words: confident, plain, quick, operator, blue.
 --rule:rgba(21,24,29,.14); --rule-paper:rgba(250,250,248,.28);
 ```
 
-Roles. Blue: the homepage and industry heroes, every primary button, the section numerals, the strike, the desk's price card. Text on blue or ink is paper at 85% or more (AA at 15px). Ink: text, the stats strip, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
+Roles. Blue: the homepage and industry heroes, every primary button, the step numerals, the strike, the desk's price card. Text on blue or ink is paper at 85% or more (AA at 15px). Ink: text, the stats strip, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
 
 ## 3. Type
 
@@ -29,7 +29,7 @@ Bricolage Grotesque (variable, optical size and width axes) at 700 for display; 
 | Level | Size | Weight | Tracking | Use |
 | --- | --- | --- | --- | --- |
 | H1 | clamp(46px, 6.2vw, 96px) | 700 | -0.025em, line-height .96 | Hero. Inner pages clamp(40px, 5vw, 76px) |
-| Numeral | clamp(64px, 8vw, 120px) | 700 | -0.04em, blue | 01–04 at the head of each section |
+| Step numeral | 28px | 700 | -0.02em, blue | Numbered lists only |
 | H2 | clamp(34px, 4.4vw, 60px) | 700 | -0.03em | Section titles |
 | H3 | 22px | 600 (Plex) | -0.015em | Row and list titles |
 | Lead | 21–22px | 400 | 0 | Hero paragraph |
@@ -45,9 +45,9 @@ Tabular figures (`tnum`) on anything numeric. No monospace, no uppercase trackin
 - **The strike.** `<span class="strike">busywork</span>`: an `::after` line at 54% height, .09em thick, blue on paper and paper on blue, scaling in from the left over 500ms, once, 700ms after load (`.now` runs on a 400ms delay for rows further down). Used in the hero H1, the review H1, and through the first three rungs of Hire vs. build. Never elsewhere.
 - **The sheet.** A white document (`.paper-doc`: 6px radius, one deep soft shadow) with two translucent sheets stacked behind it. Caption, four-column table (Document, Source, Status, Time), a foot line with the total and an ink button. On the blue hero it sits in columns 6–12. Rows fade up one by one on load, 600ms apart, the foot last; reduced-motion shows it finished.
 - **The strip.** Ink band, four numbers with one-line labels. Only the sample job's own figures; never a counter.
-- **Section head.** Blue numeral, H2 in columns 1–6, intro bottom-aligned in 7–12.
-- **How a desk works.** The desk's three parts as a numbered ledger in columns 1–7 (blue numerals, small blue "The desk" label, 30px titles); "Decide" alone in columns 8–12 on a sticky sky panel with a 34–48px title. The layout says what the copy says: three are the desk's, one is yours.
-- **Question rows (`.qs`).** On the dark band: trade in small text, the question at 24–36px, a blue arrow; the row shifts right 12px on hover.
+- **Section head.** H2 in columns 1–6, intro bottom-aligned in 7–12. No section numerals: numbers appear only where the content is a sequence (the desk's three parts, the review's steps, the job walkthrough, the ladder).
+- **How a desk works.** The desk's three parts as a numbered ledger in columns 1–7 (blue 01–03, 30px titles); "Decide" alone in columns 8–12 on a sticky sky panel with a 34–48px title. The layout says what the copy says: three are the desk's, one is yours.
+- **Question rows (`.qs`).** On the dark band: trade in small text, the question at 24–36px; the row shifts right 12px on hover. No arrows.
 - **The ladder.** Numbered rows with a right-hand status word; the first three struck; the fourth, "A desk.", on a sky row with blue numeral and tag.
 - **Figures.** Two cards: paper with a hairline for the hire, blue for the desk. Amount at up to 64px.
 - **Steps.** Numbered list, blue numerals, hairlines.
@@ -62,9 +62,7 @@ Container 1240px, 28px gutters (18px under 600px). 12 columns, 28px gap. Heroes:
 
 ## 6. Motion
 
-- Load: hero elements fade up 10px over 500ms, staggered 80ms.
-- The strike draws once.
-- The sheet fills in once.
+- Load: one orchestrated moment, the strike drawing, then the sheet filling in. Nothing else enters.
 - Hover: buttons lift 1px; question rows slide 12px.
 - Nothing scroll-triggered, nothing looping, nothing that counts. `prefers-reduced-motion` turns all of it off.
 
@@ -83,3 +81,7 @@ Gradients, glows, grain; logo bars; stats or quotes that aren't ours; counters t
 ## 9. Responsive
 
 Breakpoints 980px and 600px. Under 980px: one column, the sheet below the hero copy with its stacked pages hidden, parts two-up, question rows stack their label above the question, figures stack. Under 600px: nav shows logo and pill, the sheet hides its Time column and the Source column (source moves under the document name on the live site), parts one-up. No horizontal overflow at 360px.
+
+## 10. Second review (frontend-design skill, 2026-10-27)
+
+Removed as generic tells: section numerals 01–04, repeated small labels above headings, arrows on link rows, middle-dot captions, per-element fade-up entrances. Kept because they carry information: numbers on real sequences, the trade label on question rows, the one load moment (strike, then sheet).

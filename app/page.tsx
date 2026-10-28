@@ -17,12 +17,12 @@ export default function Home() {
         <div className="hero on-blue">
           <div className="wrap grid">
             <div className="c1-5">
-              <p className="q enter">{hero.eyebrow}</p>
-              <h1 className="enter">
+              <p className="q">{hero.eyebrow}</p>
+              <h1>
                 {hero.headlineBefore} <Strike>{hero.struck}</Strike> {hero.headlineAfter}
               </h1>
-              <p className="lead enter d1">{hero.lead}</p>
-              <div className="actions enter d2">
+              <p className="lead">{hero.lead}</p>
+              <div className="actions">
                 <Link className="btn paper" href="/review" data-cta="hero">
                   {hero.primary} <span className="dot" />
                 </Link>
@@ -31,7 +31,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="c6-12 stack enter d2">
+            <div className="c6-12 stack">
               <div className="behind two" />
               <div className="behind" />
               <Sheet {...quoteDeskJob} />
@@ -43,7 +43,7 @@ export default function Home() {
 
         <section id="how">
           <div className="wrap">
-            <SectionHead n={how.n} title={how.title} intro={how.intro} gap={64} />
+            <SectionHead title={how.title} intro={how.intro} gap={64} />
             {/* Three parts are the desk's, set as a ledger; the fourth is yours, set apart. */}
             <div className="parts-split">
               <div className="ledger-parts">
@@ -51,7 +51,6 @@ export default function Home() {
                   <div className="row" key={part.title}>
                     <div className="i">{String(i + 1).padStart(2, "0")}</div>
                     <div>
-                      <div className="k">{part.who}</div>
                       <h3>{part.title}</h3>
                       <p>{part.body}</p>
                     </div>
@@ -60,7 +59,7 @@ export default function Home() {
               </div>
               {how.parts.filter((part) => "yours" in part && part.yours).map((part) => (
                 <div className="yours-panel" key={part.title}>
-                  <div className="k">04 · {part.who}</div>
+                  <div className="k">{part.who}</div>
                   <h3>{part.title}</h3>
                   <p>{part.body}</p>
                 </div>
@@ -71,15 +70,12 @@ export default function Home() {
 
         <section id="industries" className="dark">
           <div className="wrap">
-            <SectionHead n={home.industries.n} title={home.industries.title} intro={home.industries.intro} gap={48} />
+            <SectionHead title={home.industries.title} intro={home.industries.intro} gap={48} />
             <div className="qs">
               {industries.map((industry) => (
                 <Link href={`/${industry.slug}`} key={industry.slug}>
                   <span className="t">{industry.trade}</span>
                   <span>{industry.question}</span>
-                  <span className="arrow" aria-hidden>
-                    →
-                  </span>
                 </Link>
               ))}
             </div>
@@ -88,7 +84,7 @@ export default function Home() {
 
         <section id="math">
           <div className="wrap">
-            <SectionHead n={math.n} title={math.title} intro={math.intro} />
+            <SectionHead title={math.title} intro={math.intro} />
             <div className="ladder">
               {math.ladder.map((rung, i) => (
                 <div className={rung.struck ? "r" : "r desk"} key={rung.title}>
@@ -105,7 +101,7 @@ export default function Home() {
           </div>
         </section>
 
-        <ReviewSection {...home.review} />
+        <ReviewSection title={home.review.title} intro={home.review.intro} steps={home.review.steps} cta={home.review.cta} proofTitle={home.review.proofTitle} proof={home.review.proof} />
       </main>
       <Footer />
     </div>

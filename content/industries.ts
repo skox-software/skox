@@ -112,7 +112,7 @@ export const industries: Industry[] = [
       "A tenant's request comes in by email, text or portal; the Maintenance Desk reads it, checks the lease and the unit's history, picks the vendor from your list and drafts the work order. Your coordinator sends it.",
     lead: "Usually, yes. A request comes in by email, text or portal; the desk reads it, checks the lease and the unit's history, picks the vendor from your own list and drafts the work order. Your coordinator approves and sends it.",
     sheet: {
-      caption: "Maintenance Desk · one request, as it ran",
+      caption: "The Maintenance Desk, one request, as it ran",
       sample: "Sample request. Sample building, sample tenant.",
       rows: [
         { doc: "Tenant's message", note: "\"Water under the kitchen sink since last night\"", source: "Tenant portal, unit 2B", status: "Read", time: "0:04" },
