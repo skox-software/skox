@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { Sheet } from "@/components/site/Sheet";
 import { PhotoHero } from "@/components/site/PhotoHero";
 import { Figures, ReviewSection, SectionHead, Strike, Strip } from "@/components/site/Bits";
-import { home, quoteDeskJob, stills, wall } from "@/content/site";
+import { films, home, quoteDeskJob, stills, wall } from "@/content/site";
 
 export const metadata = { alternates: { canonical: "/" } };
 
@@ -25,10 +25,38 @@ export default function Home() {
           secondary={{ label: hero.secondary, href: "/review" }}
           before={stills.home}
           after={stills.homeAfter}
+          film={films.home}
           caption="Photograph: a sample week's paperwork. Nothing here is a client's."
         />
 
-        <section id="proof">
+        <section id="cost">
+          <div className="wrap">
+            <SectionHead title={home.cost.title} intro={home.cost.intro} />
+            <p className="sample-line">{home.cost.sample}</p>
+            <div className="cost-ledger">
+              {[home.cost.before, home.cost.after].map((col, i) => (
+                <div className={i ? "col desk" : "col"} key={col.label}>
+                  <h3>{col.label}</h3>
+                  {col.lines.map((line) => (
+                    <div className="line" key={line.k}>
+                      <span className="k">{line.k}</span>
+                      <span className="v">{line.v}</span>
+                      {"note" in line && line.note && <span className="note">{line.note}</span>}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <p className="small source">{home.cost.foot}</p>
+            <div style={{ marginTop: 28 }}>
+              <Link className="btn blue" href="/review" data-cta="cost">
+                {home.cost.cta} <span className="dot" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section id="proof" style={{ paddingTop: 0 }}>
           <div className="wrap">
             <SectionHead title={home.proof.title} intro={home.proof.intro} />
             <div className="proof-grid">

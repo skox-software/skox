@@ -99,3 +99,10 @@ Josh: the third pass still read as AI slop. Diagnosis: the page was all typograp
 - The hero frame's background is the photograph's own blue (sampled at its left edge, per still in `content/site.ts`), the image starts 20% in with a 90px mask so the surface reads as one; under 980px the photograph is a 16:9 block above the copy.
 - Removed with this pass: the blue hero surface as a layout, the sky panels, the dark Industries band (the wall replaced it), the photo-less section rhythm. A 280px photographic break (the stamp corner of the hero) separates the wall from Hire vs. build.
 - The static mockups in this folder predate the photographs and are kept as the record of the earlier passes; the site itself is now the reference.
+
+## 13. The film and the cost ledger (2026-10-28)
+
+Josh: the work doesn't vanish, it gets done by a desk instead of a paid person; show that, and the money. Two additions:
+
+- **The hero film** (`public/brand/stills/pile-filed.mp4|webm`, MiniMax H3 Max, 5 s, 768p, start = the pile hero, end = `pile-filed.jpg`): sheets slide out of the folders, each is stamped and glides into one squared stack, the ledger closes into it, the emptied folders leave, a till receipt prints ("THIS WEEK · 5 documents collected · 4 read · 1 quote drafted · Time 4 min 12 s · Staff hours 0"), and the stamp presses APPROVED on the top sheet. Plays once, 1.2 s after load, desktop only; phones and reduced-motion get the still-to-still wipe. The end plate is also the "after" still. A first version that made the paperwork disappear was rejected: it said the work goes away.
+- **"What this work costs you now"**, directly under the hero: two ledger columns, Today and With a desk, in hours and dollars for a labelled sample firm (12 people, 40 quotes a month, 45 minutes each = 30 hours; BLS median $47,540 + 30% = $29.70/h = about $890 a month, $10,700 a year; the desk: 0 office hours, $1,500 a month, the hours back). Every figure is the BLS wage, our price or a stated assumption. No counters, no percentages, no client numbers.

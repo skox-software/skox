@@ -32,7 +32,7 @@ export const stills = {
   surveying: { src: "/brand/stills/surveying.jpg", bg: "#0159EE", alt: "A folded county plat, a property appraiser printout, a FEMA flood map, a surveyor's field book, a brass plumb bob and a rubber stamp, laid out on a blue surface." },
   "property-management": { src: "/brand/stills/maintenance.jpg", bg: "#025BE9", alt: "A clipboard with a maintenance work order, a tenant's handwritten note, a ring of keys tagged 2B, a lease page with a highlighted clause and a rubber stamp, laid out on a blue surface." },
   /* The same desks, cleared: the stamp, the ink pad and one approved sheet. */
-  homeAfter: { src: "/brand/stills/pile-after.jpg", bg: "#0058F0", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one sheet stamped Done." },
+  homeAfter: { src: "/brand/stills/pile-filed.jpg", bg: "#0058F0", alt: "The same blue surface: the paperwork filed in one squared stack, the top sheet a quote stamped Approved, a till receipt reading 5 documents, 4 read, 1 quote drafted, 4 min 12 s, staff hours 0." },
   surveyingAfter: { src: "/brand/stills/surveying-after.jpg", bg: "#0159EE", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one quote stamped Approved." },
   "property-managementAfter": { src: "/brand/stills/maintenance-after.jpg", bg: "#025BE9", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one work order stamped Sent." },
 } as const;
@@ -42,6 +42,11 @@ export const stills = {
  * question they are already asking. Trades with a live page link to it;
  * the rest go to the review with the trade filled in.
  */
+/** The hero films: the paperwork stamping and filing itself. Desktop only; phones get the wipe. */
+export const films = {
+  home: { mp4: "/brand/stills/pile-filed.mp4", webm: "/brand/stills/pile-filed.webm" },
+} as const;
+
 export const wall = [
   { slug: "surveying", trade: "Land surveying", question: "Can AI pull the county records for every survey job?", src: "/brand/stills/surveying.jpg", live: true },
   { slug: "property-management", trade: "Property management", question: "Can AI triage every maintenance request?", src: "/brand/stills/maintenance.jpg", live: true },
@@ -140,6 +145,35 @@ export const home = {
   industries: {
     title: "Start with the question you're already asking.",
     intro: "Every trade has its own pile. Two of these have a page that shows a desk running on it; the rest start with the review.",
+  },
+  /**
+   * What the work costs now, in the owner's units. A worked sample, labelled
+   * as one: every figure is the BLS wage, our price, or a stated assumption.
+   */
+  cost: {
+    title: "What this work costs you now.",
+    intro: "A sample firm, so the arithmetic is visible. On the call it's your firm: your jobs, your minutes, your payroll.",
+    sample: "Sample: a 12-person survey firm. 40 quotes a month, about 45 minutes of office time each.",
+    before: {
+      label: "Today",
+      lines: [
+        { k: "Office hours a month on quotes", v: "30 hours" },
+        { k: "Loaded cost of those hours", v: "about $890 a month", note: "At the BLS median admin wage of $47,540 plus about 30% for taxes and benefits: $29.70 an hour." },
+        { k: "Over a year", v: "360 hours, about $10,700" },
+        { k: "When the quoter is out", v: "Quotes wait" },
+      ],
+    },
+    after: {
+      label: "With a desk",
+      lines: [
+        { k: "Office hours a month on quotes", v: "0 hours", note: "Someone still approves each one. That's minutes, not hours." },
+        { k: "The desk", v: "$1,500 a month", note: "Fixed for the term. Setup is a one-time fee that covers configuring it to your office." },
+        { k: "The 360 hours", v: "Back, for billable work" },
+        { k: "When the quoter is out", v: "Quotes go out" },
+      ],
+    },
+    foot: "One job type rarely pays for a desk on its own; two or three do, and that's what the review finds. Wage: Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.",
+    cta: "Put your numbers in",
   },
   proof: {
     title: "One job, as it ran.",

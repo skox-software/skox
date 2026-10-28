@@ -341,3 +341,24 @@
 .ub .break { position:relative; height:280px; background:var(--blue); }
 .ub .break img { object-fit:cover; }
 @media (max-width:600px) { .ub .break { height:180px; } }
+
+
+/* the film in the hero: same placement as the stills, shown while it plays */
+.ub .photo-hero .frame video { position:absolute; top:0; left:20%; width:80%; height:100%; object-fit:cover; object-position:0% 50%; opacity:0; -webkit-mask-image:linear-gradient(to right, transparent, #000 90px); mask-image:linear-gradient(to right, transparent, #000 90px); }
+.ub .photo-hero.filming .frame video { opacity:1; }
+.ub .photo-hero.still .frame video { opacity:0; }
+.ub .photo-hero.still .after { transition:none; }
+@media (max-width:980px) { .ub .photo-hero .frame video { display:none; } }
+
+/* what this work costs you now: two columns of the owner's own units */
+.ub .sample-line { font-weight:500; margin:-24px 0 28px; color:var(--ink-2); }
+.ub .cost-ledger { display:grid; grid-template-columns:1fr 1fr; gap:0 56px; border-top:2px solid var(--ink); }
+.ub .cost-ledger .col h3 { font-family:var(--display); font-size:24px; font-weight:700; letter-spacing:-0.02em; padding:18px 0 6px; }
+.ub .cost-ledger .col.desk h3 { color:var(--blue); }
+.ub .cost-ledger .line { display:grid; grid-template-columns:1fr auto; gap:4px 24px; padding:16px 0; border-bottom:1px solid var(--rule); align-items:baseline; }
+.ub .cost-ledger .line .k { color:var(--ink-2); }
+.ub .cost-ledger .line .v { font-family:var(--display); font-weight:700; font-size:22px; letter-spacing:-0.02em; text-align:right; white-space:nowrap; }
+.ub .cost-ledger .col.desk .line .v { color:var(--blue); }
+.ub .cost-ledger .line .note { grid-column:1/3; font-size:14px; color:var(--ink-2); max-width:52ch; }
+@media (max-width:980px) { .ub .cost-ledger { grid-template-columns:1fr; } .ub .cost-ledger .col.desk { margin-top:24px; border-top:2px solid var(--ink); } }
+@media (max-width:600px) { .ub .cost-ledger .line { grid-template-columns:1fr; } .ub .cost-ledger .line .v { text-align:left; white-space:normal; } .ub .cost-ledger .line .note { grid-column:1; } }
