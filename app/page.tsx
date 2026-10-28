@@ -152,6 +152,21 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="now" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <SectionHead title={home.now.title} intro={home.now.intro} />
+            <div className="facts">
+              {home.now.facts.map((fact) => (
+                <div className="fact" key={fact.n + fact.src}>
+                  <b className="num">{fact.n}</b>
+                  <p>{fact.line}</p>
+                  <span className="src">{fact.src}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <ReviewSection title={home.review.title} intro={home.review.intro} steps={home.review.steps} cta={home.review.cta} proofTitle={home.review.proofTitle} proof={home.review.proof} />
       </main>
       <Footer />
