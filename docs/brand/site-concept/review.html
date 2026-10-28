@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a free operations review — UnBusy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .hero { padding-bottom:48px; }
+  .hero h1 { font-size:clamp(40px,5.6vw,84px); }
+  .review { padding:0 0 112px; }
+  form { border-top:1px solid var(--rule-strong); padding-top:28px; }
+  .field { display:grid; gap:8px; padding:0 0 24px; }
+  .field label, .field legend { font-size:14px; color:var(--ink-2); padding:0; }
+  .field .req { color:var(--ink); }
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width:100%; min-height:48px; padding:12px 14px; border:1px solid var(--ink); border-radius:0; background:var(--paper);
+    color:var(--ink); font:400 17px/1.4 var(--body); transition:background .15s;
+  }
+  textarea { min-height:140px; resize:vertical; }
+  select { appearance:none; -webkit-appearance:none; background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%); background-position:calc(100% - 20px) 21px, calc(100% - 15px) 21px; background-size:5px 5px; background-repeat:no-repeat; padding-right:40px; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+  fieldset { border:0; margin:0; padding:0; }
+  .choice { display:flex; gap:0; border:1px solid var(--ink); }
+  .choice label { flex:1; min-height:48px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:16px; cursor:pointer; color:var(--ink); }
+  .choice label + label { border-left:1px solid var(--ink); }
+  .choice input { position:absolute; opacity:0; }
+  .choice label.on { background:var(--ink); color:var(--paper); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .notice { margin-top:12px; max-width:56ch; }
+  .ready { border-top:1px solid var(--rule-strong); }
+  .ready li { display:grid; grid-template-columns:40px 1fr; gap:12px; padding:18px 0; border-bottom:1px solid var(--rule); }
+  .ready li::before { font-weight:500; color:var(--ink-2); }
+  .ready ol { margin:0; padding:0; list-style:none; counter-reset:r; }
+  .ready ol li { counter-increment:r; }
+  .ready ol li::before { content:counter(r,decimal-leading-zero); }
+  .ready h3 { font-size:20px; }
+  .ready p { color:var(--ink-2); margin-top:4px; }
+  .side { display:flex; flex-direction:column; gap:40px; }
+  @media (max-width:600px) { .two { grid-template-columns:1fr; gap:0; } }
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+  <a class="brand" href="index.html" aria-label="UnBusy home"><img src="../final/03-lockup-horizontal-light.png" alt="UnBusy"></a>
+  <div class="links">
+    <a href="index.html#how">How a desk works</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="index.html#math">Hire vs. build</a>
+    <a class="act" href="review.html">Book a free review <span class="dot"></span></a>
+  </div>
+</nav></div></header>
+
+<main>
+  <div class="wrap grid hero">
+    <div class="c1-9">
+      <h1 class="enter">Book a free operations review.</h1>
+    </div>
+    <div class="c10-12 aside enter d1">
+      <p class="lead">60 to 90 minutes, in your office or on a screen share. We watch how one part of your office runs today and come back with a proposal in your own numbers.</p>
+      <p class="small">Free. No pitch deck. The proposal is good for 14 days.</p>
+    </div>
+  </div>
+
+  <div class="wrap grid review enter d2">
+    <div class="c1-6">
+      <form action="#" onsubmit="return false">
+        <div class="two">
+          <div class="field"><label for="name">Your name <span class="req">*</span></label><input id="name" type="text" autocomplete="name"></div>
+          <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="firm">Firm <span class="req">*</span></label><input id="firm" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="industry">Industry <span class="req">*</span></label>
+          <select id="industry"><option>Surveying</option><option>Title and escrow</option><option>Property management</option><option>Accounting / CPA</option><option>Other</option></select>
+        </div>
+        <div class="field"><label for="part">The part of your office you'd like us to look at <span class="req">*</span></label>
+          <textarea id="part" placeholder="Who does it, what they open, how many a week, where it gets stuck."></textarea>
+        </div>
+        <div class="two">
+          <div class="field"><label for="people">People in the office</label>
+            <select id="people"><option>1 to 4</option><option selected>5 to 15</option><option>16 to 50</option><option>More than 50</option></select>
+          </div>
+          <div class="field"><fieldset><legend>Where</legend>
+            <div class="choice" style="margin-top:8px">
+              <label class="on"><input type="radio" name="where" checked>On site</label>
+              <label><input type="radio" name="where">Screen share</label>
+            </div>
+          </fieldset></div>
+        </div>
+        <div style="margin-top:4px"><button class="btn fill" type="submit">Book the review <span class="dot"></span></button></div>
+        <p class="small notice">We save what you type as you go, so a half-finished form still reaches us. We also use it to measure our ads. <a class="link" href="#">Your privacy choices.</a> We reply within one business day to set a time.</p>
+      </form>
+    </div>
+
+    <div class="c7-12 side" style="grid-column:8/13">
+      <div class="ready">
+        <h3 style="padding:18px 0 0">What to have ready</h3>
+        <ol>
+          <li><div><h3>The systems you use.</h3><p>County sites, QuickBooks, the software you already run, the shared drive. Logged in on the day.</p></div></li>
+          <li><div><h3>Who does the work.</h3><p>The person who does it now, in the room if they can be. They know where it gets stuck.</p></div></li>
+          <li><div><h3>Roughly how many a month.</h3><p>Jobs, requests, filings, whatever the unit is. A guess is fine; we confirm it together.</p></div></li>
+        </ol>
+      </div>
+      <div class="ready">
+        <h3 style="padding:18px 0 0">What you get</h3>
+        <ol>
+          <li><div><h3>A proposal in your own numbers.</h3><p>What the work costs you now, the desk that takes it over, the setup fee and the monthly fee. Good for 14 days.</p></div></li>
+          <li><div><h3>A yes/no list of the jobs the desk will run.</h3><p>If it isn't running them by day 90, you can cancel the term and keep what was built.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap grid">
+  <div class="c1-3"><img src="../final/03-lockup-horizontal-light.png" alt="UnBusy"></div>
+  <div class="c4-9 ink2" style="grid-column:4/10">Your data and your rules are yours. The system is ours to keep improving.</div>
+  <div class="c10-12 links"><a class="link" href="#">Privacy</a><a class="link" href="#">Your privacy choices</a><a class="link" href="#">Sign in</a></div>
+</div></footer>
+
+</body>
+</html>
