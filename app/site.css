@@ -418,3 +418,5 @@
   .ub .mock-sample { display:none; }
 }
 @media (prefers-reduced-motion:reduce) { .ub .mock li, .ub .mock .paper { opacity:1; transform:none; transition:none; } .ub .mock .paper .stamp { opacity:1; } }
+
+.ub .mock .paper-title { padding-right:104px; }
