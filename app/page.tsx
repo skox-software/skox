@@ -41,7 +41,39 @@ export default function Home() {
           </div>
         </div>
 
-        <section id="cost">
+        <section id="offer">
+          <div className="wrap">
+            <SectionHead title={home.offer.title} intro={home.offer.intro} />
+            <ol className="offers">
+              {home.offer.steps.map((step, i) => (
+                <li key={step.name}>
+                  <span className="i num">{String(i + 1).padStart(2, "0")}</span>
+                  <h3>{step.name}</h3>
+                  <p>{step.what}</p>
+                  <p className="get">{step.get}</p>
+                  <span className="price">{step.price}</span>
+                </li>
+              ))}
+            </ol>
+            <h3 className="desks-title">{home.offer.desksTitle}</h3>
+            <div className="desks">
+              {home.offer.desks.map((d) => (
+                <div className="desk-row" key={d.desk}>
+                  <span className="trade">{d.trade}</span>
+                  <b>{d.desk}</b>
+                  <span className="job">{d.job}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 32 }}>
+              <Link className="btn blue" href="/review" data-cta="offer">
+                {home.offer.cta} <span className="dot" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section id="cost" style={{ paddingTop: 0 }}>
           <div className="wrap">
             <SectionHead title={home.cost.title} intro={home.cost.intro} />
             <p className="sample-line">{home.cost.sample}</p>
