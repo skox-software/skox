@@ -91,13 +91,13 @@ H1: "Book a free operations review." Lead: "60 to 90 minutes, in your office or 
 | Email | email | yes |
 | Firm | text | yes |
 | Phone | tel | no |
-| Industry | select: Surveying, Title and escrow, Property management, Accounting / CPA, Other | yes |
-| The part of your office you'd like us to look at | textarea | yes |
+| What your firm does | text (free; no industry list, any firm can book) | yes |
+| The busywork you think your team could get rid of | textarea, placeholder "Describe it the way you'd describe it to a new hire: what comes in, who handles it, what they open and retype, how many a week." | yes |
 | People in the office | select: 1–4, 5–15, 16–50, more than 50 | no |
 | On site or screen share | radio | no |
 | (honeypot `website`, attribution, journey context) | hidden | — |
 
-Button: "Book the review ●". Notice under the form, truthful as today: saves as you type, used to measure ads, link to privacy choices. After submit: `/review/booked`: "Got it. We'll reply within one business day to set a time." Email subject becomes "Operations review: {firm}". The lead lands in the portal pipeline as today, with `industry` in place of `projectType`.
+Button: "Book the review ●". Notice under the form, truthful as today: saves as you type, used to measure ads, link to privacy choices. After submit: `/review/booked`: "Got it. We'll reply within one business day to set a time." Email subject becomes "Operations review: {firm}". The lead lands in the portal pipeline as today, with the free-text `industry` in place of `projectType` and the busywork description as the message.
 
 ### 2.4 Privacy (`/privacy`)
 
@@ -129,7 +129,7 @@ Code removed with them: `components/LandingPage.tsx`, `HomeServices`, `Automatio
 - **Styles:** `app/site.css` written from `DESIGN.md` (tokens, type scale, buttons, rows, table, grid). Tailwind stays installed for the concept pages but the new pages don't use its utilities. Fonts via `next/font/google`: Inter Tight 500/600 and Inter 400/500/600, replacing Geist and Instrument Serif in the root layout (concept pages that need their own fonts load them locally).
 - **Copy:** every word in `content/site.ts` (brand, nav, footer, home), `content/industries.ts`, `content/review.ts`. Components stay structural, as today.
 - **Logo:** `03-lockup-horizontal-light.png` in the header and footer via `next/image` (height 34px / 28px), from `public/brand/`. Favicon and apple-touch-icon exported from `08-app-icon-dark.png`; OG image regenerated with the stacked lockup on paper. Swap to SVG once the vector is traced.
-- **Lead delivery:** `app/api/contact/route.ts` keeps Resend → portal → Meta CAPI. `lib/leads.ts` gets the new fields (`firm`, `phone`, `industry`, `people`, `format`); `projectType` validation goes. The portal payload sends `industry` where `projectType` went, so the pipeline keeps working without a portal change.
+- **Lead delivery:** `app/api/contact/route.ts` keeps Resend → portal → Meta CAPI. `lib/leads.ts` gets the new fields (`firm`, `phone`, `industry` as free text, `people`, `format`); `projectType` validation goes. The portal payload sends `industry` where `projectType` went, so the pipeline keeps working without a portal change.
 - **Tracking:** `app/layout.tsx` keeps GA4, Clarity, Apollo, ad pixels, `CaptureAttribution`, all still gated by `lib/consent.ts`. The `scope_request` conversion event is renamed `review_request` in `lib/track.ts` and in the Google Ads / GA4 conversion definitions (a settings change Josh makes after merge). JSON-LD becomes `Organization` "UnBusy" with no founder block (decision 5); the service catalog block goes.
 - **Metadata:** `site.url` = `https://gounbusy.com`, sitemap lists the live pages only, `robots` unchanged, `llms.txt` rewritten.
 - **Checks before merge:** `npm run lint && npm run build`; a test submission through the preview form reaching founders@ and the portal pipeline; every redirect in section 3 curl-tested on the preview; no horizontal overflow at 360px; Lighthouse accessibility pass on the four pages.
