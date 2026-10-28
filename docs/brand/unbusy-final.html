@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Unbusy: monogram, wordmark, colors</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#8f8f8f; font-family:Manrope, system-ui, sans-serif; }
+  .row { display:grid; grid-template-columns:1fr; gap:14px; padding:14px; }
+  .card { border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:18px; }
+  .label { font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; opacity:.6; }
+  .sizes { display:flex; align-items:flex-end; gap:16px; }
+  svg { display:block; }
+  .wm { font-family:Manrope, sans-serif; font-weight:800; letter-spacing:-0.03em; }
+</style>
+</head>
+<body>
+<script>
+const INK='#15181D', PAPER='#FAFAF8';
+const dots=[['Blue','#0B5CFF']];
+// The monogram: one continuous stroke, u into n, and a full stop at the baseline.
+const mono=(ink,dot)=>`<path d="M18 30 V58 a14 14 0 0 0 28 0 V44 a14 14 0 0 1 28 0 V72" fill="none" stroke="${ink}" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><circle cx="90" cy="22" r="8" fill="${dot}"/>`;
+const mark=(ink,dot,size)=>`<svg width="${size}" height="${size}" viewBox="0 0 100 100">${mono(ink,dot)}</svg>`;
+const tile=(bg,ink,dot,size)=>`<svg width="${size}" height="${size}" viewBox="0 0 100 100"><rect width="100" height="100" rx="24" fill="${bg}"/><g transform="translate(14 14) scale(.72)">${mono(ink,dot)}</g></svg>`;
+const word=(ink,size)=>`<svg width="${size*3.6}" height="${size*1.22}" viewBox="0 0 360 122"><text class="wm" x="0" y="80" font-size="96" fill="${ink}">UnBusy</text></svg>`;
+const lockup=(ink,dot,h)=>`<div style="display:flex;align-items:center;gap:${h*0.28}px">${mark(ink,dot,h)}${word(ink,h*0.9)}</div>`;
+let html='';
+for (const [name,dot] of dots){
+  html+=`<div class="card" style="background:${PAPER};color:${INK}">
+    <div class="label">Dot: ${name} ${dot}</div>
+    ${lockup(INK,dot,110)}
+    <div class="sizes">${tile(INK,PAPER,dot,128)}${tile(INK,PAPER,dot,64)}${tile(INK,PAPER,dot,32)}${tile(INK,PAPER,dot,16)}</div>
+    <div class="sizes">${tile(dot,INK,INK,64)}${mark(INK,dot,64)}${mark(INK,dot,32)}${mark(INK,dot,16)}</div>
+  </div>`;
+}
+html='<div class="row">'+html+'</div><div class="row">';
+for (const [name,dot] of dots){
+  html+=`<div class="card" style="background:${INK};color:${PAPER}">
+    <div class="label">Dark · ${name}</div>
+    ${lockup(PAPER,dot,110)}
+    <div class="sizes">${tile(PAPER,INK,dot,64)}${tile(PAPER,INK,dot,32)}${mark(PAPER,dot,64)}${mark(PAPER,dot,32)}${mark(PAPER,dot,16)}</div>
+  </div>`;
+}
+html+='</div><div class="row">';
+for (const [name,dot] of dots){
+  html+=`<div class="card" style="background:${PAPER};color:${INK};align-items:center">
+    <div class="label">Hat / stacked · ${name}</div>
+    ${mark(INK,dot,160)}${word(INK,70)}
+  </div>`;
+}
+html+='</div>';
+document.body.innerHTML=html;
+</script>
+</body>
+</html>

@@ -55,6 +55,10 @@ export async function POST(req: Request) {
     company: String(body.company ?? "").trim(),
     broken: String(body.broken).trim(),
     timeline: String(body.timeline ?? "").trim(),
+    phone: body.phone ? String(body.phone).trim() : undefined,
+    industry: body.industry ? String(body.industry).trim() : undefined,
+    people: body.people ? String(body.people).trim() : undefined,
+    format: body.format ? String(body.format).trim() : undefined,
     projectType: body.projectType || undefined,
     leak: body.leak ? String(body.leak).slice(0, 300) : undefined,
     attribution: body.attribution
@@ -100,7 +104,7 @@ export async function POST(req: Request) {
         from: process.env.LEAD_FROM_EMAIL ?? "SKOX <onboarding@resend.dev>",
         to: [to],
         reply_to: lead.email,
-        subject: `Scope request — ${lead.company || company?.name || lead.name}`,
+        subject: `Operations review: ${lead.company || company?.name || lead.name}`,
         text,
       }),
     });
@@ -129,7 +133,8 @@ export async function POST(req: Request) {
         email: lead.email,
         name: lead.name,
         company: lead.company,
-        projectType: lead.projectType,
+        // The pipeline's "type" column now carries what the firm does.
+        projectType: lead.industry || lead.projectType,
         message: lead.broken,
         timeline: lead.timeline,
         attribution: lead.attribution,

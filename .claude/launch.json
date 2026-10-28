@@ -61,6 +61,18 @@
         "output/advantage-osborne"
       ],
       "port": 3500
+    },
+    {
+      "name": "mockups",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8765",
+        "--directory",
+        "docs/brand"
+      ],
+      "port": 8765
     }
   ]
 }

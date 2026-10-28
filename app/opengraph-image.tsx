@@ -1,9 +1,11 @@
 import { ImageResponse } from "next/og";
+import { home, site } from "@/content/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "SKOX — Your next big thing. Built at speed.";
+export const alt = `${site.name}: ${site.tagline}`;
 
+/* The hero, as a card: blue paper, the question, the word struck through. */
 export default function OG() {
   return new ImageResponse(
     <div
@@ -13,80 +15,26 @@ export default function OG() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#faf9f6",
-        // One soft amber glow from the top left, painted on the card itself
-        // (an oversized absolute circle gets clipped into a hard-edged box).
-        backgroundImage:
-          "radial-gradient(circle at 18% 12%, rgba(228,169,7,0.28) 0%, rgba(228,169,7,0.10) 32%, rgba(228,169,7,0) 58%)",
+        backgroundColor: "#0B5CFF",
+        color: "#FAFAF8",
         padding: 72,
+        fontFamily: "Inter, Helvetica, Arial, sans-serif",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        <svg
-          width="230"
-          height="36"
-          viewBox="0 0 1959 309"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M134 2L471 3L414 59L132 59L106 67L92 87L95 113L103 121L115 125L391 125L413 129L430 137L454 161L466 196L465 234L458 255L448 271L431 287L411 298L371 307L0 307L59 250L364 250L381 245L394 229L394 200L384 188L372 184L99 184L66 176L46 164L33 149L21 114L22 80L32 52L49 31L71 16L101 6ZM540 2L610 2L612 132L695 132L862 2L972 3L771 151L957 308L848 308L696 184L612 184L610 308L536 308L536 3Z"
-            fill="#1c201d"
-          />
-          <path
-            d="M1091 6H1359A80 66 0 0 1 1439 72V241A80 66 0 0 1 1359 307H1091A80 66 0 0 1 1011 241V72A80 66 0 0 1 1091 6ZM1105 90H1348A28 28 0 0 1 1376 118V189A28 28 0 0 1 1348 217H1105A28 28 0 0 1 1077 189V118A28 28 0 0 1 1105 90Z"
-            fill="#e4a907"
-            fillRule="evenodd"
-          />
-          <path
-            d="M1480 0L1579 1L1936 308L1835 308L1525 43L1478 1ZM1647 169L1694 211L1573 308L1478 308ZM1861 0L1958 1L1776 147L1730 106Z"
-            fill="#e4a907"
-          />
-        </svg>
+      <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 34, fontWeight: 700, letterSpacing: -1 }}>
+        <div style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#FAFAF8" }} />
+        {site.name}
       </div>
-
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          style={{
-            display: "flex",
-            fontSize: 66,
-            color: "#1c201d",
-            lineHeight: 1.05,
-            letterSpacing: -2,
-            maxWidth: 940,
-          }}
-        >
-          Your next big thing. Built at speed.
+        <div style={{ display: "flex", flexWrap: "wrap", fontSize: 92, fontWeight: 700, lineHeight: 1, letterSpacing: -4, maxWidth: 1000 }}>
+          <span style={{ marginRight: 24 }}>{home.hero.headlineBefore}</span>
+          <span style={{ display: "flex", position: "relative", marginRight: 24 }}>
+            {home.hero.struck}
+            <div style={{ position: "absolute", left: -4, right: -4, top: "52%", height: 9, backgroundColor: "#FAFAF8" }} />
+          </span>
+          <span>{home.hero.headlineAfter}</span>
         </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 28,
-            fontSize: 26,
-            color: "#5c6157",
-          }}
-        >
-          Custom websites · web apps · dashboards
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 14,
-          fontSize: 22,
-          color: "#7a5a05",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            width: 40,
-            height: 2,
-            background: "#e4a907",
-          }}
-        />
-        A clear scope. A fixed price. A delivery date.
+        <div style={{ display: "flex", marginTop: 36, fontSize: 30, opacity: 0.88 }}>{site.tagline}</div>
       </div>
     </div>,
     size,

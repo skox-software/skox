@@ -2,420 +2,306 @@
  * Every word on the site lives here. Components stay structural so copy can be
  * iterated without touching layout.
  *
- * Positioning rule enforced throughout: AI is named as the PRODUCT
- * ("AI phone agents that answer after-hours calls"), never as the METHOD.
- * Nothing here describes how the work gets built.
+ * Rules enforced throughout (docs/brand/site-concept/SITE-PLAN.md):
+ * - Sell the solution, never the category. No "AI agency", "automation" or
+ *   "software company" in a headline. "AI" appears once per page, as the
+ *   owner's own question.
+ * - "UnBusy" describes people and work, never the firm.
+ * - No invented proof. Every sample says "sample". Named clients only with
+ *   their permission.
+ * - No founder names, photos or phone number anywhere (Josh, 2026-10-27).
  */
 
 export const site = {
-  name: "SKOX",
-  tagline: "Website design, development & local SEO.",
+  name: "UnBusy",
+  tagline: "Get the busywork off your team.",
   description:
-    "Website design, development, local SEO and custom automation tools. Work directly with the SKOX founders, with a clear scope, fixed price and timeline agreed upfront.",
+    "UnBusy builds and runs the desk that does one part of your office legwork: it collects the documents, reads them, drafts the job and stops at your decision. A free operations review shows you the part it can take.",
   email: "founder@skoxsoftware.com",
-  /** The number on the Google ads' call asset. Shown on the trade pages. */
-  phone: { display: "(904) 792-0720", href: "tel:+19047920720" },
-  /** The domain visitors land on (the bare domain redirects here), so canonicals, OG and the sitemap match. */
-  url: "https://www.skoxsoftware.com",
-  /** Set to a Cal.com/Calendly URL and the page switches from "we'll reply" to instant booking. */
-  bookingUrl: null as string | null,
-  /** Drop a redacted scope at public/sample-scope.pdf and set this to "/sample-scope.pdf". */
-  sampleScopeUrl: null as string | null,
-} as const;
-
-export const nav = [
-  { label: "What we build", href: "#build" },
-  { label: "How it works", href: "#offer" },
-  { label: "What we don't", href: "#refusals" },
-  { label: "FAQ", href: "#faq" },
-] as const;
-
-export const hero = {
-  eyebrow: "Two builders · fixed scope · fixed date",
-  headline: "A site in 7 days. A live dashboard in 14. One workflow automated in 10.",
-  sub: "Two builders. We take one problem — the spreadsheet, the missed calls, the report nobody can pull — and hand it back working, on the date we set.",
-  primaryCta: "Get my price and date",
-  secondaryCta: "See what we build",
-  /** Sits directly under the headline — the top half of the fold gets ~65% of all attention. */
-  guarantee: "Fixed price and a delivery date, both agreed in writing before you pay anything.",
-  proofline: "Free written scope — what gets built, what it costs, the day it goes live. Yours to keep either way.",
+  /** The host visitors land on; canonicals, OG and the sitemap use it. */
+  url: "https://gounbusy.com",
 } as const;
 
 /**
- * Simplified hero: a plain statement of what we provide, next to a contact form.
- * Kept separate from `hero` above so the original long-form fold stays intact.
+ * The photographs: the paperwork of each trade, shot flat on the brand blue.
+ * Masters in docs/brand/stills; the site serves JPEGs from public/brand/stills.
+ * The left third of each hero frame is clear for the headline.
  */
-export const heroForm = {
-  eyebrow: "Two builders · fixed scope · fixed date",
-  headline: "Custom software, live on a date we commit to.",
-  sub: "Websites, dashboards, internal tools and AI automation — built by two people at a fixed price, on a delivery date agreed in writing before you pay.",
-  provides: [
-    "Websites & custom web apps",
-    "Live dashboards & Command Centers",
-    "Internal tools & integrations",
-    "AI phone & chat automation",
-  ],
-  formTitle: "Get your free scope",
-  formSub: "Tell us what you need — it comes straight to the two of us. A reply within one business day.",
+export const stills = {
+  home: { src: "/brand/stills/pile.jpg", bg: "#0058F0", alt: "A stack of manila folders labelled Invoices, Clients, Follow up, County and Payroll, an open ledger of handwritten figures, a rubber stamp and an ink pad, laid out on a blue surface." },
+  surveying: { src: "/brand/stills/surveying.jpg", bg: "#0159EE", alt: "A folded county plat, a property appraiser printout, a FEMA flood map, a surveyor's field book, a brass plumb bob and a rubber stamp, laid out on a blue surface." },
+  "property-management": { src: "/brand/stills/maintenance.jpg", bg: "#025BE9", alt: "A clipboard with a maintenance work order, a tenant's handwritten note, a ring of keys tagged 2B, a lease page with a highlighted clause and a rubber stamp, laid out on a blue surface." },
 } as const;
 
 /**
- * The entry offer, named rather than described. Named things get received;
- * described things get scheduled.
+ * The industry wall on the home page: every owner's paperwork, with the
+ * question they are already asking. Trades with a live page link to it;
+ * the rest go to the review with the trade filled in.
  */
-export const entryOffer = {
-  name: "The 30-Minute Scope",
-  promise: "A call, then a written scope. Yours whether or not you hire us.",
-  stack: [
-    { item: "A 30-minute call", detail: "You describe what's broken. We ask the questions that price it." },
-    { item: "A written scope document", detail: "Exactly what gets built, in plain language, with nothing hand-waved." },
-    { item: "A fixed price", detail: "Not a range, not an estimate, not billed by the hour." },
-    { item: "A fixed delivery date", detail: "Set before you pay anything, and not re-estimated once work starts." },
-    { item: "You see it working at the halfway mark", detail: "Not a status email — the actual thing, running, while there is still time to change it." },
-    { item: "You own the code outright", detail: "Your repos, your accounts, from day one. No licence, no hostage hosting." },
-  ],
-  keep: "You keep the scope document whether you hire us or not. No deposit, no obligation, no follow-up sequence.",
-  cost: "Costs you thirty minutes.",
-} as const;
 
-/** Problem stack — specific enough to sting, broad enough to cover the range. */
-export const problems = {
-  kicker: "The leak",
-  headline: "You already know which one this is.",
-  sub: "Every business has one. It has a name, it has a cost, and it has been there long enough that everyone works around it.",
-  items: [
-    {
-      n: "01",
-      title: "The site nobody can update",
-      body: "It looks nothing like the business does now, and changing a price means emailing whoever built it.",
-    },
-    {
-      n: "02",
-      title: "The spreadsheet only one person understands",
-      body: "It runs scheduling, or commissions, or inventory. If they leave, the process leaves with them.",
-    },
-    {
-      n: "03",
-      title: "Six platforms, no answer",
-      body: "The number you actually manage against lives across systems that don't talk, so nobody pulls it.",
-    },
-    {
-      n: "04",
-      title: "The 9pm enquiry answered at 10am",
-      body: "By then they have called someone else. Most of your leads arrive when nobody is at the desk.",
-    },
-    {
-      n: "05",
-      title: "The quote that came back in quarters",
-      body: "Fourteen weeks and a discovery phase, for something the business needs this month.",
-    },
-  ],
-} as const;
-
-export const calculator = {
-  kicker: "The cost of doing nothing",
-  headline: "Put your own numbers in.",
-  sub: "This is not our math. It is yours — the leak you already have, priced.",
-  fields: {
-    missed: { label: "Enquiries missed or unanswered per week", suffix: "per week" },
-    value: { label: "Average value of one customer", prefix: "$" },
-    close: { label: "Of the ones you do reach, how many become customers", suffix: "%" },
-  },
-  defaults: { missed: 12, value: 900, close: 25 },
-  footnote:
-    "Deliberately conservative: it only counts enquiries you never reached, at your own close rate. No industry multipliers, no assumed lift.",
-  payoff:
-    "That is every month. A build is one number, once, and it is live before another one of those months finishes.",
-  priceBand:
-    "Most builds land between $6,500 and $75,000. If your budget is not in that range we will say so on the call rather than waste your thirty minutes.",
-  cta: "Get my price and date",
-} as const;
-
-export const capabilities = [
-  {
-    id: "web",
-    lead: true,
-    n: "01",
-    title: "Websites & custom web apps",
-    blurb: "The thing your business runs on, built to look like your business.",
-    items: [
-      "Marketing sites and multi-location pages",
-      "Custom web apps — portals, member areas, client-facing tools",
-      "Landing and campaign pages that convert",
-      "Booking and lead capture wired straight into your CRM",
-      "Rebuilds of slow, dated or unmaintainable sites",
-      "Designed per company, not dropped into a template",
-    ],
-  },
-  {
-    id: "dashboards",
-    n: "02",
-    title: "Command Centers",
-    blurb: "If it has an API, it can feed one screen.",
-    items: [
-      "Spotify, TikTok, Instagram, Authorize.net, Acuity — and anything else with an API",
-      "Multi-location performance dashboards, live",
-      "Owner and manager scorecards",
-      "Automated weekly and monthly reports",
-      "Forecasting and cohort views",
-    ],
-  },
-  {
-    id: "products",
-    n: "03",
-    title: "Full products",
-    blurb: "Ground-up web apps for founders with an idea and no team.",
-    items: [
-      "MVPs built in days, not funded quarters",
-      "Auth, payments, admin — the whole thing",
-      "We have shipped our own: Tender in three days, and FocusTap end to end",
-    ],
-  },
-  {
-    id: "internal",
-    n: "04",
-    title: "Internal tools",
-    blurb: "Anything currently held together by one person and a spreadsheet.",
-    items: [
-      "Intake, scheduling, inventory, commissions, approvals",
-      "Admin panels and back-office workflows",
-      "Customer and client portals",
-    ],
-  },
-  {
-    id: "integrations",
-    n: "05",
-    title: "Integrations & plumbing",
-    blurb: "Making the tools you already pay for talk to each other.",
-    items: [
-      "Custom API work where no connector exists",
-      "Data migration and cleanup",
-      "Replacing brittle automation chains with something that holds",
-    ],
-  },
-  {
-    id: "ai",
-    n: "06",
-    title: "AI automation",
-    blurb: "The work that happens when nobody is at the desk.",
-    items: [
-      "Phone and chat agents that handle intake, booking, FAQs and after-hours calls",
-      "Document extraction from invoices, intake forms and contracts",
-      "Call transcription, summary and drafted follow-ups",
-      "Lead scoring and routing, email and ticket triage",
-    ],
-  },
+export const wall = [
+  { slug: "surveying", trade: "Land surveying", question: "Can AI pull the county records for every survey job?", src: "/brand/stills/surveying.jpg", live: true },
+  { slug: "property-management", trade: "Property management", question: "Can AI triage every maintenance request?", src: "/brand/stills/maintenance.jpg", live: true },
+  { slug: "title", trade: "Title and escrow", question: "Can AI order the records for a title file?", src: "/brand/stills/title.jpg", live: false },
+  { slug: "cpas", trade: "Accounting", question: "Can AI run my 1099 season?", src: "/brand/stills/cpa.jpg", live: false },
+  { slug: "law", trade: "Law offices", question: "Can AI open the file and chase the intake?", src: "/brand/stills/law.jpg", live: false },
+  { slug: "insurance", trade: "Insurance agencies", question: "Can AI issue the certificates and chase the renewals?", src: "/brand/stills/insurance.jpg", live: false },
+  { slug: "contractors", trade: "Contractors", question: "Can AI pull the permits and collect the lien waivers?", src: "/brand/stills/contractor.jpg", live: false },
+  { slug: "medical", trade: "Medical and dental offices", question: "Can AI do the intake and the insurance paperwork?", src: "/brand/stills/medical.jpg", live: false },
+  { slug: "freight", trade: "Freight and trucking", question: "Can AI match the bills of lading to the rate confirmations?", src: "/brand/stills/freight.jpg", live: false },
+  { slug: "hvac", trade: "HVAC and plumbing", question: "Can AI turn the service tickets into invoices?", src: "/brand/stills/hvac.jpg", live: false },
 ] as const;
 
-/** Things SKOX has actually shipped. Named and linkable beats named alone. */
-export const shipped = [
-  {
-    name: "Tender",
-    what: "A second-opinion marketplace for CFOs — auth, payments, admin, the lot.",
-    built: "Built in three days",
-    url: null as string | null,
+/**
+ * The desk, as the hero shows it: what came in, what the desk did, what
+ * came back. Sample firm, sample job; the month's numbers are the sample
+ * firm's arithmetic from the cost ledger below the hero, never a client's.
+ */
+export const quoteDeskMock = {
+  desk: "Quote Desk",
+  inbox: [
+    { kind: "Email", label: "New survey request: a platted lot in Lake Mary" },
+    { kind: "Attachment", label: "Prior survey, 2019.pdf" },
+    { kind: "County portal", label: "Seminole County Property Appraiser" },
+    { kind: "Spreadsheet", label: "Rates 2026.xlsx" },
+  ],
+  work: [
+    { label: "Pulled the appraiser record", time: "0:41" },
+    { label: "Pulled the plat and deed from the Clerk", time: "1:07" },
+    { label: "Read the FEMA flood layer: Zone X", time: "0:12" },
+    { label: "Read zoning and setbacks: R-1", time: "0:19" },
+    { label: "Found two prior jobs within 0.3 miles", time: "0:08" },
+    { label: "Drafted the quote from the rate sheet", time: "1:45" },
+  ],
+  out: {
+    title: "Quote: boundary survey, platted lot",
+    lines: ["Records attached, four sources", "Priced from the firm's own rates", "Filed in the job folder"],
+    stamp: "Waiting on the owner",
+    action: "Approve",
   },
-  {
-    name: "FocusTap",
-    what: "A focus tool, taken end to end from idea to shipped product.",
-    built: "Built end to end",
-    url: null as string | null,
-  },
-] as const;
-
-export const commandCenter = {
-  kicker: "Command Center",
-  headline: "Every platform in. One number out.",
-  sub: "Spotify, TikTok, Instagram, Authorize.net, Acuity — we have wired all of them in. If a platform has an API, it can feed one screen your managers actually open. Live in fourteen days.",
+  meter: [
+    { n: "40", label: "quotes drafted" },
+    { n: "30", label: "office hours back" },
+    { n: "$890", label: "of payroll not spent" },
+  ],
+  meterNote: "Sample firm: 40 quotes a month at 45 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
+  total: "4:12",
+  before: { src: "/brand/stills/surveying.jpg", alt: "", title: "Today: the same job, by hand.", line: "Four county sites, a PDF, a spreadsheet, an email. 40 times a month.", hand: "45:00" },
 } as const;
 
-export const offer = {
-  kicker: "How it works",
-  headline: "A written scope. A fixed price. A date.",
-  sub: "You get the scope document whether or not you hire us. It says exactly what gets built, what it costs, and the day it goes live.",
-  steps: [
-    { n: "01", title: "A call", body: "Thirty minutes. You describe the leak, we ask the questions that price it." },
-    { n: "02", title: "A written scope", body: "What gets built, what it costs, the date it lands. Yours to keep, hire us or not." },
-    { n: "03", title: "We build", body: "You talk to the people writing the code. No account manager in between." },
-    { n: "04", title: "It goes live", body: "On the date in the document. That date is the commitment, not an estimate." },
+export const nav = {
+  links: [
+    { label: "How a desk works", href: "/#how" },
+    { label: "Industries", href: "/#industries" },
+    { label: "Hire vs. build", href: "/#math" },
   ],
-  engagements: [
-    {
-      name: "The 7-Day Site Build",
-      days: 7,
-      scope: "Full marketing site, mobile, CMS, booking and lead capture wired up.",
-      guarantee: "Live in 7 days",
-    },
-    {
-      name: "The 14-Day Command Center",
-      days: 14,
-      scope: "Anything with an API, feeding one live dashboard with manager scorecards.",
-      guarantee: "Live in 14 days",
-    },
-    {
-      name: "The 10-Day Automation Sprint",
-      days: 10,
-      scope: "One workflow automated end to end. Document pipeline, triage system or chat agent.",
-      guarantee: "Working in 10 days",
-    },
-    {
-      name: "The Fixed-Date Custom Build",
-      days: null,
-      scope: "Internal tool, portal or full product. Scoped first, then a fixed price and a fixed date.",
-      guarantee: "Date set at scope, held",
-    },
-    {
-      name: "The Operator Retainer",
-      days: null,
-      scope: "Hosting, support, changes, new reports, priority access. Default on every deal.",
-      guarantee: "Cancel anytime",
-    },
-  ],
-  pricingLine:
-    "Fixed price against a written scope, quoted on the call. Never hourly — hourly bills you for our time instead of your result.",
+  action: { label: "Book a free review", href: "/review" },
 } as const;
 
-export const riskReversal = {
-  kicker: "Risk",
-  headline: "The date is the product.",
-  sub: "Anyone can quote a range. The commitment is what you're actually buying, so we put weight behind it.",
-
-  points: [
-    {
-      title: "You keep the scope either way",
-      body: "The written scope is yours whether you hire us or not. No deposit, no commitment, no obligation to proceed.",
-    },
-    {
-      title: "The date is fixed at scope",
-      body: "It goes in the document before you pay anything. It is not re-estimated once work starts.",
-    },
-    {
-      title: "You see it working halfway, not at the end",
-      body: "At the midpoint you get the actual thing running, not a status update — while there is still time to change direction. Most projects fail because nobody looked until it was too late to act.",
-    },
-    {
-      title: "Never hourly",
-      body: "Fixed price against written scope. You are buying a working system on a date, not a stack of timesheets.",
-    },
+export const footer = {
+  line: "Your data and your rules are yours. The system is ours to keep improving.",
+  links: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Your privacy choices", href: "/privacy#choices" },
+    { label: "Sign in", href: "/portal" },
   ],
 } as const;
 
-export const whyUs = [
-  {
-    n: "01",
-    title: "Speed that changes the math",
-    body: "Agencies quote in quarters because they are staffed to bill hours. We ship in days and weeks. That is not a nicer timeline, it is a different product — you get the thing while the problem is still the problem.",
-  },
-  {
-    n: "02",
-    title: "We have run the business",
-    body: "One of us built and ran the entire tech stack for a multi-location healthcare operation while doing the ops job. We know what the dashboard needs to say because we were the one staring at it at eleven at night.",
-  },
-  {
-    n: "03",
-    title: "You talk to the builders",
-    body: "Two people. No account manager, no offshore handoff, no game of telephone between the person who understood the problem and the person writing the code.",
-  },
-] as const;
+/** The header block at the top of a job ticket. */
+export type TicketHead = readonly { label: string; value: string }[];
 
-export type TeamMember = {
-  name: string;
-  role: string;
-  photo: string;
-  bio: string;
+/** The sample job every sheet on the site shows. Real counties, sample address. */
+export type SheetRow = {
+  doc: string;
+  note?: string;
+  source: string;
+  status: string;
+  /** The row that waits on a person gets the blue dot. */
+  waiting?: boolean;
+  time: string;
 };
 
-/**
- * Bios are drawn from each person's own LinkedIn profile. Current employers are
- * deliberately not named — the day jobs belong to the people, not to SKOX.
- */
-export const team = {
-  kicker: "Who you're talking to",
-  headline: "Two builders. Nobody in between.",
-  sub: "No account manager, no offshore handoff, no game of telephone between the person who understood the problem and the person writing the code. These are the two people who scope the work, build it, and answer when you call.",
-  members: [
-    {
-      name: "Joshua Fox",
-      role: "Co-founder",
-      photo: "/team/joshua-fox.jpg",
-      bio: "Josh runs strategy and operations for a multi-location healthcare group, scaling it through operations, technology and strategy. That means he has spent his working life on the operator's side of the exact problems we get hired to fix — he has been the one staring at the dashboard at eleven at night. MBA from the University of North Florida, former student-athlete.",
-    },
-    {
-      name: "Reiss Skeen",
-      role: "Co-founder",
-      photo: "/team/reiss-skeen.jpg",
-      bio: "Reiss engineers solutions for companies — taking a problem apart and building the thing that actually closes it. He co-founded FocusTap, leading both the technical build and the strategy behind it. Finance graduate of Flagler College and ex-captain of its men's soccer team, with a bias toward what the data actually says.",
-    },
-  ] as TeamMember[],
-};
+export const quoteDeskJob = {
+  caption: "The Quote Desk, one job, as it ran",
+  sample: "Sample job. Real counties, sample address.",
+  head: [
+    { label: "Job", value: "26-0412, boundary survey" },
+    { label: "Address", value: "Sample address, Lake Mary, FL" },
+    { label: "Received", value: "Today, 8:14 am, by email" },
+  ] as TicketHead,
+  rows: [
+    { doc: "Property appraiser record", source: "Seminole County Property Appraiser", status: "Collected", time: "0:41" },
+    { doc: "Plat and deed", source: "Clerk of Court, book 41, page 12", status: "Collected", time: "1:07" },
+    { doc: "Flood zone", source: "FEMA NFHL, Zone X", status: "Read", time: "0:12" },
+    { doc: "Zoning and setbacks", source: "City of Lake Mary, R-1", status: "Read", time: "0:19" },
+    { doc: "Quote", note: "Platted lot, two prior jobs within 0.3 miles", source: "From the firm's own rates", status: "Waiting on the owner", waiting: true, time: "1:53" },
+  ] as SheetRow[],
+  total: "4 min 12 s",
+  totalNote: "address to quote. Staff hours: 0.",
+  approve: "Approve quote",
+  approveHref: "/surveying",
+} as const;
 
-export const refusals = {
-  kicker: "Limits",
-  headline: "What we don't do.",
-  sub: "Saying this out loud is what makes the rest credible. Nobody believes two people who claim they do everything.",
-  items: [
-    "Staff augmentation",
-    "Native iOS and Android",
-    "Enterprise procurement cycles",
-    "24/7 on-call support",
-    "Ongoing paid media management",
-    "Rescuing someone else's codebase",
-    "Anything without a written scope",
+export const home = {
+  title: "UnBusy: Get the busywork off your team",
+  hero: {
+    eyebrow: "For owners who think AI could take some of this, and don't know where to start.",
+    /** The struck word is the brand device; it is rendered with a blue line through it. */
+    headlineBefore: "What's still",
+    struck: "busywork",
+    headlineAfter: "in your company?",
+    lead: "The retyping, the chasing, the paperwork that fills someone's week. Tell us the job. We look at how it runs today and show you the part a desk can take, up to your decision.",
+    primary: "Book a free review",
+    secondary: "Tell us the busywork",
+  },
+  /** The sample job's own numbers. Nothing here is invented. */
+  strip: [
+    { n: "5", label: "documents collected, from four county sources" },
+    { n: "4", label: "read against the firm's rulebook" },
+    { n: "1", label: "quote drafted from the firm's own rates" },
+    { n: "0", label: "staff hours. One decision left for a person." },
   ],
-  close:
-    "We take the work that fits in a fixed scope with a date on it. Everything else breaks the guarantee, and the guarantee is the business.",
+  how: {
+    title: "A desk does the legwork. Your people make the calls.",
+    intro: "Every desk has the same four parts, built around how your office already works. Three are the desk's. The last one is yours.",
+    parts: [
+      { who: "The desk", title: "Collect", body: "Pulls documents and data in by itself: county sites, email, uploads, QuickBooks, the software you already run. Nothing is retyped." },
+      { who: "The desk", title: "Read", body: "Reads each document and applies your rules. A new threshold, county or staff member is a setting you change, not a rebuild." },
+      { who: "The desk", title: "Prepare", body: "Every job arrives as a finished draft: the quote, the filing, the packet or the statement, written and filed." },
+      { who: "Yours", title: "Decide", body: "You approve, sign or send. The desk logs it and learns from it. The judgement, the signature and the client stay yours.", yours: true },
+    ],
+  },
+  industries: {
+    title: "Start with the question you're already asking.",
+    intro: "Every trade has its own pile. Two of these have a page that shows a desk running on it; the rest start with the review.",
+  },
   /**
-   * Scarcity is OFF until real numbers exist.
-   *
-   * Set `concurrentBuilds` to the true figure and `nextStart` to a real ISO date to
-   * turn the line back on. Leave `nextStart` null and it renders the undated version.
-   * Nothing here may be a guess: the entire offer rests on "our dates are real", and
-   * one invented date on this page discredits every other date on it.
+   * What the work costs now, in the owner's units. A worked sample, labelled
+   * as one: every figure is the BLS wage, our price, or a stated assumption.
    */
-  concurrentBuilds: null as number | null,
-  nextStart: null as string | null,
-  scarcity:
-    "We run {N} builds at a time. That is the whole calendar. Next start date we can commit to is {DATE}.",
-  scarcityNoDate:
-    "We run {N} builds at a time. That is the whole calendar — the date we give you assumes a slot is open.",
+  cost: {
+    title: "What this work costs you now.",
+    intro: "A sample firm, so the arithmetic is visible. On the call it's your firm: your jobs, your minutes, your payroll.",
+    sample: "Sample: a 12-person survey firm. 40 quotes a month, about 45 minutes of office time each.",
+    before: {
+      label: "Today",
+      lines: [
+        { k: "Office hours a month on quotes", v: "30 hours" },
+        { k: "Loaded cost of those hours", v: "about $890 a month", note: "At the BLS median admin wage of $47,540 plus about 30% for taxes and benefits: $29.70 an hour." },
+        { k: "Over a year", v: "360 hours, about $10,700" },
+        { k: "When the quoter is out", v: "Quotes wait" },
+      ],
+    },
+    after: {
+      label: "With a desk",
+      lines: [
+        { k: "Office hours a month on quotes", v: "0 hours", note: "Someone still approves each one. That's minutes, not hours." },
+        { k: "The desk", v: "$1,500 a month", note: "Fixed for the term. Setup is a one-time fee that covers configuring it to your office." },
+        { k: "The 360 hours", v: "Back, for billable work" },
+        { k: "When the quoter is out", v: "Quotes go out" },
+      ],
+    },
+    foot: "One job type rarely pays for a desk on its own; two or three do, and that's what the review finds. Wage: Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.",
+    cta: "Put your numbers in",
+  },
+  proof: {
+    title: "One job, as it ran.",
+    intro: "The Quote Desk at a Florida survey firm, on a sample address. The ticket is the product: what it collected, what it read, what it drafted, and where it stopped.",
+  },
+  math: {
+    title: "Hire vs. build.",
+    intro: "What owners usually try first, then the plain comparison. Your own numbers go in on the call.",
+    ladder: [
+      { title: "The next hire.", body: "Works until they leave. Four to eight weeks to train, out sick in busy season, and the cost comes back every year.", tag: "Costs every year", struck: true },
+      { title: "The all-in-one app.", body: "Answers the phone and builds the website. It has never read a plat, a W-9 or a work order, so your staff still retype into it.", tag: "Still retyped", struck: true },
+      { title: "ChatGPT on a laptop.", body: "Answers questions when someone asks. It doesn't pull the records, doesn't know your rates and doesn't file anything.", tag: "Files nothing", struck: true },
+      { title: "A desk.", body: "Does the job, in your systems, with your rules, and stops at your decision. Priced against the hire.", tag: "Stops at your decision", struck: false },
+    ],
+    hire: {
+      amount: "$47,540",
+      unit: "a year, before benefits",
+      title: "The next admin hire",
+      points: ["Every year, for as long as they stay", "Four to eight weeks to hire and train", "Out sick in busy season"],
+    },
+    desk: {
+      amount: "$1,500",
+      unit: "a month, to start",
+      title: "A desk",
+      points: ["One-time setup that covers configuring it to your office", "A fixed monthly fee, about a quarter of what the work costs you now", "Your data and rules, exportable any day"],
+    },
+    source: "Wage: US median for secretaries and administrative assistants, Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.",
+  },
+  review: {
+    title: "The review.",
+    intro: "We start by watching the work, not by pitching it. Free, 60 to 90 minutes, in your office or on a screen share.",
+    steps: [
+      { title: "Show us how it runs today.", body: "Your systems, your steps, your hours." },
+      { title: "Get a proposal in your own numbers.", body: "What the work costs you now, the desk that takes it over, and the monthly fee." },
+      { title: "Decide.", body: "The review is free. The proposal is good for 14 days." },
+    ],
+    cta: "Book a free review",
+    proofTitle: "Proof, the honest version",
+    proof: "Every screen on this site is a working sample and says so. Named clients and measured hours appear here when owners say yes, and not before. If you want to know what a desk would do with your process, that is what the review is for.",
+  },
 } as const;
 
-export const faq = [
-  {
-    q: "Can two people actually do this?",
-    a: "For work that fits a written scope with a date on it, yes — that is exactly why the list of what we don't do is on this page. We are not staffed to run enterprise procurement or 24/7 on-call, so we don't sell it. What we do sell, we deliver ourselves, which is why there is nobody in between you and the build.",
+export const review = {
+  title: "Book a free operations review",
+  description:
+    "Free, 60 to 90 minutes, in your office or on a screen share. We watch how one part of your office runs today and come back with a proposal in your own numbers.",
+  eyebrow: "Free. 60 to 90 minutes. In your office or on a screen share.",
+  headlineBefore: "Tell us the",
+  struck: "busywork",
+  headlineAfter: ".",
+  lead: "Can AI run this part of your office? Usually, yes. The review is where we find out which part: we watch how it runs today and come back with a proposal in your own numbers. No pitch deck.",
+  form: {
+    name: "Your name",
+    email: "Email",
+    firm: "Firm",
+    phone: "Phone",
+    industry: "What your firm does",
+    industryPlaceholder: "Land surveying, title and escrow, a CPA practice, property management, anything else",
+    busywork: "The busywork you think your team could get rid of",
+    busyworkPlaceholder: "Describe it the way you'd describe it to a new hire: what comes in, who handles it, what they open and retype, how many a week.",
+    people: "People in the office",
+    peopleOptions: ["1 to 4", "5 to 15", "16 to 50", "More than 50"],
+    format: "Where",
+    formatOptions: ["On site", "Screen share"],
+    submit: "Book the review",
+    submitting: "Sending…",
+    /* The notice for unfinished-form follow-up. Reword freely; do not remove it. */
+    notice: "We save what you type as you go, so a half-finished form still reaches us. We also use it to measure our ads.",
+    noticeLink: "Your privacy choices.",
+    reply: "We reply within one business day to set a time.",
+    error: "That didn't send. Try again, or email us with the details below.",
+    emailUs: "Email us instead",
   },
-  {
-    q: "What actually happens if the date slips?",
-    a: "It goes in the written scope before you pay anything, and it is not re-estimated once work starts. You also see the thing running at the halfway mark, so a slip is visible to you with time to act rather than announced at the end. We would rather commit to a real date than pad the estimate — a padded estimate is just an agency timeline with better manners.",
+  ready: {
+    title: "What to have ready",
+    items: [
+      { title: "The systems you use.", body: "County sites, QuickBooks, the software you already run, the shared drive. Logged in on the day." },
+      { title: "Who does the work.", body: "The person who does it now, in the room if they can be. They know where it gets stuck." },
+      { title: "Roughly how many a month.", body: "Jobs, requests, filings, whatever the unit is. A guess is fine; we confirm it together." },
+    ],
   },
-  {
-    q: "Why isn't pricing on the site?",
-    a: "Because a real number needs a real scope, and we won't quote one without the other. The call is thirty minutes and ends with a written price and a date. Nothing about that is a sales process — you keep the document either way.",
+  get: {
+    title: "What you get",
+    items: [
+      { title: "A proposal in your own numbers.", body: "What the work costs you now, the desk that takes it over, the setup fee and the monthly fee. Good for 14 days." },
+      { title: "A yes/no list of the jobs the desk will run.", body: "If it isn't running them by day 90, you can cancel the term and keep what was built." },
+    ],
   },
-  {
-    q: "Who owns the code?",
-    a: "You do. Outright, from day one, in your own repositories and your own accounts. No licence, no hostage hosting, no per-seat fee to keep using the thing you paid to have built.",
+  data: {
+    title: "Your data",
+    items: [
+      { title: "Yours, exportable any day.", body: "Plain formats, no fee, no notice period." },
+      { title: "Your rulebook is a document you keep.", body: "Thresholds, counties, templates, staff. Readable without us." },
+      { title: "Never used to train anything.", body: "Your files run your desk and nobody else's." },
+    ],
   },
-  {
-    q: "What happens after it goes live?",
-    a: "Most clients keep the Operator Retainer — hosting, support, changes, new reports and priority access. It is cancel-anytime. If you would rather take it in-house, the code and the accounts are yours and we will hand over cleanly.",
+  booked: {
+    title: "Got it.",
+    body: "We'll reply within one business day to set a time. Until then, the page that started this is a fair picture of what the review looks at.",
+    back: "Back to the start",
   },
-  {
-    q: "What if the scope changes mid-build?",
-    a: "Small things get absorbed. Anything that moves the date gets written down, priced, and agreed before we touch it — so the date never quietly moves while you assume it hasn't.",
-  },
-] as const;
-
-export const form = {
-  kicker: "Start here",
-  headline: "Tell us what's broken.",
-  sub: "Three fields. It comes straight to the two of us — no filter, no sequence.",
-  submit: "Get my free scope",
-  reassure: "No deposit. No obligation. You keep the scope document either way.",
-  submitting: "Sending…",
-  successTitle: "Got it.",
-  successBody: "We read every one of these ourselves. Expect a reply within one business day.",
-  successBooking: "Now pick your thirty minutes. If nothing on there works, just reply to the email we've sent you.",
-  errorTitle: "That didn't send.",
 } as const;

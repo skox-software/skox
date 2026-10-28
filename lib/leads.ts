@@ -7,9 +7,18 @@ export type Lead = {
   context?: string;
   name: string;
   email: string;
+  /** The firm. */
   company: string;
+  /** The busywork, in the owner's words. */
   broken: string;
   timeline: string;
+  phone?: string;
+  /** What the firm does, free text. */
+  industry?: string;
+  /** People in the office. */
+  people?: string;
+  /** On site or screen share. */
+  format?: string;
   projectType?: string;
   leak?: string;
   /** Honeypot — must stay empty. */
@@ -40,6 +49,10 @@ export function validate(lead: Partial<Lead>): FieldErrors {
     "attribution",
     "leak",
     "context",
+    "phone",
+    "industry",
+    "people",
+    "format",
   ] as const) {
     if (lead[key] !== undefined && typeof lead[key] !== "string")
       e[key] = "Please enter text.";
@@ -58,11 +71,11 @@ export function validate(lead: Partial<Lead>): FieldErrors {
     e.broken = "Too long — give us the short version.";
 
   if (lead.company && lead.company.length > 200) e.company = "Too long.";
-  if (
-    lead.projectType &&
-    !["websites", "web-apps", "dashboards", "other"].includes(lead.projectType)
-  )
-    e.projectType = "Choose a build type.";
+  if (lead.projectType && lead.projectType.length > 120) e.projectType = "Too long.";
+  if (lead.phone && lead.phone.length > 40) e.phone = "Too long.";
+  if (lead.industry && lead.industry.length > 120) e.industry = "Too long.";
+  if (lead.people && lead.people.length > 40) e.people = "Too long.";
+  if (lead.format && lead.format.length > 40) e.format = "Too long.";
   if (lead.timeline && lead.timeline.length > 200) e.timeline = "Too long.";
   if (lead.context && lead.context.length > 6000) e.context = "Too long.";
   return e;
@@ -73,12 +86,15 @@ export function formatLead(lead: Lead): string {
   return [
     `Name:     ${lead.name}`,
     `Email:    ${lead.email}`,
-    `Company:  ${lead.company || "—"}`,
-    `Timeline: ${lead.timeline || "—"}`,
-    `Build:    ${lead.projectType || "Not specified"}`,
+    `Firm:     ${lead.company || "—"}`,
+    lead.phone ? `Phone:    ${lead.phone}` : null,
+    `Does:     ${lead.industry || lead.projectType || "Not specified"}`,
+    lead.people ? `People:   ${lead.people}` : null,
+    lead.format ? `Review:   ${lead.format}` : null,
+    lead.timeline ? `Timeline: ${lead.timeline}` : null,
     lead.leak ? `Leak:     ${lead.leak}` : null,
     "",
-    "What's broken:",
+    "The busywork:",
     lead.broken,
     lead.attribution || null,
   ]

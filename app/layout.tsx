@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono, IBM_Plex_Sans, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -9,41 +9,31 @@ import { AdPixels } from "@/components/AdPixels";
 import { ClarityTracker } from "@/components/ClarityTracker";
 import { TRACKING_ALLOWED_JS } from "@/lib/consent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { site } from "@/content/site";
-import { landing } from "@/content/landing";
-import { topics } from "@/content/topics";
+import { home, site } from "@/content/site";
 import "./globals.css";
-import "./landing.css";
+import "./site.css";
 
-const sans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-});
-const mono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "swap",
-});
-/* Display face for h1/h2 only. It ships a single weight, which is the point:
-   the system's serif never goes bold, and there is no heavier cut to reach for. */
-const serif = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-instrument",
-  display: "swap",
-});
+/* The site's two faces. */
+/* Bricolage's optical-size axis gives the 96px headline its own cut while
+   the small sizes stay plain; Plex Sans reads like a document and has true
+   tabular figures for the sheet. */
+const display = Bricolage_Grotesque({ subsets: ["latin"], weight: "variable", axes: ["opsz", "wdth"], variable: "--font-display", display: "swap" });
+const body = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-body", display: "swap" });
+
+/* The concept pages under app/concepts still set type in these. */
+const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+const serif = Instrument_Serif({ weight: "400", style: ["normal", "italic"], subsets: ["latin"], variable: "--font-instrument", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `Website design, development & local SEO — ${site.name}`,
+    default: home.title,
     template: `%s — ${site.name}`,
   },
   description: site.description,
   openGraph: {
-    title: `${site.name} — ${site.tagline}`,
+    title: home.title,
     description: site.description,
     url: site.url,
     siteName: site.name,
@@ -51,35 +41,30 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
+    title: home.title,
     description: site.description,
   },
   robots: { index: true, follow: true },
-  // Search Console and Bing Webmaster Tools ownership tags. Set the codes in
-  // Vercel; until then nothing is printed.
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
-    other: process.env.BING_SITE_VERIFICATION
-      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
-      : undefined,
+    other: process.env.BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION } : undefined,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf9f6",
+  themeColor: "#0B5CFF",
 };
 
 /* Google Analytics 4 measurement ID (G-…). Unset means no Google tag at all. */
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-/* Who SKOX is, for search engines and AI answers. Service pages add their own
-   Service and BreadcrumbList that point back at #organization. No address:
-   the location stays private. */
+/* Who UnBusy is, for search engines and AI answers. No founders, no address:
+   the site names nobody (SITE-PLAN decision 5). */
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "ProfessionalService",
+      "@type": "Organization",
       "@id": `${site.url}/#organization`,
       name: site.name,
       description: site.description,
@@ -87,23 +72,8 @@ const jsonLd = {
       email: site.email,
       logo: `${site.url}/icon.png`,
       image: `${site.url}/opengraph-image`,
-      slogan: "Built at speed.",
+      slogan: site.tagline,
       areaServed: { "@type": "Country", name: "United States" },
-      knowsAbout: ["Website design and development", "Local SEO", "Custom automation tools", ...topics.map((t) => t.serviceType)],
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "What we build",
-        itemListElement: topics.map((t) => ({
-          "@type": "Offer",
-          itemOffered: { "@id": `${site.url}/${t.slug}#service` },
-        })),
-      },
-      founder: landing.founders.map((f) => ({
-        "@type": "Person",
-        name: f.name,
-        jobTitle: f.role.replace(/^Co-founder · /, "Co-founder, "),
-        image: `${site.url}${f.photo}`,
-      })),
     },
     {
       "@type": "WebSite",
@@ -115,16 +85,9 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
-    >
+    <html lang="en" className={`${display.variable} ${body.variable} ${sans.variable} ${mono.variable} ${serif.variable}`}>
       <body>
         <a
           href="#top"
@@ -151,18 +114,12 @@ export default function RootLayout({
   document.head.appendChild(o)}initApollo();}`}
           </Script>
         )}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
       {/* Google Analytics 4 via the Google tag. Production only, like the
-          Apollo tracker above, so local and preview traffic stays out of the
-          reports. Disclosed on /privacy; keep that page in step if this
-          changes. */}
+          Apollo tracker above. Disclosed on /privacy. */}
       {process.env.VERCEL_ENV === "production" && gaId && (
         <>
-          {/* Google's own switch: with this flag set, gtag sends nothing. */}
           <Script id="ga-opt-out" strategy="beforeInteractive">
             {`if(!${TRACKING_ALLOWED_JS})window['ga-disable-${gaId}']=true;`}
           </Script>

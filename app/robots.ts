@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/scope-received", "/concepts/"],
+      disallow: ["/review/booked", "/concepts/"],
     },
     sitemap: `${site.url}/sitemap.xml`,
   };

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a free operations review — UnBusy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+  <a href="index.html" aria-label="UnBusy home"><img src="../final/03-lockup-horizontal-light.png" alt="UnBusy"></a>
+  <div class="links">
+    <a href="index.html#how">How a desk works</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="index.html#math">Hire vs. build</a>
+    <a class="btn blue" href="review.html">Book a free review <span class="dot"></span></a>
+  </div>
+</nav></div></header>
+
+<main>
+  <div class="hero paper"><div class="wrap grid">
+    <div class="c1-6">
+      <p class="q">Free. 60 to 90 minutes. In your office or on a screen share.</p>
+      <h1>Tell us the <span class="strike">busywork</span>.</h1>
+      <p class="lead">Can AI run this part of your office? Usually, yes. The review is where we find out which part: we watch how it runs today and come back with a proposal in your own numbers. No pitch deck.</p>
+    </div>
+  </div></div>
+
+  <div class="wrap grid" style="padding-bottom:120px">
+    <div class="c1-6">
+      <form action="#" onsubmit="return false">
+        <div class="two">
+          <div class="field"><label for="name">Your name <span class="req">*</span></label><input id="name" type="text" autocomplete="name"></div>
+          <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="firm">Firm <span class="req">*</span></label><input id="firm" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="industry">What your firm does <span class="req">*</span></label>
+          <input id="industry" type="text" placeholder="Land surveying, title and escrow, a CPA practice, property management, anything else">
+        </div>
+        <div class="field"><label for="part">The busywork you think your team could get rid of <span class="req">*</span></label>
+          <textarea id="part" placeholder="Describe it the way you'd describe it to a new hire: what comes in, who handles it, what they open and retype, how many a week."></textarea>
+        </div>
+        <div class="two">
+          <div class="field"><label for="people">People in the office</label>
+            <select id="people"><option>1 to 4</option><option selected>5 to 15</option><option>16 to 50</option><option>More than 50</option></select>
+          </div>
+          <div class="field"><fieldset><legend>Where</legend>
+            <div class="choice" style="margin-top:8px">
+              <label class="on"><input type="radio" name="where" checked>On site</label>
+              <label><input type="radio" name="where">Screen share</label>
+            </div>
+          </fieldset></div>
+        </div>
+        <div style="margin-top:6px"><button class="btn blue" type="submit">Book the review <span class="dot"></span></button></div>
+        <p class="small notice">We save what you type as you go, so a half-finished form still reaches us. We also use it to measure our ads. <a class="link" href="#">Your privacy choices.</a> We reply within one business day to set a time.</p>
+      </form>
+    </div>
+
+    <div class="c7-12 side" style="grid-column:8/13">
+      <div class="ready">
+        <h3>What to have ready</h3>
+        <ol>
+          <li><div><h3>The systems you use.</h3><p>County sites, QuickBooks, the software you already run, the shared drive. Logged in on the day.</p></div></li>
+          <li><div><h3>Who does the work.</h3><p>The person who does it now, in the room if they can be. They know where it gets stuck.</p></div></li>
+          <li><div><h3>Roughly how many a month.</h3><p>Jobs, requests, filings, whatever the unit is. A guess is fine; we confirm it together.</p></div></li>
+        </ol>
+      </div>
+      <div class="ready">
+        <h3>What you get</h3>
+        <ol>
+          <li><div><h3>A proposal in your own numbers.</h3><p>What the work costs you now, the desk that takes it over, the setup fee and the monthly fee. Good for 14 days.</p></div></li>
+          <li><div><h3>A yes/no list of the jobs the desk will run.</h3><p>If it isn't running them by day 90, you can cancel the term and keep what was built.</p></div></li>
+        </ol>
+      </div>
+      <div class="ready">
+        <h3>Your data</h3>
+        <ol>
+          <li><div><h3>Yours, exportable any day.</h3><p>Plain formats, no fee, no notice period.</p></div></li>
+          <li><div><h3>Your rulebook is a document you keep.</h3><p>Thresholds, counties, templates, staff. Readable without us.</p></div></li>
+          <li><div><h3>Never used to train anything.</h3><p>Your files run your desk and nobody else's.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap grid">
+  <div class="c1-4"><img src="../final/07-lockup-horizontal-dark.png" alt="UnBusy" style="height:30px"></div>
+  <div class="c5-12" style="display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:start">
+    <p class="line">Your data and your rules are yours. The system is ours to keep improving.</p>
+    <div class="links"><a href="#">Privacy</a><a href="#">Your privacy choices</a><a href="#">Sign in</a></div>
+  </div>
+</div></footer>
+
+</body>
+</html>
