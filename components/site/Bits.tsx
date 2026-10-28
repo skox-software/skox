@@ -6,9 +6,9 @@ export function Strike({ children, now = false }: { children: React.ReactNode; n
 }
 
 /** The sample job's own numbers, on an ink band under the hero. */
-export function Strip({ items }: { items: readonly { n: string; label: string }[] }) {
+export function Strip({ items, stack = false }: { items: readonly { n: string; label: string }[]; stack?: boolean }) {
   return (
-    <div className="strip">
+    <div className={stack ? "strip stack" : "strip"}>
       <div className="wrap num">
         {items.map((item) => (
           <div key={item.label}>

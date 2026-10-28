@@ -32,8 +32,8 @@ const EMPTY: Lead = {
  * and then abandoned goes to /api/partial once, as the notice under the
  * button says.
  */
-export function ReviewForm() {
-  const [lead, setLead] = useState<Lead>(EMPTY);
+export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string }) {
+  const [lead, setLead] = useState<Lead>({ ...EMPTY, industry: initialIndustry });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [state, setState] = useState<"idle" | "sending" | "failed">("idle");
   const [fallback, setFallback] = useState("");

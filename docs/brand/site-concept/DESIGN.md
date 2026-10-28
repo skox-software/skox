@@ -4,7 +4,7 @@ Scope: the public site (homepage, industry question pages, the review page, priv
 
 ## 1. Visual theme
 
-Blue paper. The brand's three colours (ink, paper, the logo blue) used with nerve: blue is a surface, not a dot. The product is shown as a sheet of paper, running. One signature device, the strike, carries the name: busywork is a word with a blue line through it.
+**The paperwork, photographed.** Each page opens on a still-life photograph of that trade's actual busywork, shot flat on the brand blue: a plat and a field book for surveyors, a work order on a clipboard for property managers, the folder stack and the ledger for everyone else. The headline sits on the clear left third. On load the page's one moment plays: the strike draws through "busywork", then the photograph is swept left to right into a second photograph of the same desk cleared, only the stamp, the ink pad and one approved sheet left. The pictures live in `docs/brand/stills` (PNG masters, Higgsfield gpt_image_2_5, 2K) and `public/brand/stills` (JPEG). Underneath the photographs the system is still blue paper: The brand's three colours (ink, paper, the logo blue) used with nerve: blue is a surface, not a dot. The product is shown as a sheet of paper, running. One signature device, the strike, carries the name: busywork is a word with a blue line through it.
 
 One line: **the busywork, struck off.**
 
@@ -89,3 +89,13 @@ Removed as generic tells: section numerals 01–04, repeated small labels above 
 ## 11. Third pass (2026-10-28)
 
 Grounded the chrome in the buyer's own vernacular instead of SaaS: the sheet is a job ticket (header block, margin rule, stamp, signature line, rows that print rather than fade); Hire vs. build is two ledger lines instead of two price cards; the stats strip moved onto paper so each page has one dark band. Liquid Glass and other native-app motion systems don't apply to the site; the one idea borrowed from them is that an element should materialize in its own material (here: be written) rather than fade.
+
+## 12. Fourth pass: the photographs (2026-10-28)
+
+Josh: the third pass still read as AI slop. Diagnosis: the page was all typography and panels, where every reference he liked (giga.ai, legora.com, zaro.ai, ramp.com) has art-directed imagery. Decision: photographed paperwork on the brand blue as the visual world, a series across industries so any owner recognises their own pile.
+
+- Heroes: `pile` (home), `surveying`, `maintenance`; each with an `-after` plate for the sweep. Prompt recipe: straight-down flat lay, seamless matte #0B5CFF, the trade's real documents with real English words, hard daylight top-left, medium format f/8, Portra, faint grain; left third empty; no people, hands, screens, logos. The after plate is an edit of the hero with `image_references`: everything removed but the stamp and ink pad, one sheet with a blue stamp (APPROVED / SENT / DONE).
+- The wall: eight more trades at 4:3 (title, CPA, law, insurance, contractor, medical, freight, HVAC) under "Start with the question you're already asking"; the two with live pages are twice the width and link to them, the rest open the review with the trade filled in.
+- The hero frame's background is the photograph's own blue (sampled at its left edge, per still in `content/site.ts`), the image starts 20% in with a 90px mask so the surface reads as one; under 980px the photograph is a 16:9 block above the copy.
+- Removed with this pass: the blue hero surface as a layout, the sky panels, the dark Industries band (the wall replaced it), the photo-less section rhythm. A 280px photographic break (the stamp corner of the hero) separates the wall from Hire vs. build.
+- The static mockups in this folder predate the photographs and are kept as the record of the earlier passes; the site itself is now the reference.

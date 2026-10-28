@@ -29,7 +29,8 @@ function List({ title, items }: { title: string; items: readonly { title: string
   );
 }
 
-export default function ReviewPage() {
+export default async function ReviewPage({ searchParams }: { searchParams: Promise<{ industry?: string }> }) {
+  const { industry } = await searchParams;
   return (
     <div className="ub">
       <Header />
@@ -48,7 +49,7 @@ export default function ReviewPage() {
         </div>
         <div className="wrap grid review-body">
           <div className="c1-6">
-            <ReviewForm />
+            <ReviewForm initialIndustry={typeof industry === "string" ? industry.slice(0, 120) : ""} />
           </div>
           <div className="side" style={{ gridColumn: "8 / 13" }}>
             <List {...review.ready} />

@@ -22,6 +22,39 @@ export const site = {
   url: "https://gounbusy.com",
 } as const;
 
+/**
+ * The photographs: the paperwork of each trade, shot flat on the brand blue.
+ * Masters in docs/brand/stills; the site serves JPEGs from public/brand/stills.
+ * The left third of each hero frame is clear for the headline.
+ */
+export const stills = {
+  home: { src: "/brand/stills/pile.jpg", bg: "#0058F0", alt: "A stack of manila folders labelled Invoices, Clients, Follow up, County and Payroll, an open ledger of handwritten figures, a rubber stamp and an ink pad, laid out on a blue surface." },
+  surveying: { src: "/brand/stills/surveying.jpg", bg: "#0159EE", alt: "A folded county plat, a property appraiser printout, a FEMA flood map, a surveyor's field book, a brass plumb bob and a rubber stamp, laid out on a blue surface." },
+  "property-management": { src: "/brand/stills/maintenance.jpg", bg: "#025BE9", alt: "A clipboard with a maintenance work order, a tenant's handwritten note, a ring of keys tagged 2B, a lease page with a highlighted clause and a rubber stamp, laid out on a blue surface." },
+  /* The same desks, cleared: the stamp, the ink pad and one approved sheet. */
+  homeAfter: { src: "/brand/stills/pile-after.jpg", bg: "#0058F0", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one sheet stamped Done." },
+  surveyingAfter: { src: "/brand/stills/surveying-after.jpg", bg: "#0159EE", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one quote stamped Approved." },
+  "property-managementAfter": { src: "/brand/stills/maintenance-after.jpg", bg: "#025BE9", alt: "The same blue surface, cleared: a rubber stamp, an ink pad and one work order stamped Sent." },
+} as const;
+
+/**
+ * The industry wall on the home page: every owner's paperwork, with the
+ * question they are already asking. Trades with a live page link to it;
+ * the rest go to the review with the trade filled in.
+ */
+export const wall = [
+  { slug: "surveying", trade: "Land surveying", question: "Can AI pull the county records for every survey job?", src: "/brand/stills/surveying.jpg", live: true },
+  { slug: "property-management", trade: "Property management", question: "Can AI triage every maintenance request?", src: "/brand/stills/maintenance.jpg", live: true },
+  { slug: "title", trade: "Title and escrow", question: "Can AI order the records for a title file?", src: "/brand/stills/title.jpg", live: false },
+  { slug: "cpas", trade: "Accounting", question: "Can AI run my 1099 season?", src: "/brand/stills/cpa.jpg", live: false },
+  { slug: "law", trade: "Law offices", question: "Can AI open the file and chase the intake?", src: "/brand/stills/law.jpg", live: false },
+  { slug: "insurance", trade: "Insurance agencies", question: "Can AI issue the certificates and chase the renewals?", src: "/brand/stills/insurance.jpg", live: false },
+  { slug: "contractors", trade: "Contractors", question: "Can AI pull the permits and collect the lien waivers?", src: "/brand/stills/contractor.jpg", live: false },
+  { slug: "medical", trade: "Medical and dental offices", question: "Can AI do the intake and the insurance paperwork?", src: "/brand/stills/medical.jpg", live: false },
+  { slug: "freight", trade: "Freight and trucking", question: "Can AI match the bills of lading to the rate confirmations?", src: "/brand/stills/freight.jpg", live: false },
+  { slug: "hvac", trade: "HVAC and plumbing", question: "Can AI turn the service tickets into invoices?", src: "/brand/stills/hvac.jpg", live: false },
+] as const;
+
 export const nav = {
   links: [
     { label: "How a desk works", href: "/#how" },
@@ -106,7 +139,11 @@ export const home = {
   },
   industries: {
     title: "Start with the question you're already asking.",
-    intro: "Each page shows a desk running in that trade, on sample data, labelled as a sample.",
+    intro: "Every trade has its own pile. Two of these have a page that shows a desk running on it; the rest start with the review.",
+  },
+  proof: {
+    title: "One job, as it ran.",
+    intro: "The Quote Desk at a Florida survey firm, on a sample address. The ticket is the product: what it collected, what it read, what it drafted, and where it stopped.",
   },
   math: {
     title: "Hire vs. build.",

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Sheet } from "@/components/site/Sheet";
+import { PhotoHero } from "@/components/site/PhotoHero";
 import { Figures, ReviewSection, SectionHead, Steps, Strip } from "@/components/site/Bits";
-import { home, site } from "@/content/site";
+import { home, site, stills } from "@/content/site";
 import { industries, industryBySlug } from "@/content/industries";
 
 /** One question page per industry, from content/industries.ts. */
@@ -31,42 +32,36 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
   const { industry: slug } = await params;
   const industry = industryBySlug(slug);
   if (!industry) notFound();
+  const still = stills[industry.slug as keyof typeof stills] ?? stills.home;
+  const after = stills[`${industry.slug}After` as keyof typeof stills];
 
   return (
     <div className="ub">
       <Header />
       <main id="top" tabIndex={-1}>
-        <div className="hero inner on-blue">
-          <div className="wrap grid tight">
-            <div className="c1-5 pad">
-              <p className="t">
-                {industry.trade}: {industry.desk}
-              </p>
-              <h1>{industry.question}</h1>
-              <p className="lead">{industry.lead}</p>
-              <div className="actions">
-                <Link className="btn paper" href="/review" data-cta="hero">
-                  Book a free review <span className="dot" />
-                </Link>
-                <Link className="link" href="#job">
-                  Watch one job run
-                </Link>
-              </div>
-            </div>
-            <div className="c6-12 stack">
-              <div className="behind two" />
-              <div className="behind" />
-              <Sheet {...industry.sheet} approveHref="/review" />
-            </div>
-          </div>
-        </div>
-
-        <Strip items={industry.strip} />
+        <PhotoHero
+          eyebrow={`${industry.trade}: ${industry.desk}`}
+          headlineBefore={industry.question}
+          lead={industry.lead}
+          primary="Book a free review"
+          secondary={{ label: "Watch one job run", href: "#job" }}
+          before={still}
+          after={after}
+          caption="Photograph: sample paperwork. Nothing here is a client's."
+        />
 
         <section id="job">
           <div className="wrap">
             <SectionHead title={industry.job.title} intro={industry.job.intro} />
-            <Steps steps={industry.job.steps} />
+            <div className="proof-grid">
+              <div className="ticket-col">
+                <Sheet {...industry.sheet} approveHref="/review" />
+              </div>
+              <Strip items={industry.strip} stack />
+            </div>
+            <div style={{ marginTop: 56 }}>
+              <Steps steps={industry.job.steps} />
+            </div>
           </div>
         </section>
 
@@ -82,6 +77,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
             </div>
           </div>
         </section>
+
+        <div className="break" aria-hidden>
+          <Image src={still.src} alt="" fill sizes="100vw" style={{ objectPosition: "80% 100%" }} />
+        </div>
 
         <section id="math">
           <div className="wrap">
