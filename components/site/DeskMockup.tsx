@@ -16,16 +16,31 @@ export type DeskMock = {
   meter: readonly { n: string; label: string }[];
   meterNote: string;
   total: string;
-  /** The pile, before: a photograph of the busywork and what it costs today. Wipes away into the desk. */
+  /** The pile, before: a photograph of the busywork and what it costs today. Swept away into the desk. */
   before?: { src: string; alt: string; title: string; line: string };
 };
 
+const secs = (t: string) => {
+  const [m, s] = t.replace(/[^\d:]/g, "").split(":").map(Number);
+  return (m || 0) * 60 + (s || 0);
+};
+
 /**
- * The UnBusy desk, as a picture: the busywork comes in on the left, the desk
- * works through it in the middle, the finished job and the month's numbers
- * come out on the right. Plays once on load after the strike; "Play again"
- * replays it. Reduced-motion shows it finished. Everything on it is sample
- * data and says so.
+ * The UnBusy desk, as a picture, and the page's one moment.
+ *
+ * 1. The window holds the pile: the photograph of the busywork and what it
+ *    costs by hand.
+ * 2. The strike through "busywork" in the headline finishes; its blue line
+ *    keeps going, crosses the gap and becomes the edge that sweeps the pile
+ *    out of the window.
+ * 3. The desk underneath is already working: the inputs land, each step is
+ *    typed in as the clock reaches its time (the clock runs at the desk's
+ *    real pace, compressed to about five seconds), the quote comes back and
+ *    the stamp lands on it.
+ * 4. The month's numbers count up, the window settles, and the one button on
+ *    the page gets a single pulse.
+ *
+ * "Play again" replays it. Reduced-motion shows it finished.
  */
 export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: number }) {
   const root = useRef<HTMLDivElement>(null);
@@ -36,58 +51,110 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let timers: ReturnType<typeof setTimeout>[] = [];
     let raf = 0;
+    const hero = node.closest<HTMLElement>(".mock-hero");
+    const strike = hero?.querySelector<HTMLElement>(".strike");
+    const stroke = hero?.querySelector<HTMLElement>(".hero-stroke");
+    const cta = hero?.querySelector<HTMLElement>('[data-cta="hero"]');
+
+    const states = ["swept", "done", "settled", "stroking"];
+    const stepEls = () => Array.from(node.querySelectorAll<HTMLElement>("[data-step]"));
+    const counters = () => Array.from(node.querySelectorAll<HTMLElement>("[data-count]"));
+    const timer = node.querySelector<HTMLElement>("[data-timer]");
 
     const finish = () => {
-      node.classList.add("done", "swept");
-      node.querySelectorAll<HTMLElement>("[data-step]").forEach((el) => el.classList.add("on"));
-      node.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => (el.textContent = el.dataset.count ?? ""));
-      const t = node.querySelector<HTMLElement>("[data-timer]");
-      if (t) t.textContent = mock.total;
+      node.classList.add("swept", "done", "settled");
+      stepEls().forEach((el) => el.classList.add("on"));
+      counters().forEach((el) => (el.textContent = el.dataset.count ?? ""));
+      if (timer) timer.textContent = mock.total;
     };
 
-    const play = () => {
+    const reset = () => {
       timers.forEach(clearTimeout);
       timers = [];
       cancelAnimationFrame(raf);
-      node.classList.remove("done", "swept");
-      node.querySelectorAll<HTMLElement>("[data-step]").forEach((el) => el.classList.remove("on"));
-      node.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => (el.textContent = "0"));
-      const steps = Array.from(node.querySelectorAll<HTMLElement>("[data-step]"));
-      // Step timing: inbox items 220ms apart, then the desk's lines 480ms apart, then the output.
-      // The pile first: it holds for a beat, then wipes away and the desk starts.
-      const hold = mock.before ? 1400 : 0;
-      if (mock.before) timers.push(setTimeout(() => node.classList.add("swept"), 900));
-      let at = 200 + hold;
-      steps.forEach((el) => {
-        const gap = Number(el.dataset.step);
-        at += gap;
-        const when = at;
+      node.classList.remove(...states);
+      cta?.classList.remove("pulse");
+      stroke?.removeAttribute("style");
+      stepEls().forEach((el) => el.classList.remove("on"));
+      counters().forEach((el) => (el.textContent = "0"));
+      if (timer) timer.textContent = "0:00";
+    };
+
+    /* The strike's line continues to the window: measure the gap and draw it. */
+    const drawStroke = () => {
+      if (!stroke || !strike || !hero) return 0;
+      const h = hero.getBoundingClientRect();
+      const s = strike.getBoundingClientRect();
+      const w = node.getBoundingClientRect();
+      if (w.left <= s.right) return 0; // phones: the window is below the copy; no stroke
+      const y = s.top + s.height * 0.54 - h.top;
+      stroke.style.top = `${y}px`;
+      stroke.style.left = `${s.right - h.left - 4}px`;
+      stroke.style.width = `${w.left - s.right + 4}px`;
+      node.classList.add("stroking");
+      return 260;
+    };
+
+    const play = () => {
+      reset();
+      let at = 0;
+
+      // 1. The pile holds while the headline's strike draws (the strike animates itself on load).
+      if (mock.before) {
+        at = 700;
+        timers.push(
+          setTimeout(() => {
+            const travel = drawStroke();
+            timers.push(setTimeout(() => node.classList.add("swept"), travel));
+          }, at),
+        );
+        at += 260 + 500; // stroke travel + the sweep's first half
+      }
+
+      // 2. The inputs land, quickly.
+      const inbox = stepEls().filter((el) => el.dataset.step === "in");
+      inbox.forEach((el, i) => {
+        const when = at + 120 + i * 170;
         timers.push(setTimeout(() => el.classList.add("on"), when));
       });
-      // The timer runs while the desk works.
-      const timer = node.querySelector<HTMLElement>("[data-timer]");
-      const workStart = 200 + hold + mock.inbox.length * 220 + 200;
-      const workEnd = at;
-      const [m, s] = mock.total.replace(/[^\d:]/g, "").split(":").map(Number);
-      const totalSec = (m || 0) * 60 + (s || 0);
+      at += 120 + inbox.length * 170 + 200;
+
+      // 3. The desk works: the clock runs at the desk's pace, compressed to ~4.8 s; each step types in when the clock reaches it.
+      const work = stepEls().filter((el) => el.dataset.step === "do");
+      const total = secs(mock.total);
+      const span = 4800;
+      let acc = 0;
+      const workStart = at;
+      work.forEach((el, i) => {
+        acc += secs(mock.work[i]?.time ?? "0:00");
+        const when = workStart + Math.round((acc / Math.max(1, total)) * span);
+        timers.push(setTimeout(() => el.classList.add("on"), when));
+      });
       const tick = (now: number, start: number) => {
-        const p = Math.min(1, Math.max(0, (now - start) / Math.max(1, workEnd - workStart)));
-        const sec = Math.round(totalSec * p);
+        const p = Math.min(1, Math.max(0, (now - start) / span));
+        const sec = Math.round(total * p);
         if (timer) timer.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
         if (p < 1) raf = requestAnimationFrame((n) => tick(n, start));
       };
       timers.push(setTimeout(() => (raf = requestAnimationFrame((n) => tick(n, n))), workStart));
-      // The month's numbers count up at the end.
+      at = workStart + span;
+
+      // 4. The quote comes back; the stamp lands.
+      const out = stepEls().filter((el) => el.dataset.step === "out");
+      out.forEach((el) => timers.push(setTimeout(() => el.classList.add("on"), at + 250)));
+      at += 250 + 700;
+
+      // 5. The month counts up; the window settles; the button pulses once.
       timers.push(
         setTimeout(() => {
-          node.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+          counters().forEach((el) => {
             const target = el.dataset.count ?? "0";
             const num = Number(target.replace(/[^\d.]/g, ""));
             const prefix = target.match(/^[^\d]*/)?.[0] ?? "";
             const suffix = target.match(/[^\d]*$/)?.[0] ?? "";
             const start = performance.now();
             const run = (now: number) => {
-              const p = Math.min(1, Math.max(0, (now - start) / 900));
+              const p = Math.min(1, Math.max(0, (now - start) / 1000));
               const v = Math.round(num * (1 - Math.pow(1 - p, 3)));
               el.textContent = `${prefix}${v.toLocaleString()}${suffix}`;
               if (p < 1) requestAnimationFrame(run);
@@ -95,12 +162,18 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
             requestAnimationFrame(run);
           });
           node.classList.add("done");
-        }, at + 500),
+        }, at),
+      );
+      timers.push(
+        setTimeout(() => {
+          node.classList.add("settled");
+          cta?.classList.add("pulse");
+        }, at + 1100),
       );
     };
 
     if (reduced) finish();
-    else timers.push(setTimeout(play, delay));
+    else timers.push(setTimeout(play, Math.max(0, delay - 700)));
 
     const replay = node.querySelector<HTMLButtonElement>("[data-replay]");
     const onReplay = () => (reduced ? finish() : play());
@@ -127,11 +200,12 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       </div>
       {mock.before && (
         <div className="mock-before" aria-hidden>
-          <Image src={mock.before.src} alt="" fill sizes="(max-width: 980px) 100vw, 60vw" />
+          <Image src={mock.before.src} alt="" fill priority sizes="(max-width: 980px) 100vw, 60vw" />
           <div className="mock-before-cap">
             <b>{mock.before.title}</b>
             <span>{mock.before.line}</span>
           </div>
+          <span className="mock-edge" />
         </div>
       )}
       <div className="mock-cols">
@@ -139,9 +213,9 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
           <div className="mock-h">What came in</div>
           <ul>
             {mock.inbox.map((item) => (
-              <li key={item.label} data-step="220">
+              <li key={item.label} data-step="in">
                 <span className="kind">{item.kind}</span>
-                <span>{item.label}</span>
+                <span className="typed">{item.label}</span>
               </li>
             ))}
           </ul>
@@ -149,13 +223,16 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
         </div>
         <div className="mock-col do">
           <div className="mock-h">
-            What the desk did <span className="timer num" data-timer>0:00</span>
+            What the desk did{" "}
+            <span className="timer num" data-timer>
+              0:00
+            </span>
           </div>
           <ul>
-            {mock.work.map((step, i) => (
-              <li key={step.label} data-step={i === 0 ? "420" : "480"}>
+            {mock.work.map((step) => (
+              <li key={step.label} data-step="do">
                 <span className="tick" aria-hidden />
-                <span>{step.label}</span>
+                <span className="typed">{step.label}</span>
                 <span className="t num">{step.time}</span>
               </li>
             ))}
@@ -164,7 +241,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
         </div>
         <div className="mock-col out">
           <div className="mock-h">What came back to you</div>
-          <div className="paper" data-step="600">
+          <div className="paper" data-step="out">
             <div className="paper-title">{mock.out.title}</div>
             {mock.out.lines.map((line) => (
               <div className="paper-line" key={line}>

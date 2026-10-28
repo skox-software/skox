@@ -116,3 +116,14 @@ Removed with this pass: the photographic hero, the film and the after plates (ma
 ## 15. The pile turns into the desk (2026-10-28, night)
 
 Josh: show the paper turning into the efficient system. The mockup window now opens on the photograph of the pile with a caption ("Today: the same job, by hand. Four county sites, a PDF, a spreadsheet, an email. About 45 minutes of someone's time, 40 times a month."); 0.9 s in, the photograph wipes away left to right and the desk underneath is already running; the clock, the stamp and the month's numbers follow. One moment, three beats: the strike, the wipe, the run. "Play again" replays all three. The photographs' job on the site is now exactly this: the before.
+
+## 16. The motion pass (2026-10-28, night)
+
+Josh: it has to hit hard for owners who have been debating AI and don't know where to start. The hero's one moment is now four beats, each with a reason:
+
+1. **One stroke.** The blue line that crosses out *busywork* keeps going: a paper-coloured stroke travels from the end of the word across the gap to the window (`.hero-stroke`, measured at play time) and becomes the edge that sweeps the pile out of the window. The brand's gesture clears the desk.
+2. **Real pace.** The clock runs at the desk's own pace compressed to 4.8 s, and each step is *typed in* (a left-to-right reveal) at the moment the clock reaches its time; the tick fills with a small pop. 0:41 feels like 0:41.
+3. **Weight.** The quote card arrives and the stamp lands: scale 2.2 → 0.92 → 1 with a slight rotation in 220 ms, and the paper gives a 2px thud.
+4. **A finish.** The month counts up, the window lifts 4px and deepens its shadow, and the hero button's dot pulses once. The only thing on the page that ever asks for attention, and it asks once.
+
+Reduced-motion shows the finished desk with no stroke, no sweep. Still to come when credits allow: the documents in the photograph cut out as layers and flying into "What came in".

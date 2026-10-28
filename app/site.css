@@ -37,6 +37,7 @@
   /* the signature device: a blue line strikes the word through, once, on load */
   .ub .strike { position:relative; white-space:nowrap; }
   .ub .strike::after { content:""; position:absolute; left:-2%; right:-2%; top:54%; height:.09em; background:var(--blue); transform:scaleX(0); transform-origin:left; animation:strike .5s cubic-bezier(.2,.8,.2,1) .7s forwards; }
+.ub .mock-hero { position:relative; }
   .ub .on-blue .strike::after { background:var(--paper); }
   @keyframes strike { to { transform:scaleX(1); } }
   .ub .strike.now::after { animation-delay:0s; }
@@ -431,3 +432,49 @@
 .ub .mock-before-cap b { font-family:var(--display); font-size:22px; font-weight:700; letter-spacing:-0.02em; line-height:1.1; }
 .ub .mock-before-cap span { font-size:13px; color:rgba(250,250,248,.9); }
 @media (prefers-reduced-motion:reduce) { .ub .mock-before { transition:none; } }
+
+
+/* the motion pass: one stroke, typed steps, a stamp that lands, a finish */
+.ub .hero-stroke { position:absolute; height:4px; background:var(--paper); transform:scaleX(0); transform-origin:left; pointer-events:none; z-index:3; border-radius:2px; }
+.ub .mock.stroking ~ * .hero-stroke, .ub .mock-hero:has(.mock.stroking) .hero-stroke { transition:transform .26s cubic-bezier(.4,0,.2,1); transform:scaleX(1); }
+.ub .mock-hero:has(.mock.swept) .hero-stroke { transition:opacity .3s .5s; opacity:0; }
+.ub .mock-before { transition:clip-path .9s cubic-bezier(.75,0,.2,1); }
+.ub .mock-edge { position:absolute; top:0; bottom:0; right:0; width:4px; background:var(--paper); opacity:0; }
+.ub .mock.swept .mock-edge { opacity:1; }
+.ub .mock.swept .mock-before { clip-path:inset(0 0 0 100%); }
+
+/* steps type in: the text is revealed left to right as the clock reaches it */
+.ub .mock li { opacity:1; transform:none; transition:none; }
+.ub .mock li .typed, .ub .mock li .kind, .ub .mock li .t { clip-path:inset(0 100% 0 0); transition:clip-path .32s cubic-bezier(.2,.8,.2,1); }
+.ub .mock li.on .typed, .ub .mock li.on .kind, .ub .mock li.on .t { clip-path:inset(0 0 0 0); }
+.ub .mock .in li { opacity:0; transform:translateX(-10px); transition:opacity .25s ease-out, transform .25s ease-out; }
+.ub .mock .in li.on { opacity:1; transform:none; }
+.ub .mock .do .tick { transform:scale(.9); transition:background .15s, transform .15s; }
+.ub .mock .do li.on .tick { background:var(--ink); transform:scale(1); }
+.ub .mock .do li .t { color:var(--ink-2); }
+.ub .mock .do li.on .t { color:var(--ink); }
+.ub .mock .do li { border-bottom-color:transparent; }
+.ub .mock .do li.on { border-bottom-color:var(--rule); }
+
+/* the quote comes back; the stamp lands with weight */
+.ub .mock .paper { transition:opacity .25s ease-out, transform .25s ease-out; }
+.ub .mock .paper .stamp { opacity:0; transform:rotate(-4deg) scale(2.2); transition:none; }
+.ub .mock .paper.on .stamp { animation:land .22s cubic-bezier(.2,.9,.3,1.3) .35s forwards; }
+@keyframes land { 0% { opacity:0; transform:rotate(-9deg) scale(2.2); } 60% { opacity:1; transform:rotate(-3deg) scale(.92); } 100% { opacity:1; transform:rotate(-4deg) scale(1); } }
+.ub .mock .paper.on { animation:thud .25s ease-out .5s; }
+@keyframes thud { 0% { transform:none; } 40% { transform:translateY(2px); } 100% { transform:none; } }
+
+/* the finish: the window settles, the button asks once */
+.ub .mock { transition:transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .6s; }
+.ub .mock.settled { transform:translateY(-4px); box-shadow:0 40px 90px rgba(0,0,0,.32), 0 1px 0 rgba(0,0,0,.08); }
+.ub .btn.pulse .dot { animation:ask 1.1s ease-out 1; }
+@keyframes ask { 0% { box-shadow:0 0 0 0 rgba(11,92,255,.55); } 100% { box-shadow:0 0 0 18px rgba(11,92,255,0); } }
+.ub .btn.paper.pulse .dot { animation-name:ask; }
+.ub .mock-replay { font-size:12px; }
+@media (max-width:980px) { .ub .hero-stroke { display:none; } }
+@media (prefers-reduced-motion:reduce) {
+  .ub .mock li .typed, .ub .mock li .kind, .ub .mock li .t { clip-path:none; transition:none; }
+  .ub .mock .in li { opacity:1; transform:none; }
+  .ub .mock .paper .stamp { opacity:1; transform:rotate(-4deg); animation:none; }
+  .ub .mock, .ub .mock-before, .ub .hero-stroke { transition:none; animation:none; }
+}

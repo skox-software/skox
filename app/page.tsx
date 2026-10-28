@@ -16,6 +16,7 @@ export default function Home() {
       <Header />
       <main id="top" tabIndex={-1}>
         <div className="mock-hero">
+          <span className="hero-stroke" aria-hidden />
           <div className="wrap grid">
             <div className="c1-5">
               <div className="inner">
