@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 export type DeskMock = {
@@ -17,8 +16,11 @@ export type DeskMock = {
   meterNote: string;
   total: string;
   /** The pile, before: a photograph of the busywork and what it costs today. Swept away into the desk. */
-  before?: { src: string; alt: string; title: string; line: string };
+  before?: { src: string; alt: string; title: string; line: string; /** How long the job takes by hand, "45:00". */ hand: string };
 };
+
+const COLS = 8;
+const ROWS = 5;
 
 const secs = (t: string) => {
   const [m, s] = t.replace(/[^\d:]/g, "").split(":").map(Number);
@@ -60,6 +62,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
     const stepEls = () => Array.from(node.querySelectorAll<HTMLElement>("[data-step]"));
     const counters = () => Array.from(node.querySelectorAll<HTMLElement>("[data-count]"));
     const timer = node.querySelector<HTMLElement>("[data-timer]");
+    const hand = node.querySelector<HTMLElement>("[data-hand]");
 
     const finish = () => {
       node.classList.add("swept", "done", "settled");
@@ -78,6 +81,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       stepEls().forEach((el) => el.classList.remove("on"));
       counters().forEach((el) => (el.textContent = "0"));
       if (timer) timer.textContent = "0:00";
+      if (hand) hand.textContent = "0:00";
     };
 
     /* The strike's line continues to the window: measure the gap and draw it. */
@@ -99,16 +103,25 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       reset();
       let at = 0;
 
-      // 1. The pile holds while the headline's strike draws (the strike animates itself on load).
+      // 1. The pile holds. A clock runs up to what the job takes by hand, so the cost is felt before it goes.
       if (mock.before) {
-        at = 700;
+        const hold = 3000;
+        const handTotal = secs(mock.before.hand);
+        const handTick = (now: number, start: number) => {
+          const p = Math.min(1, Math.max(0, (now - start) / 2200));
+          const sec = Math.round(handTotal * (1 - Math.pow(1 - p, 2)));
+          if (hand) hand.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
+          if (p < 1) raf = requestAnimationFrame((n) => handTick(n, start));
+        };
+        timers.push(setTimeout(() => (raf = requestAnimationFrame((n) => handTick(n, n))), 300));
+        // Then the strike's stroke arrives and the paperwork is struck off: the tiles flip away in a wave behind it.
         timers.push(
           setTimeout(() => {
             const travel = drawStroke();
             timers.push(setTimeout(() => node.classList.add("swept"), travel));
-          }, at),
+          }, hold),
         );
-        at += 260 + 500; // stroke travel + the sweep's first half
+        at = hold + 260 + 700; // stroke travel + most of the wave
       }
 
       // 2. The inputs land, quickly.
@@ -200,12 +213,33 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       </div>
       {mock.before && (
         <div className="mock-before" aria-hidden>
-          <Image src={mock.before.src} alt="" fill priority sizes="(max-width: 980px) 100vw, 60vw" />
+          {/* The photograph as a grid of tiles, so it can be struck off piece by piece. */}
+          <div className="tiles">
+            {Array.from({ length: COLS * ROWS }, (_, i) => {
+              const c = i % COLS;
+              const r = Math.floor(i / COLS);
+              return (
+                <span
+                  className="tile"
+                  key={i}
+                  style={{
+                    backgroundImage: `url(${mock.before!.src})`,
+                    backgroundSize: `${COLS * 100}% ${ROWS * 100}%`,
+                    backgroundPosition: `${(c / (COLS - 1)) * 100}% ${(r / (ROWS - 1)) * 100}%`,
+                    transitionDelay: `${c * 55 + r * 22}ms`,
+                  }}
+                />
+              );
+            })}
+          </div>
           <div className="mock-before-cap">
             <b>{mock.before.title}</b>
             <span>{mock.before.line}</span>
           </div>
-          <span className="mock-edge" />
+          <div className="mock-hand">
+            <span>By hand</span>
+            <b className="num" data-hand>0:00</b>
+          </div>
         </div>
       )}
       <div className="mock-cols">

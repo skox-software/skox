@@ -145,7 +145,7 @@ export const industries: Industry[] = [
       ],
       meterNote: "Sample firm: 120 requests a month at 20 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
       total: "1:02",
-      before: { src: "/brand/stills/maintenance.jpg", alt: "", title: "Today: the same request, by hand.", line: "The portal, the lease file, the vendor list, the phone. About 20 minutes of someone's time, 120 times a month." },
+      before: { src: "/brand/stills/maintenance.jpg", alt: "", title: "Today: the same request, by hand.", line: "The portal, the lease file, the vendor list, the phone. 120 times a month.", hand: "20:00" },
     },
     sheet: {
       caption: "The Maintenance Desk, one request, as it ran",

@@ -127,3 +127,7 @@ Josh: it has to hit hard for owners who have been debating AI and don't know whe
 4. **A finish.** The month counts up, the window lifts 4px and deepens its shadow, and the hero button's dot pulses once. The only thing on the page that ever asks for attention, and it asks once.
 
 Reduced-motion shows the finished desk with no stroke, no sweep. Still to come when credits allow: the documents in the photograph cut out as layers and flying into "What came in".
+
+## 17. The pile holds, then is struck off (2026-10-28, late)
+
+Josh: the paper needs to show longer, and the transition has to say "eliminated". The pile now holds for three seconds with a "By hand" clock running up to what the job takes a person (45:00 for the quote, 20:00 for the work order), so the cost is felt first. Then the headline's stroke arrives and the photograph, built as an 8×5 grid of tiles, is struck off: each tile flips away on its top edge in a wave that follows the stroke (55 ms per column, 22 ms per row), and the desk is underneath already working. Reduced-motion skips the pile and shows the desk finished. The 4 s hold + 1 s strike-off + 5 s run + 2 s finish is about twelve seconds; "Play again" replays it.
