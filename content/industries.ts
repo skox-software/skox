@@ -141,9 +141,9 @@ export const industries: Industry[] = [
       meter: [
         { n: "120", label: "requests triaged" },
         { n: "40", label: "office hours back" },
-        { n: "$1,190", label: "of payroll not spent" },
+        { n: "$1,234", label: "of payroll not spent" },
       ],
-      meterNote: "Sample firm: 120 requests a month at 20 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
+      meterNote: "Sample firm: 120 requests a month at 20 minutes each, at the BLS median admin wage loaded for benefits. Your numbers go in on the call.",
       total: "1:02",
       before: { src: "/brand/stills/maintenance.jpg", alt: "", title: "Today: the same request, by hand.", line: "The portal, the lease file, the vendor list, the phone. 120 times a month.", hand: "20:00" },
     },

@@ -82,9 +82,9 @@ export const quoteDeskMock = {
   meter: [
     { n: "40", label: "quotes drafted" },
     { n: "30", label: "office hours back" },
-    { n: "$890", label: "of payroll not spent" },
+    { n: "$926", label: "of payroll not spent" },
   ],
-  meterNote: "Sample firm: 40 quotes a month at 45 minutes each, BLS median admin wage plus 30%. Your numbers go in on the call.",
+  meterNote: "Sample firm: 40 quotes a month at 45 minutes each, at the BLS median admin wage loaded for benefits. Your numbers go in on the call.",
   total: "4:12",
   before: { src: "/brand/stills/surveying.jpg", alt: "", title: "Today: the same job, by hand.", line: "Four county sites, a PDF, a spreadsheet, an email. 40 times a month.", hand: "45:00" },
 } as const;
@@ -187,8 +187,8 @@ export const home = {
       label: "Today",
       lines: [
         { k: "Office hours a month on quotes", v: "30 hours" },
-        { k: "Loaded cost of those hours", v: "about $890 a month", note: "At the BLS median admin wage of $47,540 plus about 30% for taxes and benefits: $29.70 an hour." },
-        { k: "Over a year", v: "360 hours, about $10,700" },
+        { k: "Loaded cost of those hours", v: "about $926 a month", note: "The BLS median administrative assistant earns $47,540. At firms under 50 workers each wage dollar costs about $1.35 with benefits: $30.86 an hour." },
+        { k: "Over a year", v: "360 hours, about $11,100" },
         { k: "When the quoter is out", v: "Quotes wait" },
       ],
     },
@@ -201,8 +201,21 @@ export const home = {
         { k: "When the quoter is out", v: "Quotes go out" },
       ],
     },
-    foot: "One job type rarely pays for a desk on its own; two or three do, and that's what the review finds. Wage: Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.",
+    foot: "One job type rarely pays for a desk on its own; two or three do, and that's what the review finds. Wage: Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025 (SOC 43-6014). Benefits: BLS Employer Costs for Employee Compensation, June 2026, establishments with 1–49 workers.",
     cta: "Put your numbers in",
+  },
+  /** Why owners are looking at this now. Every line is a sourced figure from docs/research/small-business-busywork-evidence.md §8. */
+  now: {
+    title: "Why owners are looking at this now.",
+    intro: "Not because of a headline. Because the seat that does this work is getting harder to fill and more expensive, and the tools have got good enough to take the job, not just help with it.",
+    facts: [
+      { n: "32%", line: "of small-business owners have jobs they can't fill, eight points above the 48-year average. 87% of those hiring get few or no qualified applicants.", src: "NFIB Small Business Economic Trends, September 2026" },
+      { n: "+26%", line: "median pay for an administrative assistant, $37,690 in 2019 to $47,540 in 2025, while the number of people doing the job fell 16%.", src: "Bureau of Labor Statistics, OEWS May 2019 and May 2025" },
+      { n: "−6%", line: "bookkeeping clerks expected by 2035. The Bureau of Labor Statistics gives the reason: software has automated many of their tasks.", src: "BLS Occupational Outlook Handbook, 2025–35 projections" },
+      { n: "7%", line: "of small employers already using AI say it's fully built into how the business runs. The rest are still testing it or using it in a few places.", src: "Federal Reserve Small Business Credit Survey, 2026 report" },
+      { n: "54%", line: "of small employers planning to try AI say the hard part is finding or adapting a tool that fits their business. Cost came well behind, at 32%.", src: "Federal Reserve Small Business Credit Survey, 2026 report" },
+      { n: "1.4 h", line: "a week of email saved by a general AI assistant in a six-month, 66-company trial, with no change in work finished. The savings are in taking a whole job, not in a chat window.", src: "Dillon, Jaffe, Immorlica & Stanton, NBER Working Paper 33795, 2025" },
+    ],
   },
   proof: {
     title: "One job, as it ran.",
@@ -212,9 +225,9 @@ export const home = {
     title: "Hire vs. build.",
     intro: "What owners usually try first, then the plain comparison. Your own numbers go in on the call.",
     ladder: [
-      { title: "The next hire.", body: "Works until they leave. Four to eight weeks to train, out sick in busy season, and the cost comes back every year.", tag: "Costs every year", struck: true },
+      { title: "The next hire.", body: "If you can find one: 87% of small firms hiring right now get few or no qualified applicants. Then they work until they leave, and the cost comes back every year.", tag: "Costs every year", struck: true },
       { title: "The all-in-one app.", body: "Answers the phone and builds the website. It has never read a plat, a W-9 or a work order, so your staff still retype into it.", tag: "Still retyped", struck: true },
-      { title: "ChatGPT on a laptop.", body: "Answers questions when someone asks. It doesn't pull the records, doesn't know your rates and doesn't file anything.", tag: "Files nothing", struck: true },
+      { title: "ChatGPT on a laptop.", body: "Answers questions when someone asks. In a six-month trial at 66 companies, a general AI assistant saved about 1.4 hours a week of email and didn't change how much work got finished. It doesn't pull the records or file anything.", tag: "Files nothing", struck: true },
       { title: "A desk.", body: "Does the job, in your systems, with your rules, and stops at your decision. Priced against the hire.", tag: "Stops at your decision", struck: false },
     ],
     hire: {
