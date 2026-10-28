@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif, Inter, Inter_Tight } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono, IBM_Plex_Sans, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -14,8 +14,11 @@ import "./globals.css";
 import "./site.css";
 
 /* The site's two faces. */
-const display = Inter_Tight({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-display", display: "swap" });
-const body = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-body", display: "swap" });
+/* Bricolage's optical-size axis gives the 96px headline its own cut while
+   the small sizes stay plain; Plex Sans reads like a document and has true
+   tabular figures for the sheet. */
+const display = Bricolage_Grotesque({ subsets: ["latin"], weight: "variable", axes: ["opsz", "wdth"], variable: "--font-display", display: "swap" });
+const body = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-body", display: "swap" });
 
 /* The concept pages under app/concepts still set type in these. */
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });

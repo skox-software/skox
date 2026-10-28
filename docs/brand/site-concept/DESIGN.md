@@ -20,18 +20,18 @@ Atmosphere words: confident, plain, quick, operator, blue.
 --rule:rgba(21,24,29,.14); --rule-paper:rgba(250,250,248,.28);
 ```
 
-Roles. Blue: the homepage and industry heroes, every primary button, the section numerals, the strike, the desk's price card. Ink: text, the stats strip, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
+Roles. Blue: the homepage and industry heroes, every primary button, the section numerals, the strike, the desk's price card. Text on blue or ink is paper at 85% or more (AA at 15px). Ink: text, the stats strip, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
 
 ## 3. Type
 
-Inter Tight 700 for display, Inter 400/500/600 for text, via `next/font/google` (`--font-display`, `--font-body`).
+Bricolage Grotesque (variable, optical size and width axes) at 700 for display; IBM Plex Sans 400/500/600 for text; via `next/font/google` (`--font-display`, `--font-body`). Chosen 2026-10-27 after the distinctive-frontend review flagged Inter as the one thing that still let the page read as generic: Bricolage's large optical size gives the headline its own cut, Plex reads like a document and has true tabular figures.
 
 | Level | Size | Weight | Tracking | Use |
 | --- | --- | --- | --- | --- |
-| H1 | clamp(46px, 6.2vw, 96px) | 700 | -0.04em, line-height .96 | Hero. Inner pages clamp(40px, 5vw, 76px) |
-| Numeral | clamp(64px, 8vw, 120px) | 700 | -0.05em, blue | 01–04 at the head of each section |
+| H1 | clamp(46px, 6.2vw, 96px) | 700 | -0.025em, line-height .96 | Hero. Inner pages clamp(40px, 5vw, 76px) |
+| Numeral | clamp(64px, 8vw, 120px) | 700 | -0.04em, blue | 01–04 at the head of each section |
 | H2 | clamp(34px, 4.4vw, 60px) | 700 | -0.03em | Section titles |
-| H3 | 22px | 600 (Inter) | -0.015em | Row and part titles |
+| H3 | 22px | 600 (Plex) | -0.015em | Row and list titles |
 | Lead | 21–22px | 400 | 0 | Hero paragraph |
 | Body | 17px | 400 | 0 | Everything else |
 | Small | 14–15px | 400/500 | 0 | Eyebrows, sources, notices |
@@ -46,7 +46,7 @@ Tabular figures (`tnum`) on anything numeric. No monospace, no uppercase trackin
 - **The sheet.** A white document (`.paper-doc`: 6px radius, one deep soft shadow) with two translucent sheets stacked behind it. Caption, four-column table (Document, Source, Status, Time), a foot line with the total and an ink button. On the blue hero it sits in columns 6–12. Rows fade up one by one on load, 600ms apart, the foot last; reduced-motion shows it finished.
 - **The strip.** Ink band, four numbers with one-line labels. Only the sample job's own figures; never a counter.
 - **Section head.** Blue numeral, H2 in columns 1–6, intro bottom-aligned in 7–12.
-- **Parts.** Four columns, 3px top border (blue for the desk's three, ink for "Yours"), a small label, H3, body.
+- **How a desk works.** The desk's three parts as a numbered ledger in columns 1–7 (blue numerals, small blue "The desk" label, 30px titles); "Decide" alone in columns 8–12 on a sticky sky panel with a 34–48px title. The layout says what the copy says: three are the desk's, one is yours.
 - **Question rows (`.qs`).** On the dark band: trade in small text, the question at 24–36px, a blue arrow; the row shifts right 12px on hover.
 - **The ladder.** Numbered rows with a right-hand status word; the first three struck; the fourth, "A desk.", on a sky row with blue numeral and tag.
 - **Figures.** Two cards: paper with a hairline for the hire, blue for the desk. Amount at up to 64px.

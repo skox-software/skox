@@ -16,7 +16,7 @@
   a { color:inherit; text-decoration:none; }
   .ub p { margin:0; }
   .ub h1, .ub h2, .ub h3 { margin:0; font-family:var(--display); font-weight:700; letter-spacing:-0.03em; }
-  .ub h1 { font-size:clamp(46px,6.2vw,96px); line-height:.96; letter-spacing:-0.04em; }
+  .ub h1 { font-size:clamp(46px,6.2vw,96px); line-height:.96; letter-spacing:-0.025em; font-optical-sizing:auto; }
   .ub h2 { font-size:clamp(34px,4.4vw,60px); line-height:1; }
   .ub h3 { font-size:22px; line-height:1.2; letter-spacing:-0.015em; font-family:var(--body); font-weight:600; }
   .ub .small { font-size:14px; }
@@ -52,7 +52,7 @@
   .ub .hero .grid { align-items:end; }
   .ub .hero .lead { font-size:21px; line-height:1.4; max-width:38ch; margin-top:28px; color:rgba(250,250,248,.88); }
   .ub .hero .actions { display:flex; gap:24px; align-items:center; flex-wrap:wrap; margin:36px 0 72px; }
-  .ub .hero .q { font-weight:500; font-size:15px; letter-spacing:.01em; color:rgba(250,250,248,.72); margin-bottom:24px; }
+  .ub .hero .q { font-weight:500; font-size:15px; letter-spacing:.01em; color:rgba(250,250,248,.92); margin-bottom:24px; }
 
   .ub .stack { position:relative; padding:0 0 0 0; }
   .ub .paper-doc { background:#fff; color:var(--ink); border-radius:6px; box-shadow:0 30px 60px rgba(0,0,0,.25), 0 2px 0 rgba(0,0,0,.08); }
@@ -82,10 +82,10 @@
   .ub .strip div { flex:1 1 160px; padding:22px 24px 22px 0; border-right:1px solid rgba(250,250,248,.14); margin-right:24px; }
   .ub .strip div:last-child { border:0; }
   .ub .strip b { display:block; font-family:var(--display); font-size:34px; font-weight:700; letter-spacing:-0.03em; line-height:1; margin-bottom:6px; }
-  .ub .strip span { font-size:14px; color:rgba(250,250,248,.7); }
+  .ub .strip span { font-size:14px; color:rgba(250,250,248,.88); }
 
   .ub section { padding:120px 0; }
-  .ub .n { font-family:var(--display); font-weight:700; font-size:clamp(64px,8vw,120px); line-height:.9; letter-spacing:-0.05em; color:var(--blue); }
+  .ub .n { font-family:var(--display); font-weight:700; font-size:clamp(64px,8vw,120px); line-height:.9; letter-spacing:-0.04em; color:var(--blue); }
   .ub .sec h2 { margin-top:18px; max-width:14ch; }
   .ub .sec .intro { margin-top:18px; max-width:36ch; color:var(--ink-2); font-size:18px; }
 
@@ -98,11 +98,11 @@
   .ub .part p { margin-top:10px; color:var(--ink-2); }
 
   .ub .dark { background:var(--ink); color:var(--paper); }
-  .ub .dark .intro { color:rgba(250,250,248,.7); }
+  .ub .dark .intro { color:rgba(250,250,248,.85); }
   .ub .qs { border-top:1px solid var(--rule-paper); }
   .ub .qs a { display:grid; grid-template-columns:200px 1fr auto; gap:24px; align-items:center; padding:34px 0; border-bottom:1px solid var(--rule-paper); font-family:var(--display); font-weight:600; font-size:clamp(24px,2.6vw,36px); letter-spacing:-0.025em; transition:padding-left .2s; }
   .ub .qs a:hover { padding-left:12px; }
-  .ub .qs a .t { font:500 15px/1.4 var(--body); color:rgba(250,250,248,.7); }
+  .ub .qs a .t { font:500 15px/1.4 var(--body); color:rgba(250,250,248,.85); }
   .ub .qs a .arrow { color:var(--blue); font-size:40px; font-family:var(--body); }
 
   .ub .ladder { border-top:2px solid var(--ink); }
@@ -154,7 +154,7 @@
 /* inner pages */
 .ub .hero.inner { padding:72px 0 0; }
 .ub .hero.inner h1 { font-size:clamp(40px,5vw,76px); }
-.ub .hero.inner .t { font-weight:500; font-size:15px; color:rgba(250,250,248,.72); margin-bottom:20px; }
+.ub .hero.inner .t { font-weight:500; font-size:15px; color:rgba(250,250,248,.92); margin-bottom:20px; }
 .ub .hero .grid.tight { align-items:end; }
 .ub .hero .pad { padding-bottom:64px; }
 .ub .hero.paper { background:var(--paper); color:var(--ink); padding:88px 0 56px; }
@@ -227,13 +227,13 @@
 .ub .btn:focus-visible { outline-offset:3px; }
 
 /* next/font hands the faces over as variables */
-.ub { --display: var(--font-display), "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif; --body: var(--font-body), Inter, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.ub { --display: var(--font-display), "Bricolage Grotesque", "Helvetica Neue", Helvetica, Arial, sans-serif; --body: var(--font-body), "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .ub footer .foot-right { display:flex; justify-content:space-between; gap:28px; flex-wrap:wrap; align-items:start; }
 .ub .source { margin-top:16px; color:var(--ink-2); }
 .ub .review-body { padding-bottom:120px; }
 .ub .q-row { display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:center; padding:34px 0; border-bottom:1px solid var(--rule-paper); font-family:var(--display); font-weight:600; font-size:clamp(22px,2.2vw,30px); letter-spacing:-0.025em; }
-.ub .q-row .t { font:500 15px/1.4 var(--body); color:rgba(250,250,248,.7); }
+.ub .q-row .t { font:500 15px/1.4 var(--body); color:rgba(250,250,248,.85); }
 @media (max-width:980px) { .ub .q-row { grid-template-columns:1fr; gap:8px; } .ub .review-body .side { grid-column:auto !important; } }
 
 /* phones: nothing may force the page wider than the viewport */
@@ -249,3 +249,18 @@
   .ub .ladder .r h3 { font-size:24px; }
   .ub .q-row, .ub .qs a { font-size:20px; }
 }
+
+
+/* How a desk works: the desk's three parts as a ledger, yours set apart */
+.ub .parts-split { display:grid; grid-template-columns:repeat(12,1fr); gap:28px; align-items:start; }
+.ub .ledger-parts { grid-column:1/8; border-top:2px solid var(--ink); }
+.ub .ledger-parts .row { display:grid; grid-template-columns:72px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--rule); }
+.ub .ledger-parts .row .i { font-family:var(--display); font-weight:700; font-size:28px; color:var(--blue); letter-spacing:-0.02em; }
+.ub .ledger-parts .row .k { font-size:13px; font-weight:600; color:var(--blue); letter-spacing:.02em; margin-bottom:6px; }
+.ub .ledger-parts .row h3 { font-family:var(--display); font-size:30px; font-weight:700; letter-spacing:-0.02em; }
+.ub .ledger-parts .row p { margin-top:8px; color:var(--ink-2); max-width:48ch; }
+.ub .yours-panel { grid-column:8/13; background:var(--sky); border-radius:8px; padding:36px 32px 40px; position:sticky; top:104px; }
+.ub .yours-panel .k { font-size:13px; font-weight:600; color:var(--ink); letter-spacing:.02em; }
+.ub .yours-panel h3 { font-family:var(--display); font-size:clamp(34px,3.6vw,48px); font-weight:700; letter-spacing:-0.025em; margin-top:10px; line-height:1; }
+.ub .yours-panel p { margin-top:16px; color:var(--ink-2); font-size:18px; }
+@media (max-width:980px) { .ub .parts-split { grid-template-columns:1fr; } .ub .ledger-parts, .ub .yours-panel { grid-column:auto; } .ub .yours-panel { position:static; } }

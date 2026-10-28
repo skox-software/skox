@@ -44,10 +44,23 @@ export default function Home() {
         <section id="how">
           <div className="wrap">
             <SectionHead n={how.n} title={how.title} intro={how.intro} gap={64} />
-            <div className="parts">
-              {how.parts.map((part) => (
-                <div className={"yours" in part && part.yours ? "part yours" : "part"} key={part.title}>
-                  <div className="k">{part.who}</div>
+            {/* Three parts are the desk's, set as a ledger; the fourth is yours, set apart. */}
+            <div className="parts-split">
+              <div className="ledger-parts">
+                {how.parts.filter((part) => !("yours" in part && part.yours)).map((part, i) => (
+                  <div className="row" key={part.title}>
+                    <div className="i">{String(i + 1).padStart(2, "0")}</div>
+                    <div>
+                      <div className="k">{part.who}</div>
+                      <h3>{part.title}</h3>
+                      <p>{part.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {how.parts.filter((part) => "yours" in part && part.yours).map((part) => (
+                <div className="yours-panel" key={part.title}>
+                  <div className="k">04 · {part.who}</div>
                   <h3>{part.title}</h3>
                   <p>{part.body}</p>
                 </div>
