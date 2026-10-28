@@ -1,4 +1,4 @@
-import { quoteDeskJob, type SheetRow } from "@/content/site";
+import { quoteDeskJob, type SheetRow, type TicketHead } from "@/content/site";
 
 /**
  * One question page per industry. A page ships only when a sample desk runs
@@ -17,6 +17,7 @@ export type Industry = {
   sheet: {
     caption: string;
     sample: string;
+    head: TicketHead;
     rows: SheetRow[];
     total: string;
     totalNote: string;
@@ -49,6 +50,7 @@ export const industries: Industry[] = [
     sheet: {
       caption: quoteDeskJob.caption,
       sample: quoteDeskJob.sample,
+      head: quoteDeskJob.head,
       rows: [
         quoteDeskJob.rows[0],
         quoteDeskJob.rows[1],
@@ -114,6 +116,11 @@ export const industries: Industry[] = [
     sheet: {
       caption: "The Maintenance Desk, one request, as it ran",
       sample: "Sample request. Sample building, sample tenant.",
+      head: [
+        { label: "Request", value: "MR-1187, plumbing" },
+        { label: "Unit", value: "2B, sample building, Orlando, FL" },
+        { label: "Received", value: "Today, 9:02 pm, tenant portal" },
+      ],
       rows: [
         { doc: "Tenant's message", note: "\"Water under the kitchen sink since last night\"", source: "Tenant portal, unit 2B", status: "Read", time: "0:04" },
         { doc: "Lease and unit history", source: "The firm's own records: two prior plumbing calls", status: "Read", time: "0:11" },

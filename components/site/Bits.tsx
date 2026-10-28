@@ -55,19 +55,21 @@ type Fig = { amount: string; unit: string; title: string; points: readonly strin
 export function Figures({ hire, desk, source }: { hire: Fig; desk: Fig; source: string }) {
   return (
     <>
-      <div className="figs">
+      <div className="ledger-lines">
         {[hire, desk].map((fig, i) => (
-          <div className={i ? "fig blue" : "fig"} key={fig.title}>
+          <div className={i ? "line desk" : "line"} key={fig.title}>
+            <div>
+              <h3>{fig.title}</h3>
+              <ul>
+                {fig.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </div>
             <div className="amt num">
               {fig.amount}
               <small>{fig.unit}</small>
             </div>
-            <h3>{fig.title}</h3>
-            <ul>
-              {fig.points.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
           </div>
         ))}
       </div>

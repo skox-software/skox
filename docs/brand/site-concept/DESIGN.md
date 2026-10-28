@@ -20,7 +20,7 @@ Atmosphere words: confident, plain, quick, operator, blue.
 --rule:rgba(21,24,29,.14); --rule-paper:rgba(250,250,248,.28);
 ```
 
-Roles. Blue: the homepage and industry heroes, every primary button, the step numerals, the strike, the desk's price card. Text on blue or ink is paper at 85% or more (AA at 15px). Ink: text, the stats strip, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
+Roles. Blue: the homepage and industry heroes, every primary button, the step numerals, the strike, the desk's price card. Text on blue or ink is paper at 85% or more (AA at 15px). Ink: text, the one dark band per page (Industries on the home page, Where it stops on industry pages), the footer. Paper: everything else. Sky: the one highlighted row or panel per section. No fourth colour. Status is a word with a dot before it: ink dot done, blue dot (with a sky halo) waiting on a person.
 
 ## 3. Type
 
@@ -43,13 +43,13 @@ Tabular figures (`tnum`) on anything numeric. No monospace, no uppercase trackin
 
 - **Buttons.** Pills, 56px (44px in the nav, 48px in the sheet). `blue` (primary), `paper` (on blue), `ink` (inside the sheet). Each ends with a 10px dot: white on blue and ink, blue on paper. Hover lifts 1px; nothing else.
 - **The strike.** `<span class="strike">busywork</span>`: an `::after` line at 54% height, .09em thick, blue on paper and paper on blue, scaling in from the left over 500ms, once, 700ms after load (`.now` runs on a 400ms delay for rows further down). Used in the hero H1, the review H1, and through the first three rungs of Hire vs. build. Never elsewhere.
-- **The sheet.** A white document (`.paper-doc`: 6px radius, one deep soft shadow) with two translucent sheets stacked behind it. Caption, four-column table (Document, Source, Status, Time), a foot line with the total and an ink button. On the blue hero it sits in columns 6–12. Rows fade up one by one on load, 600ms apart, the foot last; reduced-motion shows it finished.
-- **The strip.** Ink band, four numbers with one-line labels. Only the sample job's own figures; never a counter.
+- **The job ticket (`.sheet`).** A white document (3px radius, one deep soft shadow, a sky margin rule down the left) with two translucent sheets stacked behind it. Caption; a header block (Job / Address / Received, or Request / Unit / Received); the four-column table (Document, Source, Status, Time); a foot with the total, a signature line ("Approved by") and an ink button. The row that waits on a person carries its status as a blue rubber stamp, slightly rotated; done rows an ink dot. On load each row is written left to right (a clip-path wipe, 450ms, 600ms apart), the foot last; reduced-motion shows it finished. On the blue hero it sits in columns 6–12.
+- **The strip.** Four numbers with one-line labels on paper under the hero, hairline-separated. Only the sample job's own figures; never a counter. The page's one dark band is the Industries (or Where it stops) section.
 - **Section head.** H2 in columns 1–6, intro bottom-aligned in 7–12. No section numerals: numbers appear only where the content is a sequence (the desk's three parts, the review's steps, the job walkthrough, the ladder).
 - **How a desk works.** The desk's three parts as a numbered ledger in columns 1–7 (blue 01–03, 30px titles); "Decide" alone in columns 8–12 on a sticky sky panel with a 34–48px title. The layout says what the copy says: three are the desk's, one is yours.
 - **Question rows (`.qs`).** On the dark band: trade in small text, the question at 24–36px; the row shifts right 12px on hover. No arrows.
 - **The ladder.** Numbered rows with a right-hand status word; the first three struck; the fourth, "A desk.", on a sky row with blue numeral and tag.
-- **Figures.** Two cards: paper with a hairline for the hire, blue for the desk. Amount at up to 64px.
+- **Hire vs. build.** Two ledger lines, not cards: title and bullets left, the amount right at up to 64px in the display face, the desk's amount in blue. Source line under.
 - **Steps.** Numbered list, blue numerals, hairlines.
 - **Proof panel.** Sky, 8px radius, one paragraph.
 - **Form.** 52px fields, 1.5px hairline borders, 8px radius, blue border and sky ring on focus; a two-option segmented control for on site / screen share; blue pill submit. Labels above fields in small 500.
@@ -58,11 +58,11 @@ Tabular figures (`tnum`) on anything numeric. No monospace, no uppercase trackin
 
 ## 5. Layout
 
-Container 1240px, 28px gutters (18px under 600px). 12 columns, 28px gap. Heroes: copy 1–5, sheet 6–12, bottom-aligned. Sections 120px tall (72px under 980px). Rounded corners exist only on pills, the sheet, the sky row and the two figure cards (6–8px). Depth exists only on the sheet (one shadow) and the stacked pages behind it.
+Container 1240px, 28px gutters (18px under 600px). 12 columns, 28px gap. Heroes: copy 1–5, sheet 6–12, bottom-aligned. Sections 120px tall (72px under 980px). Rounded corners exist only on pills, the ticket (3px), the stamp and the sky panels (8px). Depth exists only on the ticket (one shadow) and the stacked pages behind it.
 
 ## 6. Motion
 
-- Load: one orchestrated moment, the strike drawing, then the sheet filling in. Nothing else enters.
+- Load: one orchestrated moment, the strike drawing, then the ticket being written row by row (a wipe, never a fade). Nothing else enters.
 - Hover: buttons lift 1px; question rows slide 12px.
 - Nothing scroll-triggered, nothing looping, nothing that counts. `prefers-reduced-motion` turns all of it off.
 
@@ -85,3 +85,7 @@ Breakpoints 980px and 600px. Under 980px: one column, the sheet below the hero c
 ## 10. Second review (frontend-design skill, 2026-10-27)
 
 Removed as generic tells: section numerals 01–04, repeated small labels above headings, arrows on link rows, middle-dot captions, per-element fade-up entrances. Kept because they carry information: numbers on real sequences, the trade label on question rows, the one load moment (strike, then sheet).
+
+## 11. Third pass (2026-10-28)
+
+Grounded the chrome in the buyer's own vernacular instead of SaaS: the sheet is a job ticket (header block, margin rule, stamp, signature line, rows that print rather than fade); Hire vs. build is two ledger lines instead of two price cards; the stats strip moved onto paper so each page has one dark band. Liquid Glass and other native-app motion systems don't apply to the site; the one idea borrowed from them is that an element should materialize in its own material (here: be written) rather than fade.

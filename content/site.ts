@@ -40,6 +40,9 @@ export const footer = {
   ],
 } as const;
 
+/** The header block at the top of a job ticket. */
+export type TicketHead = readonly { label: string; value: string }[];
+
 /** The sample job every sheet on the site shows. Real counties, sample address. */
 export type SheetRow = {
   doc: string;
@@ -54,6 +57,11 @@ export type SheetRow = {
 export const quoteDeskJob = {
   caption: "The Quote Desk, one job, as it ran",
   sample: "Sample job. Real counties, sample address.",
+  head: [
+    { label: "Job", value: "26-0412, boundary survey" },
+    { label: "Address", value: "Sample address, Lake Mary, FL" },
+    { label: "Received", value: "Today, 8:14 am, by email" },
+  ] as TicketHead,
   rows: [
     { doc: "Property appraiser record", source: "Seminole County Property Appraiser", status: "Collected", time: "0:41" },
     { doc: "Plat and deed", source: "Clerk of Court, book 41, page 12", status: "Collected", time: "1:07" },
