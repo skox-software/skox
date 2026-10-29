@@ -2,9 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { DeskMockup } from "@/components/site/DeskMockup";
+import { ParticleHero } from "@/components/site/ParticleHero";
+import { Chapters } from "@/components/site/Chapters";
+import { HowDesk } from "@/components/site/HowDesk";
 import { Figures, ReviewSection, SectionHead, Strike } from "@/components/site/Bits";
-import { home, quoteDeskMock, stills, wall } from "@/content/site";
+import { home, stills, wall } from "@/content/site";
+
+const CHAPTERS = [
+  { id: "start", label: "Start" },
+  { id: "now", label: "Why now" },
+  { id: "offer", label: "What we do" },
+  { id: "how", label: "How it works" },
+  { id: "industries", label: "Trades" },
+  { id: "math", label: "Hire vs. desk" },
+  { id: "live", label: "Review" },
+] as const;
 
 export const metadata = { alternates: { canonical: "/" } };
 
@@ -13,12 +25,12 @@ export default function Home() {
   return (
     <div className="ub">
       <Header />
-      <main id="top" tabIndex={-1}>
-        <div className="mock-hero">
-          <span className="hero-stroke" aria-hidden />
-          <div className="wrap grid">
-            <div className="c1-5">
-              <div className="inner">
+      <Chapters items={CHAPTERS} />
+      <main id="top" tabIndex={-1} className="chaptered">
+        <div className="stage-hero" id="start">
+          <div className="stage">
+            <div className="wrap grid">
+              <div className="stage-copy">
                 <p className="q">{hero.eyebrow}</p>
                 <h1>
                   {hero.headlineBefore} <Strike>{hero.struck}</Strike> {hero.headlineAfter}
@@ -33,9 +45,9 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className="c6-12">
-              <DeskMockup mock={quoteDeskMock} />
+              <div className="stage-art">
+                <ParticleHero label="A sample job: a pile of paperwork pulled apart, read, and settled into one drafted quote waiting for the owner's approval." />
+              </div>
             </div>
           </div>
         </div>
@@ -55,7 +67,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="offer" style={{ paddingTop: 0 }}>
+        <section id="offer">
           <div className="wrap">
             <SectionHead title={home.offer.title} />
             <ol className="offers">
@@ -80,22 +92,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="how" style={{ paddingTop: 0 }}>
+        <section id="how">
           <div className="wrap">
             <SectionHead title={how.title} gap={40} />
-            <ol className="how-row">
-              {how.parts.map((part) => (
-                <li key={part.title} className={"yours" in part && part.yours ? "yours" : undefined}>
-                  <span className="who">{part.who}</span>
-                  <h3>{part.title}</h3>
-                  <p>{part.body}</p>
-                </li>
-              ))}
-            </ol>
+            <HowDesk parts={how.parts} />
           </div>
         </section>
 
-        <section id="industries" style={{ paddingTop: 0 }}>
+        <section id="industries">
           <div className="wrap">
             <SectionHead title={home.industries.title} gap={40} />
             <div className="wall">
