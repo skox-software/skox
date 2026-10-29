@@ -12,7 +12,7 @@ Goal: nobody we contacted as SKOX Software ever sees something that looks like a
 | Portal emails (sign-in, invites, reminders) | No `EMAIL_FROM` set, so they send as `portal@skoxsoftware.com`; links built from `PORTAL_URL` (old host) | Clients see the old name |
 | Site lead emails | `LEAD_FROM_EMAIL="SKOX Leads <leads@skoxsoftware.com>"`; `site.email` is `founder@skoxsoftware.com` (shown in schema, privacy page, mailto fallback) | Internal mostly; the public address is mismatched |
 | Portal address | Works on both gounbusy.com/portal and www.skoxsoftware.com/portal; old host does not redirect | Two addresses for one portal |
-| Portal sign-in on gounbusy.com | Neon Auth trusted domains are portal.skoxsoftware.com, www.skoxsoftware.com and localhost only. **gounbusy.com is not trusted**, so sign-in there will likely fail | Clients who use the new address can't sign in |
+| Portal sign-in on gounbusy.com | **Fixed 29 Oct:** https://gounbusy.com added to Neon Auth trusted domains (production branch), alongside the two skoxsoftware.com hosts | Done; confirm with one real sign-in |
 | Prospect previews | previews.skoxsoftware.com/<slug> loaded but then bounced the visitor to gounbusy.com/concepts/… | **Fixed in skox PR #24**: previews now stay on the link we sent |
 | Email logo in already-sent mail | www.skoxsoftware.com/email/skox-logo.png 308s to gounbusy.com and loads | Fine |
 | Unsubscribe links in already-sent mail | www.skoxsoftware.com/portal/u/… | Must keep working on the old host (legal). Never redirect `/portal/u/*` or `/portal/api/*` |
@@ -20,14 +20,14 @@ Goal: nobody we contacted as SKOX Software ever sees something that looks like a
 ## The cutover, in order
 
 ### 1. Accounts and DNS (Josh)
-1. **Google Workspace: add gounbusy.com as a user alias domain** (Admin console → Account → Domains → Manage domains → Add a domain → User alias domain). Every person gets `name@gounbusy.com` alongside `name@skoxsoftware.com`; both deliver to the same inbox. Then in Gmail, add the gounbusy address under Settings → Accounts → Send mail as.
+1. **Google Workspace: make gounbusy.com the primary domain of the same subscription** (super admin, Admin console → Account → Domains → Manage domains). Add gounbusy.com as a *secondary* domain (not an alias domain, which can't be made primary), verify it with the TXT record Google gives, then Change primary domain. Rename each user to name@gounbusy.com; keep skoxsoftware.com on the account so name@skoxsoftware.com keeps receiving. Same billing, mailboxes, Drive and Calendar. Before renaming founders@: check which services sign in with that address by password (Vercel, Neon, Stripe, Resend, GitHub) and that portal staff memberships still match the sign-in address.
 2. **DNS for gounbusy.com** (Vercel DNS; Claude can add these with the values in hand):
    - MX `smtp.google.com` priority 1
    - SPF `v=spf1 include:_spf.google.com ~all`
    - Google DKIM `google._domainkey` (generate in Admin console → Apps → Gmail → Authenticate email)
    - DMARC `_dmarc` `v=DMARC1; p=none; rua=mailto:founders@gounbusy.com`
 3. **Resend: add `gounbusy.com` (portal and site mail) and `outreach.gounbusy.com` (cold outreach)** and add the records Resend lists (DKIM `resend._domainkey`, `send` MX and SPF). Wait for both to show Verified.
-4. **Neon Auth: add `https://gounbusy.com` to trusted domains** for the portal's production branch. Claude can do this on a yes.
+4. ~~Neon Auth: add `https://gounbusy.com` to trusted domains.~~ Done 29 Oct.
 5. Turn on auto-renew for both gounbusy.com and skoxsoftware.com. Never let skoxsoftware.com lapse: old links, old unsubscribe links and replies to old threads depend on it.
 
 ### 2. Settings and code (Claude, after step 1 verifies)
