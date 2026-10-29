@@ -13,6 +13,7 @@ const CHAPTERS = [
   { id: "now", label: "Why now" },
   { id: "offer", label: "What we do" },
   { id: "how", label: "How it works" },
+  { id: "work", label: "Our work" },
   { id: "industries", label: "Trades" },
   { id: "math", label: "Hire vs. desk" },
   { id: "live", label: "Review" },
@@ -96,6 +97,23 @@ export default function Home() {
           <div className="wrap">
             <SectionHead title={how.title} gap={40} />
             <HowDesk parts={how.parts} />
+          </div>
+        </section>
+
+        <section id="work">
+          <div className="wrap">
+            <SectionHead title={home.work.title} intro={home.work.intro} gap={40} />
+            <ul className="work-list">
+              {home.work.items.map((item) => (
+                <li key={item.who}>
+                  <span className={item.status === "In testing" ? "w-status testing" : "w-status"}>
+                    <span className="w-dot" aria-hidden /> {item.status}
+                  </span>
+                  <h3>{item.who}</h3>
+                  <p>{item.what}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

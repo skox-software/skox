@@ -200,6 +200,21 @@ export const home = {
   industries: {
     title: "Pick your trade.",
   },
+  /**
+   * Real work, unnamed until each owner says yes. Status words are exact:
+   * "In testing" is not "Live". Nothing here is a concept or a pitch.
+   */
+  work: {
+    title: "Work we've done.",
+    intro: "Real jobs, no names. Names go up when owners say yes.",
+    items: [
+      { status: "In testing", who: "A Florida land survey firm", what: "Type an address. The county records for the job land in its folder." },
+      { status: "Running daily", who: "Our own office", what: "Leads file themselves, preview opens alert us, unsubscribes are honored on their own. We run UnBusy on desks." },
+      { status: "Shipped", who: "Client dashboards", what: "Spotify, TikTok, Instagram, Authorize.net and Acuity on one screen." },
+      { status: "Shipped", who: "A car dealership", what: "The website that brings its customers in." },
+      { status: "Shipped", who: "An app for CFOs", what: "Anonymous second opinions from people who've done the thing. Ours, built in three days." },
+    ],
+  },
   math: {
     title: "You win, we win.",
     intro: "Our monthly fee is about a quarter of what the work costs you now, set in your own numbers at the review. You keep the rest.",
