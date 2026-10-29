@@ -210,9 +210,11 @@ export const home = {
     items: [
       { status: "In testing", who: "A Florida land survey firm", what: "Type an address. The county records for the job land in its folder." },
       { status: "Running daily", who: "Our own office", what: "Leads file themselves, preview opens alert us, unsubscribes are honored on their own. We run UnBusy on desks." },
+      { status: "Shipped", who: "A medical clinic", what: "A point of sale, with every product set up by SKU." },
       { status: "Shipped", who: "Client dashboards", what: "Spotify, TikTok, Instagram, Authorize.net and Acuity on one screen." },
       { status: "Shipped", who: "A car dealership", what: "The website that brings its customers in." },
       { status: "Shipped", who: "An app for CFOs", what: "Anonymous second opinions from people who've done the thing. Ours, built in three days." },
+      { status: "Live", who: "A classroom app", what: "Students tap in by NFC or a link. Professors see attendance and engagement. Ours, built end to end.", href: "https://www.focustap.org/", linkLabel: "focustap.org" },
     ],
   },
   math: {

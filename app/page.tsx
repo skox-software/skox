@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { ParticleHero } from "@/components/site/ParticleHero";
 import { Chapters } from "@/components/site/Chapters";
 import { HowDesk } from "@/components/site/HowDesk";
+import { WorkCards } from "@/components/site/WorkCards";
 import { Figures, ReviewSection, SectionHead, Strike } from "@/components/site/Bits";
 import { home, stills, wall } from "@/content/site";
 
@@ -103,17 +104,7 @@ export default function Home() {
         <section id="work">
           <div className="wrap">
             <SectionHead title={home.work.title} intro={home.work.intro} gap={40} />
-            <ul className="work-list">
-              {home.work.items.map((item) => (
-                <li key={item.who}>
-                  <span className={item.status === "In testing" ? "w-status testing" : "w-status"}>
-                    <span className="w-dot" aria-hidden /> {item.status}
-                  </span>
-                  <h3>{item.who}</h3>
-                  <p>{item.what}</p>
-                </li>
-              ))}
-            </ul>
+            <WorkCards items={home.work.items} />
           </div>
         </section>
 
