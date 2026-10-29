@@ -28,7 +28,7 @@ Goal: nobody we contacted as SKOX Software ever sees something that looks like a
    - DMARC `_dmarc` `v=DMARC1; p=none; rua=mailto:founders@gounbusy.com`
 3. **Resend: add `gounbusy.com` (portal and site mail) and `outreach.gounbusy.com` (cold outreach)** and add the records Resend lists (DKIM `resend._domainkey`, `send` MX and SPF). Wait for both to show Verified.
 4. ~~Neon Auth: add `https://gounbusy.com` to trusted domains.~~ Done 29 Oct.
-5. Turn on auto-renew for both gounbusy.com and skoxsoftware.com. Never let skoxsoftware.com lapse: old links, old unsubscribe links and replies to old threads depend on it.
+5. Auto-renew stays off on both domains by Josh's choice; renew by hand before expiry (gounbusy.com 27 Oct 2027, skoxsoftware.com 4 Sep 2027). Never let skoxsoftware.com lapse: old links, old unsubscribe links and replies to old threads depend on it.
 
 ### 2. Settings and code (Claude, after step 1 verifies)
 - Site env: `LEAD_FROM_EMAIL="UnBusy <leads@gounbusy.com>"`, `CONTACT_EMAIL` to a gounbusy address; `site.email` to the gounbusy address.
