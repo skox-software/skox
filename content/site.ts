@@ -172,8 +172,8 @@ export const home = {
     title: "What we do.",
     steps: [
       { name: "A free review", what: "We watch the job and price it in your numbers.", price: "Free" },
-      { name: "A desk", what: "Does one job, start to finish. We build it and run it.", price: "From $1,500 a month, plus setup" },
-      { name: "The next desk", what: "The next job off your team's plate.", price: "Half the setup fee" },
+      { name: "A desk", what: "Does one job, start to finish. We build it and run it.", price: "About a quarter of what the work costs you now" },
+      { name: "The next desk", what: "The next job off your team's plate.", price: "Same rule, half the setup" },
       { name: "A website that feeds it", what: "Requests land straight in your desk.", price: "Fixed price, once a desk is live" },
     ],
     desksTitle: "Desks we build",
@@ -201,7 +201,8 @@ export const home = {
     title: "Pick your trade.",
   },
   math: {
-    title: "Hire vs. desk.",
+    title: "You win, we win.",
+    intro: "Our monthly fee is about a quarter of what the work costs you now, set in your own numbers at the review. You keep the rest.",
     hire: {
       amount: "$47,540",
       unit: "a year, before benefits",
@@ -209,10 +210,10 @@ export const home = {
       points: ["Every year they stay", "Weeks to find and train", "Out sick in busy season"],
     },
     desk: {
-      amount: "$1,500",
-      unit: "a month, to start",
+      amount: "About 25%",
+      unit: "of what the work costs you now",
       title: "A desk",
-      points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"],
+      points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"],
     },
     source: "Wage: US median for secretaries and administrative assistants, Bureau of Labor Statistics, Occupational Employment and Wage Statistics, May 2025.",
   },
