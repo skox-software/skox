@@ -23,13 +23,15 @@ const nextConfig: NextConfig = {
     return [
       /*
        * Domain cutover (SITE-PLAN §5). Everything on skoxsoftware.com moves to
-       * gounbusy.com except the portal and the Ireland demo, which prospects
-       * and clients reach through links on the old host and which are served
-       * by the rewrites below on either host.
+       * gounbusy.com except what prospects and clients already hold links to:
+       * the portal, the Ireland demo, the preview concepts (previews.skoxsoftware.com
+       * proxies to /concepts here, and must not bounce the visitor to another
+       * domain) and the McCaughey short link. Those stay on the address they
+       * were sent.
        */
       { source: "/", has: oldHost, destination: `${HOST}/`, permanent: true },
       {
-        source: "/:path((?!portal(?:/|$)|irelandsurveying(?:/|$)|api/|_next/).*)",
+        source: "/:path((?!portal(?:/|$)|irelandsurveying(?:/|$)|concepts/|mccaughey(?:/|$)|api/|_next/).*)",
         has: oldHost,
         destination: `${HOST}/:path`,
         permanent: true,

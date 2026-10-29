@@ -69,7 +69,7 @@ export async function POST(req: Request) {
   const visitor = readVisitor(req, body.context);
   const company = await enrichCompany(lead.email);
 
-  const to = process.env.CONTACT_EMAIL ?? "founder@skoxsoftware.com";
+  const to = process.env.CONTACT_EMAIL ?? "founders@gounbusy.com";
   const key = process.env.RESEND_API_KEY;
   const text =
     formatLead(lead) + formatCompany(company, lead.email) + formatVisitor(visitor);

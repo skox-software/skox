@@ -17,7 +17,7 @@ export const site = {
   tagline: "Get the busywork off your team.",
   description:
     "UnBusy builds and runs the desk that does one part of your office legwork: it collects the documents, reads them, drafts the job and stops at your decision. A free operations review shows you the part it can take.",
-  email: "founder@skoxsoftware.com",
+  email: "founders@gounbusy.com",
   /** The host visitors land on; canonicals, OG and the sitemap use it. */
   url: "https://gounbusy.com",
 } as const;
@@ -100,6 +100,8 @@ export const nav = {
 
 export const footer = {
   line: "Your data and your rules are yours. The system is ours to keep improving.",
+  /** Continuity for anyone who knew us, or was emailed by us, before the rename. */
+  formerly: "UnBusy was SKOX Software until October 2026. Same people, same work, new name.",
   links: [
     { label: "Privacy", href: "/privacy" },
     { label: "Your privacy choices", href: "/privacy#choices" },
