@@ -160,7 +160,7 @@ export const home = {
     headlineBefore: "What's still",
     struck: "busywork",
     headlineAfter: "in your company?",
-    lead: "Tell us the job your team does by hand. We build the tool that does it. You approve the result.",
+    lead: "Tell us the job your team does by hand. We build a desk that does it, start to finish. You approve the result.",
     primary: "Book a free review",
     secondary: "See what we do",
   },
@@ -172,7 +172,7 @@ export const home = {
     title: "What we do.",
     steps: [
       { name: "A free review", what: "We watch the job and price it in your numbers.", price: "Free" },
-      { name: "A desk", what: "A tool that does the job. We build it and run it.", price: "From $1,500 a month, plus setup" },
+      { name: "A desk", what: "Does one job, start to finish. We build it and run it.", price: "From $1,500 a month, plus setup" },
       { name: "The next desk", what: "The next job off your team's plate.", price: "Half the setup fee" },
       { name: "A website that feeds it", what: "Requests land straight in your desk.", price: "Fixed price, once a desk is live" },
     ],

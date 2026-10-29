@@ -81,13 +81,15 @@ export function Figures({ hire, desk, source }: { hire: Fig; desk: Fig; source: 
 }
 
 /** The review, as the closing section of the home and industry pages. */
-export function ReviewSection({ title, intro, steps, cta, proofTitle, proof }: {
+export function ReviewSection({ title, intro, steps, cta, proofTitle, proof, href = "/review" }: {
   title: string;
   intro: string;
   steps: readonly { title: string; body?: string }[];
   cta: string;
   proofTitle: string;
   proof: string;
+  /** Where the button goes; trade pages pass the trade so the form knows it. */
+  href?: string;
 }) {
   return (
     <section id="live" style={{ paddingTop: 0 }}>
@@ -97,7 +99,7 @@ export function ReviewSection({ title, intro, steps, cta, proofTitle, proof }: {
           <div className="c1-6">
             <Steps steps={steps} />
             <div style={{ marginTop: 32 }}>
-              <Link className="btn blue" href="/review" data-cta="review-section">
+              <Link className="btn blue" href={href} data-cta="review-section">
                 {cta} <span className="dot" />
               </Link>
             </div>
