@@ -100,6 +100,8 @@ export const nav = {
 
 export const footer = {
   line: "Your data and your rules are yours. The system is ours to keep improving.",
+  /** Continuity for anyone who knew us, or was emailed by us, before the rename. */
+  formerly: "UnBusy was SKOX Software until October 2026. Same people, same work, new name.",
   links: [
     { label: "Privacy", href: "/privacy" },
     { label: "Your privacy choices", href: "/privacy#choices" },

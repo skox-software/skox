@@ -724,3 +724,5 @@
   .ub .flow-cards > li, .ub .flow-cards > li.on { flex:none; }
   .ub .flow-cards p { min-height:0; }
 }
+
+.ub footer .formerly { margin-top:10px; font-size:14px; color:rgba(250,250,248,.75); max-width:48ch; }

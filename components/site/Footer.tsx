@@ -12,6 +12,7 @@ export function Footer() {
         </div>
         <div className="c5-12 foot-right">
           <p className="line">{footer.line}</p>
+          <p className="formerly">{footer.formerly}</p>
           <div className="links">
             {footer.links.map((link) =>
               link.href.startsWith("/portal") ? (
