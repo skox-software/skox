@@ -29,7 +29,7 @@ export default function Home() {
                   <Link className="btn paper" href="/review" data-cta="hero">
                     {hero.primary} <span className="dot" />
                   </Link>
-                  <Link className="link" href="/review" data-cta="hero-secondary">
+                  <Link className="link" href="#offer" data-cta="hero-secondary">
                     {hero.secondary}
                   </Link>
                 </div>

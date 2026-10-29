@@ -8,6 +8,20 @@ import { review, site } from "@/content/site";
 import { captureAttribution, formatAttribution, readAttribution, readJourney } from "@/lib/attribution";
 import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 
+/**
+ * The review form's own checks on top of the shared validate(), which concept
+ * previews also use through /api/contact. Firm and industry are required here
+ * only, and the messages name the field.
+ */
+function check(lead: Partial<Lead>): FieldErrors {
+  const e = validate(lead);
+  if (e.name === "Required.") e.name = "Add your name.";
+  if (e.email === "Required.") e.email = "Add your email address.";
+  if (!e.company && !lead.company?.trim()) e.company = "Add your firm's name.";
+  if (!e.industry && !lead.industry?.trim()) e.industry = "Tell us what your firm does.";
+  return e;
+}
+
 const copy = review.form;
 
 const EMPTY: Lead = {
@@ -97,7 +111,7 @@ export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string 
   }
 
   function checkOne(key: keyof Lead) {
-    const found = validate(lead)[key];
+    const found = check(lead)[key];
     setErrors((previous) => ({ ...previous, [key]: found }));
     if (key === "email" && !found) {
       clearTimeout(pending.current);
@@ -108,7 +122,7 @@ export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     if (submitting.current) return;
-    const found = validate(lead);
+    const found = check(lead);
     setErrors(found);
     if (Object.keys(found).length) {
       track("review_form_invalid", { fields: Object.keys(found).join(",") });

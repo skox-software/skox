@@ -95,7 +95,7 @@ export const nav = {
     { label: "How a desk works", href: "/#how" },
     { label: "Industries", href: "/#industries" },
   ],
-  action: { label: "Book a free review", href: "/review" },
+  action: { label: "Book a free review", short: "Book a review", href: "/review" },
 } as const;
 
 export const footer = {
@@ -152,7 +152,7 @@ export const home = {
     headlineAfter: "in your company?",
     lead: "The retyping, the chasing, the paperwork that fills someone's week. Tell us the job. We look at how it runs today and show you the part a desk can take, up to your decision.",
     primary: "Book a free review",
-    secondary: "Tell us the busywork",
+    secondary: "See what we do",
   },
   /** The sample job's own numbers. Nothing here is invented. */
   strip: [

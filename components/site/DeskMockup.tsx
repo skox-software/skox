@@ -227,7 +227,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
   }, [mock, delay]);
 
   return (
-    <div className="mock" ref={root} aria-label={`A sample ${mock.desk} run`}>
+    <div className="mock" ref={root} role="region" aria-label={`A sample ${mock.desk} run`}>
       <div className="mock-bar">
         <span className="mock-mark" aria-hidden>
           <span className="mock-u">Un</span>

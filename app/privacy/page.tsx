@@ -16,7 +16,7 @@ export default function Privacy() {
   return (
     <div className="ub">
       <Header />
-      <main className="page">
+      <main id="top" tabIndex={-1} className="page">
         <div>
           <Link href="/" className="back">
             ← UnBusy

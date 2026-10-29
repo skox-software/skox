@@ -2,11 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import lockup from "@/public/brand/lockup-light.png";
 import { nav } from "@/content/site";
+import { Menu } from "./Menu";
 
-/** Logo left, three links, the one action. Under 600px: logo and action only. */
+/** Logo left, three links, the one action. Under 600px the links fold into a Menu. */
 export function Header() {
   return (
     <header>
+      <a className="skip" href="#top">
+        Skip to content
+      </a>
       <div className="wrap">
         <nav aria-label="Main">
           <Link href="/" aria-label="UnBusy home">
@@ -18,8 +22,10 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <Menu links={nav.links} />
             <Link className="btn blue" href={nav.action.href} data-cta="header">
-              {nav.action.label} <span className="dot" />
+              <span className="label-long">{nav.action.label}</span>
+              <span className="label-short">{nav.action.short}</span> <span className="dot" />
             </Link>
           </div>
         </nav>
