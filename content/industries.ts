@@ -11,8 +11,10 @@ export type Industry = {
   /** The trade, as the industries list and the hero eyebrow show it. */
   trade: string;
   desk: string;
-  /** The owner's question. The H1 and the <title>. */
+  /** The owner's question. The H1, and the <title> unless seoTitle is set. */
   question: string;
+  /** A <title> with the words owners search for, when the question lacks them. */
+  seoTitle?: string;
   description: string;
   lead: string;
   mock: DeskMock;
@@ -46,8 +48,9 @@ export const industries: Industry[] = [
     trade: "Surveying",
     desk: "the Quote Desk",
     question: "Can AI pull the county records for every survey job?",
+    seoTitle: "Can AI draft every survey quote from the county records?",
     description:
-      "A new address comes in; the Quote Desk collects the appraiser record, plat, flood zone and zoning, finds your prior jobs nearby and drafts the quote from your rates. The surveyor approves it.",
+      "A new address comes in; the Quote Desk pulls the appraiser record, plat, flood zone and zoning and drafts the quote from your rates. You approve it.",
     lead: "Usually, yes. A new address comes in and the desk drafts the quote from the county records. The surveyor approves it.",
     mock: quoteDeskMock,
     sheet: {
@@ -106,7 +109,7 @@ export const industries: Industry[] = [
     desk: "the Maintenance Desk",
     question: "Can AI triage every maintenance request?",
     description:
-      "A tenant's request comes in by email, text or portal; the Maintenance Desk reads it, checks the lease and the unit's history, picks the vendor from your list and drafts the work order. Your coordinator sends it.",
+      "A tenant's request comes in; the Maintenance Desk checks the lease and unit history, picks your vendor and drafts the work order. You send it.",
     lead: "Usually, yes. A request comes in and the desk drafts the work order. Your coordinator approves and sends it.",
     mock: {
       desk: "Maintenance Desk",

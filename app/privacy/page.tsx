@@ -8,6 +8,8 @@ import { Footer } from "@/components/site/Footer";
 export const metadata: Metadata = {
   title: "Privacy",
   description: "What UnBusy collects, why, and how to have it deleted.",
+  alternates: { canonical: "/privacy" },
+  openGraph: { title: "Privacy — UnBusy", description: "What UnBusy collects, why, and how to have it deleted.", url: "/privacy", images: ["/opengraph-image"] },
 };
 
 const UPDATED = "27 October 2026";
