@@ -551,3 +551,176 @@
 .ub .how-row li.yours h3, .ub .how-row li.yours .who { color:var(--blue); }
 @media (max-width:980px) { .ub .desk-chips, .ub .how-row { grid-template-columns:1fr 1fr; } .ub .how-row { gap:0 20px; } }
 @media (max-width:600px) { .ub .desk-chips { grid-template-columns:1fr 1fr; gap:8px; } .ub .desk-chips li { padding:12px; } .ub .desk-chips b { font-size:17px; } }
+
+/* ── Chapters preview: a framed stage hero, the paper-to-quote particles,
+      one statement per screen, a dot nav and a progress bar. ── */
+.ub .stage-hero { padding:12px 12px 0; }
+.ub .stage { position:relative; background:var(--blue); color:var(--paper); border-radius:24px; overflow:hidden; min-height:calc(100svh - 76px - 12px); display:flex; align-items:center; }
+.ub .stage::before { content:""; position:absolute; inset:0; background:radial-gradient(60% 70% at 72% 50%, rgba(255,255,255,.14), transparent 70%); pointer-events:none; }
+.ub .stage > .wrap { position:relative; width:100%; align-items:center; padding-top:56px; padding-bottom:56px; }
+.ub .stage-copy { grid-column:1/7; position:relative; z-index:1; }
+.ub .stage-art { grid-column:7/13; align-self:stretch; min-height:520px; position:relative; }
+.ub .stage .q { font-weight:500; font-size:15px; color:var(--paper); margin-bottom:24px; max-width:40ch; }
+.ub .stage h1 { font-size:clamp(54px,7.2vw,124px); line-height:.9; letter-spacing:-0.04em; font-variation-settings:"wdth" 82; }
+.ub .stage .strike::after { background:var(--paper); }
+.ub .stage .lead { font-size:clamp(19px,1.5vw,22px); line-height:1.4; max-width:34ch; margin-top:28px; color:var(--paper); }
+.ub .stage .actions { display:flex; gap:22px; align-items:center; flex-wrap:wrap; margin-top:34px; }
+.ub .stage :focus-visible { outline-color:var(--paper); }
+
+.ub .particles { position:absolute; inset:0; }
+.ub .particles canvas { display:block; width:100%; height:100%; opacity:0; transition:opacity .6s ease; touch-action:pan-y; }
+.ub .particles.is-live canvas { opacity:1; }
+.ub .p-tag { position:absolute; left:50%; bottom:2%; transform:translateX(-50%); display:flex; align-items:center; gap:10px; white-space:nowrap; background:rgba(250,250,248,.96); color:var(--ink); border-radius:999px; padding:9px 14px 9px 12px; font:500 14px/1 var(--body); box-shadow:0 8px 24px rgba(8,30,90,.25); animation:tag-in .35s cubic-bezier(.2,.8,.2,1); opacity:0; }
+.ub .particles.is-live .p-tag { opacity:1; }
+.ub .p-dot { width:9px; height:9px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 0 rgba(11,92,255,.5); animation:live 1.6s ease-out infinite; flex:none; }
+.ub .p-n { color:var(--ink-2); font-variant-numeric:tabular-nums; padding-left:8px; border-left:1px solid var(--rule); }
+.ub .p-sample { position:absolute; left:2%; top:2%; font-size:13px; color:var(--paper); opacity:.85; }
+@keyframes tag-in { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
+@keyframes live { 0% { box-shadow:0 0 0 0 rgba(11,92,255,.5); } 100% { box-shadow:0 0 0 10px rgba(11,92,255,0); } }
+
+/* One statement per screen, on screens big enough to hold one. */
+@media (min-width:981px) and (min-height:680px) {
+  .ub .chaptered > section { min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding:96px 0 !important; }
+  .ub .chaptered > section > .wrap { width:100%; }
+  .ub .chaptered h2 { font-size:clamp(44px,5.4vw,84px); line-height:.95; letter-spacing:-0.04em; font-variation-settings:"wdth" 85; }
+}
+
+/* Progress across the top. */
+.ub .progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:60; pointer-events:none; }
+.ub .progress > div { height:100%; background:var(--blue); transform:scaleX(0); transform-origin:left; }
+
+/* Dot nav on the right, named. */
+.ub .chapters { position:fixed; right:18px; top:50%; transform:translateY(-50%); z-index:20; }
+.ub .chapters ol { list-style:none; margin:0; padding:10px 8px; display:flex; flex-direction:column; gap:4px; background:rgba(250,250,248,.82); backdrop-filter:blur(8px); border:1px solid var(--rule); border-radius:999px; }
+.ub .chapters a { display:flex; align-items:center; justify-content:flex-end; gap:10px; min-height:24px; min-width:24px; position:relative; }
+.ub .chapters .pip { width:8px; height:8px; border-radius:50%; background:var(--ink-2); opacity:.45; transition:transform .2s, opacity .2s, background .2s; margin:0 auto; }
+.ub .chapters .lbl { position:absolute; right:calc(100% + 14px); white-space:nowrap; font:500 13px/1 var(--body); color:var(--ink); background:var(--paper); border:1px solid var(--rule); border-radius:999px; padding:7px 11px; opacity:0; transform:translateX(6px); transition:opacity .2s, transform .2s; pointer-events:none; }
+.ub .chapters li.on .pip { background:var(--blue); opacity:1; transform:scale(1.35); }
+.ub .chapters a:hover .lbl, .ub .chapters a:focus-visible .lbl { opacity:1; transform:none; }
+
+@media (max-width:980px) {
+  .ub .chapters { display:none; }
+  .ub .stage { min-height:auto; border-radius:18px; }
+  .ub .stage-copy, .ub .stage-art { grid-column:1/-1; }
+  .ub .stage > .wrap { padding-top:44px; padding-bottom:24px; }
+  .ub .stage-art { min-height:380px; }
+}
+@media (max-width:600px) {
+  .ub .stage-hero { padding:8px 8px 0; }
+  .ub .stage h1 { font-size:clamp(44px,12.5vw,64px); }
+  .ub .stage-art { min-height:330px; }
+  .ub .p-tag { font-size:13px; padding:8px 12px 8px 10px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ub .p-dot { animation:none; }
+  .ub .p-tag { animation:none; }
+}
+
+/* ── How a desk works: four live step cards on one line ── */
+.ub .how-flow { position:relative; }
+.ub .flow-stem { display:flex; justify-content:center; position:relative; height:86px; }
+.ub .flow-stem::before { content:""; position:absolute; left:50%; top:38px; bottom:24px; width:2px; background:var(--ink); transform:translateX(-1px); }
+.ub .flow-stem::after { content:""; position:absolute; left:10%; right:10%; bottom:22px; height:2px; background:var(--ink); border-radius:2px; }
+.ub .flow-in { position:relative; z-index:1; height:38px; display:inline-flex; align-items:center; gap:10px; padding:0 16px; border:1.5px solid var(--ink); border-radius:999px; background:var(--paper); font:500 15px/1 var(--body); }
+.ub .flow-cards { list-style:none; margin:0; padding:0; display:flex; gap:18px; }
+.ub .flow-cards > li { position:relative; flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:10px; padding:22px 22px 0; border:1.5px solid var(--rule); border-radius:18px; background:var(--paper); transition:flex-grow .55s cubic-bezier(.3,.7,.2,1), border-color .3s, box-shadow .3s; overflow:hidden; }
+.ub .flow-cards > li::before { content:""; position:absolute; left:50%; top:-24px; width:2px; height:22px; background:var(--ink); }
+.ub .flow-cards > li.on { flex-grow:1.55; border-color:var(--ink); box-shadow:0 18px 40px rgba(21,24,29,.10); }
+.ub .flow-cards > li.yours { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.ub .flow-cards > li.yours.on { box-shadow:0 18px 40px rgba(11,92,255,.28); }
+.ub .flow-hit { position:absolute; inset:0; z-index:3; background:none; border:0; cursor:pointer; border-radius:18px; }
+.ub .flow-hit:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
+.ub .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.ub .flow-top { display:flex; justify-content:space-between; align-items:center; }
+.ub .flow-top .who { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500; padding:5px 10px; border-radius:999px; background:var(--sky); color:var(--ink); }
+.ub .flow-cards > li.yours .who { background:var(--blue); color:var(--paper); }
+.ub .wdot { width:7px; height:7px; border-radius:50%; background:var(--blue); }
+.ub .flow-cards > li.yours .wdot { background:var(--paper); }
+.ub .flow-cards > li.on .wdot { animation:live 1.6s ease-out infinite; }
+.ub .flow-top .n { font-size:13px; color:var(--ink-2); }
+.ub .flow-cards > li.yours .n { color:rgba(250,250,248,.75); }
+.ub .flow-cards h3 { font-family:var(--display); font-size:clamp(26px,2.3vw,34px); font-weight:700; letter-spacing:-0.03em; line-height:1; margin-top:6px; }
+.ub .flow-cards p { color:var(--ink-2); max-width:30ch; min-height:3em; }
+.ub .flow-cards > li.yours p { color:rgba(250,250,248,.85); }
+.ub .mini { position:relative; margin:8px -22px 0; height:210px; background:var(--sky); border-top:1.5px solid var(--rule); overflow:hidden; font:500 13px/1.2 var(--body); color:var(--ink); }
+.ub .flow-cards > li.yours .mini { background:#1F2329; border-top-color:rgba(250,250,248,.12); }
+.ub .flow-cards > li:not(.on) .mini > * { opacity:.55; filter:saturate(.6); transition:opacity .3s; }
+.ub .flow-bar { position:absolute; left:0; right:0; bottom:0; height:3px; background:transparent; }
+.ub .flow-bar > span { display:block; height:100%; background:var(--blue); transform:scaleX(0); transform-origin:left; }
+.ub .flow-cards > li.on .flow-bar > span { animation:bar linear forwards; }
+.ub .flow-cards > li.yours .flow-bar > span { background:var(--paper); }
+.ub .flow-note { margin-top:14px; font-size:13px; color:var(--ink-2); }
+@keyframes bar { to { transform:scaleX(1); } }
+@keyframes m-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+@keyframes m-out { to { opacity:0; } }
+@keyframes m-wipe { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
+
+/* Collect: sources tick over from Pulling to Collected. */
+.ub .m-collect { position:absolute; inset:16px; display:flex; flex-direction:column; gap:8px; }
+.ub .m-row { display:flex; align-items:center; gap:10px; background:var(--paper); border:1px solid var(--rule); border-radius:10px; padding:8px 10px; }
+.ub .m-ico { width:22px; height:22px; border-radius:6px; background:var(--ink); color:var(--paper); display:grid; place-items:center; font-size:12px; flex:none; }
+.ub .m-lbl { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ub .m-st { position:relative; display:grid; font-size:12px; }
+.ub .m-st > span { grid-area:1/1; padding:3px 8px; border-radius:999px; white-space:nowrap; }
+.ub .m-st .pend { background:var(--paper-2); color:var(--ink-2); opacity:0; }
+.ub .m-st .done { background:#DDF5E5; color:#11663A; }
+.ub li.on .m-st .pend { animation:m-in .01s 0s both, m-out .2s var(--d) forwards; }
+.ub li.on .m-st .done { animation:m-in .3s var(--d) both; }
+
+/* Read: a scan runs down the page; your rules light up beside it. */
+.ub .m-read { position:absolute; inset:16px; display:grid; grid-template-columns:42% 1fr; gap:12px; align-items:center; }
+.ub .m-doc { position:relative; height:100%; background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:16px 12px; display:flex; flex-direction:column; gap:12px; overflow:hidden; }
+.ub .m-doc i { display:block; height:6px; border-radius:3px; background:var(--sky-2); }
+.ub .m-scan { position:absolute; left:0; right:0; top:0; height:26px; background:linear-gradient(transparent, rgba(11,92,255,.22), transparent); opacity:0; }
+.ub li.on .m-scan { animation:scan 2.6s .2s ease-in-out both; }
+@keyframes scan { 0% { opacity:1; transform:translateY(-20px); } 90% { opacity:1; } 100% { opacity:0; transform:translateY(160px); } }
+.ub .m-rules { display:flex; flex-direction:column; gap:8px; }
+.ub .m-rule { background:var(--paper); border:1px solid var(--rule); border-radius:10px; padding:8px 10px; display:flex; flex-direction:column; gap:3px; }
+.ub .m-rule b { font-weight:500; color:var(--blue); }
+.ub li.on .m-rule { animation:m-in .35s var(--d) both; }
+
+/* Prepare: the quote writes itself. */
+.ub .m-prep { position:absolute; inset:16px; display:grid; place-items:center; }
+.ub .m-quote { width:min(100%, 300px); background:var(--paper); border:1px solid var(--rule); border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; gap:9px; box-shadow:0 10px 24px rgba(21,24,29,.08); }
+.ub .m-qh { display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid var(--rule); }
+.ub .m-qh b { font-family:var(--display); font-size:16px; }
+.ub .m-qh span { font-size:12px; color:var(--ink-2); }
+.ub .m-line { display:flex; align-items:center; gap:10px; }
+.ub .m-line span { white-space:nowrap; }
+.ub .m-line i { flex:1; height:1px; border-top:1px dashed var(--rule); }
+.ub li.on .m-line { animation:m-wipe .5s var(--d) both; }
+.ub .m-ready { align-self:flex-start; margin-top:2px; font-size:12px; padding:4px 9px; border-radius:999px; background:var(--sky); color:var(--blue); }
+.ub li.on .m-ready { animation:m-in .3s var(--d) both; }
+
+/* Decide: your click, nothing goes out before it. */
+.ub .m-decide { position:absolute; inset:16px; display:grid; place-items:center; color:var(--paper); }
+.ub .m-card { width:min(100%, 280px); background:#2A2F36; border:1px solid rgba(250,250,248,.14); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:12px; }
+.ub .m-wait, .ub .m-btn { position:relative; display:grid; }
+.ub .m-wait > span, .ub .m-btn > span { grid-area:1/1; }
+.ub .m-wait > span { justify-self:start; font-size:12px; padding:4px 9px; border-radius:999px; }
+.ub .m-wait .w1 { background:rgba(11,92,255,.25); color:#BFD3FF; }
+.ub .m-wait .w2 { background:#DDF5E5; color:#11663A; opacity:0; }
+.ub .m-title { font-family:var(--display); font-size:18px; }
+.ub .m-btn > span { text-align:center; padding:10px; border-radius:999px; font-weight:600; }
+.ub .m-btn .b1 { background:var(--paper); color:var(--ink); }
+.ub .m-btn .b2 { background:var(--blue); color:var(--paper); opacity:0; }
+.ub .m-cursor { position:absolute; left:62%; top:76%; opacity:0; }
+.ub li.on .m-cursor { animation:cursor 2.2s .5s cubic-bezier(.5,0,.2,1) both; }
+@keyframes cursor { 0% { opacity:0; transform:translate(70px,50px); } 20% { opacity:1; } 70% { opacity:1; transform:translate(0,0); } 78% { transform:translate(0,0) scale(.85); } 86% { transform:translate(0,0) scale(1); } 100% { opacity:1; transform:translate(0,0); } }
+.ub li.on .m-btn .b1 { animation:m-out .2s 2.25s forwards; }
+.ub li.on .m-btn .b2 { animation:m-in .3s 2.25s both; }
+.ub li.on .m-wait .w1 { animation:m-out .2s 2.35s forwards; }
+.ub li.on .m-wait .w2 { animation:m-in .3s 2.35s both; }
+
+/* Still: every small screen shows its finished state. */
+.ub .how-flow.still .mini * { animation:none !important; }
+.ub .how-flow.still .m-st .pend, .ub .how-flow.still .m-btn .b1, .ub .how-flow.still .m-wait .w1 { opacity:0; }
+.ub .how-flow.still .m-btn .b2, .ub .how-flow.still .m-wait .w2, .ub .how-flow.still .m-cursor { opacity:1; }
+
+@media (max-width:980px) {
+  .ub .flow-stem { display:none; }
+  .ub .flow-cards { flex-direction:column; }
+  .ub .flow-cards > li::before { display:none; }
+  .ub .flow-cards > li, .ub .flow-cards > li.on { flex:none; }
+  .ub .flow-cards p { min-height:0; }
+}
