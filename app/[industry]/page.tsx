@@ -93,7 +93,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
 
         <section id="math">
           <div className="wrap">
-            <SectionHead title={home.math.title} gap={40} />
+            <SectionHead title={home.math.title} intro={home.math.intro} gap={40} />
             <Figures hire={industry.math.hire} desk={industry.math.desk} source={industry.math.source} />
           </div>
         </section>

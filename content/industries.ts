@@ -94,7 +94,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn the county sites", "Out sick in busy season"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Quote Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Quote Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -186,7 +186,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next maintenance coordinator", points: ["Every year they stay", "Weeks to learn the buildings", "Out sick when the pipes freeze"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Maintenance Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Maintenance Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -254,7 +254,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn the county records", "Out sick at month-end closings"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Title Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Title Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -322,7 +322,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Hired for one season, gone by spring", "Out sick in January"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The 1099 Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The 1099 Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -390,7 +390,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn your intake rules", "Out sick when the phones ring"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The New Matter Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The New Matter Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -458,7 +458,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn your carriers", "Out sick at renewal season"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Certificate Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Certificate Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -526,7 +526,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn each county's portal", "Out sick in the busy season"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Permit Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Permit Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -594,7 +594,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn your payers", "Out sick on a full schedule"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Intake Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Intake Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -662,7 +662,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn your TMS", "Out sick at month-end"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Billing Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Billing Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {
@@ -730,7 +730,7 @@ export const industries: Industry[] = [
     math: {
       intro: "",
       hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn your price book", "Out sick in the first heat wave"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Invoice Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
+      desk: { amount: "About 25%", unit: "of what the work costs you now", title: "The Invoice Desk", points: ["You keep the other three quarters", "There's a minimum; the review tells you if your work clears it", "Not running the agreed jobs by day 90? Cancel and keep what was built"] },
       source: WAGE,
     },
     review: {

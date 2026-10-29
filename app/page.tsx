@@ -127,7 +127,7 @@ export default function Home() {
 
         <section id="math">
           <div className="wrap">
-            <SectionHead title={math.title} gap={40} />
+            <SectionHead title={math.title} intro={math.intro} gap={40} />
             <Figures hire={math.hire} desk={math.desk} source={math.source} />
           </div>
         </section>
