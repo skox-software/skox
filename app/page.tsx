@@ -2,10 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Sheet } from "@/components/site/Sheet";
 import { DeskMockup } from "@/components/site/DeskMockup";
-import { Figures, ReviewSection, SectionHead, Strike, Strip } from "@/components/site/Bits";
-import { home, quoteDeskJob, quoteDeskMock, stills, wall } from "@/content/site";
+import { Figures, ReviewSection, SectionHead, Strike } from "@/components/site/Bits";
+import { home, quoteDeskMock, stills, wall } from "@/content/site";
 
 export const metadata = { alternates: { canonical: "/" } };
 
@@ -43,104 +42,47 @@ export default function Home() {
 
         <section id="offer">
           <div className="wrap">
-            <SectionHead title={home.offer.title} intro={home.offer.intro} />
+            <SectionHead title={home.offer.title} />
             <ol className="offers">
               {home.offer.steps.map((step, i) => (
                 <li key={step.name}>
                   <span className="i num">{String(i + 1).padStart(2, "0")}</span>
                   <h3>{step.name}</h3>
                   <p>{step.what}</p>
-                  <p className="get">{step.get}</p>
                   <span className="price">{step.price}</span>
                 </li>
               ))}
             </ol>
             <h3 className="desks-title">{home.offer.desksTitle}</h3>
-            <div className="desks">
+            <ul className="desk-chips">
               {home.offer.desks.map((d) => (
-                <div className="desk-row" key={d.desk}>
-                  <span className="trade">{d.trade}</span>
+                <li key={d.desk}>
                   <b>{d.desk}</b>
-                  <span className="job">{d.job}</span>
-                </div>
+                  <span>{d.trade}</span>
+                </li>
               ))}
-            </div>
-            <div style={{ marginTop: 32 }}>
-              <Link className="btn blue" href="/review" data-cta="offer">
-                {home.offer.cta} <span className="dot" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section id="cost" style={{ paddingTop: 0 }}>
-          <div className="wrap">
-            <SectionHead title={home.cost.title} intro={home.cost.intro} />
-            <p className="sample-line">{home.cost.sample}</p>
-            <div className="cost-ledger">
-              {[home.cost.before, home.cost.after].map((col, i) => (
-                <div className={i ? "col desk" : "col"} key={col.label}>
-                  <h3>{col.label}</h3>
-                  {col.lines.map((line) => (
-                    <div className="line" key={line.k}>
-                      <span className="k">{line.k}</span>
-                      <span className="v">{line.v}</span>
-                      {"note" in line && line.note && <span className="note">{line.note}</span>}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <p className="small source">{home.cost.foot}</p>
-            <div style={{ marginTop: 28 }}>
-              <Link className="btn blue" href="/review" data-cta="cost">
-                {home.cost.cta} <span className="dot" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section id="proof" style={{ paddingTop: 0 }}>
-          <div className="wrap">
-            <SectionHead title={home.proof.title} intro={home.proof.intro} />
-            <div className="proof-grid">
-              <div className="ticket-col">
-                <Sheet {...quoteDeskJob} />
-              </div>
-              <Strip items={home.strip} stack />
-            </div>
+            </ul>
           </div>
         </section>
 
         <section id="how" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <SectionHead title={how.title} intro={how.intro} gap={64} />
-            <div className="parts-split">
-              <div className="ledger-parts">
-                {how.parts.filter((part) => !("yours" in part && part.yours)).map((part, i) => (
-                  <div className="row" key={part.title}>
-                    <div className="i">{String(i + 1).padStart(2, "0")}</div>
-                    <div>
-                      <h3>{part.title}</h3>
-                      <p>{part.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {how.parts.filter((part) => "yours" in part && part.yours).map((part) => (
-                <div className="yours-panel" key={part.title}>
-                  <div className="k">{part.who}</div>
+            <SectionHead title={how.title} gap={40} />
+            <ol className="how-row">
+              {how.parts.map((part) => (
+                <li key={part.title} className={"yours" in part && part.yours ? "yours" : undefined}>
+                  <span className="who">{part.who}</span>
                   <h3>{part.title}</h3>
                   <p>{part.body}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         <section id="industries" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <SectionHead title={home.industries.title} intro={home.industries.intro} gap={48} />
+            <SectionHead title={home.industries.title} gap={40} />
             <div className="wall">
               {wall.map((tile) => (
                 <Link
@@ -154,7 +96,6 @@ export default function Home() {
                   </span>
                   <span className="trade">{tile.trade}</span>
                   <span className="qq">{tile.question}</span>
-                  {!tile.live && <span className="soon">Starts with the review.</span>}
                 </Link>
               ))}
             </div>
@@ -167,27 +108,15 @@ export default function Home() {
 
         <section id="math">
           <div className="wrap">
-            <SectionHead title={math.title} intro={math.intro} />
-            <div className="ladder">
-              {math.ladder.map((rung, i) => (
-                <div className={rung.struck ? "r" : "r desk"} key={rung.title}>
-                  <div className="i">{String(i + 1).padStart(2, "0")}</div>
-                  <div>
-                    <h3>{rung.struck ? <Strike now>{rung.title}</Strike> : rung.title}</h3>
-                    <p>{rung.body}</p>
-                  </div>
-                  <div className="tag">{rung.tag}</div>
-                </div>
-              ))}
-            </div>
+            <SectionHead title={math.title} gap={40} />
             <Figures hire={math.hire} desk={math.desk} source={math.source} />
           </div>
         </section>
 
         <section id="now" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <SectionHead title={home.now.title} intro={home.now.intro} />
-            <div className="facts">
+            <SectionHead title={home.now.title} gap={40} />
+            <div className="facts three">
               {home.now.facts.map((fact) => (
                 <div className="fact" key={fact.n + fact.src}>
                   <b className="num">{fact.n}</b>

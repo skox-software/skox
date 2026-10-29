@@ -22,27 +22,29 @@ export function Strip({ items, stack = false }: { items: readonly { n: string; l
 }
 
 /** Title in columns 1–6, intro bottom-aligned in 7–12: the head of every section. */
-export function SectionHead({ title, intro, gap = 56 }: { title: string; intro: string; gap?: number }) {
+export function SectionHead({ title, intro, gap = 56 }: { title: string; intro?: string; gap?: number }) {
   return (
     <div className="grid sec" style={{ marginBottom: gap }}>
       <div className="c1-6">
         <h2>{title}</h2>
       </div>
-      <div className="c7-12" style={{ alignSelf: "end" }}>
-        <p className="intro">{intro}</p>
-      </div>
+      {intro && (
+        <div className="c7-12" style={{ alignSelf: "end" }}>
+          <p className="intro">{intro}</p>
+        </div>
+      )}
     </div>
   );
 }
 
-export function Steps({ steps }: { steps: readonly { title: string; body: string }[] }) {
+export function Steps({ steps }: { steps: readonly { title: string; body?: string }[] }) {
   return (
     <ol className="steps">
       {steps.map((step) => (
         <li key={step.title}>
           <div>
             <h3>{step.title}</h3>
-            <p>{step.body}</p>
+            {step.body && <p>{step.body}</p>}
           </div>
         </li>
       ))}
@@ -82,7 +84,7 @@ export function Figures({ hire, desk, source }: { hire: Fig; desk: Fig; source: 
 export function ReviewSection({ title, intro, steps, cta, proofTitle, proof }: {
   title: string;
   intro: string;
-  steps: readonly { title: string; body: string }[];
+  steps: readonly { title: string; body?: string }[];
   cta: string;
   proofTitle: string;
   proof: string;

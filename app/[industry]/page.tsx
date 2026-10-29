@@ -3,10 +3,9 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Sheet } from "@/components/site/Sheet";
 import { DeskMockup } from "@/components/site/DeskMockup";
 import Link from "next/link";
-import { Figures, ReviewSection, SectionHead, Steps, Strip } from "@/components/site/Bits";
+import { Figures, ReviewSection, SectionHead, Steps } from "@/components/site/Bits";
 import { home, site, stills } from "@/content/site";
 import { industries, industryBySlug } from "@/content/industries";
 
@@ -67,16 +66,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
 
         <section id="job">
           <div className="wrap">
-            <SectionHead title={industry.job.title} intro={industry.job.intro} />
-            <div className="proof-grid">
-              <div className="ticket-col">
-                <Sheet {...industry.sheet} approveHref="/review" />
-              </div>
-              <Strip items={industry.strip} stack />
-            </div>
-            <div style={{ marginTop: 56 }}>
-              <Steps steps={industry.job.steps} />
-            </div>
+            <SectionHead title={industry.job.title} gap={40} />
+            <Steps steps={industry.job.steps} />
           </div>
         </section>
 
@@ -99,7 +90,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
 
         <section id="math">
           <div className="wrap">
-            <SectionHead title={home.math.title} intro={industry.math.intro} />
+            <SectionHead title={home.math.title} gap={40} />
             <Figures hire={industry.math.hire} desk={industry.math.desk} source={industry.math.source} />
           </div>
         </section>
