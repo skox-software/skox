@@ -40,7 +40,22 @@ export default function Home() {
           </div>
         </div>
 
-        <section id="offer">
+        <section id="now">
+          <div className="wrap">
+            <SectionHead title={home.now.title} gap={40} />
+            <div className="facts three">
+              {home.now.facts.map((fact) => (
+                <div className="fact" key={fact.n + fact.src}>
+                  <b className="num">{fact.n}</b>
+                  <p>{fact.line}</p>
+                  <span className="src">{fact.src}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="offer" style={{ paddingTop: 0 }}>
           <div className="wrap">
             <SectionHead title={home.offer.title} />
             <ol className="offers">
@@ -110,21 +125,6 @@ export default function Home() {
           <div className="wrap">
             <SectionHead title={math.title} gap={40} />
             <Figures hire={math.hire} desk={math.desk} source={math.source} />
-          </div>
-        </section>
-
-        <section id="now" style={{ paddingTop: 0 }}>
-          <div className="wrap">
-            <SectionHead title={home.now.title} gap={40} />
-            <div className="facts three">
-              {home.now.facts.map((fact) => (
-                <div className="fact" key={fact.n + fact.src}>
-                  <b className="num">{fact.n}</b>
-                  <p>{fact.line}</p>
-                  <span className="src">{fact.src}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
