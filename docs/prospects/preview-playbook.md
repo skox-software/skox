@@ -128,7 +128,7 @@ The routine saves `preview_url` on the deal, sets `ready`, and posts to Reiss (S
 
 ### Where the link lives (learned on Bass Harbor, 2026-10-21)
 
-The `skox` project's PR previews sit behind Vercel's login, so an owner can't open them. Instead: merge the concept PR (it lives at `/concepts/<slug>-<hash>`, noindex, robots-disallowed), then add one rewrite to `skox-software/prospect-previews` `vercel.json` so `previews.skoxsoftware.com/<short-slug>` serves it. The shared `/_next`, `/concepts`, `/api/contact` and `/portal/api/lead-previews/open` rewrites are already there. Save the short link as the deal's `preview_url`.
+The `skox` project's PR previews sit behind Vercel's login, so an owner can't open them. Instead: merge the concept PR (it lives at `/concepts/<slug>-<hash>`, noindex, robots-disallowed), then add one rewrite to `skox-software/prospect-previews` `vercel.json` so `previews.gounbusy.com/<short-slug>` serves it. The shared `/_next`, `/concepts`, `/api/contact` and `/portal/api/lead-previews/open` rewrites are already there. Save the short link as the deal's `preview_url`.
 
 ### Honest limits
 

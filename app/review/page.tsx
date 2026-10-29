@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: review.title,
   description: review.description,
   alternates: { canonical: "/review" },
+  openGraph: { title: `${review.title} — UnBusy`, description: review.description, url: "/review", images: ["/opengraph-image"] },
 };
 
 function List({ title, items }: { title: string; items: readonly { title: string; body: string }[] }) {

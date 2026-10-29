@@ -30,6 +30,19 @@ const nextConfig: NextConfig = {
        * were sent.
        */
       { source: "/", has: oldHost, destination: `${HOST}/`, permanent: true },
+      /*
+       * The portal moves too: pages on the old host go to gounbusy.com/portal
+       * (a trusted sign-in domain since 29 Oct 2026). Unsubscribe links (/u/)
+       * and the API (webhooks, auth, the preview beacon) stay where they were
+       * sent and registered; assets (/_next/) stay for pages already open.
+       */
+      {
+        source: "/portal/:path((?!api/|u/|_next/).*)",
+        has: oldHost,
+        destination: `${HOST}/portal/:path`,
+        permanent: false,
+      },
+      { source: "/portal", has: oldHost, destination: `${HOST}/portal`, permanent: false },
       {
         source: "/:path((?!portal(?:/|$)|irelandsurveying(?:/|$)|concepts/|mccaughey(?:/|$)|api/|_next/).*)",
         has: oldHost,
@@ -40,6 +53,7 @@ const nextConfig: NextConfig = {
 
       /* The SKOX pages, retired at cutover (SITE-PLAN §3). */
       { source: "/for/property-management", destination: "/property-management", permanent: true },
+      { source: "/for/surveying", destination: "/surveying", permanent: true },
       { source: "/for/:trade", destination: "/", permanent: true },
       {
         source: "/:slug(web-apps|dashboards|websites|customer-portals|internal-tools|integrations|mvp-development|examples|dashboard-examples|internal-tool-examples)",

@@ -19,12 +19,14 @@ export async function generateMetadata({ params }: { params: Promise<{ industry:
   const { industry: slug } = await params;
   const industry = industryBySlug(slug);
   if (!industry) return {};
+  const title = industry.seoTitle ?? industry.question;
+  const still = stills[industry.slug as keyof typeof stills] ?? stills.home;
   return {
-    title: industry.question,
+    title,
     description: industry.description,
     alternates: { canonical: `/${industry.slug}` },
-    openGraph: { title: `${industry.question} — ${site.name}`, description: industry.description, url: `/${industry.slug}` },
-    twitter: { title: `${industry.question} — ${site.name}`, description: industry.description },
+    openGraph: { title: `${title} — ${site.name}`, description: industry.description, url: `/${industry.slug}`, images: [{ url: still.src, alt: still.alt }] },
+    twitter: { card: "summary_large_image", title: `${title} — ${site.name}`, description: industry.description, images: [still.src] },
   };
 }
 

@@ -16,7 +16,7 @@ export const site = {
   name: "UnBusy",
   tagline: "Get the busywork off your team.",
   description:
-    "UnBusy builds and runs the desk that does one part of your office legwork: it collects the documents, reads them, drafts the job and stops at your decision. A free operations review shows you the part it can take.",
+    "UnBusy builds the desk that does one part of your office paperwork and stops at your decision. Start with a free operations review.",
   email: "founders@gounbusy.com",
   /** The host visitors land on; canonicals, OG and the sitemap use it. */
   url: "https://gounbusy.com",

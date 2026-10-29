@@ -21,7 +21,7 @@ These come first. If a task seems to need breaking one, stop and ask Josh or Rei
 ## Preview concepts (`app/concepts/`)
 
 - **Don't edit, move, rename or delete another concept's route or its `public/concepts/<name>/` folder.** Each one may be open on a prospect's phone right now. Shared building blocks live in `app/concepts/_shared/`. Change them only with defaults that leave existing concepts unchanged.
-- **Every preview a prospect sees goes on `https://previews.skoxsoftware.com/<short-slug>`.** Never send them a vercel.app link (PR previews are behind Vercel's login), a Vercel share link, or a `www.skoxsoftware.com/concepts/...` URL.
+- **Every new preview a prospect sees goes on `https://previews.gounbusy.com/<short-slug>`.** Links already sent on `previews.skoxsoftware.com` keep working (same project); never break them. Never send them a vercel.app link (PR previews are behind Vercel's login), a Vercel share link, or a `www.skoxsoftware.com/concepts/...` URL.
 - How a preview gets there:
   1. Build the route at `app/concepts/<business-slug>-<8 hex>/` (playbook: `docs/prospects/preview-playbook.md`; master prompt: `scripts/lead-scan/preview-prompt.md`).
   2. Merge its PR to `main`.
