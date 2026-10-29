@@ -31,6 +31,14 @@ export const stills = {
   home: { src: "/brand/stills/pile.jpg", bg: "#0058F0", alt: "A stack of manila folders labelled Invoices, Clients, Follow up, County and Payroll, an open ledger of handwritten figures, a rubber stamp and an ink pad, laid out on a blue surface." },
   surveying: { src: "/brand/stills/surveying.jpg", bg: "#0159EE", alt: "A folded county plat, a property appraiser printout, a FEMA flood map, a surveyor's field book, a brass plumb bob and a rubber stamp, laid out on a blue surface." },
   "property-management": { src: "/brand/stills/maintenance.jpg", bg: "#025BE9", alt: "A clipboard with a maintenance work order, a tenant's handwritten note, a ring of keys tagged 2B, a lease page with a highlighted clause and a rubber stamp, laid out on a blue surface." },
+  "title-and-escrow": { src: "/brand/stills/title.jpg", bg: "#0159EE", alt: "Title and escrow paperwork laid out on a blue surface." },
+  accounting: { src: "/brand/stills/cpa.jpg", bg: "#0159EE", alt: "Accounting paperwork laid out on a blue surface." },
+  "law-offices": { src: "/brand/stills/law.jpg", bg: "#0159EE", alt: "Law office paperwork laid out on a blue surface." },
+  "insurance-agencies": { src: "/brand/stills/insurance.jpg", bg: "#0159EE", alt: "Insurance agency paperwork laid out on a blue surface." },
+  contractors: { src: "/brand/stills/contractor.jpg", bg: "#0159EE", alt: "Contractor paperwork laid out on a blue surface." },
+  "medical-and-dental": { src: "/brand/stills/medical.jpg", bg: "#0159EE", alt: "Medical and dental office paperwork laid out on a blue surface." },
+  freight: { src: "/brand/stills/freight.jpg", bg: "#0159EE", alt: "Freight and trucking paperwork laid out on a blue surface." },
+  "hvac-and-plumbing": { src: "/brand/stills/hvac.jpg", bg: "#0159EE", alt: "HVAC and plumbing service paperwork laid out on a blue surface." },
 } as const;
 
 /**
@@ -42,14 +50,14 @@ export const stills = {
 export const wall = [
   { slug: "surveying", trade: "Land surveying", question: "Can AI pull the county records for every survey job?", src: "/brand/stills/surveying.jpg", live: true },
   { slug: "property-management", trade: "Property management", question: "Can AI triage every maintenance request?", src: "/brand/stills/maintenance.jpg", live: true },
-  { slug: "title", trade: "Title and escrow", question: "Can AI order the records for a title file?", src: "/brand/stills/title.jpg", live: false },
-  { slug: "cpas", trade: "Accounting", question: "Can AI run my 1099 season?", src: "/brand/stills/cpa.jpg", live: false },
-  { slug: "law", trade: "Law offices", question: "Can AI open the file and chase the intake?", src: "/brand/stills/law.jpg", live: false },
-  { slug: "insurance", trade: "Insurance agencies", question: "Can AI issue the certificates and chase the renewals?", src: "/brand/stills/insurance.jpg", live: false },
-  { slug: "contractors", trade: "Contractors", question: "Can AI pull the permits and collect the lien waivers?", src: "/brand/stills/contractor.jpg", live: false },
-  { slug: "medical", trade: "Medical and dental offices", question: "Can AI do the intake and the insurance paperwork?", src: "/brand/stills/medical.jpg", live: false },
-  { slug: "freight", trade: "Freight and trucking", question: "Can AI match the bills of lading to the rate confirmations?", src: "/brand/stills/freight.jpg", live: false },
-  { slug: "hvac", trade: "HVAC and plumbing", question: "Can AI turn the service tickets into invoices?", src: "/brand/stills/hvac.jpg", live: false },
+  { slug: "title-and-escrow", trade: "Title and escrow", question: "Can AI order the records for a title file?", src: "/brand/stills/title.jpg", live: true },
+  { slug: "accounting", trade: "Accounting", question: "Can AI run my 1099 season?", src: "/brand/stills/cpa.jpg", live: true },
+  { slug: "law-offices", trade: "Law offices", question: "Can AI open the file and chase the intake?", src: "/brand/stills/law.jpg", live: true },
+  { slug: "insurance-agencies", trade: "Insurance agencies", question: "Can AI issue the certificates and chase the renewals?", src: "/brand/stills/insurance.jpg", live: true },
+  { slug: "contractors", trade: "Contractors", question: "Can AI pull the permits and collect the lien waivers?", src: "/brand/stills/contractor.jpg", live: true },
+  { slug: "medical-and-dental", trade: "Medical and dental offices", question: "Can AI do the intake and the insurance paperwork?", src: "/brand/stills/medical.jpg", live: true },
+  { slug: "freight", trade: "Freight and trucking", question: "Can AI match the bills of lading to the rate confirmations?", src: "/brand/stills/freight.jpg", live: true },
+  { slug: "hvac-and-plumbing", trade: "HVAC and plumbing", question: "Can AI turn the service tickets into invoices?", src: "/brand/stills/hvac.jpg", live: true },
 ] as const;
 
 /**
