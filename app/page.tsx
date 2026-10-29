@@ -111,6 +111,11 @@ export default function Home() {
                   </span>
                   <h3>{item.who}</h3>
                   <p>{item.what}</p>
+                  {"href" in item && (
+                    <a className="link w-link" href={item.href} target="_blank" rel="noopener">
+                      {item.linkLabel}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
