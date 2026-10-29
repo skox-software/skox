@@ -345,7 +345,7 @@ export const industries: Industry[] = [
       inbox: [
         { kind: "Web form", label: "New inquiry: car accident, three weeks ago" },
         { kind: "Attachment", label: "Police report.pdf" },
-        { kind: "Practice system", label: "Your practice management software" },
+        { kind: "Practice system", label: "Your practice management system" },
         { kind: "Spreadsheet", label: "Conflict list" },
       ],
       work: [
@@ -369,7 +369,7 @@ export const industries: Industry[] = [
       ],
       meterNote: "Sample firm: 30 new matters a month at 50 minutes each of intake, at the BLS median admin wage loaded for benefits. Your numbers go in on the call.",
       total: "2:22",
-      before: { src: "/brand/stills/law.jpg", alt: "", title: "Today: the same intake, by hand.", line: "The web form, the conflict list, the practice software, the follow-up calls. 30 times a month.", hand: "50:00" },
+      before: { src: "/brand/stills/law.jpg", alt: "", title: "Today: the same intake, by hand.", line: "The web form, the conflict list, the practice system, the follow-up calls. 30 times a month.", hand: "50:00" },
     },
     job: {
       title: "One inquiry, start to finish.",
@@ -550,7 +550,7 @@ export const industries: Industry[] = [
         { kind: "Web form", label: "New patient: cleaning and exam, Tuesday" },
         { kind: "Photo", label: "Insurance card, front and back" },
         { kind: "Attachment", label: "Intake forms, completed online" },
-        { kind: "Practice system", label: "Your practice management software" },
+        { kind: "Practice system", label: "Your practice management system" },
       ],
       work: [
         { label: "Read the forms and the insurance card", time: "0:14" },
@@ -573,7 +573,7 @@ export const industries: Industry[] = [
       ],
       meterNote: "Sample practice: 200 new patients a month at 12 minutes each of intake and insurance, at the BLS median admin wage loaded for benefits. Your numbers go in on the call.",
       total: "2:06",
-      before: { src: "/brand/stills/medical.jpg", alt: "", title: "Today: the same patient, by hand.", line: "The forms, the insurance card, the payer portal, the practice software. 200 times a month.", hand: "12:00" },
+      before: { src: "/brand/stills/medical.jpg", alt: "", title: "Today: the same patient, by hand.", line: "The forms, the insurance card, the payer portal, the practice system. 200 times a month.", hand: "12:00" },
     },
     job: {
       title: "One patient, start to finish.",

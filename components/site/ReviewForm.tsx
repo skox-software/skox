@@ -10,15 +10,15 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 
 /**
  * The review form's own checks on top of the shared validate(), which concept
- * previews also use through /api/contact. Firm and industry are required here
- * only, and the messages name the field.
+ * previews also use through /api/contact. Firm is required here only, and the
+ * messages name the field. Four fields: name, email, firm, the busywork. The
+ * trade comes from the page the visitor clicked through from (?industry=).
  */
 function check(lead: Partial<Lead>): FieldErrors {
   const e = validate(lead);
   if (e.name === "Required.") e.name = "Add your name.";
   if (e.email === "Required.") e.email = "Add your email address.";
   if (!e.company && !lead.company?.trim()) e.company = "Add your firm's name.";
-  if (!e.industry && !lead.industry?.trim()) e.industry = "Tell us what your firm does.";
   return e;
 }
 
@@ -32,7 +32,7 @@ const EMPTY: Lead = {
   industry: "",
   broken: "",
   people: "",
-  format: copy.formatOptions[0],
+  format: "",
   timeline: "",
   website: "",
 };
@@ -208,11 +208,7 @@ export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string 
         {text("name", copy.name, true, { type: "text", autoComplete: "name", maxLength: 120 })}
         {text("email", copy.email, true, { type: "email", autoComplete: "email", maxLength: 254 })}
       </div>
-      <div className="two">
-        {text("company", copy.firm, true, { type: "text", autoComplete: "organization", maxLength: 200 })}
-        {text("phone", copy.phone, false, { type: "tel", autoComplete: "tel", maxLength: 40 })}
-      </div>
-      {text("industry", copy.industry, true, { type: "text", placeholder: copy.industryPlaceholder, maxLength: 120 })}
+      {text("company", copy.firm, true, { type: "text", autoComplete: "organization", maxLength: 200 })}
 
       <div className="field">
         <label htmlFor="review-broken">
@@ -235,33 +231,6 @@ export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string 
             {errors.broken}
           </p>
         )}
-      </div>
-
-      <div className="two">
-        <div className="field">
-          <label htmlFor="review-people">{copy.people}</label>
-          <select id="review-people" name="people" value={lead.people} onChange={change}>
-            <option value="">Choose</option>
-            {copy.peopleOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="field">
-          <fieldset>
-            <legend>{copy.format}</legend>
-            <div className="choice" style={{ marginTop: 8 }}>
-              {copy.formatOptions.map((option) => (
-                <label key={option} className={lead.format === option ? "on" : undefined}>
-                  <input type="radio" name="format" value={option} checked={lead.format === option} onChange={change} />
-                  {option}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-        </div>
       </div>
 
       {state === "failed" && (

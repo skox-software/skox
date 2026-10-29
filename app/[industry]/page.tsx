@@ -34,6 +34,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
   const { industry: slug } = await params;
   const industry = industryBySlug(slug);
   if (!industry) notFound();
+  const reviewHref = `/review?industry=${encodeURIComponent(industry.trade)}`;
   const still = stills[industry.slug as keyof typeof stills] ?? stills.home;
 
   return (
@@ -51,7 +52,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
                 <h1>{industry.question}</h1>
                 <p className="lead">{industry.lead}</p>
                 <div className="actions">
-                  <Link className="btn paper" href="/review" data-cta="hero">
+                  <Link className="btn paper" href={reviewHref} data-cta="hero">
                     Book a free review <span className="dot" />
                   </Link>
                   <Link className="link" href="#job">
@@ -98,6 +99,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
         </section>
 
         <ReviewSection
+          href={reviewHref}
           title={home.review.title}
           intro={industry.review.intro}
           steps={industry.review.steps}
