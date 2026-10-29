@@ -26,7 +26,7 @@ export type Industry = {
     approve: string;
   };
   strip: { n: string; label: string }[];
-  job: { title: string; intro: string; steps: { title: string; body: string }[] };
+  job: { title: string; intro: string; steps: { title: string; body?: string }[] };
   stops: { title: string; intro: string; items: string[] };
   math: {
     intro: string;
@@ -34,7 +34,7 @@ export type Industry = {
     desk: { amount: string; unit: string; title: string; points: string[] };
     source: string;
   };
-  review: { intro: string; steps: { title: string; body: string }[]; proof: string };
+  review: { intro: string; steps: { title: string; body?: string }[]; proof: string };
 };
 
 const WAGE =
@@ -48,7 +48,7 @@ export const industries: Industry[] = [
     question: "Can AI pull the county records for every survey job?",
     description:
       "A new address comes in; the Quote Desk collects the appraiser record, plat, flood zone and zoning, finds your prior jobs nearby and drafts the quote from your rates. The surveyor approves it.",
-    lead: "Usually, yes. A new address comes in; the desk collects the appraiser record, plat, flood zone and zoning, finds your prior jobs nearby and drafts the quote from your rates. The surveyor approves it.",
+    lead: "Usually, yes. A new address comes in and the desk drafts the quote from the county records. The surveyor approves it.",
     mock: quoteDeskMock,
     sheet: {
       caption: quoteDeskJob.caption,
@@ -74,38 +74,30 @@ export const industries: Industry[] = [
     ],
     job: {
       title: "One address, start to finish.",
-      intro: "The sample job above, step by step. Each step is a setting in your rulebook, not a rebuild.",
+      intro: "",
       steps: [
-        { title: "A new address comes in. The desk pulls the appraiser record, plat and deed.", body: "From the county sites your staff open today. A new county is added once and works for every job after." },
-        { title: "It checks the flood zone, zoning and setbacks.", body: "Reads the FEMA layer and the municipal code and writes down what it found, with the source." },
-        { title: "It finds your prior jobs nearby.", body: "Searches the firm's own folders by distance, so a lot you surveyed last year is priced like one." },
-        { title: "The quote arrives as a finished draft, from your rate sheet.", body: "Your rates, your job types, your wording, written into the quote template the office already sends." },
-        { title: "Everything is filed in the job folder. The surveyor approves, changes or sends.", body: "The records, the notes and the draft, in the folder structure the crew uses. Nothing goes out until a person says so." },
+        { title: "Pulls the appraiser record, plat and deed." },
+        { title: "Checks flood zone, zoning and setbacks." },
+        { title: "Finds your prior jobs nearby." },
+        { title: "Drafts the quote from your rate sheet." },
+        { title: "Files it all. The surveyor approves." },
       ],
     },
     stops: {
       title: "Where it stops.",
-      intro: "The desk prepares. These stay with a person, every time.",
-      items: [
-        "The quote amount. The surveyor reads the draft, changes what they want, and sends it.",
-        "Anything a county won't give. A row that says so, with the link. The desk never guesses.",
-        "The client. The call, the question, the negotiation. The desk hands you a finished file, not a conversation.",
-      ],
+      intro: "These stay with a person, every time.",
+      items: ["The quote amount.", "Anything a county won't give. It says so, never guesses.", "The client."],
     },
     math: {
-      intro: "The plain comparison. Your own numbers go in on the call.",
-      hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year, for as long as they stay", "Four to eight weeks to train on the county sites", "Out sick in busy season"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Quote Desk", points: ["One-time setup that covers configuring it to your counties, rates and folders", "A fixed monthly fee, about a quarter of what the work costs you now", "Your data and rules, exportable any day"] },
+      intro: "",
+      hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next office hire", points: ["Every year they stay", "Weeks to learn the county sites", "Out sick in busy season"] },
+      desk: { amount: "$1,500", unit: "a month, to start", title: "The Quote Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
       source: WAGE,
     },
     review: {
-      intro: "We start by watching a job come in, not by pitching. Free, 60 to 90 minutes, in your office or on a screen share.",
-      steps: [
-        { title: "Show us how a job comes in today.", body: "The counties you work, the sites your staff open, the quote you send." },
-        { title: "Get a proposal in your own numbers.", body: "What the records and quoting cost you now, the desk that takes it over, and the monthly fee." },
-        { title: "Decide.", body: "The review is free. The proposal is good for 14 days." },
-      ],
-      proof: "The job above is a sample, and says so. The desk it shows is running at a Florida survey firm today; its name and its measured hours appear here when the owner says yes, and not before.",
+      intro: "60 to 90 minutes, in your office or on a screen share.",
+      steps: [{ title: "Show us how a job comes in." }, { title: "Get a proposal in your numbers." }, { title: "Decide. It's good for 14 days." }],
+      proof: "The job above is a sample. The desk runs at a Florida survey firm today; its name and hours go here when the owner says yes.",
     },
   },
   {
@@ -115,7 +107,7 @@ export const industries: Industry[] = [
     question: "Can AI triage every maintenance request?",
     description:
       "A tenant's request comes in by email, text or portal; the Maintenance Desk reads it, checks the lease and the unit's history, picks the vendor from your list and drafts the work order. Your coordinator sends it.",
-    lead: "Usually, yes. A request comes in by email, text or portal; the desk reads it, checks the lease and the unit's history, picks the vendor from your own list and drafts the work order. Your coordinator approves and sends it.",
+    lead: "Usually, yes. A request comes in and the desk drafts the work order. Your coordinator approves and sends it.",
     mock: {
       desk: "Maintenance Desk",
       inbox: [
@@ -174,38 +166,30 @@ export const industries: Industry[] = [
     ],
     job: {
       title: "One request, start to finish.",
-      intro: "The sample request above, step by step. Each step is a setting in your rulebook, not a rebuild.",
+      intro: "",
       steps: [
-        { title: "A request comes in. The desk reads it, however it arrived.", body: "Portal, email, text or a voicemail transcript. It pulls out the unit, the problem and the photos." },
-        { title: "It checks the lease and the unit's history.", body: "Who pays for what, what has been fixed before, which vendor did it, and whether this is the third time." },
-        { title: "It sets the urgency from your rules.", body: "An active leak is same day; a dripping tap is this week. Your thresholds, written once, applied every time." },
-        { title: "The work order arrives as a finished draft.", body: "The vendor from your list, the access notes, the photos, the not-to-exceed amount, in the template you already send." },
-        { title: "Your coordinator approves, changes or sends.", body: "Nothing goes to a vendor or a tenant until a person says so. The desk logs the decision and learns from it." },
+        { title: "Reads the request, however it arrived." },
+        { title: "Checks the lease and the unit's history." },
+        { title: "Sets the urgency from your rules." },
+        { title: "Drafts the work order with your vendor." },
+        { title: "Your coordinator approves and sends." },
       ],
     },
     stops: {
       title: "Where it stops.",
-      intro: "The desk prepares. These stay with a person, every time.",
-      items: [
-        "Sending the vendor. The coordinator reads the draft, changes the vendor or the amount, and sends it.",
-        "Anything outside the rulebook. A request it can't place is a row that says so, not a guess.",
-        "The tenant and the owner. The call, the apology, the explanation. The desk hands your team a finished file, not a conversation.",
-      ],
+      intro: "These stay with a person, every time.",
+      items: ["Sending the vendor.", "Anything outside your rules. It says so, never guesses.", "The tenant and the owner."],
     },
     math: {
-      intro: "The plain comparison. Your own numbers go in on the call.",
-      hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next maintenance coordinator", points: ["Every year, for as long as they stay", "Four to eight weeks to learn the buildings and the vendors", "Out sick when the pipes freeze"] },
-      desk: { amount: "$1,500", unit: "a month, to start", title: "The Maintenance Desk", points: ["One-time setup that covers configuring it to your buildings, vendors and rules", "A fixed monthly fee, about a quarter of what the work costs you now", "Your data and rules, exportable any day"] },
+      intro: "",
+      hire: { amount: "$47,540", unit: "a year, before benefits", title: "The next maintenance coordinator", points: ["Every year they stay", "Weeks to learn the buildings", "Out sick when the pipes freeze"] },
+      desk: { amount: "$1,500", unit: "a month, to start", title: "The Maintenance Desk", points: ["Plus a one-time setup", "Runs nights and weekends", "Your data, exportable any day"] },
       source: WAGE,
     },
     review: {
-      intro: "We start by watching a request come in, not by pitching. Free, 60 to 90 minutes, in your office or on a screen share.",
-      steps: [
-        { title: "Show us how a request comes in today.", body: "The portal, the inbox, the vendor list, the work order you send." },
-        { title: "Get a proposal in your own numbers.", body: "What triage costs you now, the desk that takes it over, and the monthly fee." },
-        { title: "Decide.", body: "The review is free. The proposal is good for 14 days." },
-      ],
-      proof: "The request above is a sample, and says so. Named clients and measured hours appear here when owners say yes, and not before.",
+      intro: "60 to 90 minutes, in your office or on a screen share.",
+      steps: [{ title: "Show us how a request comes in." }, { title: "Get a proposal in your numbers." }, { title: "Decide. It's good for 14 days." }],
+      proof: "The request above is a sample. Client names and hours go here when owners say yes.",
     },
   },
 ];

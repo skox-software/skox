@@ -536,3 +536,18 @@
 .ub .desk-row .job { color:var(--ink); }
 @media (max-width:980px) { .ub .offers { grid-template-columns:1fr 1fr; gap:0 28px; } .ub .desk-row { grid-template-columns:1fr; gap:2px; } }
 @media (max-width:600px) { .ub .offers { grid-template-columns:1fr; } }
+
+/* Simple pass: desks as chips, how-it-works as one row of four. */
+.ub .desk-chips { list-style:none; margin:20px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.ub .desk-chips li { border:1px solid var(--rule); border-radius:10px; padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+.ub .desk-chips b { font-family:var(--display); font-size:19px; font-weight:700; letter-spacing:-0.01em; }
+.ub .desk-chips span { font-size:14px; color:var(--ink-2); }
+.ub .how-row { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:0 24px; }
+.ub .how-row li { border-top:2px solid var(--ink); padding:20px 0 8px; display:flex; flex-direction:column; gap:8px; }
+.ub .how-row .who { font-size:14px; color:var(--ink-2); }
+.ub .how-row h3 { font-family:var(--display); font-size:28px; font-weight:700; letter-spacing:-0.02em; line-height:1.1; }
+.ub .how-row p { color:var(--ink-2); }
+.ub .how-row li.yours { border-top-color:var(--blue); }
+.ub .how-row li.yours h3, .ub .how-row li.yours .who { color:var(--blue); }
+@media (max-width:980px) { .ub .desk-chips, .ub .how-row { grid-template-columns:1fr 1fr; } .ub .how-row { gap:0 20px; } }
+@media (max-width:600px) { .ub .desk-chips { grid-template-columns:1fr 1fr; gap:8px; } .ub .desk-chips li { padding:12px; } .ub .desk-chips b { font-size:17px; } }
