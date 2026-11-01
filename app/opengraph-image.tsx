@@ -28,7 +28,7 @@ export default function OG() {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", flexWrap: "wrap", fontSize: 92, fontWeight: 700, lineHeight: 1, letterSpacing: -4, maxWidth: 1000 }}>
           <span style={{ marginRight: 24 }}>{home.hero.headlineBefore}</span>
-          <span style={{ display: "flex", position: "relative", marginRight: 24 }}>
+          <span style={{ display: "flex", position: "relative", marginRight: /^[.,!?]/.test(home.hero.headlineAfter) ? 0 : 24 }}>
             {home.hero.struck}
             <div style={{ position: "absolute", left: -4, right: -4, top: "52%", height: 9, backgroundColor: "#FAFAF8" }} />
           </span>

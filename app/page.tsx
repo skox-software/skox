@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -6,17 +5,18 @@ import { ParticleHero } from "@/components/site/ParticleHero";
 import { Chapters } from "@/components/site/Chapters";
 import { HowDesk } from "@/components/site/HowDesk";
 import { WorkCards } from "@/components/site/WorkCards";
+import { SoftwarePicker } from "@/components/site/SoftwarePicker";
 import { Figures, ReviewSection, SectionHead, Strike } from "@/components/site/Bits";
-import { home, stills, wall } from "@/content/site";
+import { home } from "@/content/site";
 
 const CHAPTERS = [
   { id: "start", label: "Start" },
-  { id: "now", label: "Why now" },
+  { id: "software", label: "Your software" },
   { id: "offer", label: "What we do" },
   { id: "how", label: "How it works" },
   { id: "work", label: "Our work" },
-  { id: "industries", label: "Trades" },
-  { id: "math", label: "Hire vs. desk" },
+  { id: "math", label: "You win, we win" },
+  { id: "faq", label: "Questions" },
   { id: "live", label: "Review" },
 ] as const;
 
@@ -33,16 +33,16 @@ export default function Home() {
           <div className="stage">
             <div className="wrap grid">
               <div className="stage-copy">
-                <p className="q">{hero.eyebrow}</p>
                 <h1>
-                  {hero.headlineBefore} <Strike>{hero.struck}</Strike> {hero.headlineAfter}
+                  {hero.headlineBefore} <Strike>{hero.struck}</Strike>
+                  {hero.headlineAfter}
                 </h1>
                 <p className="lead">{hero.lead}</p>
                 <div className="actions">
                   <Link className="btn paper" href="/review" data-cta="hero">
                     {hero.primary} <span className="dot" />
                   </Link>
-                  <Link className="link" href="#offer" data-cta="hero-secondary">
+                  <Link className="link" href="#software" data-cta="hero-secondary">
                     {hero.secondary}
                   </Link>
                 </div>
@@ -54,18 +54,10 @@ export default function Home() {
           </div>
         </div>
 
-        <section id="now">
+        <section id="software">
           <div className="wrap">
-            <SectionHead title={home.now.title} gap={40} />
-            <div className="facts three">
-              {home.now.facts.map((fact) => (
-                <div className="fact" key={fact.n + fact.src}>
-                  <b className="num">{fact.n}</b>
-                  <p>{fact.line}</p>
-                  <span className="src">{fact.src}</span>
-                </div>
-              ))}
-            </div>
+            <SectionHead title={home.software.title} intro={home.software.intro} gap={40} />
+            <SoftwarePicker items={home.software.items} cta={home.software.cta} />
           </div>
         </section>
 
@@ -83,14 +75,16 @@ export default function Home() {
               ))}
             </ol>
             <h3 className="desks-title">{home.offer.desksTitle}</h3>
-            <ul className="desk-chips">
+            <ul className="desk-lines">
               {home.offer.desks.map((d) => (
                 <li key={d.desk}>
-                  <b>{d.desk}</b>
-                  <span>{d.trade}</span>
+                  <Link href={`/${d.slug}`} data-cta="desk-line">
+                    <b>{d.desk}:</b> {d.output}
+                  </Link>
                 </li>
               ))}
             </ul>
+            <p className="small desks-note">{home.offer.desksNote}</p>
           </div>
         </section>
 
@@ -108,37 +102,49 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="industries">
+        <section id="invite" className="invite">
           <div className="wrap">
-            <SectionHead title={home.industries.title} gap={40} />
-            <div className="wall">
-              {wall.map((tile) => (
-                <Link
-                  href={tile.live ? `/${tile.slug}` : `/review?industry=${encodeURIComponent(tile.trade)}`}
-                  key={tile.slug}
-                  className={tile.live ? "live" : undefined}
-                  data-cta={tile.live ? "wall-page" : "wall-review"}
-                >
-                  <span className="pic">
-                    <Image src={tile.src} alt={`${tile.trade}: the paperwork, on a blue surface.`} fill sizes="(max-width: 600px) 100vw, (max-width: 980px) 50vw, 33vw" />
-                  </span>
-                  <span className="trade">{tile.trade}</span>
-                  <span className="qq">{tile.question}</span>
-                </Link>
-              ))}
+            <div className="invite-band">
+              <p>{home.invite.line}</p>
+              <Link className="btn paper" href="/review" data-cta="invite">
+                {home.invite.cta} <span className="dot" />
+              </Link>
             </div>
           </div>
         </section>
-
-        <div className="break" aria-hidden>
-          <Image src={stills.surveying.src} alt="" fill sizes="100vw" style={{ objectPosition: "80% 100%" }} />
-        </div>
 
         <section id="math">
           <div className="wrap">
             <SectionHead title={math.title} intro={math.intro} gap={40} />
             <Figures hire={math.hire} desk={math.desk} source={math.source} />
           </div>
+        </section>
+
+        <section id="faq">
+          <div className="wrap">
+            <SectionHead title={home.faq.title} gap={40} />
+            <dl className="faq">
+              {home.faq.items.map((item) => (
+                <div key={item.q}>
+                  <dt>{item.q}</dt>
+                  <dd>
+                    <p className="a">{item.a}</p>
+                    <p className="more">{item.more}</p>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: home.faq.items.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: `${item.a} ${item.more}` } })),
+              }),
+            }}
+          />
         </section>
 
         <ReviewSection title={home.review.title} intro={home.review.intro} steps={home.review.steps} cta={home.review.cta} proofTitle={home.review.proofTitle} proof={home.review.proof} />
