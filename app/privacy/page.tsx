@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: { title: "Privacy — UnBusy", description: "What UnBusy collects, why, and how to have it deleted.", url: "/privacy", images: ["/opengraph-image"] },
 };
 
-const UPDATED = "27 October 2026";
+const UPDATED = "1 November 2026";
 
 export default function Privacy() {
   return (
@@ -30,11 +30,11 @@ export default function Privacy() {
           <div className="prose">
             <Block title="What we collect">
               What you type into the review form: your name, your email
-              address, your firm, what it does, the busywork you describe and,
-              optionally, your phone number, the size of your office and
-              whether you&apos;d rather meet on site or on a screen share. If you
-              reached us from an ad or a search, the campaign parameters in the
-              link are recorded alongside it.
+              address, your firm and the busywork you describe. If you came to
+              the form from one of our trade pages, or picked the software your
+              office runs on, that comes with it. If you reached us from an ad
+              or a search, the campaign parameters in the link are recorded
+              alongside it.
             </Block>
 
 
@@ -53,7 +53,7 @@ export default function Privacy() {
               If you enter your email address in the review form and then leave
               without sending it, we receive what you had filled in at that
               point — your address, and anything already typed above it — and we
-              may follow up about it. The form says so beside the address field.
+              may follow up about it. The form says so under the email field.
               Reply to that email, or write to us at the address below, and we
               will delete the record and not contact you again.
             </Block>

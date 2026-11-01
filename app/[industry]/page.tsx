@@ -5,8 +5,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DeskMockup } from "@/components/site/DeskMockup";
 import Link from "next/link";
-import { Figures, ReviewSection, SectionHead, Steps } from "@/components/site/Bits";
-import { home, nav, site, stills } from "@/content/site";
+import { Figures, ReadyList, ReviewSection, SectionHead, Steps } from "@/components/site/Bits";
+import { home, nav, review, site, stills } from "@/content/site";
 import { industries, industryBySlug } from "@/content/industries";
 
 /** One question page per industry, from content/industries.ts. */
@@ -107,6 +107,14 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
           proofTitle={home.review.proofTitle}
           proof={industry.review.proof}
         />
+
+        <section id="data" className="trade-data">
+          <div className="wrap">
+            <div className="trade-data-list">
+              <ReadyList {...review.data} />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

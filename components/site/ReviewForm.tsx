@@ -44,7 +44,8 @@ const EMPTY: Lead = {
  * Delivery is unchanged from the SKOX form: /api/contact sends the email,
  * files the lead on the portal pipeline and tells the ad platforms; a success
  * lands on /review/booked so the platforms see a real URL. An address typed
- * and then abandoned goes to /api/partial once, as the notice under the
+ * and then abandoned goes to /api/partial once, as the notice under the email
+ * field says (and /privacy describes). Was: the notice under the
  * button says.
  */
 export function ReviewForm({ initialIndustry = "", software = "" }: { initialIndustry?: string; software?: string }) {
@@ -176,9 +177,14 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
         onBlur={() => checkOne(key)}
         required={required}
         aria-invalid={!!errors[key]}
-        aria-describedby={errors[key] ? `${key}-error` : undefined}
+        aria-describedby={[key === "email" ? "email-note" : "", errors[key] ? `${key}-error` : ""].filter(Boolean).join(" ") || undefined}
         {...extra}
       />
+      {key === "email" && (
+        <p className="small field-note" id="email-note">
+          {copy.notice} <Link className="link" href="/privacy#choices">{copy.noticeLink}</Link>
+        </p>
+      )}
       {errors[key] && (
         <p className="field-error" id={`${key}-error`}>
           {errors[key]}
@@ -258,9 +264,7 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
           {state === "sending" ? copy.submitting : copy.submit} <span className="dot" />
         </button>
       </div>
-      <p className="small notice">
-        {copy.notice} <Link className="link" href="/privacy#choices">{copy.noticeLink}</Link> {copy.reply}
-      </p>
+      <p className="small notice">{copy.reply}</p>
     </form>
   );
 }

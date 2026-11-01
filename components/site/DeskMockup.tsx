@@ -106,6 +106,11 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       cta?.classList.remove("pulse");
       stroke?.removeAttribute("style");
       stepEls().forEach((el) => el.classList.remove("on"));
+      // The month counts up from zero when the run reaches it; until then it reads its real value.
+      counters().forEach((el) => {
+        const t = el.dataset.count ?? "";
+        el.textContent = `${t.match(/^[^\d]*/)?.[0] ?? ""}0${t.match(/[^\d]*$/)?.[0] ?? ""}`;
+      });
       counters().forEach((el) => (el.textContent = "0"));
       if (timer) timer.textContent = "0:00";
       if (hand) hand.textContent = "0:00";
@@ -212,8 +217,20 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       );
     };
 
+    let seen: IntersectionObserver | null = null;
     if (reduced) finish();
-    else timers.push(setTimeout(play, Math.max(0, delay - 700)));
+    else {
+      // Start when the mockup is on screen: on phones it sits below the headline.
+      seen = new IntersectionObserver(
+        ([e]) => {
+          if (!e.isIntersecting) return;
+          seen?.disconnect();
+          timers.push(setTimeout(play, Math.max(0, delay - 700)));
+        },
+        { threshold: 0.35 },
+      );
+      seen.observe(node);
+    }
 
     const replay = node.querySelector<HTMLButtonElement>("[data-replay]");
     const onReplay = () => (reduced ? finish() : play());
@@ -223,6 +240,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
       cancelAnimationFrame(raf);
       replay?.removeEventListener("click", onReplay);
       ro?.disconnect();
+      seen?.disconnect();
     };
   }, [mock, delay]);
 
@@ -318,7 +336,7 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
             {mock.meter.map((m) => (
               <div className="m" key={m.label}>
                 <b className="num" data-count={m.n}>
-                  0
+                  {m.n}
                 </b>
                 <span>{m.label}</span>
               </div>

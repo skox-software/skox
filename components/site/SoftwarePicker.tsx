@@ -61,7 +61,7 @@ export function SoftwarePicker({ items, cta }: { items: readonly Item[]; cta: st
             <li key={line}>{line}</li>
           ))}
         </ul>
-        <Link className="btn blue" href={href} data-cta="software-picker">
+        <Link className="btn paper" href={href} data-cta="software-picker">
           {cta} <span className="dot" />
         </Link>
       </div>
