@@ -568,11 +568,15 @@
 .ub .stage :focus-visible { outline-color:var(--paper); }
 
 .ub .particles { position:absolute; inset:0; }
-.ub .particles canvas { display:block; width:100%; height:100%; opacity:0; transition:opacity .6s ease; touch-action:pan-y; }
-.ub .particles.is-live canvas { opacity:1; }
+.ub .particles canvas { display:block; width:100%; height:100%; touch-action:pan-y; }
+.ub .p-art { position:absolute; inset:0; }
 .ub .p-tag { position:absolute; left:50%; bottom:2%; transform:translateX(-50%); display:flex; align-items:center; gap:10px; white-space:nowrap; background:rgba(250,250,248,.96); color:var(--ink); border-radius:999px; padding:9px 14px 9px 12px; font:500 14px/1 var(--body); box-shadow:0 8px 24px rgba(8,30,90,.25); animation:tag-in .35s cubic-bezier(.2,.8,.2,1); opacity:0; }
 .ub .particles.is-live .p-tag { opacity:1; }
-.ub .p-dot { width:9px; height:9px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 0 rgba(11,92,255,.5); animation:live 1.6s ease-out infinite; flex:none; }
+.ub .p-dot { width:9px; height:9px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 0 rgba(11,92,255,.5); flex:none; }
+.ub .particles.is-playing .p-dot { animation:live 1.6s ease-out infinite; }
+.ub .p-control { position:absolute; right:2%; top:1%; z-index:2; font:500 13px/1 var(--body); color:var(--paper); background:rgba(250,250,248,.14); border:1px solid rgba(250,250,248,.4); border-radius:999px; padding:0 14px; min-height:32px; min-width:44px; cursor:pointer; }
+.ub .p-control:hover { background:rgba(250,250,248,.24); }
+.ub .p-control:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
 .ub .p-n { color:var(--ink-2); font-variant-numeric:tabular-nums; padding-left:8px; border-left:1px solid var(--rule); }
 .ub .p-sample { position:absolute; left:2%; top:2%; font-size:13px; color:var(--paper); opacity:.85; }
 @keyframes tag-in { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
@@ -695,27 +699,12 @@
 /* Decide: your click, nothing goes out before it. */
 .ub .m-decide { position:absolute; inset:16px; display:grid; place-items:center; color:var(--paper); }
 .ub .m-card { width:min(100%, 280px); background:#2A2F36; border:1px solid rgba(250,250,248,.14); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:12px; }
-.ub .m-wait, .ub .m-btn { position:relative; display:grid; }
-.ub .m-wait > span, .ub .m-btn > span { grid-area:1/1; }
-.ub .m-wait > span { justify-self:start; font-size:12px; padding:4px 9px; border-radius:999px; }
-.ub .m-wait .w1 { background:rgba(11,92,255,.25); color:#BFD3FF; }
-.ub .m-wait .w2 { background:#DDF5E5; color:#11663A; opacity:0; }
 .ub .m-title { font-family:var(--display); font-size:18px; }
-.ub .m-btn > span { text-align:center; padding:10px; border-radius:999px; font-weight:600; }
-.ub .m-btn .b1 { background:var(--paper); color:var(--ink); }
-.ub .m-btn .b2 { background:var(--blue); color:var(--paper); opacity:0; }
-.ub .m-cursor { position:absolute; left:62%; top:76%; opacity:0; }
-.ub li.on .m-cursor { animation:cursor 2.2s .5s cubic-bezier(.5,0,.2,1) both; }
 @keyframes cursor { 0% { opacity:0; transform:translate(70px,50px); } 20% { opacity:1; } 70% { opacity:1; transform:translate(0,0); } 78% { transform:translate(0,0) scale(.85); } 86% { transform:translate(0,0) scale(1); } 100% { opacity:1; transform:translate(0,0); } }
-.ub li.on .m-btn .b1 { animation:m-out .2s 2.25s forwards; }
-.ub li.on .m-btn .b2 { animation:m-in .3s 2.25s both; }
-.ub li.on .m-wait .w1 { animation:m-out .2s 2.35s forwards; }
-.ub li.on .m-wait .w2 { animation:m-in .3s 2.35s both; }
 
 /* Still: every small screen shows its finished state. */
 .ub .how-flow.still .mini * { animation:none !important; }
-.ub .how-flow.still .m-st .pend, .ub .how-flow.still .m-btn .b1, .ub .how-flow.still .m-wait .w1 { opacity:0; }
-.ub .how-flow.still .m-btn .b2, .ub .how-flow.still .m-wait .w2, .ub .how-flow.still .m-cursor { opacity:1; }
+.ub .how-flow.still .m-st .pend { opacity:0; }
 
 @media (max-width:980px) {
   .ub .flow-stem { display:none; }
@@ -799,3 +788,37 @@
 
 /* Phones: a shorter dot stage, so the software picker comes into view sooner. */
 @media (max-width:600px) { .ub .stage-art { min-height:240px; } .ub .stage > .wrap { padding-bottom:12px; } }
+
+/* Review booking: the scheduling step and the confirmation. */
+.ub .booking { margin-top:28px; max-width:1000px; }
+.ub .booking iframe { display:block; width:100%; height:720px; border:1.5px solid var(--rule); border-radius:16px; background:var(--paper); }
+.ub .booking-note { margin-top:10px; color:var(--ink-2); }
+.ub .booked-ready { margin-top:40px; max-width:640px; }
+.ub .booked-when { color:var(--blue); }
+@media (max-width:600px) { .ub .booking iframe { height:640px; } }
+
+/* Decide: the one real click. Above the card's hit layer; the stamp lands once (L1). */
+.ub .flow-cards > li .mini.live { position:relative; z-index:4; height:auto; min-height:210px; }
+.ub .flow-cards > li:not(.on) .mini.live > * { opacity:1; filter:none; }
+.ub .m-decide { position:relative; inset:auto; padding:16px; min-height:210px; }
+.ub .m-stamp { justify-self:start; align-self:flex-start; font-size:12px; font-weight:600; padding:5px 10px; border-radius:999px; background:rgba(11,92,255,.25); color:#BFD3FF; }
+.ub .m-decide.done .m-stamp { background:#DDF5E5; color:#11663A; transform:rotate(-2deg); animation:stamp .26s cubic-bezier(.2,.8,.2,1); }
+@keyframes stamp { from { transform:rotate(-2deg) scale(1.12); opacity:.4; } to { transform:rotate(-2deg) scale(1); opacity:1; } }
+.ub .m-sample { font:500 11px/1 var(--body); color:rgba(250,250,248,.6); border:1px solid rgba(250,250,248,.3); border-radius:999px; padding:3px 7px; margin-left:6px; vertical-align:middle; }
+.ub .m-approve { font:600 15px/1 var(--body); color:var(--ink); background:var(--paper); border:0; border-radius:999px; min-height:44px; cursor:pointer; transition:transform .15s; }
+.ub .m-approve:hover { transform:translateY(-1px); }
+.ub .m-after p { font-family:var(--display); font-size:17px; font-weight:600; line-height:1.25; color:var(--paper); }
+.ub .m-actions { display:flex; gap:10px; align-items:center; margin-top:10px; flex-wrap:wrap; }
+.ub .m-cta { display:inline-flex; align-items:center; min-height:44px; padding:0 16px; border-radius:999px; background:var(--blue); color:var(--paper); font:600 14px/1 var(--body); }
+.ub .m-reset { font:500 14px/1 var(--body); color:rgba(250,250,248,.8); background:none; border:0; min-height:44px; padding:0 8px; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+.ub .m-decide :focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+@media (prefers-reduced-motion:reduce) { .ub .m-decide.done .m-stamp { animation:none; } }
+
+/* The picker's lead-in above the busywork box. */
+.ub .lead-in { margin:4px 0 8px; font-weight:600; color:var(--ink); }
+.ub .lead-in span { font-weight:400; color:var(--ink-2); }
+
+/* Section dots: 44px-tall targets (the dots stay small); the name shows on hover and on focus. */
+.ub .chapters ol { gap:0; padding:4px 8px; }
+.ub .chapters a { min-height:44px; min-width:28px; }
+.ub .chapters a:focus-visible { outline:2px solid var(--blue); outline-offset:-2px; border-radius:999px; }

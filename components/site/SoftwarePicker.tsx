@@ -9,7 +9,7 @@ type Item = { name: string; lines: readonly string[] };
 /**
  * "What does your office run on?" Tiles for the software an owner already
  * knows; picking one shows what a desk does with it. Buttons, so Tab and
- * Enter work; arrow keys move between tiles. The answer is a polite live
+ * Enter work; the group is one tab stop and arrow keys move between tiles. The answer is a polite live
  * region. No motion beyond the site's 1px hover lift.
  */
 export function SoftwarePicker({ items, cta }: { items: readonly Item[]; cta: string }) {
@@ -45,6 +45,7 @@ export function SoftwarePicker({ items, cta }: { items: readonly Item[]; cta: st
             type="button"
             className={i === active ? "tile on" : "tile"}
             aria-pressed={i === active}
+            tabIndex={i === active ? 0 : -1}
             aria-controls="picker-answer"
             onClick={() => pick(i)}
             onKeyDown={(e) => onKey(e, i)}

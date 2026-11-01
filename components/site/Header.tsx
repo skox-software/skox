@@ -8,9 +8,6 @@ import { Menu } from "./Menu";
 export function Header() {
   return (
     <header>
-      <a className="skip" href="#top">
-        Skip to content
-      </a>
       <div className="wrap">
         <nav aria-label="Main">
           <Link href="/" aria-label="UnBusy home">

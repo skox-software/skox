@@ -12,6 +12,21 @@
  * - No founder names, photos or phone number anywhere (Josh, 2026-10-27).
  */
 
+/**
+ * The review booking. With NEXT_PUBLIC_REVIEW_BOOKING_URL set (a Calendly or
+ * Google Calendar appointment-schedule link Josh controls), the form ends on
+ * a scheduling step and every button can honestly say "Book". Without it,
+ * the visitor sends a request and we reply to set a time, so the buttons say
+ * "Request". One switch keeps the promise and the page in step.
+ */
+const BOOKING_URL = (process.env.NEXT_PUBLIC_REVIEW_BOOKING_URL ?? "").trim();
+export const booking = {
+  url: BOOKING_URL,
+  enabled: BOOKING_URL.startsWith("https://"),
+} as const;
+const CTA = booking.enabled ? "Book a free review" : "Request a free review";
+const CTA_SHORT = booking.enabled ? "Book a review" : "Request a review";
+
 export const site = {
   name: "UnBusy",
   tagline: "Get the busywork off your team.",
@@ -103,7 +118,7 @@ export const nav = {
     { label: "How a desk works", href: "/#how" },
     { label: "Questions", href: "/#faq" },
   ],
-  action: { label: "Book a free review", short: "Book a review", href: "/review" },
+  action: { label: CTA, short: CTA_SHORT, href: "/review" },
 } as const;
 
 export const footer = {
@@ -160,7 +175,7 @@ export const home = {
     struck: "busywork",
     headlineAfter: ".",
     lead: "Built around the software you already use. You keep the final say.",
-    primary: "Book a free review",
+    primary: CTA,
     secondary: "What does your office run on?",
   },
   /**
@@ -267,7 +282,7 @@ export const home = {
   },
   invite: {
     line: "Got a job you think can't be handed off? Bring it to the review.",
-    cta: "Book a free review",
+    cta: CTA,
   },
   faq: {
     title: "Questions owners ask.",
@@ -288,14 +303,14 @@ export const home = {
       { title: "Get a proposal in your numbers." },
       { title: "Decide. It's good for 14 days." },
     ],
-    cta: "Book a free review",
+    cta: CTA,
     proofTitle: "Proof, the honest version",
     proof: "Every screen on this site is a sample and says so. Client names and hours go here when owners say yes.",
   },
 } as const;
 
 export const review = {
-  title: "Book a free operations review",
+  title: booking.enabled ? "Book a free operations review" : "Request a free operations review",
   description:
     "Free, 60 to 90 minutes, in your office or on a screen share. We watch how one part of your office runs today and come back with a proposal in your own numbers.",
   eyebrow: "Free. 60 to 90 minutes. In your office or on a screen share.",
@@ -316,12 +331,12 @@ export const review = {
     peopleOptions: ["1 to 4", "5 to 15", "16 to 50", "More than 50"],
     format: "Where",
     formatOptions: ["On site", "Screen share"],
-    submit: "Book the review",
+    submit: booking.enabled ? "Next: pick a time" : "Send the request",
     submitting: "Sending…",
     /* The notice for unfinished-form follow-up. Reword freely; do not remove it. */
     notice: "We save what you type as you go, so a half-finished form still reaches us. We also use it to measure our ads.",
     noticeLink: "Your privacy choices.",
-    reply: "We reply within one business day to set a time.",
+    reply: booking.enabled ? "Next you pick a time that suits you." : "We reply within one business day to set a time.",
     error: "That didn't send. Try again, or email us with the details below.",
     emailUs: "Email us instead",
   },
@@ -349,8 +364,25 @@ export const review = {
     ],
   },
   booked: {
-    title: "Got it.",
-    body: "We'll reply within one business day to set a time. Until then, the page that started this is a fair picture of what the review looks at.",
+    /** Without a booking link: the honest end of a request. */
+    requested: {
+      meta: "Review requested",
+      title: "Request received.",
+      body: "We'll reply within one business day to set a time.",
+    },
+    /** With a booking link: the scheduling step, then the confirmation. */
+    pick: {
+      meta: "Review requested",
+      title: "Pick a time.",
+      body: "60 to 90 minutes, in your office or on a screen share. Choose what suits you.",
+    },
+    confirmed: {
+      meta: "Review booked",
+      title: "You're booked",
+      noTime: "The invite with the time is in your inbox.",
+      addToCalendar: "Add to Google Calendar",
+      calendarTitle: "UnBusy operations review",
+    },
     back: "Back to the start",
   },
 } as const;

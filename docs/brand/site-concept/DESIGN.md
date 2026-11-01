@@ -2,6 +2,30 @@
 
 Scope: the public site (homepage, industry question pages, the review page, privacy). Rewritten 2026-10-27 after Josh rejected the first "Swiss ledger" direction as a tax form with no character, and reviewed giga.ai, legora.com, zaro.ai, beside.com and ramp.com. The mockups beside this file (`index.html`, `surveying.html`, `review.html`, sharing `site.css`) are the reference; `app/site.css` in the repo is the same sheet scoped under `.ub`.
 
+## 0. The live site (2026-11-01). Where this section and an older one differ, this one wins.
+
+The sections below record how the design got here. This one records what gounbusy.com is now, so the spec and the site agree. Change this section in the same PR as any visual change.
+
+**Homepage order.** Framed blue stage hero → What does your office run on? (software picker) → What we do (three offers) → How a desk works → Work we've done (cards, then the desks named by output) → invite band → You win, we win → Questions owners ask → the review. A right-edge dot nav names each section; a 3px blue progress bar runs across the top.
+
+**Hero.** A rounded (24px) panel of solid brand blue with one soft radial light, inset 12px from the page edge; not a photograph. H1 "AI that does your office's busywork." with the strike on *busywork*, clamp(54px, 7.2vw, 124px), Bricolage at width 82, line-height .9. On the right, a canvas of paper-white dots plays the sample job: the pile, read, the drafted quote, the stamp, with a label pill per step (1/4 to 4/4) and "Sample job". Trade pages keep the desk mockup hero (`DeskMockup`) on the same blue.
+
+**Components now on the page.**
+- *Software picker.* Ten tiles (paper, 1.5px rule, 12px radius; the picked one ink) and a blue answer panel with two or three lines in the display face and a paper button. Buttons with `aria-pressed`; arrow keys move; the answer is a polite live region. The pick travels to the review form as a lead-in ("We use QuickBooks.").
+- *How a desk works.* Four cards on one line from "A new job comes in"; one in focus widens, with a small screen per step. Decide is the ink card and holds the page's one real click: **Approve quote** (a button) stamps "Approved by you · sent to the client", says "That's the only click your team makes." and offers the review; Reset puts it back. Labelled Sample.
+- *Work cards.* Real jobs, unnamed, each with a status pill. The pills are the one place a fourth colour appears: green (#DDF5E5 on #11663A) for Running daily, Shipped and Live; paper on blue for In testing (the first card is blue). Status is still a word first.
+- *Desk lines.* Each desk named by what it produces, one line, linking to its sample job page.
+- *Invite band.* One ink band with one line and a paper button.
+- *FAQ.* A two-column definition list: the answer in ink, one follow-up line in ink-2. FAQPage JSON-LD.
+- *Section dots.* 8px dots in a paper pill; each target is 44px tall; the name shows on hover and on focus.
+- *The review end.* With `NEXT_PUBLIC_REVIEW_BOOKING_URL` set, /review/booked is a scheduling step (the embedded booking page) and /review/booked/confirmed says "You're booked: <day time>" with an add-to-calendar link. Without it, every button says "Request a free review" and the page says "Request received." Both list What to have ready.
+
+**Motion now.** This replaces §6.
+- Load: the strike draws once. The hero draws its first frame at once, plays the four steps one time (about eleven seconds) and rests on 4/4 "Waiting on you". A visible Pause / Play / Replay button controls it, and it pauses off screen.
+- How a desk works: the focused card advances every 4.2 s while the section is in view; hover or tap holds a card. The Decide stamp lands once (scale 1.12 → 1, 260 ms).
+- Hover: buttons and picker tiles lift 1px; desk lines slide 6px; work cards tilt up to 4° toward the cursor with a soft light under it (mouse and pen only).
+- `prefers-reduced-motion`: the hero shows 4/4, still, with no control; the How cards show their finished states and don't advance; nothing tilts; the stamp doesn't animate.
+
 ## 1. Visual theme
 
 **The paperwork, photographed.** Each page opens on a still-life photograph of that trade's actual busywork, shot flat on the brand blue: a plat and a field book for surveyors, a work order on a clipboard for property managers, the folder stack and the ledger for everyone else. The headline sits on the clear left third. On load the page's one moment plays: the strike draws through "busywork", then the photograph is swept left to right into a second photograph of the same desk cleared, only the stamp, the ink pad and one approved sheet left. The pictures live in `docs/brand/stills` (PNG masters, Higgsfield gpt_image_2_5, 2K) and `public/brand/stills` (JPEG). Underneath the photographs the system is still blue paper: The brand's three colours (ink, paper, the logo blue) used with nerve: blue is a surface, not a dot. The product is shown as a sheet of paper, running. One signature device, the strike, carries the name: busywork is a word with a blue line through it.
@@ -60,7 +84,7 @@ Tabular figures (`tnum`) on anything numeric. No monospace, no uppercase trackin
 
 Container 1240px, 28px gutters (18px under 600px). 12 columns, 28px gap. Heroes: copy 1–5, sheet 6–12, bottom-aligned. Sections 120px tall (72px under 980px). Rounded corners exist only on pills, the ticket (3px), the stamp and the sky panels (8px). Depth exists only on the ticket (one shadow) and the stacked pages behind it.
 
-## 6. Motion
+## 6. Motion (superseded by §0 "Motion now")
 
 - Load: one orchestrated moment, the strike drawing, then the ticket being written row by row (a wipe, never a fade). Nothing else enters.
 - Hover: buttons lift 1px; question rows slide 12px.

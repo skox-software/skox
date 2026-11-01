@@ -14,10 +14,9 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
  * messages name the field. Four fields: name, email, firm, the busywork. The
  * trade comes from the page the visitor clicked through from (?industry=).
  */
-function check(lead: Partial<Lead>, prefill = ""): FieldErrors {
+function check(lead: Partial<Lead>): FieldErrors {
   const e = validate(lead);
-  // The picker's opening line on its own isn't a description yet.
-  if (!e.broken && prefill.trim() && lead.broken?.trim() === prefill.trim()) e.broken = "This is the one we actually need.";
+  if (e.broken === "This is the one we actually need.") e.broken = "Tell us the job in a sentence or two.";
   if (e.name === "Required.") e.name = "Add your name.";
   if (e.email === "Required.") e.email = "Add your email address.";
   if (!e.company && !lead.company?.trim()) e.company = "Add your firm's name.";
@@ -48,8 +47,11 @@ const EMPTY: Lead = {
  * and then abandoned goes to /api/partial once, as the notice under the
  * button says.
  */
-export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { initialIndustry?: string; initialBusywork?: string }) {
-  const [lead, setLead] = useState<Lead>({ ...EMPTY, industry: initialIndustry, broken: initialBusywork });
+export function ReviewForm({ initialIndustry = "", software = "" }: { initialIndustry?: string; software?: string }) {
+  const [lead, setLead] = useState<Lead>({ ...EMPTY, industry: initialIndustry });
+  /** From the homepage picker: shown as a lead-in above the box, joined on send. The visitor types only the job. */
+  const leadIn = software ? `We use ${software}.` : "";
+  const outgoing = (l: Lead): Lead => (leadIn && l.broken.trim() ? { ...l, broken: `${leadIn} ${l.broken.trim()}` } : l);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [state, setState] = useState<"idle" | "sending" | "failed">("idle");
   const [fallback, setFallback] = useState("");
@@ -67,7 +69,7 @@ export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { ini
 
   function captureUnfinished(stage: string) {
     clearTimeout(pending.current);
-    const current = latest.current;
+    const current = outgoing(latest.current);
     const email = current.email.trim();
     if (finished.current || submitting.current) return;
     if (!email || captured.current === email) return;
@@ -112,8 +114,10 @@ export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { ini
     setErrors((previous) => ({ ...previous, [key]: undefined }));
   }
 
+  /** On blur, only once something has been typed: tabbing past an empty field says nothing. Submit flags the empty ones. */
   function checkOne(key: keyof Lead) {
-    const found = check(lead, initialBusywork)[key];
+    if (!String(lead[key] ?? "").trim()) return;
+    const found = check(lead)[key];
     setErrors((previous) => ({ ...previous, [key]: found }));
     if (key === "email" && !found) {
       clearTimeout(pending.current);
@@ -124,7 +128,7 @@ export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { ini
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     if (submitting.current) return;
-    const found = check(lead, initialBusywork);
+    const found = check(lead);
     setErrors(found);
     if (Object.keys(found).length) {
       track("review_form_invalid", { fields: Object.keys(found).join(",") });
@@ -135,7 +139,7 @@ export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { ini
     clearTimeout(pending.current);
     setState("sending");
     captureAttribution();
-    const enriched = { ...lead, attribution: formatAttribution(readAttribution()) };
+    const enriched = { ...outgoing(lead), attribution: formatAttribution(readAttribution()) };
     setFallback(
       `mailto:${site.email}?subject=${encodeURIComponent(`Operations review: ${lead.company || lead.name}`)}&body=${encodeURIComponent(formatLead(enriched))}`,
     );
@@ -216,6 +220,11 @@ export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { ini
         <label htmlFor="review-broken">
           {copy.busywork} <span className="req" aria-hidden>*</span>
         </label>
+        {leadIn && (
+          <p className="lead-in" id="broken-leadin">
+            {leadIn} <span>We&apos;ll add that to what you write.</span>
+          </p>
+        )}
         <textarea
           id="review-broken"
           name="broken"
@@ -226,7 +235,7 @@ export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { ini
           onChange={change}
           onBlur={() => checkOne("broken")}
           aria-invalid={!!errors.broken}
-          aria-describedby={errors.broken ? "broken-error" : undefined}
+          aria-describedby={[leadIn ? "broken-leadin" : "", errors.broken ? "broken-error" : ""].filter(Boolean).join(" ") || undefined}
         />
         {errors.broken && (
           <p className="field-error" id="broken-error">

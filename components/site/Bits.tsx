@@ -113,3 +113,22 @@ export function ReviewSection({ title, intro, steps, cta, proofTitle, proof, hre
     </section>
   );
 }
+
+/** A numbered list of short items: what to have ready, what you get. */
+export function ReadyList({ title, items }: { title: string; items: readonly { title: string; body: string }[] }) {
+  return (
+    <div className="ready">
+      <h3>{title}</h3>
+      <ol>
+        {items.map((item) => (
+          <li key={item.title}>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}

@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { nav } from "@/content/site";
 
 const REDUCED = "(prefers-reduced-motion: reduce)";
 function subscribe(cb: () => void) {
@@ -64,11 +66,11 @@ export function HowDesk({ parts }: { parts: readonly Part[] }) {
             </div>
             <h3>{part.title}</h3>
             <p>{part.body}</p>
-            <div className="mini" aria-hidden>
+            <div className={i === 3 ? "mini live" : "mini"} aria-hidden={i === 3 ? undefined : true}>
               {i === 0 && <MiniCollect />}
               {i === 1 && <MiniRead />}
               {i === 2 && <MiniPrepare />}
-              {i === 3 && <MiniDecide />}
+              {i === 3 && <MiniDecide onUse={() => { setActive(3); setHeld(true); }} />}
             </div>
             <span className="flow-bar" aria-hidden>
               <span style={{ animationDuration: `${STEP_MS}ms` }} />
@@ -148,23 +150,56 @@ function MiniPrepare() {
   );
 }
 
-function MiniDecide() {
+/**
+ * The page's peak: the one click a person makes. A real button; approving
+ * stamps the sample quote, says that's the only click, and offers the
+ * review. Reset puts it back. Labelled as a sample.
+ */
+function MiniDecide({ onUse }: { onUse: () => void }) {
+  const [approved, setApproved] = useState(false);
+  const approveRef = useRef<HTMLButtonElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
+  const moved = useRef(false);
+
+  useEffect(() => {
+    if (!moved.current) return;
+    (approved ? ctaRef.current : approveRef.current)?.focus();
+  }, [approved]);
+
+  const act = (next: boolean) => (e: React.MouseEvent) => {
+    e.stopPropagation();
+    moved.current = true;
+    onUse();
+    setApproved(next);
+  };
+
   return (
-    <div className="m-decide">
+    <div className={approved ? "m-decide done" : "m-decide"}>
       <div className="m-card">
-        <span className="m-wait">
-          <span className="w1">Waiting on you</span>
-          <span className="w2">Approved by you</span>
+        <span className="m-stamp" role="status">
+          {approved ? "Approved by you · sent to the client" : "Waiting on you"}
         </span>
-        <b className="m-title">Quote, 1 address</b>
-        <span className="m-btn">
-          <span className="b1">Approve quote</span>
-          <span className="b2">Sent to the client</span>
-        </span>
+        <b className="m-title">
+          Quote, 1 address <span className="m-sample">Sample</span>
+        </b>
+        {approved ? (
+          <div className="m-after">
+            <p>That&apos;s the only click your team makes.</p>
+            <div className="m-actions">
+              <Link ref={ctaRef} className="m-cta" href="/review" data-cta="demo-approve" onClick={(e) => e.stopPropagation()}>
+                {nav.action.label}
+              </Link>
+              <button type="button" className="m-reset" onClick={act(false)}>
+                Reset
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button ref={approveRef} type="button" className="m-approve" onClick={act(true)}>
+            Approve quote
+          </button>
+        )}
       </div>
-      <svg className="m-cursor" viewBox="0 0 20 22" width="20" height="22">
-        <path d="M2 1.5 L2 17.5 L6.4 13.6 L9.3 20 L12.1 18.8 L9.3 12.6 L15 12.4 Z" fill="#FAFAF8" stroke="#15181D" strokeWidth="1.4" strokeLinejoin="round" />
-      </svg>
     </div>
   );
 }
