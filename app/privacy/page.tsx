@@ -37,16 +37,13 @@ export default function Privacy() {
               alongside it.
             </Block>
 
-
             <Block title="What arrives with an enquiry">
               When you send an enquiry, or leave one unfinished as described
               below, it also carries: the pages you viewed on this site during
               that visit, how many times you have visited, how you first found
               us, your approximate city and region (worked out from your IP
-              address), and your device type. If you use a business email
-              address, we look up public information about the company at that
-              domain, such as its industry, size and location, through Apollo.io.
-              This summary is only put together when you contact us.
+              address), and your device type. This summary is only put
+              together when you contact us.
             </Block>
 
             <Block title="Enquiries you don’t finish">
@@ -67,11 +64,12 @@ export default function Privacy() {
             </Block>
 
             <Block title="Who can see it">
-              The two of us. Enquiries are delivered by email through Resend,
-              and the site runs on Vercel — both process data on our behalf as
-              hosting and delivery providers. Visit data from the website
-              tracker and company lookups are processed by Apollo.io, usage
-              data from Google Analytics is processed by Google, and the
+              The two of us. Enquiries are delivered by email through Resend
+              and filed in our own client portal, which we built and run; the
+              site and the portal run on Vercel, and the portal&apos;s records
+              are stored with Neon. All three process data on our behalf as
+              hosting, storage and delivery providers. Usage data from Google
+              Analytics is processed by Google, and the
               advertising tags described below are processed by Meta, Google
               and LinkedIn, and session recordings are processed by Microsoft
               Clarity.
@@ -97,16 +95,6 @@ export default function Privacy() {
                 Analytics opt-out add-on
               </a>
               , will stop it.
-            </Block>
-
-            <Block title="Website visitor tracking">
-              We also use Apollo.io’s website tracker. It records which pages
-              you visit and uses information such as your IP address to work
-              out which company you may be visiting from, and it may set cookies
-              to do that. We use it to understand which businesses are
-              interested in what we build. Apollo processes this data under its
-              own privacy policy. If you would rather not be tracked, blocking
-              third-party scripts or cookies in your browser will stop it.
             </Block>
 
             <Block title="Session recordings">

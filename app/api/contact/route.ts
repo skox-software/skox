@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { formatLead, validate, type Lead } from "@/lib/leads";
-import { enrichCompany, formatCompany } from "@/lib/enrich";
 import { sendMetaLead } from "@/lib/meta-capi";
 import { sendToPortal } from "@/lib/portal";
 import { formatVisitor, readVisitor } from "@/lib/visitor";
@@ -67,12 +66,11 @@ export async function POST(req: Request) {
   };
 
   const visitor = readVisitor(req, body.context);
-  const company = await enrichCompany(lead.email);
 
   const to = process.env.CONTACT_EMAIL ?? "founders@gounbusy.com";
   const key = process.env.RESEND_API_KEY;
   const text =
-    formatLead(lead) + formatCompany(company, lead.email) + formatVisitor(visitor);
+    formatLead(lead) + formatVisitor(visitor);
 
   if (!key) {
     // No mail provider configured. Log it so it is recoverable, then FAIL LOUDLY.
@@ -104,7 +102,7 @@ export async function POST(req: Request) {
         from: process.env.LEAD_FROM_EMAIL ?? "SKOX <onboarding@resend.dev>",
         to: [to],
         reply_to: lead.email,
-        subject: `Operations review: ${lead.company || company?.name || lead.name}`,
+        subject: `Operations review: ${lead.company || lead.name}`,
         text,
       }),
     });
@@ -140,7 +138,6 @@ export async function POST(req: Request) {
         attribution: lead.attribution,
       },
       visitor,
-      company,
     ),
     sendMetaLead(req, lead, visitor),
   ]);

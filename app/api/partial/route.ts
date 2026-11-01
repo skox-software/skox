@@ -4,7 +4,6 @@ import {
   validatePartial,
   type PartialLead,
 } from "@/lib/leads";
-import { enrichCompany, formatCompany } from "@/lib/enrich";
 import { sendToPortal } from "@/lib/portal";
 import { formatVisitor, readVisitor } from "@/lib/visitor";
 
@@ -83,9 +82,8 @@ export async function POST(req: Request) {
   const to = process.env.CONTACT_EMAIL ?? "founders@gounbusy.com";
   const key = process.env.RESEND_API_KEY;
   const visitor = readVisitor(req, body.context);
-  const company = await enrichCompany(lead.email);
   const text =
-    formatPartial(lead) + formatCompany(company, lead.email) + formatVisitor(visitor);
+    formatPartial(lead) + formatVisitor(visitor);
 
   if (!key) {
     // Logged rather than surfaced: nothing on screen is waiting on this, so a
@@ -143,7 +141,6 @@ export async function POST(req: Request) {
       attribution: lead.attribution,
     },
     visitor,
-    company,
   );
 
   return NextResponse.json({ ok: true });
