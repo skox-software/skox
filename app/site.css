@@ -522,7 +522,7 @@
 @media (max-width:600px) { .ub nav img { height:30px; } .ub footer img { height:30px; } }
 
 /* what we do: the four things an owner can buy, then the desks by trade */
-.ub .offers { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:0 32px; border-top:2px solid var(--ink); }
+.ub .offers { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:0 32px; border-top:2px solid var(--ink); }
 .ub .offers li { padding:22px 0 26px; display:flex; flex-direction:column; gap:10px; }
 .ub .offers .i { font-family:var(--display); font-weight:700; font-size:28px; color:var(--blue); letter-spacing:-0.02em; }
 .ub .offers h3 { font-family:var(--display); font-size:26px; font-weight:700; letter-spacing:-0.02em; line-height:1.1; }
@@ -534,7 +534,7 @@
 .ub .desk-row .trade { color:var(--ink-2); font-size:15px; }
 .ub .desk-row b { font-family:var(--display); font-weight:700; font-size:19px; letter-spacing:-0.01em; }
 .ub .desk-row .job { color:var(--ink); }
-@media (max-width:980px) { .ub .offers { grid-template-columns:1fr 1fr; gap:0 28px; } .ub .desk-row { grid-template-columns:1fr; gap:2px; } }
+@media (max-width:980px) { .ub .offers { grid-template-columns:repeat(3,1fr); gap:0 20px; } .ub .desk-row { grid-template-columns:1fr; gap:2px; } }
 @media (max-width:600px) { .ub .offers { grid-template-columns:1fr; } }
 
 /* Simple pass: desks as chips, how-it-works as one row of four. */
@@ -794,3 +794,8 @@
   .ub .picker-answer { padding:22px; }
   .ub .invite-band { padding:24px; }
 }
+
+.ub .work-desks { margin-top:56px; }
+
+/* Phones: a shorter dot stage, so the software picker comes into view sooner. */
+@media (max-width:600px) { .ub .stage-art { min-height:240px; } .ub .stage > .wrap { padding-bottom:12px; } }

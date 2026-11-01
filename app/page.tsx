@@ -74,17 +74,6 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <h3 className="desks-title">{home.offer.desksTitle}</h3>
-            <ul className="desk-lines">
-              {home.offer.desks.map((d) => (
-                <li key={d.desk}>
-                  <Link href={`/${d.slug}`} data-cta="desk-line">
-                    <b>{d.desk}:</b> {d.output}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <p className="small desks-note">{home.offer.desksNote}</p>
           </div>
         </section>
 
@@ -99,6 +88,19 @@ export default function Home() {
           <div className="wrap">
             <SectionHead title={home.work.title} intro={home.work.intro} gap={40} />
             <WorkCards items={home.work.items} />
+            <div className="work-desks">
+              <h3 className="desks-title">{home.offer.desksTitle}</h3>
+              <ul className="desk-lines">
+                {home.offer.desks.map((d) => (
+                  <li key={d.desk}>
+                    <Link href={`/${d.slug}`} data-cta="desk-line">
+                      <b>{d.desk}:</b> {d.output}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="small desks-note">{home.offer.desksNote}</p>
+            </div>
           </div>
         </section>
 

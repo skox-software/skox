@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { track } from "@/lib/track";
 
 type Item = { name: string; lines: readonly string[] };
 
@@ -20,11 +21,18 @@ export function SoftwarePicker({ items, cta }: { items: readonly Item[]; cta: st
     if (!step) return;
     e.preventDefault();
     const next = (i + step + items.length) % items.length;
-    setActive(next);
+    pick(next);
     tiles.current[next]?.focus();
   };
 
+  const pick = (i: number) => {
+    setActive(i);
+    track("software_pick", { software: items[i].name });
+  };
+
   const item = items[active];
+  const other = item.name === "Something else";
+  const href = other ? "/review" : `/review?software=${encodeURIComponent(item.name)}`;
   return (
     <div className="picker">
       <div className="picker-tiles" role="group" aria-label="Software your office runs on">
@@ -38,7 +46,7 @@ export function SoftwarePicker({ items, cta }: { items: readonly Item[]; cta: st
             className={i === active ? "tile on" : "tile"}
             aria-pressed={i === active}
             aria-controls="picker-answer"
-            onClick={() => setActive(i)}
+            onClick={() => pick(i)}
             onKeyDown={(e) => onKey(e, i)}
           >
             {it.name}
@@ -46,13 +54,13 @@ export function SoftwarePicker({ items, cta }: { items: readonly Item[]; cta: st
         ))}
       </div>
       <div className="picker-answer" id="picker-answer" aria-live="polite">
-        <p className="picker-k">{item.name === "Something else" ? "Anything else:" : `With ${item.name}, a desk:`}</p>
+        <p className="picker-k">{other ? "Anything else:" : `With ${item.name}, a desk:`}</p>
         <ul>
           {item.lines.map((line) => (
             <li key={line}>{line}</li>
           ))}
         </ul>
-        <Link className="btn blue" href="/review" data-cta="software-picker">
+        <Link className="btn blue" href={href} data-cta="software-picker">
           {cta} <span className="dot" />
         </Link>
       </div>

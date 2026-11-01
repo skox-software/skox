@@ -14,8 +14,10 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
  * messages name the field. Four fields: name, email, firm, the busywork. The
  * trade comes from the page the visitor clicked through from (?industry=).
  */
-function check(lead: Partial<Lead>): FieldErrors {
+function check(lead: Partial<Lead>, prefill = ""): FieldErrors {
   const e = validate(lead);
+  // The picker's opening line on its own isn't a description yet.
+  if (!e.broken && prefill.trim() && lead.broken?.trim() === prefill.trim()) e.broken = "This is the one we actually need.";
   if (e.name === "Required.") e.name = "Add your name.";
   if (e.email === "Required.") e.email = "Add your email address.";
   if (!e.company && !lead.company?.trim()) e.company = "Add your firm's name.";
@@ -46,8 +48,8 @@ const EMPTY: Lead = {
  * and then abandoned goes to /api/partial once, as the notice under the
  * button says.
  */
-export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string }) {
-  const [lead, setLead] = useState<Lead>({ ...EMPTY, industry: initialIndustry });
+export function ReviewForm({ initialIndustry = "", initialBusywork = "" }: { initialIndustry?: string; initialBusywork?: string }) {
+  const [lead, setLead] = useState<Lead>({ ...EMPTY, industry: initialIndustry, broken: initialBusywork });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [state, setState] = useState<"idle" | "sending" | "failed">("idle");
   const [fallback, setFallback] = useState("");
@@ -111,7 +113,7 @@ export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string 
   }
 
   function checkOne(key: keyof Lead) {
-    const found = check(lead)[key];
+    const found = check(lead, initialBusywork)[key];
     setErrors((previous) => ({ ...previous, [key]: found }));
     if (key === "email" && !found) {
       clearTimeout(pending.current);
@@ -122,7 +124,7 @@ export function ReviewForm({ initialIndustry = "" }: { initialIndustry?: string 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     if (submitting.current) return;
-    const found = check(lead);
+    const found = check(lead, initialBusywork);
     setErrors(found);
     if (Object.keys(found).length) {
       track("review_form_invalid", { fields: Object.keys(found).join(",") });

@@ -30,8 +30,10 @@ function List({ title, items }: { title: string; items: readonly { title: string
   );
 }
 
-export default async function ReviewPage({ searchParams }: { searchParams: Promise<{ industry?: string }> }) {
-  const { industry } = await searchParams;
+export default async function ReviewPage({ searchParams }: { searchParams: Promise<{ industry?: string; software?: string }> }) {
+  const { industry, software } = await searchParams;
+  /** From the homepage software picker: the owner already told us what they run. */
+  const busywork = typeof software === "string" && software.trim() ? `We use ${software.trim().slice(0, 60)}. What I'd hand off: ` : "";
   return (
     <div className="ub">
       <Header />
@@ -50,7 +52,7 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
         </div>
         <div className="wrap grid review-body">
           <div className="c1-6">
-            <ReviewForm initialIndustry={typeof industry === "string" ? industry.slice(0, 120) : ""} />
+            <ReviewForm initialIndustry={typeof industry === "string" ? industry.slice(0, 120) : ""} initialBusywork={busywork} />
           </div>
           <div className="side" style={{ gridColumn: "8 / 13" }}>
             <List {...review.ready} />
