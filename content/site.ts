@@ -101,7 +101,7 @@ export const nav = {
   links: [
     { label: "What we do", href: "/#offer" },
     { label: "How a desk works", href: "/#how" },
-    { label: "Industries", href: "/#industries" },
+    { label: "Questions", href: "/#faq" },
   ],
   action: { label: "Book a free review", short: "Book a review", href: "/review" },
 } as const;
@@ -155,14 +155,34 @@ export const quoteDeskJob = {
 export const home = {
   title: "UnBusy: Get the busywork off your team",
   hero: {
-    eyebrow: "For owners who wonder if AI could take some of this.",
     /** The struck word is the brand device; it is rendered with a blue line through it. */
-    headlineBefore: "What's still",
+    headlineBefore: "AI that does your office's",
     struck: "busywork",
-    headlineAfter: "in your company?",
-    lead: "Tell us the job your team does by hand. We build a desk that does it, start to finish. You approve the result.",
+    headlineAfter: ".",
+    lead: "Built around the software you already use. You keep the final say.",
     primary: "Book a free review",
-    secondary: "See what we do",
+    secondary: "What does your office run on?",
+  },
+  /**
+   * The way in: the software an owner already knows. Picking one says, in two
+   * or three plain lines, what a desk does with it. No times, no numbers.
+   */
+  software: {
+    title: "What does your office run on?",
+    intro: "Pick one. Here's what a desk does with it.",
+    cta: "Bring it to the review",
+    items: [
+      { name: "QuickBooks", lines: ["Pulls the vendor payments and sorts what needs a 1099.", "Drafts invoices from finished jobs and matches payments as they land.", "Flags the edge cases for you."] },
+      { name: "Outlook / Gmail", lines: ["Reads what comes in and files each attachment to the right job.", "Drafts the reply. You hit send."] },
+      { name: "Excel / Google Sheets", lines: ["Fills the sheet your team keeps by hand, from the emails and documents behind it.", "Your rates and rules stay in the sheet you already edit."] },
+      { name: "County and state websites", lines: ["Looks up the records for an address or a name and saves them to the job.", "Says so when a site won't give an answer. It never guesses."] },
+      { name: "Your CRM", lines: ["Logs every call, email and form to the right contact.", "Sets the next follow-up and drafts it for you."] },
+      { name: "Shared drive / Dropbox", lines: ["Names, sorts and files every document into the folders your team already uses."] },
+      { name: "A scheduling calendar", lines: ["Books the visit from the request and sends the reminder.", "Moves it when the reply asks to."] },
+      { name: "E-signature", lines: ["Prepares the agreement from your template, sends it and chases the signature."] },
+      { name: "Payments / Stripe", lines: ["Sends the invoice or payment link.", "Marks it paid when the money lands, in your books too."] },
+      { name: "Something else", lines: ["Name it at the review.", "If someone in your office opens it every day, a desk can usually work with it."] },
+    ],
   },
   /**
    * What we sell, said plainly. One line each. Prices are the ones in the
@@ -174,18 +194,20 @@ export const home = {
       { name: "A free review", what: "We watch the job and price it in your numbers.", price: "Free" },
       { name: "A desk", what: "Does one job, start to finish. We build it and run it.", price: "About a quarter of what the work costs you now" },
       { name: "The next desk", what: "The next job off your team's plate.", price: "Same rule, half the setup" },
-      { name: "A website that feeds it", what: "Requests land straight in your desk.", price: "Fixed price, once a desk is live" },
     ],
     desksTitle: "Desks we build",
+    desksNote: "Each opens a sample job.",
     desks: [
-      { trade: "Surveying", desk: "Quote Desk" },
-      { trade: "Property management", desk: "Maintenance Desk" },
-      { trade: "Accounting", desk: "1099 Desk" },
-      { trade: "Title and escrow", desk: "Title Desk" },
-      { trade: "Insurance", desk: "Certificate Desk" },
-      { trade: "Contractors", desk: "Permit Desk" },
-      { trade: "Medical and dental", desk: "Intake Desk" },
-      { trade: "Any office", desk: "Your desk" },
+      { desk: "Quote Desk", slug: "surveying", output: "a priced survey quote from an address, ready for you to approve." },
+      { desk: "Maintenance Desk", slug: "property-management", output: "a work order from a tenant's request, with your vendor picked." },
+      { desk: "Title Desk", slug: "title-and-escrow", output: "the records for a new file, with what needs clearing listed." },
+      { desk: "1099 Desk", slug: "accounting", output: "every W-9 chased, every 1099 ready for your signature." },
+      { desk: "New Matter Desk", slug: "law-offices", output: "a new matter opened, conflicts checked, engagement letter drafted." },
+      { desk: "Certificate Desk", slug: "insurance-agencies", output: "a certificate drafted from the policies on file, ready to issue." },
+      { desk: "Permit Desk", slug: "contractors", output: "a permit packet built and the lien waivers chased." },
+      { desk: "Intake Desk", slug: "medical-and-dental", output: "a new patient set up and their coverage checked before the visit." },
+      { desk: "Billing Desk", slug: "freight", output: "the paperwork matched to the rate confirmation and the invoice drafted." },
+      { desk: "Invoice Desk", slug: "hvac-and-plumbing", output: "a finished ticket turned into an invoice from your price book." },
     ],
   },
   how: {
@@ -209,7 +231,7 @@ export const home = {
     intro: "Real jobs, no names. Names go up when owners say yes.",
     items: [
       { status: "In testing", who: "A Florida land survey firm", what: "Type an address. The county records for the job land in its folder." },
-      { status: "Running daily", who: "Our own office", what: "Leads file themselves, preview opens alert us, unsubscribes are honored on their own. We run UnBusy on desks." },
+      { status: "Running daily", who: "Our own office", what: "Leads file themselves, preview opens alert us, unsubscribes are honored on their own. Our own office runs on desks." },
       { status: "Shipped", who: "A medical clinic", what: "A point of sale, with every product set up by SKU." },
       { status: "Shipped", who: "Client dashboards", what: "Spotify, TikTok, Instagram, Authorize.net and Acuity on one screen." },
       { status: "Shipped", who: "A car dealership", what: "The website that brings its customers in." },
@@ -241,6 +263,21 @@ export const home = {
       { n: "32%", line: "of small-business owners have jobs they can't fill.", src: "NFIB Small Business Economic Trends, September 2026" },
       { n: "+26%", line: "admin pay since 2019, with 16% fewer people doing the job.", src: "Bureau of Labor Statistics, OEWS May 2019 and May 2025" },
       { n: "54%", line: "of small firms trying AI say the hard part is finding a tool that fits.", src: "Federal Reserve Small Business Credit Survey, 2026 report" },
+    ],
+  },
+  invite: {
+    line: "Got a job you think can't be handed off? Bring it to the review.",
+    cta: "Book a free review",
+  },
+  faq: {
+    title: "Questions owners ask.",
+    items: [
+      { q: "Is the review free?", a: "Yes. 60 to 90 minutes, in your office or on a screen share.", more: "You leave with a proposal in your own numbers, good for 14 days." },
+      { q: "What happens after?", a: "If you say yes, we build the desk around how your office works today.", more: "Setup is paid before we start, then one fixed monthly fee. You approve its work from day one." },
+      { q: "How long until it runs?", a: "The review gives you a date, and it goes in the proposal.", more: "So does a yes/no list of the jobs the desk will run. If it isn't running them by day 90, you can cancel and keep what was built." },
+      { q: "Do we have to change our software?", a: "No. The desk works in the software you already run.", more: "If something can't be connected, the review tells you before you sign anything." },
+      { q: "Is our data safe?", a: "Your files run your desk and nobody else's. They're never used to train anything.", more: "Only your team and ours see them, and you can export them any day." },
+      { q: "Who owns what?", a: "Your data and your rules are yours, exportable any day.", more: "We own and run the engine underneath, and keep improving it." },
     ],
   },
   review: {
