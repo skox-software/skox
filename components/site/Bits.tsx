@@ -118,7 +118,7 @@ export function ReviewSection({ title, intro, steps, cta, proofTitle, proof, hre
 export function ReadyList({ title, items }: { title: string; items: readonly { title: string; body: string }[] }) {
   return (
     <div className="ready">
-      <h3>{title}</h3>
+      <h2 className="ready-title">{title}</h2>
       <ol>
         {items.map((item) => (
           <li key={item.title}>

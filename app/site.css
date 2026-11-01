@@ -173,6 +173,7 @@
 .ub .notice { margin-top:14px; max-width:56ch; color:var(--ink-2); }
 .ub .ready { border-top:2px solid var(--ink); }
 .ub .ready h3 { padding:18px 0 4px; font-family:var(--display); font-size:24px; font-weight:700; letter-spacing:-0.02em; }
+.ub .ready h2.ready-title { padding:18px 0 4px; font-family:var(--display); font-size:24px; font-weight:700; letter-spacing:-0.02em; line-height:1.2; }
 .ub .ready ol { margin:0; padding:0; list-style:none; counter-reset:r; }
 .ub .ready li { counter-increment:r; display:grid; grid-template-columns:44px 1fr; gap:12px; padding:16px 0; border-bottom:1px solid var(--rule); }
 .ub .ready li::before { content:counter(r,decimal-leading-zero); font-family:var(--display); font-weight:700; font-size:20px; color:var(--blue); }
@@ -503,12 +504,12 @@
 .ub .mock.swept .mock-before-cap, .ub .mock.swept .mock-hand { opacity:0; transition:opacity .25s; }
 .ub .mock-before-cap { z-index:1; }
 .ub .mock-hand { position:absolute; right:18px; top:16px; z-index:1; text-align:right; color:var(--paper); }
-.ub .mock-hand span { display:block; font-size:12px; color:rgba(250,250,248,.9); }
+.ub .mock-hand span { display:block; font-size:12px; color:var(--paper); }
 .ub .mock-hand b { display:block; font-family:var(--display); font-size:40px; font-weight:700; letter-spacing:-0.03em; line-height:1; }
 .ub .mock.done .mock-before { display:none; }
 @media (prefers-reduced-motion:reduce) { .ub .mock-before { display:none; } }
 
-.ub .mock-hand { background:rgba(11,92,255,.92); padding:8px 12px 10px; border-radius:6px; }
+.ub .mock-hand { background:var(--blue-deep); padding:8px 12px 10px; border-radius:6px; }
 
 /* why owners are looking at this now: sourced figures, three across */
 .ub .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:0 40px; border-top:2px solid var(--ink); }
@@ -749,7 +750,7 @@
 .ub .picker .tile.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
 .ub .picker .tile:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
 .ub .picker-answer { background:var(--blue); color:var(--paper); border-radius:18px; padding:28px; display:flex; flex-direction:column; gap:14px; min-height:100%; }
-.ub .picker-k { font:600 14px/1.3 var(--body); opacity:.9; }
+.ub .picker-k { font:600 14px/1.3 var(--body); color:var(--paper); }
 .ub .picker-answer ul { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
 .ub .picker-answer li { font-family:var(--display); font-size:clamp(20px,1.7vw,25px); font-weight:600; letter-spacing:-0.015em; line-height:1.25; }
 .ub .picker-answer .btn { margin-top:auto; align-self:flex-start; background:var(--paper); color:var(--ink); }
@@ -822,3 +823,21 @@
 .ub .chapters ol { gap:0; padding:4px 8px; }
 .ub .chapters a { min-height:44px; min-width:28px; }
 .ub .chapters a:focus-visible { outline:2px solid var(--blue); outline-offset:-2px; border-radius:999px; }
+
+/* Accessibility pass (WCAG 2.2 AA). */
+/* 1.4.10: the hero caption pill wraps inside the stage on narrow screens. */
+@media (max-width:420px) {
+  .ub .p-tag { white-space:normal; width:max-content; max-width:calc(100% - 16px); line-height:1.3; flex-wrap:wrap; justify-content:center; text-align:left; }
+}
+/* Narrow phones: the logo keeps its room; below 360px only the mark shows. */
+.ub nav > a:first-child { flex-shrink:0; }
+@media (max-width:360px) {
+  .ub nav > a:first-child { width:40px; overflow:hidden; }
+  .ub nav > a:first-child img { max-width:none; }
+}
+@media (max-width:360px) {
+  .ub nav { gap:10px; }
+  .ub nav .links { gap:6px; }
+  .ub nav .links .btn { padding:0 12px; font-size:14px; }
+  .ub .menu summary { padding:10px 12px; }
+}
