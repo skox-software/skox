@@ -310,7 +310,9 @@ export function DeskMockup({ mock, delay = 1200 }: { mock: DeskMock; delay?: num
             {mock.work.map((step) => (
               <li key={step.label} data-step="do">
                 <span className="tick" aria-hidden />
-                <span className="typed">{step.label}</span>
+                <span>
+                  <span className="typed">{step.label}</span>
+                </span>
                 <span className="t num">{step.time}</span>
               </li>
             ))}

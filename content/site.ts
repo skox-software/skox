@@ -114,6 +114,7 @@ export const quoteDeskMock = {
 
 export const nav = {
   links: [
+    { label: "Desks", href: "/#desks" },
     { label: "What we do", href: "/#offer" },
     { label: "How a desk works", href: "/#how" },
     { label: "Questions", href: "/#faq" },
@@ -177,6 +178,8 @@ export const home = {
     lead: "Built around the software you already use. You keep the final say.",
     primary: CTA,
     secondary: "What does your office run on?",
+    slipTitle: "Quote: boundary survey, platted lot in Lake Mary",
+    trades: "Desks for:",
   },
   /**
    * The way in: the software an owner already knows. Picking one says, in two
@@ -184,7 +187,7 @@ export const home = {
    */
   software: {
     title: "What does your office run on?",
-    intro: "Pick one. Here's what a desk does with it.",
+    intro: "A desk is a tool we build to do one office job, start to finish. Pick what you run on to see one.",
     cta: "Bring it to the review",
     items: [
       { name: "QuickBooks", lines: ["Pulls the vendor payments and sorts what needs a 1099.", "Drafts invoices from finished jobs and matches payments as they land.", "Flags the edge cases for you."] },

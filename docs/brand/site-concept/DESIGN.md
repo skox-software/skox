@@ -2,29 +2,36 @@
 
 Scope: the public site (homepage, industry question pages, the review page, privacy). Rewritten 2026-10-27 after Josh rejected the first "Swiss ledger" direction as a tax form with no character, and reviewed giga.ai, legora.com, zaro.ai, beside.com and ramp.com. The mockups beside this file (`index.html`, `surveying.html`, `review.html`, sharing `site.css`) are the reference; `app/site.css` in the repo is the same sheet scoped under `.ub`.
 
-## 0. The live site (2026-11-01). Where this section and an older one differ, this one wins.
+## 0. The live site (rebuilt 2026-11-01). Where this section and an older one differ, this one wins.
 
-The sections below record how the design got here. This one records what gounbusy.com is now, so the spec and the site agree. Change this section in the same PR as any visual change.
+The sections below record how the design got here. This one records what gounbusy.com is now, so the spec and the site agree. Change this section in the same PR as any visual change. The seven reviews behind this rebuild are in `docs/brand/site-reviews/2026-11-01/` (PLAN.md summarises them).
 
-**Homepage order.** Framed blue stage hero → What does your office run on? (software picker) → What we do (three offers) → How a desk works → Work we've done (cards, then the desks named by output) → invite band → You win, we win → Questions owners ask → the review. A right-edge dot nav names each section; a 3px blue progress bar runs across the top.
+**Principles.**
+1. The strike is the product: every line of work the desk does is struck through; the only unstruck line is the owner's decision.
+2. Paper is the desk, white is the sheet on it. Documents sit on surfaces; nothing else floats.
+3. Rows, not cards, for lists of jobs.
+4. Blue is spent on the stage, the strike and the primary button.
+5. Sections are as tall as what they say (120px padding, 72px under 980px). No full-screen sections, no dot nav, no progress bar.
 
-**Hero.** A rounded (24px) panel of solid brand blue with one soft radial light, inset 12px from the page edge; not a photograph. H1 "AI that does your office's busywork." with the strike on *busywork*, clamp(54px, 7.2vw, 124px), Bricolage at width 82, line-height .9. On the right, a canvas of paper-white dots plays the sample job: the pile, read, the drafted quote, the stamp, with a label pill per step (1/4 to 4/4) and "Sample job". Trade pages keep the desk mockup hero (`DeskMockup`) on the same blue.
+**Homepage order.** Framed blue stage hero → a row of trade links ("Desks for:") → What does your office run on? → What we do → How a desk works → Work we've done (rows), then Desks we build (`#desks`) → invite band → You win, we win → Questions owners ask → the review. Header links: Desks, What we do, How a desk works, Questions; under 980px they fold into Menu.
+
+**Hero.** A flat brand-blue panel (20px radius, no glow), inset 12px. H1 "AI that does your office's busywork." with an ink strike on *busywork*. On the right, the **approval slip**: a white sheet (4px radius, the one shadow) titled "Quote: boundary survey, platted lot in Lake Mary" with "Desk time 4:12". The desk's six steps (from `quoteDeskMock.work`) are struck through in blue one after another on load and dim to ink-2. The last line is unstruck: "Waiting on you." on sky with the one real **Approve the quote** button. Approving stamps "Approved by you. Sent to the client.", says "That's the only click your team makes." and offers the review; Reset puts it back; Replay runs the strikes again. Captioned "Sample job". `components/site/ApprovalSlip.tsx`.
+
+**Trade pages.** The same framed blue stage holds the headline (columns 1–5, `clamp(36px,3.8vw,54px)`) and `DeskMockup` (6–12). In "What the desk did" every step is visible in ink from the start and is struck through in blue as its time arrives: the same gesture as the home slip.
+
+**Type.** Schibsted Grotesk 800 for H1, H2 and figures only (`--display`); IBM Plex Sans for everything else, H3s included (600, 20px). Sizes: home H1 `clamp(46px,6vw,96px)`, other H1s `clamp(40px,4.4vw,68px)`, H2 `clamp(34px,4.2vw,60px)`, figures `clamp(40px,4.6vw,64px)`; tracking −0.03em (−0.035em on the home H1). Headings use `text-wrap:balance`. Figures in the display face don't use tabular numerals (they space the comma).
+
+**Tokens** (top of `app/site.css`). Radii: sheet 4, field 8, panel 16, stage 20, pill. Shadows: `--sh-sheet` for a sheet on blue, `--sh-pop` for the menu; nothing else casts one. Buttons: L 56px, M 44px (`.m`), S 40px (`.s`, with a 44px target). Green (#DDF5E5 on #11663A) appears only for "Running daily" and "Live"; "In testing" is a blue dot with a sky halo; "Shipped" is an ink dot.
 
 **Components now on the page.**
-- *Software picker.* Ten tiles (paper, 1.5px rule, 12px radius; the picked one ink) and a blue answer panel with two or three lines in the display face and a paper button. Buttons with `aria-pressed`; arrow keys move; the answer is a polite live region. The pick travels to the review form as a lead-in ("We use QuickBooks.").
-- *How a desk works.* Four cards on one line from "A new job comes in"; one in focus widens, with a small screen per step. Decide is the ink card and holds the page's one real click: **Approve quote** (a button) stamps "Approved by you · sent to the client", says "That's the only click your team makes." and offers the review; Reset puts it back. Labelled Sample.
-- *Work cards.* Real jobs, unnamed, each with a status pill. The pills are the one place a fourth colour appears: green (#DDF5E5 on #11663A) for Running daily, Shipped and Live; paper on blue for In testing (the first card is blue). Status is still a word first.
-- *Desk lines.* Each desk named by what it produces, one line, linking to its sample job page.
-- *Invite band.* One ink band with one line and a paper button.
-- *FAQ.* A two-column definition list: the answer in ink, one follow-up line in ink-2. FAQPage JSON-LD.
-- *Section dots.* 8px dots in a paper pill; each target is 44px tall; the name shows on hover and on focus.
-- *The review end.* With `NEXT_PUBLIC_REVIEW_BOOKING_URL` set, /review/booked is a scheduling step (the embedded booking page) and /review/booked/confirmed says "You're booked: <day time>" with an add-to-calendar link. Without it, every button says "Request a free review" and the page says "Request received." Both list What to have ready.
+- *Software picker.* Ten tiles (8px radius; the picked one ink) and the answer on a white sheet with a 2px ink top rule and a blue button. The intro defines a desk: "A desk is a tool we build to do one office job, start to finish."
+- *How a desk works.* Four flat cards (16px radius, no shadow, no counters) on one line from "A new job comes in"; Decide is the ink card with the Approve demo.
+- *Work we've done.* Ledger rows: what it is, what it does, status on the right.
+- *Desk lines, invite band, FAQ, figures, review end* as before; What to have ready and Your data are plain rows without numerals.
 
-**Motion now.** This replaces §6.
-- Load: the strike draws once. The hero draws its first frame at once, plays the four steps one time (about eleven seconds) and rests on 4/4 "Waiting on you". A visible Pause / Play / Replay button controls it, and it pauses off screen.
-- How a desk works: the focused card advances every 4.2 s while the section is in view; hover or tap holds a card. The Decide stamp lands once (scale 1.12 → 1, 260 ms).
-- Hover: buttons and picker tiles lift 1px; desk lines slide 6px; work cards tilt up to 4° toward the cursor with a soft light under it (mouse and pen only).
-- `prefers-reduced-motion`: the hero shows 4/4, still, with no control; the How cards show their finished states and don't advance; nothing tilts; the stamp doesn't animate.
+**Motion.** The headline strike draws once. The slip's strikes run once on load (about 3.5 s, so no pause control is needed) and rest. Trade mockups play once, with Play again. How a desk works advances every 4.2 s in view. Hover: buttons and tiles lift 1px, desk lines slide 6px. `prefers-reduced-motion`: everything shows its finished state.
+
+**Not done, on purpose (Josh's call).** Trimming Work we've done to desks only, replacing the $47,540 figure, a home "Where it stops" band, removing the trade-page photo break, and moving the concept-only fonts out of the root layout.
 
 ## 1. Visual theme
 

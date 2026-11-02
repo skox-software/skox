@@ -58,12 +58,7 @@ export function HowDesk({ parts }: { parts: readonly Part[] }) {
             <button type="button" className="flow-hit" onClick={() => { setActive(i); setHeld(true); }} aria-pressed={i === active}>
               <span className="sr">Show step {i + 1}: {part.title}</span>
             </button>
-            <div className="flow-top">
-              <span className="who">
-                <span className="wdot" /> {part.who}
-              </span>
-              <span className="n num">{String(i + 1).padStart(2, "0")}/{String(parts.length).padStart(2, "0")}</span>
-            </div>
+            <span className="who">{part.who}</span>
             <h3>{part.title}</h3>
             <p>{part.body}</p>
             <div className={i === 3 ? "mini live" : "mini"} aria-hidden={i === 3 ? undefined : true}>
