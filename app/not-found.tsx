@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <div className="ub">
       <Header />
-      <main className="page">
+      <main id="top" tabIndex={-1} className="page">
         <p className="meta">404</p>
         <h1>That page doesn&apos;t exist.</h1>
         <div className="page-actions">

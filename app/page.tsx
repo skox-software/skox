@@ -27,7 +27,6 @@ export default function Home() {
   return (
     <div className="ub">
       <Header />
-      <Chapters items={CHAPTERS} />
       <main id="top" tabIndex={-1} className="chaptered">
         <div className="stage-hero" id="start">
           <div className="stage">
@@ -151,6 +150,7 @@ export default function Home() {
 
         <ReviewSection title={home.review.title} intro={home.review.intro} steps={home.review.steps} cta={home.review.cta} proofTitle={home.review.proofTitle} proof={home.review.proof} />
       </main>
+      <Chapters items={CHAPTERS} />
       <Footer />
     </div>
   );

@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 /**
  * The homepage hero visual: the busywork pile as a cloud of dots that the
  * desk pulls apart, reads, and settles into one finished quote with the
- * owner's stamp. Canvas 2D, no library. It starts after first paint so the
- * headline is never waiting on it, pauses off screen, and shows the finished
- * quote, still, under reduced motion.
+ * owner's stamp. Canvas 2D, no library. Frame 1 draws at once; it plays the
+ * four steps one time and rests on 4/4 "Waiting on you". A visible button
+ * pauses, plays and replays it (WCAG 2.2.2). It pauses off screen and shows
+ * the finished quote, still, under reduced motion.
  */
 
 type Shape = "pile" | "swirl" | "sheet" | "stamp";
@@ -102,8 +103,9 @@ function targets(w: number, h: number, n: number) {
 export function ParticleHero({ label }: { label: string }) {
   const wrap = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
+  const ctrl = useRef<{ pause: () => void; play: () => void; replay: () => void } | null>(null);
   const [stage, setStage] = useState(0);
-  const [ready, setReady] = useState(false);
+  const [mode, setMode] = useState<"playing" | "paused" | "ended" | "still">("playing");
 
   useEffect(() => {
     const box = wrap.current;
@@ -119,6 +121,7 @@ export function ParticleHero({ label }: { label: string }) {
     let stageStart = 0;
     let raf = 0;
     let visible = true;
+    let playing = !reduced;
     const mouse = { x: -9999, y: -9999 };
 
     const setup = () => {
@@ -138,10 +141,10 @@ export function ParticleHero({ label }: { label: string }) {
         y = new Float32Array(n);
         vx = new Float32Array(n);
         vy = new Float32Array(n);
-        // Start where the pile is, scattered a little, so the first frame is already the pile.
+        // Start on the pile itself, so frame 1 is already the pile.
         for (let i = 0; i < n; i++) {
-          x[i] = t.pile[i * 2] + (Math.random() - 0.5) * 30;
-          y[i] = t.pile[i * 2 + 1] + (Math.random() - 0.5) * 30;
+          x[i] = t.pile[i * 2] + (Math.random() - 0.5) * 6;
+          y[i] = t.pile[i * 2 + 1] + (Math.random() - 0.5) * 6;
         }
       }
     };
@@ -154,14 +157,24 @@ export function ParticleHero({ label }: { label: string }) {
       for (let i = 0; i < n; i++) ctx.fillRect(x[i], y[i], s, s);
     };
 
+    const snapTo = (src: Float32Array) => {
+      for (let i = 0; i < n; i++) { x[i] = src[i * 2]; y[i] = src[i * 2 + 1]; vx[i] = 0; vy[i] = 0; }
+    };
+
     const step = (now: number) => {
+      if (!playing) return;
       const st = STAGES[current];
-      if (now - stageStart > st.hold) {
-        current = (current + 1) % STAGES.length;
+      if (current < STAGES.length - 1 && now - stageStart > st.hold) {
+        current += 1;
         stageStart = now;
         setStage(current);
-        // Leaving the stamp, the quote bursts back into a pile.
-        if (current === 0) for (let i = 0; i < n; i++) { vx[i] += (Math.random() - 0.5) * 9; vy[i] += (Math.random() - 0.5) * 9; }
+      }
+      // One cycle only: once the stamp has settled, rest on 4/4.
+      if (current === STAGES.length - 1 && now - stageStart > 2400) {
+        playing = false;
+        setMode("ended");
+        draw();
+        return;
       }
       const shape = STAGES[current].shape;
       const k = shape === "swirl" ? 0.02 : 0.034;
@@ -197,35 +210,43 @@ export function ParticleHero({ label }: { label: string }) {
 
     setup();
 
-
     if (reduced) {
-      for (let i = 0; i < n; i++) { x[i] = t.stamp[i * 2]; y[i] = t.stamp[i * 2 + 1]; }
+      snapTo(t.stamp);
       current = 3;
       draw();
-      const shown = requestAnimationFrame(() => { setStage(3); setReady(true); });
-      const ro = new ResizeObserver(() => {
-        setup();
-        for (let i = 0; i < n; i++) { x[i] = t.stamp[i * 2]; y[i] = t.stamp[i * 2 + 1]; }
-        draw();
-      });
+      const shown = requestAnimationFrame(() => { setStage(3); setMode("still"); });
+      const ro = new ResizeObserver(() => { setup(); snapTo(t.stamp); draw(); });
       ro.observe(box);
       return () => { cancelAnimationFrame(shown); ro.disconnect(); };
     }
 
+    // Frame 1, now: the pile is on screen before anything moves.
+    draw();
+    stageStart = performance.now();
+
     const resume = () => {
       cancelAnimationFrame(raf);
-      if (visible && !document.hidden) raf = requestAnimationFrame(step);
+      if (playing && visible && !document.hidden) raf = requestAnimationFrame(step);
     };
-    // Start after the page has painted: the headline never waits on the dots.
-    const start = window.setTimeout(() => {
-      stageStart = performance.now();
-      setReady(true);
-      resume();
-    }, 250);
+    ctrl.current = {
+      pause: () => { playing = false; cancelAnimationFrame(raf); setMode("paused"); },
+      play: () => { playing = true; stageStart = performance.now() - Math.min(performance.now() - stageStart, STAGES[current].hold); setMode("playing"); resume(); },
+      replay: () => {
+        current = 0;
+        setStage(0);
+        // The finished quote bursts back into the pile.
+        for (let i = 0; i < n; i++) { vx[i] += (Math.random() - 0.5) * 9; vy[i] += (Math.random() - 0.5) * 9; }
+        stageStart = performance.now();
+        playing = true;
+        setMode("playing");
+        resume();
+      },
+    };
+    resume();
 
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; resume(); });
     io.observe(box);
-    const ro = new ResizeObserver(() => setup());
+    const ro = new ResizeObserver(() => { setup(); if (!playing) { snapTo(current === 3 ? t.stamp : current === 2 ? t.sheet : t.pile); draw(); } });
     ro.observe(box);
     const onVis = () => resume();
     document.addEventListener("visibilitychange", onVis);
@@ -239,27 +260,43 @@ export function ParticleHero({ label }: { label: string }) {
     cv.addEventListener("pointerleave", onLeave);
 
     return () => {
-      clearTimeout(start);
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
       document.removeEventListener("visibilitychange", onVis);
       cv.removeEventListener("pointermove", onMove);
       cv.removeEventListener("pointerleave", onLeave);
+      ctrl.current = null;
     };
   }, []);
 
+  const controlText = mode === "playing" ? "Pause" : mode === "paused" ? "Play" : mode === "ended" ? "Replay" : null;
+  const onControl = () => {
+    const c = ctrl.current;
+    if (!c) return;
+    if (mode === "playing") c.pause();
+    else if (mode === "paused") c.play();
+    else c.replay();
+  };
+
   return (
-    <div className={ready ? "particles is-live" : "particles"} ref={wrap} role="img" aria-label={label}>
-      <canvas ref={canvas} aria-hidden />
-      <div className="p-tag" aria-hidden key={stage}>
-        <span className="p-dot" />
-        <span>{STAGES[stage].tag}</span>
-        <span className="p-n">{stage + 1}/4</span>
+    <div className={`particles is-live${mode === "playing" ? " is-playing" : ""}`} ref={wrap}>
+      <div className="p-art" role="img" aria-label={label}>
+        <canvas ref={canvas} aria-hidden />
+        <div className="p-tag" aria-hidden key={stage}>
+          <span className="p-dot" />
+          <span>{STAGES[stage].tag}</span>
+          <span className="p-n">{stage + 1}/4</span>
+        </div>
       </div>
       <span className="p-sample" aria-hidden>
         Sample job
       </span>
+      {controlText && (
+        <button type="button" className="p-control" onClick={onControl} aria-label={`${controlText} the sample job`}>
+          {controlText}
+        </button>
+      )}
     </div>
   );
 }

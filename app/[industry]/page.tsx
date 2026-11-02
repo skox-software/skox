@@ -6,7 +6,7 @@ import { Footer } from "@/components/site/Footer";
 import { DeskMockup } from "@/components/site/DeskMockup";
 import Link from "next/link";
 import { Figures, ReviewSection, SectionHead, Steps } from "@/components/site/Bits";
-import { home, site, stills } from "@/content/site";
+import { home, nav, site, stills } from "@/content/site";
 import { industries, industryBySlug } from "@/content/industries";
 
 /** One question page per industry, from content/industries.ts. */
@@ -53,7 +53,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
                 <p className="lead">{industry.lead}</p>
                 <div className="actions">
                   <Link className="btn paper" href={reviewHref} data-cta="hero">
-                    Book a free review <span className="dot" />
+                    {nav.action.label} <span className="dot" />
                   </Link>
                   <Link className="link" href="#job">
                     See the whole job
