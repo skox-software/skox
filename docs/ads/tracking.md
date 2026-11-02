@@ -21,7 +21,7 @@ Verified against the code on 2026-10-05. Re-verify the line numbers before trust
    - LinkedIn conversion (`:37`).
 7. **Then** the browser goes to `/scope-received` (`ConversionForm.tsx:218`). Because the conversion already fired, a refresh of this page never re-counts it.
 
-Other events that are **not** conversions: `scope_form_started` (Meta custom `LeadFormStarted`, `track.ts:41`), `email_click` / `phone_click` (Meta `Contact`, `:39`), `scope_partial_captured` (an "Unfinished enquiry" email from `/api/partial`), `scope_cta_clicked`, `scope_form_invalid`, `scope_type_chosen`, `scope_request_failed`, `scope_email_fallback`, `hero_composer_*`, `hero_scope_pinned`, `build_card_selected`, `build_preview_selected`, `app_demo_used`. Never make any of these a primary conversion.
+Other events that are **not** conversions: `scope_form_started` (Meta custom `LeadFormStarted`, `track.ts:41`), `email_click` / `phone_click` (Meta `Contact`, `:39`), `scope_cta_clicked`, `scope_form_invalid`, `scope_type_chosen`, `scope_request_failed`, `scope_email_fallback`, `hero_composer_*`, `hero_scope_pinned`, `build_card_selected`, `build_preview_selected`, `app_demo_used`. Never make any of these a primary conversion.
 
 `scope_request` is also called in `components/HeroContactForm.tsx` and `components/ScopeForm.tsx`, but no live page renders either. If one is ever re-used, re-run the tracking auditor.
 
@@ -52,7 +52,7 @@ Nobody has confirmed which are set. The CLI link in `.vercel/` is stale and the 
 2. Copy the `send_to` string (`AW-…/…`) into `NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL` and the `AW-…` part into `NEXT_PUBLIC_GOOGLE_ADS_ID`.
 3. **Never create a URL-based conversion on `/scope-received`.** It would double-count with the event and count refreshes.
 4. If GA4 is linked to Google Ads, import `generate_lead` as **secondary** (observation only), never primary. Otherwise every lead counts twice in bidding.
-5. In GA4, mark `generate_lead` as a key event. Do **not** mark `scope_partial_captured`, `scope_form_started` or `scope_cta_clicked`.
+5. In GA4, mark `generate_lead` as a key event. Do **not** mark `scope_form_started` or `scope_cta_clicked`.
 
 ## Meta setup rules
 

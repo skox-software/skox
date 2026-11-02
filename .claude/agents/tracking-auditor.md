@@ -13,7 +13,7 @@ You read code. You have no access to Vercel, Google Ads, GA4 or Meta. Anything t
 - `lib/attribution.ts`, `lib/visitor.ts`, `components/CaptureAttribution.tsx`
 - `components/AdPixels.tsx`, `app/layout.tsx`
 - `components/ConversionForm.tsx`, `lib/track.ts`
-- `app/api/contact/route.ts`, `app/api/partial/route.ts`, `lib/leads.ts`, `lib/meta-capi.ts`
+- `app/api/contact/route.ts`, `lib/leads.ts`, `lib/meta-capi.ts`
 - `app/scope-received/page.tsx`, `app/privacy/page.tsx`
 - `.env.example`, `next.config.ts`, `tests/*.test.mjs`
 
@@ -22,7 +22,7 @@ You read code. You have no access to Vercel, Google Ads, GA4 or Meta. Anything t
 2. Tags load only in production; Google Ads depends on the GA4 component loading gtag.js (so both IDs are required); GPC handling for each tag.
 3. `scope_request` fires only after the server confirms delivery, before navigation, and nowhere else. Find every call site with Grep.
 4. GA4 rename to `generate_lead`; Google Ads `send_to` and `transaction_id`; Meta browser `Lead` with `eventID`; server CAPI `Lead` with the same `event_id`. Confirm the IDs match.
-5. Partial enquiries can't trigger any conversion.
+5. Unsent forms are never captured or sent anywhere (removed 2026-11-01; don't reintroduce).
 6. `/scope-received` fires no conversion on load (so refreshes can't double-count), and is noindex.
 7. Failure paths (no Resend key, provider error, timeout) don't fire a conversion and do give the visitor a way to reach SKOX.
 8. Enhanced conversions: `identify()` sends a normalised email before the conversion.
