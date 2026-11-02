@@ -38,21 +38,11 @@ export default function Privacy() {
             </Block>
 
             <Block title="What arrives with an enquiry">
-              When you send an enquiry, or leave one unfinished as described
-              below, it also carries: the pages you viewed on this site during
+              When you send an enquiry, it also carries: the pages you viewed on this site during
               that visit, how many times you have visited, how you first found
               us, your approximate city and region (worked out from your IP
               address), and your device type. This summary is only put
               together when you contact us.
-            </Block>
-
-            <Block title="Enquiries you don’t finish">
-              If you enter your email address in the review form and then leave
-              without sending it, we receive what you had filled in at that
-              point — your address, and anything already typed above it — and we
-              may follow up about it. The form says so under the email field.
-              Reply to that email, or write to us at the address below, and we
-              will delete the record and not contact you again.
             </Block>
 
             <Block title="Why we collect it">
