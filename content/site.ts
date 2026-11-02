@@ -333,9 +333,6 @@ export const review = {
     formatOptions: ["On site", "Screen share"],
     submit: booking.enabled ? "Next: pick a time" : "Send the request",
     submitting: "Sending…",
-    /* The notice for unfinished-form follow-up. Reword freely; do not remove it. */
-    notice: "We save what you type as you go, so a half-finished form still reaches us. We also use it to measure our ads.",
-    noticeLink: "Your privacy choices.",
     reply: booking.enabled ? "Next you pick a time that suits you." : "We reply within one business day to set a time.",
     error: "That didn't send. Try again, or email us with the details below.",
     emailUs: "Email us instead",

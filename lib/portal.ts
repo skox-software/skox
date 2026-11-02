@@ -22,7 +22,7 @@ function parseAttribution(text: string | undefined): Touch {
 }
 
 export type PortalLead = {
-  status: "submitted" | "unfinished";
+  status: "submitted";
   email: string;
   name?: string;
   company?: string;

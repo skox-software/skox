@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { identify, track } from "@/lib/track";
 import { review, site } from "@/content/site";
@@ -43,10 +42,8 @@ const EMPTY: Lead = {
  *
  * Delivery is unchanged from the SKOX form: /api/contact sends the email,
  * files the lead on the portal pipeline and tells the ad platforms; a success
- * lands on /review/booked so the platforms see a real URL. An address typed
- * and then abandoned goes to /api/partial once, as the notice under the email
- * field says (and /privacy describes). Was: the notice under the
- * button says.
+ * lands on /review/booked so the platforms see a real URL. Nothing is sent
+ * until the visitor presses the button.
  */
 export function ReviewForm({ initialIndustry = "", software = "" }: { initialIndustry?: string; software?: string }) {
   const [lead, setLead] = useState<Lead>({ ...EMPTY, industry: initialIndustry });
@@ -61,53 +58,6 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
   const started = useRef(false);
   const submitting = useRef(false);
   const finished = useRef(false);
-  const captured = useRef("");
-  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const latest = useRef(lead);
-  useEffect(() => {
-    latest.current = lead;
-  }, [lead]);
-
-  function captureUnfinished(stage: string) {
-    clearTimeout(pending.current);
-    const current = outgoing(latest.current);
-    const email = current.email.trim();
-    if (finished.current || submitting.current) return;
-    if (!email || captured.current === email) return;
-    if (validate({ ...current, name: "x", broken: "x" }).email) return;
-    captured.current = email;
-    captureAttribution();
-    track("review_partial_captured", { stage });
-    void fetch("/api/partial", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      keepalive: true,
-      body: JSON.stringify({
-        email,
-        name: current.name,
-        broken: current.broken,
-        projectType: current.industry?.slice(0, 40),
-        website: current.website,
-        stage,
-        attribution: formatAttribution(readAttribution()),
-        context: JSON.stringify(readJourney()),
-      }),
-    }).catch(() => {});
-  }
-
-  useEffect(() => {
-    const leaving = () => captureUnfinished("left-page");
-    const hidden = () => {
-      if (document.visibilityState === "hidden") captureUnfinished("left-page");
-    };
-    window.addEventListener("pagehide", leaving);
-    document.addEventListener("visibilitychange", hidden);
-    return () => {
-      window.removeEventListener("pagehide", leaving);
-      document.removeEventListener("visibilitychange", hidden);
-      clearTimeout(pending.current);
-    };
-  }, []);
 
   function change(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const key = event.target.name as keyof Lead;
@@ -120,10 +70,6 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
     if (!String(lead[key] ?? "").trim()) return;
     const found = check(lead)[key];
     setErrors((previous) => ({ ...previous, [key]: found }));
-    if (key === "email" && !found) {
-      clearTimeout(pending.current);
-      pending.current = setTimeout(() => captureUnfinished("email-entered"), 10_000);
-    }
   }
 
   async function submit(event: React.FormEvent) {
@@ -137,7 +83,6 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
       return;
     }
     submitting.current = true;
-    clearTimeout(pending.current);
     setState("sending");
     captureAttribution();
     const enriched = { ...outgoing(lead), attribution: formatAttribution(readAttribution()) };
@@ -177,14 +122,9 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
         onBlur={() => checkOne(key)}
         required={required}
         aria-invalid={!!errors[key]}
-        aria-describedby={[key === "email" ? "email-note" : "", errors[key] ? `${key}-error` : ""].filter(Boolean).join(" ") || undefined}
+        aria-describedby={errors[key] ? `${key}-error` : undefined}
         {...extra}
       />
-      {key === "email" && (
-        <p className="small field-note" id="email-note">
-          {copy.notice} <Link className="link" href="/privacy#choices">{copy.noticeLink}</Link>
-        </p>
-      )}
       {errors[key] && (
         <p className="field-error" id={`${key}-error`}>
           {errors[key]}
