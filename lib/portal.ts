@@ -1,4 +1,3 @@
-import type { Company } from "@/lib/enrich";
 import type { Visitor } from "@/lib/visitor";
 
 /**
@@ -23,7 +22,7 @@ function parseAttribution(text: string | undefined): Touch {
 }
 
 export type PortalLead = {
-  status: "submitted" | "unfinished";
+  status: "submitted";
   email: string;
   name?: string;
   company?: string;
@@ -34,7 +33,7 @@ export type PortalLead = {
   attribution?: string;
 };
 
-export async function sendToPortal(lead: PortalLead, visitor: Visitor, company: Company | undefined): Promise<void> {
+export async function sendToPortal(lead: PortalLead, visitor: Visitor): Promise<void> {
   const url = process.env.PORTAL_LEADS_URL;
   const secret = process.env.PORTAL_LEADS_SECRET;
   if (!url || !secret) return;
@@ -50,10 +49,8 @@ export async function sendToPortal(lead: PortalLead, visitor: Visitor, company: 
         status: lead.status,
         email: lead.email,
         name: lead.name || undefined,
-        company: lead.company || company?.name || undefined,
-        website: company?.domain,
-        industry: company?.industry,
-        location: [visitor.city, visitor.region].filter(Boolean).join(", ") || company?.location,
+        company: lead.company || undefined,
+        location: [visitor.city, visitor.region].filter(Boolean).join(", ") || undefined,
         projectType: lead.projectType,
         message: lead.message,
         timeline: lead.timeline || undefined,

@@ -1,6 +1,6 @@
 /*
  * One opt-out for every third-party tracker on the site: Google Analytics,
- * Apollo, Clarity, and the Meta, Google Ads and LinkedIn tags, plus the
+ * Clarity, and the Meta, Google Ads and LinkedIn tags, plus the
  * server-side Meta event. Either signal turns them all off:
  *   - Global Privacy Control, which several US state laws require honouring;
  *   - the "Your Privacy Choices" switch on /privacy, kept in a cookie so the

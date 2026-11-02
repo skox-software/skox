@@ -114,7 +114,7 @@
   .ub .ladder .r.desk .i, .ub .ladder .r.desk .tag { color:var(--blue); font-weight:600; }
 
   .ub .steps { counter-reset:s; list-style:none; margin:0; padding:0; border-top:2px solid var(--ink); }
-  .ub .steps li { counter-increment:s; display:grid; grid-template-columns:72px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--rule); }
+  .ub .steps li { counter-increment:s; display:grid; grid-template-columns:72px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--rule); align-items:baseline; }
   .ub .steps li::before { content:counter(s,decimal-leading-zero); font-family:var(--display); font-weight:700; font-size:28px; color:var(--blue); letter-spacing:-0.02em; }
   .ub .steps p { color:var(--ink-2); margin-top:6px; }
   .ub .proof { border-top:2px solid var(--ink); padding:24px 0 0; }
@@ -384,7 +384,7 @@
 .ub .mock-hero { background:var(--blue); color:var(--paper); padding:72px 0 88px; overflow:hidden; }
 .ub .mock-hero .grid { align-items:center; }
 .ub .mock-hero .inner { max-width:520px; }
-.ub .mock-hero h1 { font-size:clamp(42px,4.6vw,70px); }
+.ub .mock-hero h1 { font-size:clamp(40px,4.2vw,62px); }
 .ub .mock-hero .q { font-weight:500; font-size:15px; color:var(--paper); margin-bottom:22px; max-width:40ch; }
 .ub .mock-hero .lead { font-size:19px; line-height:1.45; max-width:36ch; margin-top:22px; color:var(--paper); }
 .ub .mock-hero .actions { display:flex; gap:22px; align-items:center; flex-wrap:wrap; margin-top:30px; }
@@ -435,7 +435,7 @@
   .ub .mock-cols { grid-template-columns:1fr; }
   .ub .mock-col + .mock-col { border-left:0; border-top:1px solid var(--rule); }
   .ub .mock-col { min-height:0; }
-  .ub .mock-sample { display:none; }
+  .ub .mock-sample { display:block; font-size:12px; }
 }
 @media (prefers-reduced-motion:reduce) { .ub .mock li, .ub .mock .paper { opacity:1; transform:none; transition:none; } .ub .mock .paper .stamp { opacity:1; } }
 
@@ -563,7 +563,7 @@
 .ub .stage-art { grid-column:7/13; align-self:stretch; min-height:520px; position:relative; }
 .ub .stage .q { font-weight:500; font-size:15px; color:var(--paper); margin-bottom:24px; max-width:40ch; }
 .ub .stage h1 { font-size:clamp(54px,7.2vw,124px); line-height:.9; letter-spacing:-0.04em; font-variation-settings:"wdth" 82; }
-.ub .stage .strike::after { background:var(--paper); }
+.ub .stage .strike::after { background:var(--ink); }
 .ub .stage .lead { font-size:clamp(19px,1.5vw,22px); line-height:1.4; max-width:34ch; margin-top:28px; color:var(--paper); }
 .ub .stage .actions { display:flex; gap:22px; align-items:center; flex-wrap:wrap; margin-top:34px; }
 .ub .stage :focus-visible { outline-color:var(--paper); }
@@ -753,7 +753,7 @@
 .ub .picker-k { font:600 14px/1.3 var(--body); color:var(--paper); }
 .ub .picker-answer ul { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
 .ub .picker-answer li { font-family:var(--display); font-size:clamp(20px,1.7vw,25px); font-weight:600; letter-spacing:-0.015em; line-height:1.25; }
-.ub .picker-answer .btn { margin-top:auto; align-self:flex-start; background:var(--paper); color:var(--ink); }
+.ub .picker-answer .btn { margin-top:auto; align-self:flex-start; }
 .ub .picker-answer :focus-visible { outline-color:var(--paper); }
 
 .ub .desk-lines { list-style:none; margin:16px 0 0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:0 32px; }
@@ -841,3 +841,28 @@
   .ub nav .links .btn { padding:0 12px; font-size:14px; }
   .ub .menu summary { padding:10px 12px; }
 }
+
+.ub .field-note { margin-top:6px; color:var(--ink-2); }
+
+/* ── Fixes from the 2026-11-01 design reviews ── */
+/* Headings never leave one word on its own line. */
+.ub h1, .ub h2, .ub h3 { text-wrap:balance; }
+/* What we do: the price rules line up across the three offers (subgrid rows). */
+@media (min-width:601px) {
+  .ub .offers { grid-template-rows:repeat(4,auto); row-gap:0; }
+  .ub .offers li { display:grid; grid-row:span 4; grid-template-rows:subgrid; row-gap:10px; }
+  .ub .offers .price { margin-top:0; align-self:start; }
+}
+/* Short pages: the footer sits at the bottom, no paper under it. */
+.ub { min-height:100svh; display:flex; flex-direction:column; }
+.ub > main { flex:1 0 auto; }
+/* Single-column pages line up with the header's left edge. */
+.ub .page { max-width:1240px; width:100%; }
+.ub .page > * { max-width:760px; }
+.ub .page > .booking { max-width:1000px; }
+/* Phone footer links: 44px targets. */
+@media (max-width:600px) { .ub footer .links a { display:inline-flex; align-items:center; min-height:44px; } }
+
+/* Trade pages: the same three data promises as /review. */
+.ub .trade-data { padding-top:0 !important; }
+.ub .trade-data-list { max-width:640px; }

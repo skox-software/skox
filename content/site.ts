@@ -246,7 +246,7 @@ export const home = {
     intro: "Real jobs, no names. Names go up when owners say yes.",
     items: [
       { status: "In testing", who: "A Florida land survey firm", what: "Type an address. The county records for the job land in its folder." },
-      { status: "Running daily", who: "Our own office", what: "Leads file themselves, preview opens alert us, unsubscribes are honored on their own. Our own office runs on desks." },
+      { status: "Running daily", who: "Our own office", what: "Leads file themselves and unsubscribes are honored on their own. Our own office runs on desks." },
       { status: "Shipped", who: "A medical clinic", what: "A point of sale, with every product set up by SKU." },
       { status: "Shipped", who: "Client dashboards", what: "Spotify, TikTok, Instagram, Authorize.net and Acuity on one screen." },
       { status: "Shipped", who: "A car dealership", what: "The website that brings its customers in." },
@@ -333,9 +333,6 @@ export const review = {
     formatOptions: ["On site", "Screen share"],
     submit: booking.enabled ? "Next: pick a time" : "Send the request",
     submitting: "Sending…",
-    /* The notice for unfinished-form follow-up. Reword freely; do not remove it. */
-    notice: "We save what you type as you go, so a half-finished form still reaches us. We also use it to measure our ads.",
-    noticeLink: "Your privacy choices.",
     reply: booking.enabled ? "Next you pick a time that suits you." : "We reply within one business day to set a time.",
     error: "That didn't send. Try again, or email us with the details below.",
     emailUs: "Email us instead",

@@ -100,7 +100,7 @@ export const industries: Industry[] = [
     review: {
       intro: "60 to 90 minutes, in your office or on a screen share.",
       steps: [{ title: "Show us how a job comes in." }, { title: "Get a proposal in your numbers." }, { title: "Decide. It's good for 14 days." }],
-      proof: "The job above is a sample. The desk runs at a Florida survey firm today; its name and hours go here when the owner says yes.",
+      proof: "The job above is a sample. A desk like it is in testing at a Florida survey firm; its name and hours go here when the owner says yes.",
     },
   },
   {

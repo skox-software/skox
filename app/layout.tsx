@@ -101,24 +101,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteTracking />
         <Analytics />
         <SpeedInsights />
-        {/* Apollo.io website visitor tracker. Production only, so local
-            development and Vercel preview links never count as visits.
-            Disclosed on /privacy; keep that page in step if this changes.
-            Every third-party tag honours the opt-out in lib/consent.ts. */}
+        {/* Third-party tags: production only, so local development and
+            Vercel preview links never count as visits. Disclosed on /privacy;
+            keep that page in step if this changes. Every one honours the
+            opt-out in lib/consent.ts. */}
         {process.env.VERCEL_ENV === "production" && <AdPixels />}
         {process.env.VERCEL_ENV === "production" && <ClarityTracker />}
-        {process.env.VERCEL_ENV === "production" && (
-          <Script id="apollo-tracker" strategy="afterInteractive">
-            {`if(${TRACKING_ALLOWED_JS}){function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
-  o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-  o.onload=function(){window.trackingFunctions.onLoad({appId:"6aa5b0de804ad70018bc61f9"})},
-  document.head.appendChild(o)}initApollo();}`}
-          </Script>
-        )}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
       {/* Google Analytics 4 via the Google tag. Production only, like the
-          Apollo tracker above. Disclosed on /privacy. */}
+          tags above. Disclosed on /privacy. */}
       {process.env.VERCEL_ENV === "production" && gaId && (
         <>
           <Script id="ga-opt-out" strategy="beforeInteractive">
