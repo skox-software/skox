@@ -5,22 +5,6 @@ export function Strike({ children, now = false }: { children: React.ReactNode; n
   return <span className={now ? "strike now" : "strike"}>{children}</span>;
 }
 
-/** The sample job's own numbers, on an ink band under the hero. */
-export function Strip({ items, stack = false }: { items: readonly { n: string; label: string }[]; stack?: boolean }) {
-  return (
-    <div className={stack ? "strip stack" : "strip"}>
-      <div className="wrap num">
-        {items.map((item) => (
-          <div key={item.label}>
-            <b>{item.n}</b>
-            <span>{item.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /** Title in columns 1–6, intro bottom-aligned in 7–12: the head of every section. */
 export function SectionHead({ title, intro, gap = 56 }: { title: string; intro?: string; gap?: number }) {
   return (

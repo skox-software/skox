@@ -1,24 +1,13 @@
 import Link from "next/link";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { ParticleHero } from "@/components/site/ParticleHero";
-import { Chapters } from "@/components/site/Chapters";
+import { ApprovalSlip } from "@/components/site/ApprovalSlip";
 import { HowDesk } from "@/components/site/HowDesk";
 import { WorkCards } from "@/components/site/WorkCards";
 import { SoftwarePicker } from "@/components/site/SoftwarePicker";
 import { Figures, ReviewSection, SectionHead, Strike } from "@/components/site/Bits";
-import { home } from "@/content/site";
-
-const CHAPTERS = [
-  { id: "start", label: "Start" },
-  { id: "software", label: "Your software" },
-  { id: "offer", label: "What we do" },
-  { id: "how", label: "How it works" },
-  { id: "work", label: "Our work" },
-  { id: "math", label: "You win, we win" },
-  { id: "faq", label: "Questions" },
-  { id: "live", label: "Review" },
-] as const;
+import { home, nav, quoteDeskMock } from "@/content/site";
+import { industries } from "@/content/industries";
 
 export const metadata = { alternates: { canonical: "/" } };
 
@@ -27,7 +16,7 @@ export default function Home() {
   return (
     <div className="ub">
       <Header />
-      <main id="top" tabIndex={-1} className="chaptered">
+      <main id="top" tabIndex={-1}>
         <div className="stage-hero" id="start">
           <div className="stage">
             <div className="wrap grid">
@@ -47,11 +36,24 @@ export default function Home() {
                 </div>
               </div>
               <div className="stage-art">
-                <ParticleHero label="A sample job: a pile of paperwork pulled apart, read, and settled into one drafted quote waiting for the owner's approval." />
+                <ApprovalSlip title={home.hero.slipTitle} total={quoteDeskMock.total} steps={quoteDeskMock.work} cta={nav.action.label} />
               </div>
             </div>
           </div>
         </div>
+
+        <nav className="trades wrap" aria-label="Desks by trade">
+          <span>{home.hero.trades}</span>
+          <ul>
+            {industries.map((t) => (
+              <li key={t.slug}>
+                <Link href={`/${t.slug}`} data-cta="trade-row">
+                  {t.trade}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <section id="software">
           <div className="wrap">
@@ -87,7 +89,7 @@ export default function Home() {
           <div className="wrap">
             <SectionHead title={home.work.title} intro={home.work.intro} gap={40} />
             <WorkCards items={home.work.items} />
-            <div className="work-desks">
+            <div className="work-desks" id="desks">
               <h3 className="desks-title">{home.offer.desksTitle}</h3>
               <ul className="desk-lines">
                 {home.offer.desks.map((d) => (
@@ -150,7 +152,6 @@ export default function Home() {
 
         <ReviewSection title={home.review.title} intro={home.review.intro} steps={home.review.steps} cta={home.review.cta} proofTitle={home.review.proofTitle} proof={home.review.proof} />
       </main>
-      <Chapters items={CHAPTERS} />
       <Footer />
     </div>
   );
