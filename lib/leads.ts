@@ -19,6 +19,8 @@ export type Lead = {
   people?: string;
   /** On site or screen share. */
   format?: string;
+  /** "How did you hear about us?" Optional; one of review.form.heardOptions (content/site.ts). */
+  heard?: string;
   projectType?: string;
   leak?: string;
   /** Honeypot — must stay empty. */
@@ -53,6 +55,7 @@ export function validate(lead: Partial<Lead>): FieldErrors {
     "industry",
     "people",
     "format",
+    "heard",
   ] as const) {
     if (lead[key] !== undefined && typeof lead[key] !== "string")
       e[key] = "Please enter text.";
@@ -76,6 +79,7 @@ export function validate(lead: Partial<Lead>): FieldErrors {
   if (lead.industry && lead.industry.length > 120) e.industry = "Too long.";
   if (lead.people && lead.people.length > 40) e.people = "Too long.";
   if (lead.format && lead.format.length > 40) e.format = "Too long.";
+  if (lead.heard && lead.heard.length > 60) e.heard = "Too long.";
   if (lead.timeline && lead.timeline.length > 200) e.timeline = "Too long.";
   if (lead.context && lead.context.length > 6000) e.context = "Too long.";
   return e;
@@ -91,6 +95,7 @@ export function formatLead(lead: Lead): string {
     `Does:     ${lead.industry || lead.projectType || "Not specified"}`,
     lead.people ? `People:   ${lead.people}` : null,
     lead.format ? `Review:   ${lead.format}` : null,
+    lead.heard ? `Heard:    ${lead.heard}` : null,
     lead.timeline ? `Timeline: ${lead.timeline}` : null,
     lead.leak ? `Leak:     ${lead.leak}` : null,
     "",

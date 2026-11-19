@@ -120,3 +120,24 @@ test("validation rejects invalid build types and overlong email", () => {
     validate({ ...valid, email: "a".repeat(250) + "@example.com" }).email,
   );
 });
+test("the optional 'how did you hear' answer reaches the lead email", async () => {
+  let payload;
+  const route = load("app/api/contact/route.ts", {
+    process: {
+      env: { RESEND_API_KEY: "test-only", CONTACT_EMAIL: "owner@example.com" },
+    },
+    fetch: async (url, options) => {
+      if (String(url).includes("resend")) payload = JSON.parse(options.body);
+      return new Response('{"id":"test"}', { status: 200 });
+    },
+  });
+  const response = await route.POST(request({ ...valid, heard: "Instagram" }));
+  assert.equal(response.status, 200);
+  assert.match(payload.text, /Heard: +Instagram/);
+});
+test("validation accepts a missing 'heard' and rejects a non-text or overlong one", () => {
+  const { validate } = load("lib/leads.ts");
+  assert.equal(validate(valid).heard, undefined);
+  assert.ok(validate({ ...valid, heard: 42 }).heard);
+  assert.ok(validate({ ...valid, heard: "x".repeat(61) }).heard);
+});
