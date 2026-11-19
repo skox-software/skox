@@ -334,6 +334,8 @@ export const review = {
     peopleOptions: ["1 to 4", "5 to 15", "16 to 50", "More than 50"],
     format: "Where",
     formatOptions: ["On site", "Screen share"],
+    heard: "How did you hear about us?",
+    heardOptions: ["Instagram", "YouTube", "Threads", "LinkedIn", "Google search", "A friend or colleague", "Other"],
     submit: booking.enabled ? "Next: pick a time" : "Send the request",
     submitting: "Sending…",
     reply: booking.enabled ? "Next you pick a time that suits you." : "We reply within one business day to set a time.",

@@ -58,6 +58,7 @@ export async function POST(req: Request) {
     industry: body.industry ? String(body.industry).trim() : undefined,
     people: body.people ? String(body.people).trim() : undefined,
     format: body.format ? String(body.format).trim() : undefined,
+    heard: body.heard ? String(body.heard).trim() : undefined,
     projectType: body.projectType || undefined,
     leak: body.leak ? String(body.leak).slice(0, 300) : undefined,
     attribution: body.attribution
@@ -135,7 +136,10 @@ export async function POST(req: Request) {
         projectType: lead.industry || lead.projectType,
         message: lead.broken,
         timeline: lead.timeline,
-        attribution: lead.attribution,
+        // The pipeline has no column for it; the answer rides along with the source.
+        attribution: lead.heard
+          ? `${lead.attribution ?? ""}\n  heard: ${lead.heard}`.trim()
+          : lead.attribution,
       },
       visitor,
     ),

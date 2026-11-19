@@ -10,8 +10,10 @@ import { formatLead, validate, type FieldErrors, type Lead } from "@/lib/leads";
 /**
  * The review form's own checks on top of the shared validate(), which concept
  * previews also use through /api/contact. Firm is required here only, and the
- * messages name the field. Four fields: name, email, firm, the busywork. The
- * trade comes from the page the visitor clicked through from (?industry=).
+ * messages name the field. Four fields: name, email, firm, the busywork, plus an
+ * optional "How did you hear about us?" that catches the visitor who saw a post
+ * and typed the address later, which no link tag can. The trade comes from the
+ * page the visitor clicked through from (?industry=).
  */
 function check(lead: Partial<Lead>): FieldErrors {
   const e = validate(lead);
@@ -34,6 +36,7 @@ const EMPTY: Lead = {
   people: "",
   format: "",
   timeline: "",
+  heard: "",
   website: "",
 };
 
@@ -100,7 +103,7 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
       if (!response.ok || result.delivered !== "email") throw new Error("Delivery not confirmed");
       finished.current = true;
       identify(lead.email);
-      track("review_request", { from: "review", industry: lead.industry || "unspecified" });
+      track("review_request", { from: "review", industry: lead.industry || "unspecified", heard: lead.heard || "unspecified" });
       router.push("/review/booked");
     } catch {
       track("review_request_failed", { from: "review" });
@@ -188,6 +191,18 @@ export function ReviewForm({ initialIndustry = "", software = "" }: { initialInd
             {errors.broken}
           </p>
         )}
+      </div>
+
+      <div className="field">
+        <label htmlFor="review-heard">{copy.heard}</label>
+        <select id="review-heard" name="heard" value={lead.heard ?? ""} onChange={change}>
+          <option value="">Choose one (optional)</option>
+          {copy.heardOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
 
       {state === "failed" && (
